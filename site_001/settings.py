@@ -25,8 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'backend',
-    'captcha',
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -122,6 +123,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Настройка SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
 # SMTP Hostname
 """
 EMAIL_HOST = 'smtp.mailgun.org'
