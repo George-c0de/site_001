@@ -5,6 +5,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class All(models.Model):
+    money = models.DecimalField('Деньги', max_digits=10, decimal_places=2, default=0)
+
+
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     money = models.DecimalField('Деньги', max_digits=10, decimal_places=2)
@@ -16,7 +20,7 @@ class Admin(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    money = models.DecimalField('Деньги', max_digits=10, decimal_places=2)
+    money = models.DecimalField('Деньги', max_digits=10, decimal_places=2, default=0)
     referral_link = models.CharField('Реферальная ссылка', max_length=100, blank=True, unique=True, default=uuid.uuid4)
     referral_amount = models.DecimalField('Сумма полученных средств по реферальной системе', max_digits=10,
                                           decimal_places=2, default=0)
@@ -26,7 +30,8 @@ class Profile(models.Model):
     line_2 = models.CharField('Second_Line', null=True, blank=True, max_length=150)
     line_3 = models.CharField('Third_Line', null=True, blank=True, max_length=150)
     max_card = models.IntegerField('Максимальная купленная карта(Формат при bronze 6 карта: 06)',
-                                   null=True, blank=True)
+                                   null=True, blank=True, default=0)
+    admin_or = models.BooleanField('Админ или нет', default=False)
 
     class Meta:
         verbose_name_plural = _("Профили пользователей")
@@ -128,8 +133,9 @@ class Buy_Card(models.Model):
 
 class Matrix(models.Model):
     up = models.BooleanField('Верх, если да - true', default=False)
-    max_users = models.IntegerField('Максимальное кол-во участников')
-    go_money = models.IntegerField('Номер участника, который получает след выплату')
+    max_users = models.IntegerField('Максимальное кол-во участников', default=4)
+    go_money = models.IntegerField('Номер участника, который получает след выплату', default=0)
+    col = models.IntegerField('Кол-во в матрице', default=0)
 
 
 """
@@ -145,3 +151,21 @@ class User_in_Matrix(models.Model):
     participant_number = models.IntegerField('Номер участника')
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     d = models.IntegerField('Кол-во зачислений', default=0)
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, default=0)
+
+
+# Кошелек
+class Wallet(models.Model):
+    address = models.CharField('Адрес', max_length=150)
+    pkey = models.CharField('pkey', max_length=150)
+
+
+# база данных транзакций
+class Transaction(models.Model):
+    tx_id = models.CharField('tx_id', max_length=150)  # id транзакции в Tron
+    timestamp = models.IntegerField('timestamp')  # время транзакции
+    sender = models.CharField('sender', max_length=150)  # отправитель
+    receiver = models.CharField('receiver', max_length=150)  # получатель
+    currency = models.CharField('currency', max_length=150)  # валюта (TRX / USDT)
+    amount = models.FloatField('amount')  # количество
+    fee = models.IntegerField('fee')  # использованный газ

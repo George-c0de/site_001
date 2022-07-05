@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="5">
+    <title>Tron Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <script src="https://unpkg.com/htmx.org@1.7.0"
+            integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Tron Demo
+        </h1>
+        <p class="subtitle">
+            Демонстрация управления кошельками
+        </p>
+        <table>
+            <th>
+            <td></td>
+            <td>Кошелек</td>
+            <td>USDT</td>
+            <td>TRX</td>
+            <td></td>
+            <td></td>
+            </th>
+            {% for w in wallets %}
+                {% for el in a %}
+                    {% for e in b %}
+                        <tr>
+                            <td>{{ w.id }}.</td>
+                            <td><b><span class="address"><a
+                                    href="https://nile.tronscan.org/#/address/{{ w.address }}">{{ w.address }}</a></span></b>
+                            </td>
+                            <td>{{ el }}</td>
+                            <td>{{ e }}</td>
+                            <td>
+                                <button hx-post="/send_usdt" hx-swap="none" hx-vals='{"address": "{{ w.address }}" }'>
+                                    Отправить 1 USDT
+                                </button>
+                            </td>
+                            <td>
+                                <button hx-post="/collect_usdt" hx-swap="none"
+                                        hx-vals='{"address": "{{ w.address }}" }'>Забрать USDT
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </table>
+
+        <button hx-get="/new_wallet" hx-swap="none">Add Wallet</button>
+        <button hx-get="/delete" hx-swap="none">Delete Wallets</button>
+    </div>
+    <div>
+        <p class="subtitle">
+            Проведенные транзакции
+        </p>
+
+        <table>
+            <th>
+            <td>TX</td>
+            <td>Время</td>
+            <td>Отправитель</td>
+            <td>Получатель</td>
+            <td>Валюта</td>
+            <td>Cумма</td>
+            <td>Газ</td>
+            </th>
+            {% for t in transactions %}
+                <tr>
+                    <td><a href="https://nile.tronscan.org/#/transaction/{{ t.tx_id }}">{{ t.id }}</a></td>
+                    <td>{{ t.timestamp }}</td>
+                    <td>{{ t.sender }}</td>
+                    <td>{{ t.receiver }}</td>
+                    <td>{{ t.currency }}</td>
+                    <td>{{ t.amount }}</td>
+                    <td>{{ t.fee }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+</body>
+</html>

@@ -29,17 +29,35 @@ class ProfileAdminAdmin(admin.ModelAdmin):
 
 @admin.register(First_Line)
 class FirstLineAdmin(admin.ModelAdmin):
+    list_display = ('main_user', 'id_')
     fields = ('main_user',)
+
+    def id_(self, obj):
+        return obj.id
+
+    id_.short_description = 'id_'
 
 
 @admin.register(Second_Line)
 class Second_LineAdmin(admin.ModelAdmin):
+    list_display = ('main_user', 'id_')
     fields = ('main_user',)
+
+    def id_(self, obj):
+        return obj.id
+
+    id_.short_description = 'id_'
 
 
 @admin.register(Third_Line)
 class Third_LineAdmin(admin.ModelAdmin):
+    list_display = ('main_user', 'id_')
     fields = ('main_user',)
+
+    def id_(self, obj):
+        return obj.id
+
+    id_.short_description = 'id_'
 
 
 @admin.register(Profile)
