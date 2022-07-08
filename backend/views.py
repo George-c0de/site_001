@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 from decimal import *
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
-    Second_Line, Third_Line
+    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald
 from .serializers import ProfileSerializer
 from tronpy import Contract, Tron
 import base58
@@ -44,6 +44,29 @@ admin_ = Profile.objects.filter(admin_or=True).first()
 if not All.objects.all().exists():
     a = All()
     a.save()
+
+
+def save_user():
+    a = Profile.objects.get(user__username='User_1')
+    b = Profile.objects.get(user__username='User_2')
+    c = Profile.objects.get(user__username='User_3')
+    d = Profile.objects.get(user__username='User_4')
+    f = Profile.objects.get(user__username='User_5')
+    t = All.objects.all().first()
+    t.money = 100
+    a.money = 100
+    b.money = 100
+    c.money = 100
+    d.money = 100
+    f.money = 100
+    admin_.money = 100
+    admin_.save()
+    t.save()
+    a.save()
+    b.save()
+    c.save()
+    d.save()
+    f.save()
 
 
 def index(request):
@@ -146,115 +169,123 @@ def register_page(request):
     return render(request, 'backend/register.html', context)
 
 
-def referral_system_bronze1(request):
-    profile = Profile.objects.get(user__id=request.user.id)
-    all_ = All.objects.all().first()
-    if request.COOKIES.get('utm'):
-        cokies = 0
-        main_user = 0
+def what_card(card, category_bronze):
+    if card == 'card_1':
+        money_to_card = category_bronze.card_1
+    elif card == 'card_2':
+        money_to_card = category_bronze.card_2
+    elif card == 'card_3':
+        money_to_card = category_bronze.card_3
+    elif card == 'card_4':
+        money_to_card = category_bronze.card_4
+    elif card == 'card_5':
+        money_to_card = category_bronze.card_5
     else:
-        cookies = request.COOKIES['utm']
-        main_user = Profile.objects.get(referral_link=cookies)
-    context = {
-        'admin': admin_,
-        'profile': profile,
-        'all': all_,
-        'main_user': main_user
+        money_to_card = category_bronze.card_6
+    return money_to_card
 
-    }
-    # utm = profile.referral_link
-    # response = render(request, 'backend/ref.html')
-    # response.set_cookie(key='utm', value=utm)
-    # return response
-    #
-    # html = Response('Hello')
-    # utm = profile.referral_link
-    # html.set_cookie('utm', utm, max_age=None)
-    # return html
-    return render(request, 'backend/ref.html', context=context)
+
+def save(*args):
+    for el in args:
+        el.save()
+    # main_user.save()
+    # all_.save()
+    # profile.save()
+    # admin_.save()
+    # category_bronze.save()
+
+
+def case_3_4_ref(main_user, money_to_card, all_, profile):
+    second_line = False
+    third_line = False
+    if Second_Line.objects.filter(main_user__id=main_user.id).exists():
+        second_line = True
+    if Third_Line.objects.filter(main_user__id=main_user.id).exists():
+        third_line = True
+    if not second_line and not third_line:
+        admin_.money += money_to_card * Decimal('0.05')
+        main_user.money += money_to_card * Decimal('0.1')
+        all_.money += money_to_card
+        profile.money -= money_to_card
+    # четвертый случай
+    elif not third_line:
+        admin_.money += money_to_card * Decimal('0.01')
+        profile.money -= money_to_card
+        main_user.money += money_to_card * Decimal('0.1')
+        all_.money += money_to_card
+    else:
+        profile.money -= money_to_card
+        main_user.money += money_to_card * Decimal('0.1')
+        all_.money += money_to_card
+    save(main_user, all_, profile, admin_)
 
 
 # Логика реферальной системы
 def referral_system_bronze(request, id_):
+    save_user()
+    # Сбор данных
     profile = Profile.objects.get(user__id=request.user.id)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    cookies = request.COOKIES['utm']
-    main_user = Profile.objects.get(referral_link=cookies)
-    # Пятый случай
-    max_card_ = '0' + str(id_)
-
+    cookies = request.COOKIES.get('utm')
+    if cookies is None:
+        cookies = None
     if Category_Bronze.objects.filter(user__id=profile.id).exists():
         category_bronze = Category_Bronze.objects.get(user__id=profile.id)
     else:
         category_bronze = Category_Bronze()
         category_bronze.user = profile
+    # Проверка блокировки карты для пользователя
     if id_ == 6 and category_bronze.card_6_disable is False:
         return HttpResponse('Error')
     else:
-        if card == 'card_1':
-            money_to_card = category_bronze.card_1
-        elif card == 'card_2':
-            money_to_card = category_bronze.card_2
-        elif card == 'card_3':
-            money_to_card = category_bronze.card_3
-        elif card == 'card_4':
-            money_to_card = category_bronze.card_4
-        elif card == 'card_5':
-            money_to_card = category_bronze.card_5
-        else:
-            money_to_card = category_bronze.card_6
-    money_to_card = Decimal(money_to_card)
-    if profile.money < money_to_card:
-        return HttpResponse('Error')
-    if main_user.max_card < int(max_card_):
-        if First_Line.objects.filter(main_user__id=admin_.id):
-            line_admin = First_Line.objects.get(main_user__id=admin_.id)
-            profile.line_1 = line_admin.id
-            line_admin.save()
-        else:
-            line_admin = First_Line()
-            line_admin.main_user = admin_
-            profile.line_1 = line_admin.id
-            line_admin.save()
-    # Второй случай
+        money_to_card = what_card(card, category_bronze)
+    money_to_card = Decimal(money_to_card)  # Стоимость карты
+    # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
-        admin_.money += money_to_card * Decimal(0.15)
+        admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
-        all_.money += money_to_card * Decimal(0.85)
-    # третий случай
-
-    second_line = False
-    third_line = False
-    if Second_Line.objects.filter(main_user__user__id=main_user.id).exists():
-        second_line = True
-    if Third_Line.objects.filter(main_user__user__id=main_user.id).exists():
-        third_line = True
-    if not second_line and not third_line:
-        admin_.money += money_to_card * Decimal(0.05)
-        main_user.money += money_to_card * Decimal(0.1)
-        all_.money += money_to_card * Decimal(0.85)
-        profile.money -= money_to_card
-    # четвертый случай
-    if not third_line:
-        admin_.money += money_to_card * Decimal(0.01)
-        profile.money -= money_to_card
-        main_user.money += money_to_card * Decimal(0.1)
-        all_.money += money_to_card * Decimal(0.85)
+        all_.money += money_to_card
+        save(all_, profile, admin_, category_bronze)
+        # main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
     else:
-        profile.money -= money_to_card
-        main_user.money += money_to_card * Decimal(0.1)
-        all_.money += money_to_card * Decimal(0.9)
-    category_bronze.save()
-    admin_.save()
-    main_user.save()
-    all_.save()
-    profile.save()
+        main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+        save(main_user)
+        if profile.money < money_to_card:
+            return HttpResponse('Error')
+        # Если у пригласившего не открыта карта номиналом,
+        # которую купил рефер, то рефералка уходит админу
+        if main_user.max_card < int(max_card_):
+            if First_Line.objects.filter(main_user__id=admin_.id).exists():
+                line_admin = First_Line.objects.get(main_user__id=admin_.id)
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            else:
+                line_admin = First_Line()
+                line_admin.main_user = admin_
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            save(main_user, all_, profile, admin_, category_bronze)
+        # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
+        else:
+            case_3_4_ref(main_user, money_to_card, all_, profile)
+            save(category_bronze)
+
+    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
     context = {
         'admin': admin_,
         'profile': profile,
         'all': all_,
-        'main_user': main_user
+        'main_user': main_user,
+        'users': users
     }
     return render(request, 'backend/ref.html', context=context)
 
@@ -265,38 +296,369 @@ def referral_system_bronze(request, id_):
     # if Category_Bronze.objects.filter(user.id=).exists()
 
 
-# Логика матрицы
-def logics_matrix(request):
-    if Matrix.objects.all().count() != 0:
-        if Matrix.objects.all().count() == 1:
-            all_Matrix = Matrix.objects.all().first()
-            main_matrix = all_Matrix
-            if main_matrix.col == 4:
-                new_matrix = Matrix()
-                new_matrix.max_users = main_matrix.max_users * 2
-                main_matrix.up = True
-                new_user_in_matrix = User_in_Matrix()
-                new_user_in_matrix.participant_number = 4
-                new_user_in_matrix.matrix = new_matrix
-                new_user_in_matrix.user = request.user
-                new_matrix.save()
-                new_user_in_matrix.save()
-                # Вставить моудли зачисления дял предыдущих игроко, а также
-                # реферальную систему
-            else:
-                new_user_in_matrix = User_in_Matrix()
-                new_user_in_matrix.participant_number = main_matrix.col
-                new_user_in_matrix.user = request.user
-                main_matrix.col += 1
-                main_matrix.save()
-                new_user_in_matrix.matrix = main_matrix
-                new_user_in_matrix.save()
-        else:
-            pass
-            # Оснорвной модуль
+# silver
+def referral_system_silver(request, id_):
+    save_user()
+    # Сбор данных
+    profile = Profile.objects.get(user__id=request.user.id)
+    card = 'card_' + str(id_)
+    all_ = All.objects.all().first()
+    cookies = request.COOKIES.get('utm')
+    if cookies is None:
+        cookies = None
+    if Category_Silver.objects.filter(user__id=profile.id).exists():
+        category_bronze = Category_Silver.objects.get(user__id=profile.id)
     else:
-        pass
-        # Модуль создание первой матрицы
+        category_bronze = Category_Silver()
+        category_bronze.user = profile
+    # Проверка блокировки карты для пользователя
+    if id_ == 6 and category_bronze.card_6_disable is False:
+        return HttpResponse('Error')
+    else:
+        money_to_card = what_card(card, category_bronze)
+    money_to_card = Decimal(money_to_card)  # Стоимость карты
+    # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
+    if cookies is None or cookies == '':
+        admin_.money += money_to_card * Decimal('0.15')
+        profile.money -= money_to_card
+        all_.money += money_to_card
+        save(all_, profile, admin_, category_bronze)
+        # main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+    else:
+        main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+        save(main_user)
+        if profile.money < money_to_card:
+            return HttpResponse('Error')
+        # Если у пригласившего не открыта карта номиналом,
+        # которую купил рефер, то рефералка уходит админу
+        if main_user.max_card < int(max_card_):
+            if First_Line.objects.filter(main_user__id=admin_.id).exists():
+                line_admin = First_Line.objects.get(main_user__id=admin_.id)
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            else:
+                line_admin = First_Line()
+                line_admin.main_user = admin_
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            save(main_user, all_, profile, admin_, category_bronze)
+        # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
+        else:
+            case_3_4_ref(main_user, money_to_card, all_, profile)
+            save(category_bronze)
+
+    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
+    context = {
+        'admin': admin_,
+        'profile': profile,
+        'all': all_,
+        'main_user': main_user,
+        'users': users
+    }
+    return render(request, 'backend/ref.html', context=context)
+
+    # проверка на рефку
+    # else:
+    # a = Admin.objects.all().first()
+    # b =
+    # if Category_Bronze.objects.filter(user.id=).exists()
+
+
+# gold
+def referral_system_gold(request, id_):
+    save_user()
+    # Сбор данных
+    profile = Profile.objects.get(user__id=request.user.id)
+    card = 'card_' + str(id_)
+    all_ = All.objects.all().first()
+    cookies = request.COOKIES.get('utm')
+    if cookies is None:
+        cookies = None
+    if Category_Gold.objects.filter(user__id=profile.id).exists():
+        category_bronze = Category_Gold.objects.get(user__id=profile.id)
+    else:
+        category_bronze = Category_Gold()
+        category_bronze.user = profile
+    # Проверка блокировки карты для пользователя
+    if id_ == 6 and category_bronze.card_6_disable is False:
+        return HttpResponse('Error')
+    else:
+        money_to_card = what_card(card, category_bronze)
+    money_to_card = Decimal(money_to_card)  # Стоимость карты
+    # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
+    if cookies is None or cookies == '':
+        admin_.money += money_to_card * Decimal('0.15')
+        profile.money -= money_to_card
+        all_.money += money_to_card
+        save(all_, profile, admin_, category_bronze)
+        # main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+    else:
+        main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+        save(main_user)
+        if profile.money < money_to_card:
+            return HttpResponse('Error')
+        # Если у пригласившего не открыта карта номиналом,
+        # которую купил рефер, то рефералка уходит админу
+        if main_user.max_card < int(max_card_):
+            if First_Line.objects.filter(main_user__id=admin_.id).exists():
+                line_admin = First_Line.objects.get(main_user__id=admin_.id)
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            else:
+                line_admin = First_Line()
+                line_admin.main_user = admin_
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            save(main_user, all_, profile, admin_, category_bronze)
+        # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
+        else:
+            case_3_4_ref(main_user, money_to_card, all_, profile)
+            save(category_bronze)
+
+    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
+    context = {
+        'admin': admin_,
+        'profile': profile,
+        'all': all_,
+        'main_user': main_user,
+        'users': users
+    }
+    return render(request, 'backend/ref.html', context=context)
+
+    # проверка на рефку
+    # else:
+    # a = Admin.objects.all().first()
+    # b =
+    # if Category_Bronze.objects.filter(user.id=).exists()
+
+
+# emerald
+def referral_system_emerald(request, id_):
+    save_user()
+    # Сбор данных
+    profile = Profile.objects.get(user__id=request.user.id)
+    card = 'card_' + str(id_)
+    all_ = All.objects.all().first()
+    cookies = request.COOKIES.get('utm')
+    if cookies is None:
+        cookies = None
+    if Category_Emerald.objects.filter(user__id=profile.id).exists():
+        category_bronze = Category_Emerald.objects.get(user__id=profile.id)
+    else:
+        category_bronze = Category_Emerald()
+        category_bronze.user = profile
+    # Проверка блокировки карты для пользователя
+    if id_ == 6 and category_bronze.card_6_disable is False:
+        return HttpResponse('Error')
+    else:
+        money_to_card = what_card(card, category_bronze)
+    money_to_card = Decimal(money_to_card)  # Стоимость карты
+    # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
+    if cookies is None or cookies == '':
+        admin_.money += money_to_card * Decimal('0.15')
+        profile.money -= money_to_card
+        all_.money += money_to_card
+        save(all_, profile, admin_, category_bronze)
+        # main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+    else:
+        main_user = Profile.objects.get(referral_link=cookies)
+        max_card_ = '0' + str(id_)
+        save(main_user)
+        if profile.money < money_to_card:
+            return HttpResponse('Error')
+        # Если у пригласившего не открыта карта номиналом,
+        # которую купил рефер, то рефералка уходит админу
+        if main_user.max_card < int(max_card_):
+            if First_Line.objects.filter(main_user__id=admin_.id).exists():
+                line_admin = First_Line.objects.get(main_user__id=admin_.id)
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            else:
+                line_admin = First_Line()
+                line_admin.main_user = admin_
+                profile.line_1 = line_admin.id
+                line_admin.save()
+                admin_.money += money_to_card * Decimal('0.1')
+                all_.money += money_to_card
+                profile.money -= money_to_card
+            save(main_user, all_, profile, admin_, category_bronze)
+        # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
+        else:
+            case_3_4_ref(main_user, money_to_card, all_, profile)
+            save(category_bronze)
+
+    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
+    context = {
+        'admin': admin_,
+        'profile': profile,
+        'all': all_,
+        'main_user': main_user,
+        'users': users
+    }
+    return render(request, 'backend/ref.html', context=context)
+
+    # проверка на рефку
+    # else:
+    # a = Admin.objects.all().first()
+    # b =
+    # if Category_Bronze.objects.filter(user.id=).exists()
+
+
+def matrix_pay(main_matrix, money):
+    if User_in_Matrix.objects.filter(participant_number=main_matrix.go_money).exists():
+        user_1 = User_in_Matrix.objects.get(
+            participant_number=main_matrix.go_money
+        )
+        if User_in_Matrix.objects.filter(participant_number=(main_matrix.go_money + 1)).exists():
+            user_2 = User_in_Matrix.objects.get(
+                participant_number=(main_matrix.go_money + 1)
+            )
+        else:
+            user_1_2 = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('participant_number')
+            user_2 = user_1_2.first()
+    else:
+        user_1_2 = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('participant_number')
+        user_1 = user_1_2.first()
+        user_2 = user_1_2[1]
+    if user_1.user.id is user_2.user.id:
+        user_1.user.money += Decimal(money / 2) * 2
+        user_1.user.save()
+        user_1.save()
+    else:
+        user_1.user.money += Decimal(money / 2)
+        user_2.user.money += Decimal(money / 2)
+        user_1.user.save()
+        user_2.user.save()
+        user_1.save()
+        user_2.save()
+
+
+# Логика матрицы
+def logics_matrix(request, money):
+    profile = Profile.objects.get(user__id=request.user.id)
+    user_in_matrix = User_in_Matrix()
+    user_in_matrix.user = profile
+    if User_in_Matrix.objects.all().count() != 0:
+        user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
+            '-participant_number').first().participant_number + 1
+    else:
+        user_in_matrix.participant_number = 0
+    # Проверка существ главной матрицы
+    if Matrix.objects.filter(up=True).exists():
+        main_matrix = Matrix.objects.get(up=True)
+        # Проверка на максимальность матрицы
+        if main_matrix.col == main_matrix.max_users:
+            # Проверка на вторую матрицу(принимающую)
+            if Matrix.objects.filter(up=False).exists():
+                down_matrix = Matrix.objects.get(up=False)
+                # Проверка на максимальность матрицы
+                if down_matrix.col == down_matrix.max_users:
+                    down_matrix.up = True
+                    down_matrix.go_money = main_matrix.go_money
+                    main_matrix.delete()
+                    new_matrix = Matrix()
+                    new_matrix.max_users = down_matrix.max_users * 2
+                    new_matrix.col += 1
+                    user_in_matrix.matrix = new_matrix
+                    matrix_pay(down_matrix, money)
+                    all_users = User_in_Matrix.objects.order_by('-participant_number')
+                    if down_matrix.go_money + 2 > all_users.first().participant_number:
+                        if down_matrix.go_money + 1 > all_users.first().participant_number:
+                            all_in_matrix = User_in_Matrix.objects.filter(matrix=down_matrix)
+                            all_in_matrix = all_in_matrix.order_by('participant_number')
+                            down_matrix.go_money = all_in_matrix[1]
+                        else:
+                            all_in_matrix = User_in_Matrix.objects.filter(matrix=down_matrix)
+                            all_in_matrix = all_in_matrix.order_by('participant_number')
+                            all_in_matrix = all_in_matrix.first().participant_number
+                            down_matrix.go_money = all_in_matrix
+                    else:
+                        down_matrix.go_money += 2
+                    # save
+                    down_matrix.save()
+                    new_matrix.save()
+                    user_in_matrix.save()
+                else:
+                    matrix_pay(main_matrix, money)
+                    all_users = User_in_Matrix.objects.order_by('-participant_number')
+                    if down_matrix.go_money + 2 > all_users.first().participant_number:
+                        if down_matrix.go_money + 1 > all_users.first().participant_number:
+                            all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
+                            all_in_matrix = all_in_matrix.order_by('participant_number')
+                            main_matrix.go_money = all_in_matrix[1]
+                        else:
+                            all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
+                            all_in_matrix = all_in_matrix.order_by('participant_number')
+                            all_in_matrix = all_in_matrix.first().participant_number
+                            main_matrix.go_money = all_in_matrix
+                    else:
+                        main_matrix.go_money += 2
+                    down_matrix.col += 1
+                    user_in_matrix.matrix = down_matrix
+                    # save
+                    user_in_matrix.save()
+                    down_matrix.save()
+            else:
+                down_matrix = Matrix()
+                down_matrix.max_users = main_matrix.max_users * 2
+                down_matrix.col += 1
+                user_in_matrix.matrix = down_matrix
+                matrix_pay(main_matrix, money)
+                all_users = User_in_Matrix.objects.order_by('-participant_number')
+                if down_matrix.go_money + 2 > all_users.first().participant_number:
+                    if down_matrix.go_money + 1 > all_users.first().participant_number:
+                        all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
+                        all_in_matrix = all_in_matrix.order_by('participant_number')
+                        main_matrix.go_money = all_in_matrix[1]
+                    else:
+                        all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
+                        all_in_matrix = all_in_matrix.order_by('participant_number')
+                        all_in_matrix = all_in_matrix.first().participant_number
+                        main_matrix.go_money = all_in_matrix
+                else:
+                    main_matrix.go_money += 2
+                # save
+                main_matrix.save()
+                down_matrix.save()
+                user_in_matrix.save()
+        else:
+            user_in_matrix.matrix = main_matrix
+            main_matrix.col += 1
+            user_in_matrix.save()
+            main_matrix.save()
+    else:
+        main_matrix = Matrix()
+        main_matrix.col += 1
+        user_in_matrix.matrix = main_matrix
+        main_matrix.up = True
+        main_matrix.save()
+        user_in_matrix.save()
+    context = {
+        'matrix': Matrix.objects.all(),
+        'user': Profile.objects.filter(admin_or=True),
+        'user_in': User_in_Matrix.objects.all().order_by('participant_number'),
+    }
+    return render(request, 'backend/matrix.html', context=context)
 
 
 # Модуль оплаты

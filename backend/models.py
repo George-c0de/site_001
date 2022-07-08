@@ -151,7 +151,7 @@ class User_in_Matrix(models.Model):
     participant_number = models.IntegerField('Номер участника')
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     d = models.IntegerField('Кол-во зачислений', default=0)
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, default=0)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
 # Кошелек

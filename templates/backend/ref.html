@@ -9,5 +9,11 @@
 <p>profile.money {{ profile.money }}</p>
 <p>all {{ all.money }}</p>
 <p>main_user {{ main_user.money }}</p>
+<div>
+    {% for el in users %}
+        <p>{{ el.user.username }} - {{ el.money }}</p>
+        <br>
+    {% endfor %}
+</div>
 </body>
 </html>

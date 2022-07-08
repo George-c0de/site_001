@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>matrix</h4>
+{% for el in matrix %}
+    <p>{{ el.up }}</p>
+    <p>Макс польз {{ el.max_users }}</p>
+    <p> След {{ el.go_money }}</p>
+    <p>Кол-во {{ el.col }}</p>
+{% endfor %}
+<h4>user_in</h4>
+<ul>
+{% for el in user_in %}
+    <li>№ {{ el.participant_number }}</li>
+    <li> Матрица : {{ el.matrix.id }}</li>
+    <li>Получено выплат{{ el.d }}</li>
+    <li> Пользователь{{ el.user }}</li>
+    <br>
+{% endfor %}</ul>
+<h4>user</h4>
+{% for el in user %}
+    <p>{{ el.user }}</p>
+    <p>{{ el.money }}</p>
+{% endfor %}
+</body>
+</html>

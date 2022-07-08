@@ -24,6 +24,9 @@ urlpatterns = [
     path('send_usdt/', views.send_usdt),
     path('delete/', views.delete),
     path('paymant/', views.main),
-    path('ref/<int:id_>', views.referral_system_bronze),
-    path('ref', views.referral_system_bronze1),
+    path('bronze/<int:id_>', views.referral_system_bronze),
+    path('silver/<int:id_>', views.referral_system_silver),
+    path('gold/<int:id_>', views.referral_system_gold),
+    path('emerald/<int:id_>', views.referral_system_emerald),
+    path('matrix/<int:money>', views.logics_matrix)
 ]
