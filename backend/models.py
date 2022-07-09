@@ -53,7 +53,8 @@ class Third_Line(models.Model):
 
 
 class Card(models.Model):
-    name = models.CharField('Название', max_length=50)
+    name = models.IntegerField('Название')
+    category = models.CharField('Название', max_length=150)
     price = models.DecimalField('Стоимость', max_digits=10, decimal_places=2)
 
 

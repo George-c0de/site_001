@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 from decimal import *
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
-    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald
+    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card
 from .serializers import ProfileSerializer
 from tronpy import Contract, Tron
 import base58
@@ -278,7 +278,18 @@ def referral_system_bronze(request, id_):
         else:
             case_3_4_ref(main_user, money_to_card, all_, profile)
             save(category_bronze)
-
+    buy_card = Buy_Card()
+    buy_card.user = profile
+    card_ = Card()
+    card_.price = money_to_card
+    card_.category = 'bronze'
+    card_.name = card
+    card_.save()
+    buy_card.card = card_
+    buy_card.save()
+    new_money = money_to_card * Decimal('0.8')
+    admin_.money += money_to_card * Decimal('0.05')
+    logics_matrix(profile, new_money)
     users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
     context = {
         'admin': admin_,
@@ -525,28 +536,21 @@ def referral_system_emerald(request, id_):
 
 
 def matrix_pay(main_matrix, money):
-    if User_in_Matrix.objects.filter(participant_number=main_matrix.go_money).exists():
-        user_1 = User_in_Matrix.objects.get(
-            participant_number=main_matrix.go_money
-        )
-        if User_in_Matrix.objects.filter(participant_number=(main_matrix.go_money + 1)).exists():
-            user_2 = User_in_Matrix.objects.get(
-                participant_number=(main_matrix.go_money + 1)
-            )
-        else:
-            user_1_2 = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('participant_number')
-            user_2 = user_1_2.first()
-    else:
-        user_1_2 = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('participant_number')
-        user_1 = user_1_2.first()
-        user_2 = user_1_2[1]
-    if user_1.user.id is user_2.user.id:
+    user_1 = User_in_Matrix.objects.get(participant_number=main_matrix.go_money)
+    user_2 = User_in_Matrix.objects.get(participant_number=(main_matrix.go_money + 1))
+    if user_1.user.id == user_2.user.id:
         user_1.user.money += Decimal(money / 2) * 2
+        user_1.d += 1
+        user_2.d += 1
+        user_2.save()
+        user_2.user.save()
         user_1.user.save()
         user_1.save()
     else:
         user_1.user.money += Decimal(money / 2)
         user_2.user.money += Decimal(money / 2)
+        user_1.d += 1
+        user_2.d += 1
         user_1.user.save()
         user_2.user.save()
         user_1.save()
@@ -554,10 +558,10 @@ def matrix_pay(main_matrix, money):
 
 
 # Логика матрицы
-def logics_matrix(request, money):
-    profile = Profile.objects.get(user__id=request.user.id)
+def logics_matrix(user_, money):
+    profile = user_
     user_in_matrix = User_in_Matrix()
-    user_in_matrix.user = profile
+    user_in_matrix.user = Profile.objects.get(user=profile)
     if User_in_Matrix.objects.all().count() != 0:
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
             '-participant_number').first().participant_number + 1
@@ -573,25 +577,23 @@ def logics_matrix(request, money):
                 down_matrix = Matrix.objects.get(up=False)
                 # Проверка на максимальность матрицы
                 if down_matrix.col == down_matrix.max_users:
+                    print('Матрица полна')
                     down_matrix.up = True
-                    down_matrix.go_money = main_matrix.go_money
+
+                    temp = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('-participant_number')
+                    temp = temp.first().participant_number + 1
+                    down_matrix.go_money = temp
                     main_matrix.delete()
                     new_matrix = Matrix()
                     new_matrix.max_users = down_matrix.max_users * 2
                     new_matrix.col += 1
                     user_in_matrix.matrix = new_matrix
                     matrix_pay(down_matrix, money)
-                    all_users = User_in_Matrix.objects.order_by('-participant_number')
-                    if down_matrix.go_money + 2 > all_users.first().participant_number:
-                        if down_matrix.go_money + 1 > all_users.first().participant_number:
-                            all_in_matrix = User_in_Matrix.objects.filter(matrix=down_matrix)
-                            all_in_matrix = all_in_matrix.order_by('participant_number')
-                            down_matrix.go_money = all_in_matrix[1]
-                        else:
-                            all_in_matrix = User_in_Matrix.objects.filter(matrix=down_matrix)
-                            all_in_matrix = all_in_matrix.order_by('participant_number')
-                            all_in_matrix = all_in_matrix.first().participant_number
-                            down_matrix.go_money = all_in_matrix
+                    all_users = User_in_Matrix.objects.filter(matrix=down_matrix).order_by('-participant_number')
+                    if all_users[1].participant_number == down_matrix.go_money:
+                        down_matrix.go_money = all_users[all_users.count() - 1].participant_number
+                    elif all_users[0].participant_number == down_matrix.go_money:
+                        down_matrix.go_money = all_users[all_users.count() - 2].participant_number
                     else:
                         down_matrix.go_money += 2
                     # save
@@ -600,17 +602,11 @@ def logics_matrix(request, money):
                     user_in_matrix.save()
                 else:
                     matrix_pay(main_matrix, money)
-                    all_users = User_in_Matrix.objects.order_by('-participant_number')
-                    if down_matrix.go_money + 2 > all_users.first().participant_number:
-                        if down_matrix.go_money + 1 > all_users.first().participant_number:
-                            all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
-                            all_in_matrix = all_in_matrix.order_by('participant_number')
-                            main_matrix.go_money = all_in_matrix[1]
-                        else:
-                            all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
-                            all_in_matrix = all_in_matrix.order_by('participant_number')
-                            all_in_matrix = all_in_matrix.first().participant_number
-                            main_matrix.go_money = all_in_matrix
+                    all_users = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('-participant_number')
+                    if all_users[1].participant_number == main_matrix.go_money:
+                        main_matrix.go_money = all_users[all_users.count() - 1].participant_number
+                    elif all_users[0].participant_number == main_matrix.go_money:
+                        main_matrix.go_money = all_users[all_users.count() - 2].participant_number
                     else:
                         main_matrix.go_money += 2
                     down_matrix.col += 1
@@ -618,26 +614,21 @@ def logics_matrix(request, money):
                     # save
                     user_in_matrix.save()
                     down_matrix.save()
+                    main_matrix.save()
             else:
                 down_matrix = Matrix()
                 down_matrix.max_users = main_matrix.max_users * 2
                 down_matrix.col += 1
                 user_in_matrix.matrix = down_matrix
                 matrix_pay(main_matrix, money)
-                all_users = User_in_Matrix.objects.order_by('-participant_number')
-                if down_matrix.go_money + 2 > all_users.first().participant_number:
-                    if down_matrix.go_money + 1 > all_users.first().participant_number:
-                        all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
-                        all_in_matrix = all_in_matrix.order_by('participant_number')
-                        main_matrix.go_money = all_in_matrix[1]
-                    else:
-                        all_in_matrix = User_in_Matrix.objects.filter(matrix=main_matrix)
-                        all_in_matrix = all_in_matrix.order_by('participant_number')
-                        all_in_matrix = all_in_matrix.first().participant_number
-                        main_matrix.go_money = all_in_matrix
+                all_users = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('-participant_number')
+                if all_users[1].participant_number == main_matrix.go_money:
+                    main_matrix.go_money = all_users[all_users.count() - 1].participant_number
+                elif all_users[0].participant_number == main_matrix.go_money:
+                    main_matrix.go_money = all_users[all_users.count() - 2].participant_number
                 else:
                     main_matrix.go_money += 2
-                # save
+                    # save
                 main_matrix.save()
                 down_matrix.save()
                 user_in_matrix.save()
@@ -653,12 +644,6 @@ def logics_matrix(request, money):
         main_matrix.up = True
         main_matrix.save()
         user_in_matrix.save()
-    context = {
-        'matrix': Matrix.objects.all(),
-        'user': Profile.objects.filter(admin_or=True),
-        'user_in': User_in_Matrix.objects.all().order_by('participant_number'),
-    }
-    return render(request, 'backend/matrix.html', context=context)
 
 
 # Модуль оплаты
