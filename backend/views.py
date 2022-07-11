@@ -164,19 +164,18 @@ def index_with_utm(request, utm):
 @api_view(['GET', 'POST'])
 def login_page(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return Response('You are already logged in')
     else:
         if request.method == 'POST':
-            username = request.POST.get('username')
+            username = request.POST.get('email')
             password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(request, email=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return Response('OK')
             else:
-                messages.info(request, 'имя пользователя и пароль неверный.')
-        context = {}
-        return render(request, 'backend/login.html', context)
+                return Response('Error')
+        return Response('OK')
 
 
 def logout_user(request):
