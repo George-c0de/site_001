@@ -32,9 +32,9 @@ logging.basicConfig(
     ]
 )
 
+
 @api_view(['GET'])
 def getRoutes(request):
-
     routes = [
         {
             'Endpoint': '/login/',
@@ -167,9 +167,11 @@ def login_page(request):
         return Response('You are already logged in')
     else:
         if request.method == 'POST':
-            username = request.POST.get('email')
-            password = request.POST.get('password')
-            user = authenticate(request, email=username, password=password)
+            email = request.data.get('email')
+            username = User.objects.get(email=email).username
+            # username = request.POST.get('email')
+            password = request.data.get('password')
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return Response('OK')
@@ -192,7 +194,7 @@ def register_page(request):
             username = form.cleaned_data.get('username')
             user = User.objects.get(username=username)
             messages.success(request, 'Аккаунт создан,' + username)
-            return redirect('home')
+            return Response("OK")
 
     context = {'form': form}
     return render(request, 'backend/register.html', context)

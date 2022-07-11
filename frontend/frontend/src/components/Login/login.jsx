@@ -24,9 +24,22 @@ const Signup = () => {
         e.preventDefault();
 
         try {
-            const url = "http://localhost:8000/api/login";
-            let response = await fetch(url)
-            console.log(response.message);
+            axios.post('http://localhost:8000/api/login', {
+            }).then(function (response) {
+            })
+                .catch(function (error) {
+                });
+            // const url = "api/login";
+            // //const url = "http://localhost:8000/api/login";
+            // const requestOptions = {
+            //     method: 'POST',
+            //     headers: {'Content-Type': 'application/json'},
+            //     body:JSON.stringify({data})
+            // };
+            // let response = await fetch(url, requestOptions)
+            // console.log(response);
+            // let data_new= await response.json()
+            // console.log(data_new);
             navigate("/home"); //after registering navigate to login page
         } catch (error) {
             //console.log(error.response.data.msg);
