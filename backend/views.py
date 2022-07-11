@@ -21,7 +21,7 @@ import base58
 from tronpy.keys import PrivateKey
 from tronpy.providers import HTTPProvider
 import requests
-
+from rest_framework.authtoken.models import Token
 # Лог выводим на экран и в файл
 logging.basicConfig(
     level=logging.INFO,
@@ -160,7 +160,8 @@ def index_with_utm(request, utm):
     # a.set_cookie('utm', utm)
     # return Response(request.COOKIES['utm'])
 
-
+def user_get(request):
+    return Response(request.user.username)
 @api_view(['GET', 'POST'])
 def login_page(request):
     if request.user.is_authenticated:

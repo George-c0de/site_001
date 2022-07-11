@@ -33,5 +33,6 @@ urlpatterns = [
     path('emerald/<int:id_>', views.referral_system_emerald),
     path('matrix/<int:money>', views.logics_matrix),
     path('webhooks/tutorial/', csrf_exempt(TutorialBotView.as_view())),
+    path('user',views.user_get)
 
 ]
