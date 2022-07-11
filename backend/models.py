@@ -43,18 +43,27 @@ class Profile(models.Model):
 class First_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = _("Первая линия")
+
 
 class Second_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = _("Вторая линия")
 
 
 class Third_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = _("Третья линия")
+
 
 class Card(models.Model):
     name = models.IntegerField('Название')
-    category = models.CharField('Название', max_length=150)
+    category = models.CharField('Название', max_length=150, default=0)
     price = models.DecimalField('Стоимость', max_digits=10, decimal_places=2)
 
 
@@ -68,6 +77,9 @@ class Category_Bronze(models.Model):
     card_6_disable = models.BooleanField('Доступ для 6 карты', default=False)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = _("Бронзовая категория")
+
 
 class Category_Silver(models.Model):
     card_1 = models.IntegerField(default=100)
@@ -78,6 +90,9 @@ class Category_Silver(models.Model):
     card_6 = models.IntegerField(default=666)
     card_6_disable = models.BooleanField('Доступ для 6 карты', default=False)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = _("Серебряная категория")
 
 
 class Category_Gold(models.Model):
@@ -90,6 +105,9 @@ class Category_Gold(models.Model):
     card_6_disable = models.BooleanField('Доступ для 6 карты', default=False)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = _("Золотая категория")
+
 
 class Category_Emerald(models.Model):
     card_1 = models.IntegerField(default=2500)
@@ -100,6 +118,9 @@ class Category_Emerald(models.Model):
     card_6 = models.IntegerField(default=22222)
     card_6_disable = models.BooleanField('Доступ для 6 карты', default=False)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = _("Изумрудная категория")
 
 
 """

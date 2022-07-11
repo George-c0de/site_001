@@ -1,21 +1,9 @@
 from django.contrib import admin
-from django.http import HttpResponseRedirect
-from django.template.defaulttags import url
 from django.urls import reverse
 from .models import *
 from django.utils.http import urlencode
 
-from django.contrib.auth.models import User, Group
-
-"""
-admin.site.unregister(User)
-admin.site.unregister(Group)
-
-
-@admin.register(User)
-class User_1(admin.ModelAdmin):
-    fields = ('email',)
-"""
+from django.contrib.auth.models import User  # Group
 
 
 class HistoryTransactionsProfileAdmin(admin.TabularInline):
@@ -58,6 +46,50 @@ class Third_LineAdmin(admin.ModelAdmin):
         return obj.id
 
     id_.short_description = 'id_'
+
+
+@admin.register(Category_Bronze)
+class Category_Bronze_Admin(admin.ModelAdmin):
+    list_display = (
+        'card_6_disable', 'user',
+    )
+    search_fields = ('user__id',)
+    list_filter = (
+        'user', 'card_6_disable'
+    )
+
+
+@admin.register(Category_Silver)
+class Category_Silver_Admin(admin.ModelAdmin):
+    list_display = (
+        'card_6_disable', 'user',
+    )
+    search_fields = ('user__id',)
+    list_filter = (
+        'user', 'card_6_disable'
+    )
+
+
+@admin.register(Category_Gold)
+class Category_Gold_Admin(admin.ModelAdmin):
+    list_display = (
+        'card_6_disable', 'user',
+    )
+    search_fields = ('user__id',)
+    list_filter = (
+        'user', 'card_6_disable'
+    )
+
+
+@admin.register(Category_Emerald)
+class Category_Emerald_Admin(admin.ModelAdmin):
+    list_display = (
+        'card_6_disable', 'user',
+    )
+    search_fields = ('user__id',)
+    list_filter = (
+        'user', 'card_6_disable'
+    )
 
 
 @admin.register(Profile)

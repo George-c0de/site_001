@@ -31,19 +31,28 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-if not Profile.objects.filter(admin_or=True).exists():
-    user = User()
-    user.username = 'admin'
-    user.password = 'admin'
-    user.save()
-    profile2 = Profile()
-    profile2.user = user
-    profile2.save()
 
+def create_all_and_admin():
+    if not Profile.objects.filter(admin_or=True).exists():
+        user = User()
+        user.username = 'admin'
+        user.password = 'admin'
+        user.save()
+        profile2 = Profile()
+        profile2.user = user
+        profile2.save()
+
+    if not All.objects.all().exists():
+        a = All()
+        a.save()
+
+
+create_all_and_admin()
 admin_ = Profile.objects.filter(admin_or=True).first()
-if not All.objects.all().exists():
-    a = All()
-    a.save()
+
+
+def lan(request):
+    render(request, 'backend/len.html')
 
 
 def save_user():
@@ -125,10 +134,11 @@ def import_users(request):
 
 
 def index_with_utm(request, utm):
-    a = Response()
-    # request.session
-    a.set_cookie('utm', utm)
-    return Response(request.COOKIES['utm'])
+    pass
+    # a = Response()
+    # # request.session
+    # a.set_cookie('utm', utm)
+    # return Response(request.COOKIES['utm'])
 
 
 @api_view(['GET', 'POST'])
@@ -222,7 +232,6 @@ def case_3_4_ref(main_user, money_to_card, all_, profile):
 
 # Логика реферальной системы
 def referral_system_bronze(request, id_):
-    save_user()
     # Сбор данных
     profile = Profile.objects.get(user__id=request.user.id)
     card = 'card_' + str(id_)
@@ -290,15 +299,7 @@ def referral_system_bronze(request, id_):
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
     logics_matrix(profile, new_money)
-    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
-    context = {
-        'admin': admin_,
-        'profile': profile,
-        'all': all_,
-        'main_user': main_user,
-        'users': users
-    }
-    return render(request, 'backend/ref.html', context=context)
+    return render(request, 'backend/ref.html')
 
     # проверка на рефку
     # else:
@@ -309,7 +310,6 @@ def referral_system_bronze(request, id_):
 
 # silver
 def referral_system_silver(request, id_):
-    save_user()
     # Сбор данных
     profile = Profile.objects.get(user__id=request.user.id)
     card = 'card_' + str(id_)
@@ -318,22 +318,22 @@ def referral_system_silver(request, id_):
     if cookies is None:
         cookies = None
     if Category_Silver.objects.filter(user__id=profile.id).exists():
-        category_bronze = Category_Silver.objects.get(user__id=profile.id)
+        category_silver = Category_Silver.objects.get(user__id=profile.id)
     else:
-        category_bronze = Category_Silver()
-        category_bronze.user = profile
+        category_silver = Category_Silver()
+        category_silver.user = profile
     # Проверка блокировки карты для пользователя
-    if id_ == 6 and category_bronze.card_6_disable is False:
+    if id_ == 6 and category_silver.card_6_disable is False:
         return HttpResponse('Error')
     else:
-        money_to_card = what_card(card, category_bronze)
+        money_to_card = what_card(card, category_silver)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
         all_.money += money_to_card
-        save(all_, profile, admin_, category_bronze)
+        save(all_, profile, admin_, category_silver)
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
@@ -360,21 +360,24 @@ def referral_system_silver(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-            save(main_user, all_, profile, admin_, category_bronze)
+            save(main_user, all_, profile, admin_, category_silver)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
             case_3_4_ref(main_user, money_to_card, all_, profile)
-            save(category_bronze)
-
-    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
-    context = {
-        'admin': admin_,
-        'profile': profile,
-        'all': all_,
-        'main_user': main_user,
-        'users': users
-    }
-    return render(request, 'backend/ref.html', context=context)
+            save(category_silver)
+    buy_card = Buy_Card()
+    buy_card.user = profile
+    card_ = Card()
+    card_.price = money_to_card
+    card_.category = 'silver'
+    card_.name = card
+    card_.save()
+    buy_card.card = card_
+    buy_card.save()
+    new_money = money_to_card * Decimal('0.8')
+    admin_.money += money_to_card * Decimal('0.05')
+    logics_matrix(profile, new_money)
+    return render(request, 'backend/ref.html')
 
     # проверка на рефку
     # else:
@@ -385,7 +388,6 @@ def referral_system_silver(request, id_):
 
 # gold
 def referral_system_gold(request, id_):
-    save_user()
     # Сбор данных
     profile = Profile.objects.get(user__id=request.user.id)
     card = 'card_' + str(id_)
@@ -394,22 +396,22 @@ def referral_system_gold(request, id_):
     if cookies is None:
         cookies = None
     if Category_Gold.objects.filter(user__id=profile.id).exists():
-        category_bronze = Category_Gold.objects.get(user__id=profile.id)
+        category_gold = Category_Gold.objects.get(user__id=profile.id)
     else:
-        category_bronze = Category_Gold()
-        category_bronze.user = profile
+        category_gold = Category_Gold()
+        category_gold.user = profile
     # Проверка блокировки карты для пользователя
-    if id_ == 6 and category_bronze.card_6_disable is False:
+    if id_ == 6 and category_gold.card_6_disable is False:
         return HttpResponse('Error')
     else:
-        money_to_card = what_card(card, category_bronze)
+        money_to_card = what_card(card, category_gold)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
         all_.money += money_to_card
-        save(all_, profile, admin_, category_bronze)
+        save(all_, profile, admin_, category_gold)
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
@@ -436,21 +438,24 @@ def referral_system_gold(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-            save(main_user, all_, profile, admin_, category_bronze)
+            save(main_user, all_, profile, admin_, category_gold)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
             case_3_4_ref(main_user, money_to_card, all_, profile)
-            save(category_bronze)
-
-    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
-    context = {
-        'admin': admin_,
-        'profile': profile,
-        'all': all_,
-        'main_user': main_user,
-        'users': users
-    }
-    return render(request, 'backend/ref.html', context=context)
+            save(category_gold)
+    buy_card = Buy_Card()
+    buy_card.user = profile
+    card_ = Card()
+    card_.price = money_to_card
+    card_.category = 'gold'
+    card_.name = card
+    card_.save()
+    buy_card.card = card_
+    buy_card.save()
+    new_money = money_to_card * Decimal('0.8')
+    admin_.money += money_to_card * Decimal('0.05')
+    logics_matrix(profile, new_money)
+    return render(request, 'backend/ref.html')
 
     # проверка на рефку
     # else:
@@ -461,7 +466,6 @@ def referral_system_gold(request, id_):
 
 # emerald
 def referral_system_emerald(request, id_):
-    save_user()
     # Сбор данных
     profile = Profile.objects.get(user__id=request.user.id)
     card = 'card_' + str(id_)
@@ -470,22 +474,22 @@ def referral_system_emerald(request, id_):
     if cookies is None:
         cookies = None
     if Category_Emerald.objects.filter(user__id=profile.id).exists():
-        category_bronze = Category_Emerald.objects.get(user__id=profile.id)
+        category_emerald = Category_Emerald.objects.get(user__id=profile.id)
     else:
-        category_bronze = Category_Emerald()
-        category_bronze.user = profile
+        category_emerald = Category_Emerald()
+        category_emerald.user = profile
     # Проверка блокировки карты для пользователя
-    if id_ == 6 and category_bronze.card_6_disable is False:
+    if id_ == 6 and category_emerald.card_6_disable is False:
         return HttpResponse('Error')
     else:
-        money_to_card = what_card(card, category_bronze)
+        money_to_card = what_card(card, category_emerald)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
         all_.money += money_to_card
-        save(all_, profile, admin_, category_bronze)
+        save(all_, profile, admin_, category_emerald)
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
@@ -512,21 +516,24 @@ def referral_system_emerald(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-            save(main_user, all_, profile, admin_, category_bronze)
+            save(main_user, all_, profile, admin_, category_emerald)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
             case_3_4_ref(main_user, money_to_card, all_, profile)
-            save(category_bronze)
-
-    users = Profile.objects.exclude(user__username='maria').exclude(user__username='Василий')
-    context = {
-        'admin': admin_,
-        'profile': profile,
-        'all': all_,
-        'main_user': main_user,
-        'users': users
-    }
-    return render(request, 'backend/ref.html', context=context)
+            save(category_emerald)
+    buy_card = Buy_Card()
+    buy_card.user = profile
+    card_ = Card()
+    card_.price = money_to_card
+    card_.category = 'emerald'
+    card_.name = card
+    card_.save()
+    buy_card.card = card_
+    buy_card.save()
+    new_money = money_to_card * Decimal('0.8')
+    admin_.money += money_to_card * Decimal('0.05')
+    logics_matrix(profile, new_money)
+    return render(request, 'backend/ref.html')
 
     # проверка на рефку
     # else:
@@ -833,7 +840,8 @@ class TronClient:
         Returns:
             dict: {success, result:[transaction list]}
         """
-        url = f"{self.trongrid_url}/v1/accounts/{address}/transactions/trc20?limit=200&contract_address={self.usdt_address}"
+        url = f"{self.trongrid_url}/v1/accounts/{address}/transactions/trc20?limit=200&contract_address=" \
+              f"{self.usdt_address}"
         try:
             r = requests.get(url)
         except Exception as e:

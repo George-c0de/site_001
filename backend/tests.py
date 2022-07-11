@@ -461,7 +461,7 @@ class Card_test(TestCase):
         print(admin_.money)
         self.assertEqual(admin_.money, 30)
 
-    def test_bez_ref(self):
+    def test_bez_ref1(self):
         st = 'User_'
         admin_ = Profile.objects.filter(admin_or=True).first()
         a = []

@@ -1,8 +1,10 @@
 from django.template.defaulttags import url
-from django.urls import path, include
+from django.views.decorators.csrf import csrf_exempt
 from backend import views
 from django.urls import path, reverse_lazy, include
 from django.contrib.auth import views as auth_views
+
+from tgbot.views import TutorialBotView
 
 urlpatterns = [
     path('', views.index, name='home'),
@@ -28,5 +30,7 @@ urlpatterns = [
     path('silver/<int:id_>', views.referral_system_silver),
     path('gold/<int:id_>', views.referral_system_gold),
     path('emerald/<int:id_>', views.referral_system_emerald),
-    path('matrix/<int:money>', views.logics_matrix)
+    path('matrix/<int:money>', views.logics_matrix),
+    path('webhooks/tutorial/', csrf_exempt(TutorialBotView.as_view())),
+
 ]

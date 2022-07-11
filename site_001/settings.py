@@ -14,10 +14,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-&caj_mhhj2j2e_r_t_$_xi8@az)hq$k4ziwo%+rv*_i77&*-3='
 SECRET_KEY = env('SECRET_KEY')
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -34,9 +31,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'backend',
     'captcha',
+    'tgbot',
+    'frontend',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,11 +108,29 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+# LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'  # язык сайта по умолчанию
 
+LANGUAGES = (
+    ('ru', 'Russian'),
+    ('en', 'English'),
+    ('de', 'Germany'),
+    ('es', 'Spain'),
+    ('br', 'Brazil'),
+    ('ar', 'Argentina'),
+    ('pr', 'Puerto Rico'),
+    ('fr', 'France'),
+    ('it', 'Italy'),
+)
+
+USE_I18N = True  # активация системы перевода django
+
+# месторасположение файлов перевода
+LOCALE_PATHS = (
+    'locale',
+    # os.path.join(PROJECT_DIR, 'locale'),
+)
 TIME_ZONE = 'UTC'
-
-USE_I18N = True
 
 USE_TZ = True
 
@@ -127,53 +145,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SMTP Hostname
-"""
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@mg.bottlenose.co'
-EMAIL_HOST_PASSWORD = 'mys3cr3tp4ssw0rd'
-EMAIL_USE_TLS = True
-"""
 
-# Настройка SMTP
-"""
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-SENDGRID_API_KEY = env('SENDGRID_API_KEY')
-
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
-# EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-"""
-
-# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-# DEFAULT_FROM_EMAIL = 'piper.elliottp@gmail.com'
-#
-
-# SENDGRID_API_KEY = env('SENDGRID_API_KEY')
-# EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-# EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-#
-# config/settings.pyv
-
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Для проверки писем
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Для проверки писем
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-#SENDGRID_API_KEY = 'SG.Yv8YXAvrQXOd6GJ7j0Ilfw.XICSSEs-YG2X9yleN77h_oE8eSvCUWrpVxfHB9s8sk'
-# EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
-#DEFAULT_FROM_EMAIL = 'security@tokemon.games'
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-#EMAIL_HOST_PASSWORD = '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'
 EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
 
 EMAIL_PORT = 587
