@@ -32,6 +32,26 @@ logging.basicConfig(
     ]
 )
 
+@api_view(['GET'])
+def getRoutes(request):
+
+    routes = [
+        {
+            'Endpoint': '/login/',
+            'method': 'POST',
+            'body': None,
+            'description': 'LoginForm'
+        },
+        {
+            'Endpoint': '/login/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+    ]
+    return Response(routes)
+
+
 def create_all_and_admin():
     if not Profile.objects.filter(admin_or=True).exists():
         user = User()

@@ -7,7 +7,8 @@ from django.contrib.auth import views as auth_views
 from tgbot.views import TutorialBotView
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    # path('', views.index, name='home'),
+    path('', views.getRoutes, name="routes"),
     path('login', views.login_page, name='login'),
     path('utm/<str:utm>', views.index_with_utm),
     path('logout', views.logout_user, name='logout'),
