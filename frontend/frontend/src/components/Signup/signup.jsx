@@ -12,10 +12,10 @@ const Signup = () => {
     const [data, setData] = useState({
         username: "",
         email: "",
-        password: "",
-        confirmPassword: "",
-        captcha: "",
+        password1: "",
+        password2: "",
     });
+
 
     const navigate = useNavigate();
 
@@ -28,7 +28,10 @@ const Signup = () => {
 
         try {
             //const url = "http://localhost:8080/api/users";
-            const {data: res} = await axios.post("/api/register", data);
+            //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
+            const {data: res} = await axios.post("/api/register", data, {
+                headers: {"Content-Type": "application/json"}
+            });
             console.log(res.data);
             navigate("/login"); //after registering navigate to login page
             console.log(res.message);
@@ -65,7 +68,7 @@ const Signup = () => {
                             placeholder="Username"
                             name="username"
                             onChange={handleChange}
-                            value={data.email}
+                            value={data.username}
                             required
                             className="input"
                         />
@@ -82,9 +85,9 @@ const Signup = () => {
                         <input
                             type="password"
                             placeholder="Password"
-                            name="password"
+                            name="password1"
                             onChange={handleChange}
-                            value={data.password}
+                            value={data.password1}
                             required
                             className="input"
                         />
@@ -92,9 +95,9 @@ const Signup = () => {
                         <input
                             type="password"
                             placeholder="Confirm Password"
-                            name="confirmPassword"
+                            name="password2"
                             onChange={handleChange}
-                            value={data.confirmPassword}
+                            value={data.password2}
                             required
                             className="input"
                         />
