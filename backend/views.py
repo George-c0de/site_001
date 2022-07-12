@@ -4,10 +4,16 @@ import json
 import xlsxwriter
 from captcha.fields import CaptchaField
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import PasswordContextMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.generic import FormView
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -24,6 +30,8 @@ from tronpy.providers import HTTPProvider
 import requests
 from rest_framework.authtoken.models import Token
 from rest_framework.request import Request
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Лог выводим на экран и в файл
 logging.basicConfig(
@@ -66,6 +74,40 @@ def getRoutes(request):
         {
             'Endpoint': '/register/',
             'method': 'POST',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/password-reset/',
+            'method': 'POST',
+            'body': None,
+            'description': 'Returns a single note object'
+        }
+        ,
+        {
+            'Endpoint': '/bronze/id_/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        }
+        ,
+        {
+            'Endpoint': '/silver/id_/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        }
+        ,
+        {
+            'Endpoint': '/gold/id_/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        }
+        ,
+        {
+            'Endpoint': '/emerald/id_/',
+            'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
         }
@@ -189,10 +231,10 @@ def user_get(request: Request):
     })
 
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def login_page(request):
     if request.user.is_authenticated:
-        return Response('You are already logged in')
+        return Response(status=501)
     else:
         email = request.data.get('email')
         username = User.objects.get(email=email).username
@@ -202,6 +244,8 @@ def login_page(request):
         if user is not None:
             login(request, user)
             return Response({'data': request.session})
+        else:
+            return Response(status=400)
 
 
 @api_view(['GET'])
@@ -263,11 +307,6 @@ def what_card(card, category_bronze):
 def save(*args):
     for el in args:
         el.save()
-    # main_user.save()
-    # all_.save()
-    # profile.save()
-    # admin_.save()
-    # category_bronze.save()
 
 
 def case_3_4_ref(main_user, money_to_card, all_, profile):
@@ -296,9 +335,10 @@ def case_3_4_ref(main_user, money_to_card, all_, profile):
 
 
 # Логика реферальной системы
+@api_view(['GET'])
 def referral_system_bronze(request, id_):
     # Сбор данных
-    profile = Profile.objects.get(user__id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     cookies = request.COOKIES.get('utm')
@@ -311,7 +351,8 @@ def referral_system_bronze(request, id_):
         category_bronze.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_bronze.card_6_disable is False:
-        return HttpResponse('Error')
+        messages.add_message(request, messages.error, 'Карта недоступна')
+        return Response(messages, status=400)
     else:
         money_to_card = what_card(card, category_bronze)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
@@ -328,7 +369,8 @@ def referral_system_bronze(request, id_):
         max_card_ = '0' + str(id_)
         save(main_user)
         if profile.money < money_to_card:
-            return HttpResponse('Error')
+            messages.add_message(request, messages.error, 'Недостаточно денег')
+            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -357,14 +399,14 @@ def referral_system_bronze(request, id_):
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'bronze'
-    card_.name = card
+    card_.name = id_
     card_.save()
     buy_card.card = card_
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
     logics_matrix(profile, new_money)
-    return render(request, 'backend/ref.html')
+    return Response(status=200)
 
     # проверка на рефку
     # else:
@@ -374,9 +416,10 @@ def referral_system_bronze(request, id_):
 
 
 # silver
+@api_view(['GET'])
 def referral_system_silver(request, id_):
     # Сбор данных
-    profile = Profile.objects.get(user__id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     cookies = request.COOKIES.get('utm')
@@ -389,7 +432,8 @@ def referral_system_silver(request, id_):
         category_silver.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_silver.card_6_disable is False:
-        return HttpResponse('Error')
+        messages.add_message(request, messages.error, 'Карта недоступна')
+        return Response(messages, status=400)
     else:
         money_to_card = what_card(card, category_silver)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
@@ -406,7 +450,7 @@ def referral_system_silver(request, id_):
         max_card_ = '0' + str(id_)
         save(main_user)
         if profile.money < money_to_card:
-            return HttpResponse('Error')
+            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -435,14 +479,14 @@ def referral_system_silver(request, id_):
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'silver'
-    card_.name = card
+    card_.name = id_
     card_.save()
     buy_card.card = card_
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
     logics_matrix(profile, new_money)
-    return render(request, 'backend/ref.html')
+    return Response(status=200)
 
     # проверка на рефку
     # else:
@@ -452,9 +496,10 @@ def referral_system_silver(request, id_):
 
 
 # gold
+@api_view(['GET'])
 def referral_system_gold(request, id_):
     # Сбор данных
-    profile = Profile.objects.get(user__id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     cookies = request.COOKIES.get('utm')
@@ -467,7 +512,8 @@ def referral_system_gold(request, id_):
         category_gold.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_gold.card_6_disable is False:
-        return HttpResponse('Error')
+        messages.add_message(request, messages.error, 'Карта недоступна')
+        return Response(messages, status=400)
     else:
         money_to_card = what_card(card, category_gold)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
@@ -484,7 +530,8 @@ def referral_system_gold(request, id_):
         max_card_ = '0' + str(id_)
         save(main_user)
         if profile.money < money_to_card:
-            return HttpResponse('Error')
+            messages.add_message(request, messages.error, 'Недостаточно денег')
+            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -513,14 +560,14 @@ def referral_system_gold(request, id_):
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'gold'
-    card_.name = card
+    card_.name = id_
     card_.save()
     buy_card.card = card_
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
     logics_matrix(profile, new_money)
-    return render(request, 'backend/ref.html')
+    return Response(status=200)
 
     # проверка на рефку
     # else:
@@ -530,9 +577,10 @@ def referral_system_gold(request, id_):
 
 
 # emerald
+@api_view(['GET'])
 def referral_system_emerald(request, id_):
     # Сбор данных
-    profile = Profile.objects.get(user__id=request.user.id)
+    profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     cookies = request.COOKIES.get('utm')
@@ -545,7 +593,8 @@ def referral_system_emerald(request, id_):
         category_emerald.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_emerald.card_6_disable is False:
-        return HttpResponse('Error')
+        messages.add_message(request, messages.error, 'Карта недоступна')
+        return Response(messages, status=400)
     else:
         money_to_card = what_card(card, category_emerald)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
@@ -562,7 +611,8 @@ def referral_system_emerald(request, id_):
         max_card_ = '0' + str(id_)
         save(main_user)
         if profile.money < money_to_card:
-            return HttpResponse('Error')
+            messages.add_message(request, messages.error, 'Недостаточно денег')
+            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -591,14 +641,14 @@ def referral_system_emerald(request, id_):
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'emerald'
-    card_.name = card
+    card_.name = id_
     card_.save()
     buy_card.card = card_
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
     logics_matrix(profile, new_money)
-    return render(request, 'backend/ref.html')
+    return Response(status=200)
 
     # проверка на рефку
     # else:
@@ -633,7 +683,7 @@ def matrix_pay(main_matrix, money):
 def logics_matrix(user_, money):
     profile = user_
     user_in_matrix = User_in_Matrix()
-    user_in_matrix.user = Profile.objects.get(user=profile)
+    user_in_matrix.user = Profile.objects.get(user=profile.user)
     if User_in_Matrix.objects.all().count() != 0:
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
             '-participant_number').first().participant_number + 1

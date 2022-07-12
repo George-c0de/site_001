@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'backend',
     'captcha',
     'tgbot',
-    'frontend',
+    'frontend.frontend',
     'corsheaders',
 ]
 
