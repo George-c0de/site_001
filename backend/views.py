@@ -22,7 +22,7 @@ from decimal import *
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card
-from .serializers import ProfileSerializer, UserSerializer
+from .serializers import ProfileSerializer, UserSerializer, AllSerializer
 from tronpy import Contract, Tron
 import base58
 from tronpy.keys import PrivateKey
@@ -110,6 +110,12 @@ def getRoutes(request):
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/get_all/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
         }
     ]
     return Response(routes)
@@ -130,8 +136,15 @@ def create_all_and_admin():
         a.save()
 
 
+all_ = All.objects.all().get()
 create_all_and_admin()
 admin_ = Profile.objects.filter(admin_or=True).first()
+
+
+@api_view(['GET'])
+def get_all(request):
+    data = AllSerializer(all_)
+    return Response(data.data)
 
 
 def lan(request):
@@ -224,13 +237,15 @@ def index_with_utm(request, utm):
     # return Response(request.COOKIES['utm'])
 
 
-@api_view()
-def user_get(request: Request):
-    return Response({
-        'data': UserSerializer(request.user).data
-    })
+@api_view(['GET'])
+def user_get(request):
+    profile = Profile.objects.get(user=request.user)
+    data = ProfileSerializer(profile)
+    return Response(data.data)
 
-
+@api_view(['POST'])
+def reset_password(request):
+    pass
 @api_view(['POST'])
 def login_page(request):
     if request.user.is_authenticated:

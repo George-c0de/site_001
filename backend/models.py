@@ -7,7 +7,8 @@ from django.utils.translation import gettext_lazy as _
 
 class All(models.Model):
     money = models.DecimalField('Деньги', max_digits=10, decimal_places=2, default=0)
-
+    all_transactions = models.IntegerField(default=0)
+    coll_user = models.IntegerField(default=0)
 
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

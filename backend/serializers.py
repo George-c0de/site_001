@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile
+from .models import Profile, All
 
 from django.contrib.auth.models import User
 
@@ -10,10 +10,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AllSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = All
+        fields = '__all__'
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('pk', 'user', 'money', 'referral_link', 'referral_amount', 'missed_amount', 'wallet')
+        fields = '__all__'
+
 
     def create(self, validated_data):
         return Profile.objects.create(**validated_data)

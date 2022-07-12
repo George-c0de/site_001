@@ -34,6 +34,6 @@ urlpatterns = [
     path('matrix/<int:money>', views.logics_matrix),
     path('webhooks/tutorial/', csrf_exempt(TutorialBotView.as_view())),
     path('user', views.user_get),
-
+    path('get_all', views.get_all)
 
 ]
