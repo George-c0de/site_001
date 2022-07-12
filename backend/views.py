@@ -239,13 +239,12 @@ def index_with_utm(request, utm):
 
 @api_view(['GET'])
 def user_get(request):
-    profile = Profile.objects.get(user=request.user)
+    # profile = Profile.objects.get(user=request.user)
+    profile = Profile.objects.all().first()
     data = ProfileSerializer(profile)
     return Response(data.data)
 
-@api_view(['POST'])
-def reset_password(request):
-    pass
+
 @api_view(['POST'])
 def login_page(request):
     if request.user.is_authenticated:
@@ -258,7 +257,8 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return Response({'data': request.session})
+            # return Response({'data': request.session})
+            return Response(status=200)
         else:
             return Response(status=400)
 
