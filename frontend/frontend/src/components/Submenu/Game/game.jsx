@@ -32,9 +32,9 @@ const Game = () => {
 
 
     let getUsername = async () => {
-        const { username: res }= await axios.post('api/user')
-        console.log(res.data);
-        setUsername(res.data);
+        const username = await axios.get('api/user')
+        console.log(username);
+        setUsername(username.data.username);
     }
 
     //Show Menu

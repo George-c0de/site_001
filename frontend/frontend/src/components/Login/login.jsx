@@ -24,13 +24,9 @@ const Signup = () => {
         e.preventDefault();
 
         try {
-            axios.post('http://localhost:8000/api/login', data
-            ).then(function (response) {
-                console.log(response);
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            let data2 = await axios.post('http://localhost:8000/api/login', data
+            );
+            console.log(data2)
             navigate("/home"); //after registering navigate to login page
         } catch (error) {
             //console.log(error.response.data.msg);

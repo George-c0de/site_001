@@ -15,13 +15,15 @@ from decimal import *
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer, UserSerializer
 from tronpy import Contract, Tron
 import base58
 from tronpy.keys import PrivateKey
 from tronpy.providers import HTTPProvider
 import requests
 from rest_framework.authtoken.models import Token
+from rest_framework.request import Request
+
 # Лог выводим на экран и в файл
 logging.basicConfig(
     level=logging.INFO,
@@ -44,6 +46,18 @@ def getRoutes(request):
         },
         {
             'Endpoint': '/login/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/user/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/logout/',
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
@@ -160,45 +174,45 @@ def index_with_utm(request, utm):
     # a.set_cookie('utm', utm)
     # return Response(request.COOKIES['utm'])
 
-def user_get(request):
-    return Response(request.user.username)
+
+@api_view()
+def user_get(request: Request):
+    return Response({
+        'data': UserSerializer(request.user).data
+    })
+
+
 @api_view(['GET', 'POST'])
 def login_page(request):
     if request.user.is_authenticated:
         return Response('You are already logged in')
     else:
-        if request.method == 'POST':
-            email = request.data.get('email')
-            username = User.objects.get(email=email).username
-            # username = request.POST.get('email')
-            password = request.data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return Response('OK')
-            else:
-                return Response('Error')
-        return Response('OK')
+        email = request.data.get('email')
+        username = User.objects.get(email=email).username
+        # username = request.POST.get('email')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return Response({'data': request.session})
 
 
+@api_view(['GET'])
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return Response('OK')
 
 
 def register_page(request):
     form = CreateUserForm()
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            user = User.objects.get(username=username)
-            messages.success(request, 'Аккаунт создан,' + username)
-            return Response("OK")
-
-    context = {'form': form}
-    return render(request, 'backend/register.html', context)
+    form = CreateUserForm(request.POST)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        user = User.objects.get(username=username)
+        messages.success(request, 'Аккаунт создан,' + username)
+        return Response(messages)
+    return Response("ERROR")
 
 
 def what_card(card, category_bronze):
