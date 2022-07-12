@@ -4,8 +4,6 @@ from captcha.fields import CaptchaField
 
 
 class CreateUserForm(UserCreationForm):
-    captcha = CaptchaField()
-
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'confirmPassword', 'captcha']
+        fields = ['username', 'email', 'password1', 'password2']
