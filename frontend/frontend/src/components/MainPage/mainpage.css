@@ -1,265 +1,280 @@
-.homepage{
-	position: relative;
-	width: 100%;
-	min-height: 100vh;
-	background-image: url('../../Ảnh Pokemon Dự Trù/фон\ общий-min.svg');
-	background-position: right bottom;
-	background-attachment: fixed;
-	background-size: cover;
+.homepage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../Ảnh Pokemon Dự Trù/фон\ общий-min.svg');
+    background-position: right bottom;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
 }
 
 /*Header*/
 .navbar {
-	height: 110px;
-	background: linear-gradient(to right, rgb(18, 18, 130),lightblue);
-	position: relative;
-	display: flex;
-	align-items: center;
+    width: 100%;
+    height: 110px;
+    background: linear-gradient(to right, rgb(18, 18, 130), lightblue);
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .navbar_active {
-	height: 410px;
-	background: linear-gradient(to right, rgb(18, 18, 130),lightblue);
-	position: relative;
-	display: flex;
-	align-items: center;
+    height: 500px;
+    background: linear-gradient(to right, rgb(18, 18, 130), lightblue);
+    border-radius: 0 0 50px 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 0 40px rgba(0, 0, 0, .8);
+    padding-bottom: 50px;
 }
 
 /*Pokemon banner*/
-.pokemon-banner{
-	position: absolute;
-	margin-left: 43%;
-	margin-top: -5px;
-	width: 15%;
+.pokemon-banner {
+    position: absolute;
+    width: 15%;
+    height: 100px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.pokemon-banner_active{
-	position: absolute;
-	margin-left: 43%;
-	margin-top: -5px;
-	width: 15%;
-	margin-bottom:17.5%;
+.pokemon-banner_active {
+    position: absolute;
+    width: 15%;
+    height: 150px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /*List of menu options*/
 ul {
-	margin-top:13%;
-	margin-left:200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 70px;
 }
 
 ul li {
-	display: inline;
-	cursor: pointer;
-	color:black;
-	list-style-type:none;
-	font-size:40px;
-	padding-left:20%;
+    display: inline;
+    cursor: pointer;
+    color: #FFF;
+    margin: 0 20px;
+    font-size: 40px;
+    font-weight: 700;
+    text-shadow: 0 8px 5px #000;
+    list-style-type: none;
 }
 
 /*List of user information*/
-.user-info{
-	margin-top: 50px;
+.user-info {
+    margin-top: 50px;
 }
 
-.user-info .user-id{
-	position: absolute;
-	margin-left:31%;
-	color:white;
-	font-size: 40px;
-	margin-top:-1.5%;
-	font-weight:bold;
+.user-info .user-id {
+    position: absolute;
+    margin-left: 31%;
+    color: white;
+    font-size: 40px;
+    margin-top: -1.5%;
+    font-weight: bold;
 }
 
-.user-info li{
-	margin-top:2%;
-	margin-left:20px;
-	display: block;
-	cursor: auto;
-	color:white;
-	list-style-type:none;
-	font-size:25px;
-	padding-bottom:-5px;
-	min-width:400px;
+.user-info li {
+    margin-top: 2%;
+    margin-left: 20px;
+    display: block;
+    cursor: auto;
+    color: white;
+    list-style-type: none;
+    font-size: 25px;
+    padding-bottom: -5px;
+    min-width: 400px;
 }
 
 .user-info li,
-.user-info button{
-	margin-bottom: -3%;
+.user-info button {
+    margin-bottom: -3%;
 }
 
-.user-info .link-invitation{
-	position: absolute;
-	border-radius: 25px;
-	outline:1px solid white;
-  	padding: 20px;
-	color:white;
-	height:5px;
-	width:300px;
-	margin-top:0.5%;
-	margin-left:5%;
+.user-info .link-invitation {
+    position: absolute;
+    border-radius: 25px;
+    outline: 1px solid white;
+    padding: 20px;
+    color: white;
+    height: 5px;
+    width: 300px;
+    margin-top: 0.5%;
+    margin-left: 5%;
 }
 
-.yellow-btn{
-	border: none;
-	outline: none;
-	background-color:rgb(211, 211, 103);
-	border-radius: 20px;
-	color:white;
-	margin-top:60px;
-	min-width:120px;
-	min-height:40px;
-	margin-left:80px;
-	border: none;
-	outline: none;
+.yellow-btn {
+    border: none;
+    outline: none;
+    background-color: rgb(211, 211, 103);
+    border-radius: 20px;
+    color: white;
+    margin-top: 60px;
+    min-width: 120px;
+    min-height: 40px;
+    margin-left: 80px;
+    border: none;
+    outline: none;
 }
 
-.user-info .satoshi{
-	position:absolute;
-	margin-top: -10%;
-	margin-left:12%;
-	width:50%;
-	height:80%;
+.user-info .satoshi {
+    position: absolute;
+    margin-top: -10%;
+    margin-left: 12%;
+    width: 50%;
+    height: 80%;
 }
 
-.menu-info li:hover{
-	cursor: pointer;
-	color:aqua;
-} 
+.menu-info li:hover {
+    cursor: pointer;
+    color: aqua;
+}
 
 /*Log out button*/
-.white_btn_in {
-	margin-left:90%;
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: aqua;
-	border-radius: 20px;
-	width: 120px;
-	font-weight: bold;
-	font-size: 14px;
-	cursor: pointer;
-	position:absolute;
+.white_btn_in, .white_btn_in_active {
+    position: absolute;
+    top: 25px;
+    right: 100px;
+    padding: 12px;
+    width: 150px;
+    background-color: aqua;
+    border-radius: 20px;
+    border: 3px solid #000;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+
+    outline: none;
 }
 
-.white_btn_in_active{
-	margin-left:90%;
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: aqua;
-	border-radius: 20px;
-	width: 120px;
-	font-weight: bold;
-	font-size: 14px;
-	cursor: pointer;
-	position:absolute;
-	margin-bottom:17.5%;
+.white_btn_in:hover, .white_btn_in_active:hover {
+    background-color: #FFCC00;
 }
 
 /*Main Content*/
 
 
 /*Icon*/
-.icon-menu{
-	margin-left:10%;
-	height:20px;
-	position: absolute;
-  	display: inline-block;
+.icon-menu {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    left: 50px;
+    cursor: pointer;
+    transition: color .3s ease-in-out;
 }
 
-.icon_menu_active{
-	margin-left:10%;
-	height:20px;
-	position: absolute;
-  	display: inline-block;
-	margin-bottom:17.5%;
+.icon_menu_active {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    left: 50px;
+    cursor: pointer;
+    transition: color .3s ease-in-out;
 }
 
-.icon-menu:hover{
-	cursor: pointer;
-	background-color:aqua;
+.icon-menu:hover {
+    color: #FFF;
 }
 
-.icon_menu_active:hover{
-	cursor: pointer;
-	background-color:aqua;
+.icon-user {
+    position: absolute;
+    top: 50%;
+    right: 270px;
+    height: 80px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
-.icon-user{
-	position:absolute;
-	margin-left:85%;
-	height:50%;
+.icon-user_active {
+    position: absolute;
+    top: 15px;
+    right: 270px;
+    height: 80px;
+    cursor: pointer;
 }
 
-.icon-user:hover{
-	cursor: pointer;
-}
-
-.icon-user_active{
-	position:absolute;
-	margin-left:85%;
-	height:13%;
-	margin-bottom:17.5%;
-}
-
-.icon-user_active:hover{
-	cursor: pointer;
-}
-
-.pokeball{
-	height:50px;
-	width:50px;
+.pokeball {
+    height: 50px;
+    width: 50px;
 }
 
 /*Telegram option*/
-.paper-plane{
-	color:yellow;
-	height:30px;
-	margin-left:140%;
-	margin-top:60px;
+.menu-info-icons {
+    width: 100%;
+    margin-top: 50px;
+    padding: 0 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
 }
 
-.telegram-user{
-	color:white;
-	font-size:20px;
-	margin-top:10px;
-	float:right;
-	margin-right:-350px;
+.info-icons-container {
+    text-align: center;
 }
 
-.telegram-user:hover{
-	cursor: pointer;
-	color:aqua;
+.paper-plane {
+    color: yellow;
+    height: 50px;
+}
+
+.telegram-user {
+    display: block;
+    color: white;
+    font-size: 24px;
+}
+
+.telegram-user:hover {
+    cursor: pointer;
+    color: aqua;
 }
 
 /*Icon at the right bottom of screen*/
 
-.english-icon-mainpage{
-	position:relative;
-	width:55px;
-	height:70px;
-	margin-left:95.1%;
-	margin-top:34%;
+.english-icon-mainpage {
+    position: absolute;
+    right: 50px;
+    bottom: 200px;
+    width: 55px;
+    height: 70px;
 }
 
-.support-icon-mainpage{
-	position: relative;
-	width:100px;
-	height:75px;
-	margin-left:94%;
+.support-icon-mainpage {
+    position: absolute;
+    right: 27px;
+    bottom: 120px;
+    width: 100px;
+    height: 75px;
 }
 
-.english-icon-mainpage_active{
-	position:relative;
-	width:55px;
-	height:70px;
-	margin-left:95.1%;
-	margin-top:16.5%;
+.english-icon-mainpage_active {
+    position: absolute;
+    right: 50px;
+    bottom: 200px;
+    width: 55px;
+    height: 70px;
 }
 
-.support-icon-mainpage_active{
-	position: relative;
-	width:100px;
-	height:75px;
-	margin-left:94%;
+.support-icon-mainpage_active {
+    position: absolute;
+    right: 27px;
+    bottom: 120px;
+    width: 100px;
+    height: 75px;
 }
