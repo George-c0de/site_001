@@ -34,23 +34,29 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-         if(isCheck===false){
+        
+        if(data.password !==data.confirmPassword){
+          alert("Your confirmed password does not match!");
+        }
+        else{
+          if(isCheck===false){
             alert("Check Captcha please!")
-            }
-            else{
-                try {
-                //const url = "http://localhost:8080/api/users";
-                //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
-                const {data: res} = await axios.post("http://localhost:8080/api/register", data, {
-                    headers: {"Content-Type": "application/json"}
-                });
-                console.log(res.data);
-                navigate("/login"); //after registering navigate to login page
-                console.log(res.message);
-            } catch (error) {
-                alert(error.response.data.msg);
-            }
-        }   
+          }
+          else{
+               try {
+                    //const url = "http://localhost:8080/api/users";
+                    //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
+                    const {data: res} = await axios.post("http://localhost:8080/api/register", data, {
+                        headers: {"Content-Type": "application/json"}
+                    });
+                    console.log(res.data);
+                    navigate("/login"); //after registering navigate to login page
+                    console.log(res.message);
+                } catch (error) {
+                    alert(error.response.data.msg);
+                } 
+          }
+        }
     };
 
     return (
