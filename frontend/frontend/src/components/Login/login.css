@@ -21,7 +21,7 @@
     height: 110px;
     background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
     position: absolute;
-    border-radius: 0% 0% 25px 25px;
+    border-radius: 0 0 25px 25px;
 }
 
 .logo-tokemon {
