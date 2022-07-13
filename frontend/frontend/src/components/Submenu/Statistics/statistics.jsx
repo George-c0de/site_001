@@ -60,8 +60,9 @@ const Statistics = () => {
 
           {openDropDown ? (
             <ul className="statistic-info">
-              <li>Количество участников:</li>
-              <li>Количество транзакций:</li>><li>Сумма выплат:</li>
+              <li>Количество участников: <span>1356614</span></li>
+              <li>Количество транзакций: <span>1356614</span></li>
+              <li>Сумма выплат: <span>1356614</span></li>
             </ul>
           ) : null}
 

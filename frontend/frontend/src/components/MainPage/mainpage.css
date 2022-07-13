@@ -13,7 +13,7 @@
 .navbar {
     width: 100%;
     height: 110px;
-    background: linear-gradient(to right, rgb(18, 18, 130), lightblue);
+    background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
     position: relative;
     display: flex;
     align-items: center;
@@ -22,8 +22,8 @@
 }
 
 .navbar_active {
-    height: 500px;
-    background: linear-gradient(to right, rgb(18, 18, 130), lightblue);
+    height: 600px;
+    background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
     border-radius: 0 0 50px 50px;
     position: relative;
     display: flex;
@@ -188,7 +188,7 @@ ul li {
     transition: color .3s ease-in-out;
 }
 
-.icon-menu:hover {
+.icon-menu:hover, .icon_menu_active:hover {
     color: #FFF;
 }
 
