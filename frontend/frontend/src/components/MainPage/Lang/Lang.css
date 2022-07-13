@@ -1,0 +1,33 @@
+/*Icon at the right bottom of screen*/
+
+.english-icon-mainpage {
+    position: absolute;
+    right: 50px;
+    bottom: 100px;
+    width: 55px;
+    height: 70px;
+}
+
+.support-icon-mainpage {
+    position: absolute;
+    right: 27px;
+    bottom: 30px;
+    width: 100px;
+    height: 75px;
+}
+
+.english-icon-mainpage_active {
+    position: absolute;
+    right: 50px;
+    bottom: 100px;
+    width: 55px;
+    height: 70px;
+}
+
+.support-icon-mainpage_active {
+    position: absolute;
+    right: 27px;
+    bottom: 20px;
+    width: 100px;
+    height: 75px;
+}

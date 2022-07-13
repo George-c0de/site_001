@@ -9,75 +9,6 @@
     overflow: hidden;
 }
 
-/*Header*/
-.navbar-new_active {
-    height: 700px;
-    background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);;
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: 50px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, .8);
-    border-radius: 0 0 50px 50px;
-}
-
-.icon-new-menu_active {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 25px;
-    left: 50px;
-    cursor: pointer;
-    transition: color .3s ease-in-out;
-}
-
-.icon-new-menu_active:hover {
-    cursor: pointer;
-    color: #FFF;
-}
-
-.pokemon-banner-new_active {
-    position: absolute;
-    width: 15%;
-    height: 150px;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.icon-user-new_active {
-    position: absolute;
-    top: 15px;
-    right: 270px;
-    height: 80px;
-    cursor: pointer;
-}
-
-.icon-user-new_active:hover {
-    cursor: pointer;
-}
-
-.white_btn_in-new_active {
-    position: absolute;
-    top: 25px;
-    right: 100px;
-    padding: 12px;
-    width: 150px;
-    background-color: aqua;
-    border-radius: 20px;
-    border: 3px solid #000;
-    font-weight: bold;
-    font-size: 24px;
-    cursor: pointer;
-    transition: background-color .3s ease-in-out;
-
-    outline: none;
-}
-
-.white_btn_in-new_active:hover {
-    background-color: #FFCC00;
-}
-
 /*All infos on menu*/
 .container {
     display: flex;
@@ -150,21 +81,4 @@ ul.row {
     color: white;
     height: 55px;
     width: 500px;
-}
-
-/*Icons below*/
-.english-icon-mainpage-new_active {
-    position: absolute;
-    right: 50px;
-    bottom: 200px;
-    width: 55px;
-    height: 70px;
-}
-
-.support-icon-mainpage-new_active {
-    position: absolute;
-    right: 27px;
-    bottom: 120px;
-    width: 100px;
-    height: 75px;
 }

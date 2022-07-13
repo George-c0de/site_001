@@ -1,0 +1,79 @@
+.menu {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100px;
+    width: 100%;
+}
+
+/*Icon*/
+.icon-menu {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    left: 50px;
+    cursor: pointer;
+    transition: color .3s ease-in-out;
+}
+
+.icon_menu_active {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    left: 50px;
+    cursor: pointer;
+    transition: color .3s ease-in-out;
+}
+
+.icon-menu:hover, .icon_menu_active:hover {
+    color: #FFF;
+}
+
+.icon-user {
+    position: absolute;
+    top: 50%;
+    right: 270px;
+    height: 80px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.icon-user_active {
+    position: absolute;
+    top: 50%;
+    right: 270px;
+    height: 80px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.pokeball {
+    height: 50px;
+    width: 50px;
+}
+
+/*Log out button*/
+.white_btn_in, .white_btn_in_active {
+    position: absolute;
+    top: 50%;
+    right: 100px;
+    padding: 12px;
+    width: 150px;
+    background-color: aqua;
+    border-radius: 20px;
+    border: 3px solid #000;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+    transform: translateY(-50%);
+
+    outline: none;
+}
+
+.white_btn_in:hover, .white_btn_in_active:hover {
+    background-color: #FFCC00;
+}

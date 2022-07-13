@@ -2,21 +2,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-//Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-
-//Images
-import logo from "../../../Ảnh Pokemon Dự Trù/логотип.svg";
-import human from "../../../Ảnh Pokemon Dự Trù/Чел.svg";
-import satoshi from "../../../Ảnh Pokemon Dự Trù/123133.svg";
-import britain from "../../../Ảnh Pokemon Dự Trù/gb-1.svg";
-import support from "../../../Ảnh Pokemon Dự Trù/супорт.svg";
+//Pages
+import { Menu } from '../../MainPage/Menu/Menu';
+import { Lang } from '../../MainPage/Lang/Lang';
+import { UserId } from '../../UserId/UserId';
 
 const Referals = () => {
   const [openDropDown, setOpenDropDown] = useState(true);
   const [openNewDropDown, setNewOpenDropDown] = useState(false);
-  const [count, setCount] = useState(1);
 
   const [onActive, setActive] = useState(false);
   const navigate = useNavigate();
@@ -34,29 +27,15 @@ const Referals = () => {
 
   //Show informations of user
   const showNewMenu = () => {
-    setNewOpenDropDown(!openNewDropDown);
+    setNewOpenDropDown(true);
     setOpenDropDown(false);
-    //Check times on click and setState prospectively
-    setCount(count + 1);
-
-    console.log(count);
-
-    if (count % 2 === 0) {
-      setActive(!onActive);
-    } else {
-      setActive(onActive);
-    }
   };
 
   return (
     <div className="homepage">
       <div className="main_container">
-        <nav className={ onActive ? "navbar" : "navbar-new_active" }>
-          <FontAwesomeIcon
-            icon={ faBars }
-            className={ onActive ? "icon-menu" : "icon-new-menu_active" }
-            onClick={ backHome }
-          />
+        <nav className={ onActive ? "navbar" : "navbar_active" }>
+          <Menu isActive={ onActive } showMenu={ backHome } showNewMenu={ showNewMenu } handleLogout={ handleLogout }/>
 
           { openDropDown ? (
             <div className="container">
@@ -95,61 +74,11 @@ const Referals = () => {
             </div>
           ) : null }
 
-          <img
-            className={ onActive ? "pokemon-banner" : "pokemon-banner-new_active" }
-            src={ logo }
-            alt=""
-          />
-
-          <img
-            src={ human }
-            className={ onActive ? "icon-user" : "icon-user-new_active" }
-            onClick={ showNewMenu }
-            alt=""
-          />
-          { openNewDropDown ? (
-            <ul className="user-info">
-              <span className="user-id">User Id-</span>
-
-              <li>Balance:</li>
-              <li>Cards profit:</li>
-              <li>Referal profit:</li>
-              <li>Link for invitation</li>
-              <div className="link-invitation"></div>
-
-              <button className="yellow-btn">Deposit</button>
-              <button className="yellow-btn">Withdraw</button>
-
-              <img className="satoshi" src={ satoshi } alt=""/>
-            </ul>
-          ) : null }
-
-          <button
-            className={ onActive ? "white_btn_in" : "white_btn_in-new_active" }
-            onClick={ handleLogout }
-          >
-            Logout
-          </button>
+          { openNewDropDown ? <UserId /> : null }
         </nav>
       </div>
       {/* <img  src={pokeball} alt="" className="pokeball"/> */ }
-      <div className={ onActive ? "site-main" : "site-main-new_active" }>
-        <img
-          src={ britain }
-          className={
-            onActive ? "english-icon-mainpage" : "english-icon-mainpage-new_active"
-          }
-          alt=""
-        />
-
-        <img
-          src={ support }
-          className={
-            onActive ? "support-icon-mainpage" : "support-icon-mainpage-new_active"
-          }
-          alt=""
-        />
-      </div>
+      <Lang isActive={onActive}/>
     </div>
   );
 };

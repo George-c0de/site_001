@@ -12,49 +12,51 @@
 /*Header*/
 .navbar {
     width: 100%;
-    height: 110px;
+    height: 120px;
     background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
     position: relative;
     display: flex;
     align-items: center;
     margin-left: 0;
     margin-right: 0;
+    padding: 10px 0;
 }
 
 .navbar_active {
-    height: 600px;
+    min-height: 400px;
+    max-height: 700px;
     background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
     border-radius: 0 0 50px 50px;
     position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     box-shadow: 0 0 40px rgba(0, 0, 0, .8);
-    padding-bottom: 50px;
+    padding: 10px 0 50px;
 }
 
 /*Pokemon banner*/
 .pokemon-banner {
     position: absolute;
-    width: 15%;
-    height: 100px;
-    top: 0;
+    width: 250px;
+    height: 150px;
+    top: -25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .pokemon-banner_active {
     position: absolute;
-    width: 15%;
+    width: 250px;
     height: 150px;
-    top: 0;
+    top: -25px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 /*List of menu options*/
-ul {
+.menu-info {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -72,152 +74,17 @@ ul li {
     list-style-type: none;
 }
 
-/*List of user information*/
-.user-info {
-    margin-top: 50px;
-}
-
-.user-info .user-id {
-    position: absolute;
-    margin-left: 31%;
-    color: white;
-    font-size: 40px;
-    margin-top: -1.5%;
-    font-weight: bold;
-}
-
-.user-info li {
-    margin-top: 2%;
-    margin-left: 20px;
-    display: block;
-    cursor: auto;
-    color: white;
-    list-style-type: none;
-    font-size: 25px;
-    padding-bottom: -5px;
-    min-width: 400px;
-}
-
-.user-info li,
-.user-info button {
-    margin-bottom: -3%;
-}
-
-.user-info .link-invitation {
-    position: absolute;
-    border-radius: 25px;
-    outline: 1px solid white;
-    padding: 20px;
-    color: white;
-    height: 5px;
-    width: 300px;
-    margin-top: 0.5%;
-    margin-left: 5%;
-}
-
-.yellow-btn {
-    border: none;
-    outline: none;
-    background-color: rgb(211, 211, 103);
-    border-radius: 20px;
-    color: white;
-    margin-top: 60px;
-    min-width: 120px;
-    min-height: 40px;
-    margin-left: 80px;
-    border: none;
-    outline: none;
-}
-
-.user-info .satoshi {
-    position: absolute;
-    margin-top: -10%;
-    margin-left: 12%;
-    width: 50%;
-    height: 80%;
-}
-
 .menu-info li:hover {
     cursor: pointer;
     color: aqua;
 }
 
-/*Log out button*/
-.white_btn_in, .white_btn_in_active {
-    position: absolute;
-    top: 25px;
-    right: 100px;
-    padding: 12px;
-    width: 150px;
-    background-color: aqua;
-    border-radius: 20px;
-    border: 3px solid #000;
-    font-weight: bold;
-    font-size: 24px;
-    cursor: pointer;
-    transition: background-color .3s ease-in-out;
-
-    outline: none;
-}
-
-.white_btn_in:hover, .white_btn_in_active:hover {
-    background-color: #FFCC00;
-}
-
 /*Main Content*/
-
-
-/*Icon*/
-.icon-menu {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 25px;
-    left: 50px;
-    cursor: pointer;
-    transition: color .3s ease-in-out;
-}
-
-.icon_menu_active {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 25px;
-    left: 50px;
-    cursor: pointer;
-    transition: color .3s ease-in-out;
-}
-
-.icon-menu:hover, .icon_menu_active:hover {
-    color: #FFF;
-}
-
-.icon-user {
-    position: absolute;
-    top: 50%;
-    right: 270px;
-    height: 80px;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.icon-user_active {
-    position: absolute;
-    top: 15px;
-    right: 270px;
-    height: 80px;
-    cursor: pointer;
-}
-
-.pokeball {
-    height: 50px;
-    width: 50px;
-}
 
 /*Telegram option*/
 .menu-info-icons {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 0 70px;
     display: flex;
     flex-direction: column;
@@ -245,36 +112,3 @@ ul li {
     color: aqua;
 }
 
-/*Icon at the right bottom of screen*/
-
-.english-icon-mainpage {
-    position: absolute;
-    right: 50px;
-    bottom: 200px;
-    width: 55px;
-    height: 70px;
-}
-
-.support-icon-mainpage {
-    position: absolute;
-    right: 27px;
-    bottom: 120px;
-    width: 100px;
-    height: 75px;
-}
-
-.english-icon-mainpage_active {
-    position: absolute;
-    right: 50px;
-    bottom: 200px;
-    width: 55px;
-    height: 70px;
-}
-
-.support-icon-mainpage_active {
-    position: absolute;
-    right: 27px;
-    bottom: 120px;
-    width: 100px;
-    height: 75px;
-}
