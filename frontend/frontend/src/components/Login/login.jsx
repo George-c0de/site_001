@@ -1,5 +1,5 @@
-import {Link, useNavigate} from "react-router-dom";
-import React, {useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
 
 //Images
@@ -9,82 +9,82 @@ import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
 
 const Signup = () => {
-    const [data, setData] = useState({
-        email: "",
-        password: "",
-    });
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleChange = ({currentTarget: input}) => {
-        setData({...data, [input.name]: input.value});
-    };
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            let data2 = await axios.post('http://localhost:8000/api/login', data
-            );
-            console.log(data2)
-            navigate("/home"); //after registering navigate to login page
-        } catch (error) {
-            //console.log(error.response.data.msg);
-            alert("Wrong email or password!");
-        }
-    };
-    return (
-        <div className="login_container">
-            <nav className="navbar">
-                <img src={logo} className="logo-tokemon" alt=""/>
-            </nav>
+    try {
+      let data2 = await axios.post('http://localhost:8000/api/login', data
+      );
+      console.log(data2)
+      navigate("/home"); //after registering navigate to login page
+    } catch (error) {
+      //console.log(error.response.data.msg);
+      alert("Wrong email or password!");
+    }
+  };
+  return (
+    <div className="login_container">
+      <nav className="navbar">
+        <img src={ logo } className="logo-tokemon" alt=""/>
+      </nav>
 
-            <img src={pikachu_pokeball} className="pikachu-pokeball" alt=""/>
+      <img src={ pikachu_pokeball } className="pikachu-pokeball" alt=""/>
 
-            <div className="login_form_container bubble-speech">
-                <div className="left">
-                    <form className="form_container" onSubmit={handleSubmit}>
-                        <div>Login to your Account</div>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            name="email"
-                            onChange={handleChange}
-                            value={data.email}
-                            required
-                            className="input"
-                        />
+      <div className="login_form_container bubble-speech">
+        <div className="left">
+          <form className="form_container" onSubmit={ handleSubmit }>
+            <div>Login Into Your Account</div>
+            <input
+              type="email"
+              placeholder="Email:"
+              name="email"
+              onChange={ handleChange }
+              value={ data.email }
+              required
+              className="login_input"
+            />
 
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            name="password"
-                            onChange={handleChange}
-                            value={data.password}
-                            required
-                            className="input"
-                        />
+            <input
+              type="password"
+              placeholder="Password:"
+              name="password"
+              onChange={ handleChange }
+              value={ data.password }
+              required
+              className="login_input"
+            />
 
-                        <button type="submit" className="green_btn">
-                            Sign In
-                        </button>
-                    </form>
-                </div>
-
-                <div className="right">
-                    <h1>New Here?</h1>
-                    <Link to="/signup">
-                        <button type="button" className="yellow_btn">
-                            Sign up
-                        </button>
-                    </Link>
-                </div>
-            </div>
-            <img src={britain} className="english-icon" alt=""/>
-
-            <img src={support} className="support-icon" alt=""/>
+            <button type="submit" className="green_btn">
+              Sign In
+            </button>
+          </form>
         </div>
-    );
+
+        <div className="right">
+          <h1>New Here?</h1>
+          <Link to="/signup">
+            <button type="button" className="yellow_btn">
+              Sign up
+            </button>
+          </Link>
+        </div>
+      </div>
+
+      <img src={ britain } className="english-icon" alt=""/>
+      <img src={ support } className="support-icon" alt=""/>
+    </div>
+  );
 };
 
 export default Signup;

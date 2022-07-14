@@ -1,164 +1,209 @@
 .login_container {
-	position: relative;
-	width: 100%;
-	min-height: 100vh;
-	background-image: url('../../Ảnh Pokemon Dự Trù/фон\ общий-min.svg');
-	background-position: 25% 75%;
-	background-repeat: no-repeat;
-	background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 0 50px;
+    background-image: url('../../Ảnh Pokemon Dự Trù/фон\ общий-min.svg');
+    background-position: 25% 75%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
 }
 
 /*Navbar*/
-.navbar {
-	height: 110px;
-	background: linear-gradient(to right, rgb(18, 18, 130),lightblue);
-	position: absolute;
-	border-radius: 0% 0% 25px 25px;
+.login_container .navbar {
+    width: unset;
+    margin-left: -50px;
+    margin-right: -50px;
 }
 
-.logo-tokemon{
-  height:120%;
-  margin-left:40%;
+.navbar {
+    height: 110px;
+    background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
+    position: absolute;
+    border-radius: 0 0 25px 25px;
+}
+
+.logo-tokemon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0!important;
 }
 
 /*Pikachu-Pokeball*/
-.pikachu-pokeball{
-	position:absolute;
-	height:50%;
-	margin-top:18%;
-	margin-left:200px;
+.pikachu-pokeball {
+    position: absolute;
+    height: 50%;
+    top: 50%;
+    left: 0;
 }
-
 
 /*Login Form*/
 .login_form_container {
-	width: 900px;
-	height: 500px;
-	margin-top:40px;
-	margin-left:40%;
-	display: flex;
-	border-radius: 10px;
-	position: relative;
-	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
-		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    max-width: 1000px;
+    width: 60%;
+    height: 50%;
+    margin-top: 40px;
+    margin-left: 40%;
+    margin-right: 50px;
+    display: flex;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
 
-.bubble-speech::after{
-  content:"";
-  display: block;
-  position: absolute;
+.bubble-speech::after {
+    content: "";
+    display: block;
+    position: absolute;
 
-  left:-55px;
-  bottom:0px;
+    left: -55px;
+    bottom: 0px;
 
-  width: 0px;
-  height: 0px;
-  border-top: 30px solid transparent;
-  border-bottom: 0px solid transparent;
-  border-right: 60px solid white;
+    width: 0px;
+    height: 0px;
+    border-top: 30px solid transparent;
+    border-bottom: 0px solid transparent;
+    border-right: 60px solid white;
 }
 
-.left {
-	flex: 2;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
+.login_container .left {
+    flex: 2;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 5px solid #000;
+    border-right: 0;
 }
 
 .form_container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form_container div {
-	color: black;
-	font-size: 40px;
-	align-self: center;
+.login_container .form_container div {
+    color: #7B7B7B;
+    font-weight: 700;
+    font-size: calc(24px + 16 * ((100vw - 320px) / (1980 - 320)));
+    align-self: center;
+    text-align: center;
 }
 
-.input {
-	outline: none;
-	border: none;
-	width: 370px;
-	padding: 15px;
-	border-radius: 10px;
-	background-color: #edf5f3;
-	margin: 5px 0;
-	font-size: 14px;
+.login_input {
+    width: 100%;
+    height: 60px;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 15px;
+    color: #000;
+    background: linear-gradient(to right, rgb(87, 170, 222), lightblue);
+    font-size: 28px;
+    outline: none;
+    border: none;
+}
+
+.login_input::placeholder {
+    color: #000;
+    font-weight: 700;
 }
 
 .error_msg {
-	width: 370px;
-	padding: 15px;
-	margin: 5px 0;
-	font-size: 14px;
-	background-color: #f34646;
-	color: white;
-	border-radius: 5px;
-	text-align: center;
+    width: 370px;
+    padding: 15px;
+    margin: 5px 0;
+    font-size: 14px;
+    background-color: #f34646;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
 }
 
-.right {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: #3bb19b;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+.login_container .right {
+    flex: 1;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #3bb19b;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 5px solid #000;
+    border-left: 0;
 }
 
 .right h1 {
-	margin-top: 0;
-	color: white;
-	font-size: 40px;
-	align-self: center;
+    margin-top: 0;
+    color: white;
+    font-size: calc(24px + 16 * ((100vw - 320px) / (1980 - 320)));
+    align-self: center;
+    text-align: center;
 }
 
-.green_btn {
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: white;
-	border-radius: 20px;
-	width: 180px;
-	font-weight: bold;
-	font-size: 14px;
-	cursor: pointer;
+.login_form_container .green_btn {
+    outline: none;
+    padding: 12px;
+    background-color: #3bb19b;
+    border-radius: 15px;
+    border: 3px solid #000;
+    min-width: 180px;
+    width: 80%;
+    font-weight: bold;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1980 - 320)));
+    cursor: pointer;
+    transition: all .3s ease-in-out;
 }
 
-.yellow_btn {
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: rgb(211, 211, 103);
-	border-radius: 20px;
-	width: 180px;
-	font-weight: bold;
-	font-size: 14px;
-	cursor: pointer;
-	margin-top:5px;
+.login_form_container .green_btn:hover {
+    color: #000;
+    background-color: #FFCC06;
+}
+
+.login_container .right a {
+    width: 100%;
+    text-align: center;
+}
+
+.login_container .yellow_btn {
+    border: 3px solid #000;
+    outline: none;
+    padding: 12px;
+    background-color: rgb(211, 211, 103);
+    border-radius: 20px;
+    max-width: 180px;
+    width: 100%;
+    font-weight: bold;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1980 - 320)));
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all .3s ease-in-out;
+}
+
+.login_container .yellow_btn:hover {
+    background-color: #3bb19b;
+    color: #FFF;
 }
 
 /*Icon at the right bottom of screen*/
 
-.english-icon{
-	position:relative;
-	width:55px;
-	height:70px;
-	margin-left:95.1%;
-	margin-top:50px;
+.english-icon {
+    position: absolute;
+    right: 50px;
+    bottom: 200px;
+    width: 55px;
+    height: 70px;
 }
 
-.support-icon{
-	position: relative;
-	width:100px;
-	height:75px;
-	margin-left:94%;
+.support-icon {
+    position: absolute;
+    right: 27px;
+    bottom: 120px;
+    width: 100px;
+    height: 75px;
 }

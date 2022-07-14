@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useState,useCallback} from "react";
 import axios from "axios";
 
 //Images
@@ -8,6 +8,9 @@ import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в па
 import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
 
+//Captcha
+import Captcha from "./captcha";
+
 const Signup = () => {
     const [data, setData] = useState({
         username: "",
@@ -15,9 +18,14 @@ const Signup = () => {
         password1: "",
         password2: "",
     });
-
+    
+    const [isCheck,setIsCheck]=useState(false);
 
     const navigate = useNavigate();
+    
+    const handleChangeItem = useCallback((childData) => {
+      setIsCheck(childData);
+    }, []);
 
     const handleChange = ({currentTarget: input}) => {
         setData({...data, [input.name]: input.value});
@@ -25,18 +33,29 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            //const url = "http://localhost:8080/api/users";
-            //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
-            const {data: res} = await axios.post("http://localhost:8080/api/register", data, {
-                headers: {"Content-Type": "application/json"}
-            });
-            console.log(res.data);
-            navigate("/login"); //after registering navigate to login page
-            console.log(res.message);
-        } catch (error) {
-            alert(error.response.data.msg);
+        
+        
+        if(data.password !==data.confirmPassword){
+          alert("Your confirmed password does not match!");
+        }
+        else{
+          if(isCheck===false){
+            alert("Check Captcha please!")
+          }
+          else{
+               try {
+                    //const url = "http://localhost:8080/api/users";
+                    //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
+                    const {data: res} = await axios.post("http://localhost:8080/api/register", data, {
+                        headers: {"Content-Type": "application/json"}
+                    });
+                    console.log(res.data);
+                    navigate("/login"); //after registering navigate to login page
+                    console.log(res.message);
+                } catch (error) {
+                    alert(error.response.data.msg);
+                } 
+          }
         }
     };
 
@@ -103,16 +122,7 @@ const Signup = () => {
                         />
 
                         <div className="captcha">Captcha</div>
-                        <input
-                            type="text"
-                            name="captcha"
-                            onChange={handleChange}
-                            value={data.captcha}
-                            required
-                            className="input-captcha"
-                        />
-
-                        <div className="captcha-data">HTML</div>
+                        <Captcha parentCallback={handleChangeItem}/>
 
                         <button type="submit" className="yellow_btn">
                             Further
