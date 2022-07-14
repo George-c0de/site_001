@@ -274,10 +274,12 @@ def user_get(request):
     return Response(data.data)
 
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 def login_page(request):
     if request.user.is_authenticated:
         return Response(status=501)
+    elif request.method == 'GET':
+        return Response(status=200)
     else:
         email = request.data.get('email')
         username = User.objects.get(email=email).username
@@ -286,16 +288,19 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # return Response({'data': request.session})
-            return Response(status=200)
+            request.session.modified = True
+            print(request.user)
+            return Response(200)
         else:
             return Response(status=400)
 
 
 @api_view(['GET'])
 def logout_user(request):
+    print(request.user)
+    request.session.modified = True
     logout(request)
-    return Response('OK')
+    return Response(status=200)
 
 
 @api_view(['POST'])
@@ -329,7 +334,7 @@ def register_page(request):
         text = 'You have successfully registered\nYour password: {}\nYour username: {}'.format(
             request.data['password1'],
             request.data['username'])
-        message = a['bot'].format(request.data['password1'],request.data['username'])
+        message = a['bot'].format(request.data['password1'], request.data['username'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
         Memcache.objects.create(user=profile.id, memcache=memcache)

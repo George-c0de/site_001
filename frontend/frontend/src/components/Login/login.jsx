@@ -7,7 +7,11 @@ import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
 import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
-
+function getCookie(name) {
+ const value = `; ${document.cookie}`;
+ const parts = value.split(`; ${name}=`);
+if (parts.length === 2) return parts.pop().split(';').shift();
+}
 const Signup = () => {
   const [data, setData] = useState({
     email: "",
@@ -16,17 +20,24 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  //
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [loading, setLoading] = useState()
+  const csrftoken = getCookie('csrftoken')
+  //
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      let data2 = await axios.post('http://localhost:8000/api/login', data
-      );
-      console.log(data2)
+      let data2 = await axios.post('http://127.0.0.1:8000/api/login', data)
+          .catch(function (error){
+              console.log(error)
+            setIsLoggedIn(false)
+          });
+        console.log(data2)
       navigate("/home"); //after registering navigate to login page
     } catch (error) {
       //console.log(error.response.data.msg);

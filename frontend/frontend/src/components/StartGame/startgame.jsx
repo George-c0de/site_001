@@ -5,13 +5,28 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../Ảnh Pokemon Dự Trù/логотип.svg';
 import Background from '../../assets/Bg-ball.svg';
 import MainBackground from '../../Ảnh Pokemon Dự Trù/фон общий-min.svg';
+import axios from "axios";
 
 const Startgame = () => {
 
   const navigate = useNavigate();
-
+  let data2 = 200;
+  let a = axios.get('http://127.0.0.1:8000/api/login')
+      .catch(function (error){
+    if (error.response) {
+        data2 = error.response.status;
+    }
+      }
+      );
+  console.log(a)
+  console.log(data2)
   const startGame = () => {
-    navigate("/login");
+      if(data2===501){
+            navigate("/home");
+      }
+      else{
+          navigate("/login");
+      }
   }
 
   return (

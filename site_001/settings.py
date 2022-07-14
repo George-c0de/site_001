@@ -19,9 +19,13 @@ DEBUG = True
 ALLOWED_HOSTS = ["*", ]  # since Telegram uses a lot of IPs for webhooks
 # ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
-
 # Application definition
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

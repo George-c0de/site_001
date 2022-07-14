@@ -28,7 +28,7 @@ const Mainpage = () => {
     }, [])
 
     const getNote = async () => {
-      const response = await fetch(`http://localhost:8000/api/user`)
+      const response = await fetch(`http://127.0.0.1:8000/api/user`)
       const data = await response.json()
       setNote(data)
     }
@@ -36,6 +36,7 @@ const Mainpage = () => {
 
     //Logout
     const handleLogout = () => {
+        let data2 = axios.get('http://127.0.0.1:8000/api/logout');
       localStorage.removeItem("token");
       navigate("/login");
     };
