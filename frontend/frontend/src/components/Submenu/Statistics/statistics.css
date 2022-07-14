@@ -1,13 +1,23 @@
-.statistic-info{
-    margin-bottom:140px;
+.statistic-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
 }
-.statistic-info li{
+
+.statistic-info li {
     display: block;
     cursor: auto;
-	color:white;
-	list-style-type:none;
-    font-size:25px;
-    min-width:400px;
-    margin-left:70%;
-    margin-bottom:10%;
+    color: white;
+    list-style-type: none;
+    font-size: 36px;
+    text-shadow: none;
+}
+
+.statistic-info li span {
+    text-align: center;
+    display: block;
+    color: #FFCC00;
+    font-weight: 600;
+    margin: 10px 0;
 }

@@ -2,16 +2,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-//Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-
-//Images
-import logo from "../../../Ảnh Pokemon Dự Trù/логотип.svg";
-import human from "../../../Ảnh Pokemon Dự Trù/Чел.svg";
-import satoshi from "../../../Ảnh Pokemon Dự Trù/123133.svg";
-import britain from "../../../Ảnh Pokemon Dự Trù/gb-1.svg";
-import support from "../../../Ảnh Pokemon Dự Trù/супорт.svg";
+// Pages
+import { Menu } from '../../MainPage/Menu/Menu';
+import { UserId } from '../../UserId/UserId';
+import { Lang } from '../../MainPage/Lang/Lang';
 
 const Statistics = () => {
   const [openDropDown, setOpenDropDown] = useState(true);
@@ -34,92 +28,29 @@ const Statistics = () => {
 
   //Show informations of user
   const showNewMenu = () => {
-    setNewOpenDropDown(!openNewDropDown);
+    setNewOpenDropDown(true);
     setOpenDropDown(false);
-    //Check times on click and setState prospectively
-    setCount(count + 1);
-
-    console.log(count);
-
-    if (count % 2 === 0) {
-      setActive(!onActive);
-    } else {
-      setActive(onActive);
-    }
   };
 
   return (
     <div className="homepage">
       <div className="main_container">
-        <nav className={onActive ? "navbar" : "navbar_active"}>
-          <FontAwesomeIcon
-            icon={faBars}
-            className={onActive ? "icon-menu" : "icon_menu_active"}
-            onClick={backHome}
-          />
+        <nav className={ onActive ? "navbar" : "navbar_active" }>
+          <Menu isActive={ onActive } showMenu={ backHome } showNewMenu={ showNewMenu } handleLogout={ handleLogout }/>
 
-          {openDropDown ? (
+          { openDropDown ? (
             <ul className="statistic-info">
-              <li>Количество участников:</li>
-              <li>Количество транзакций:</li>><li>Сумма выплат:</li>
+              <li>Количество участников: <span>1356614</span></li>
+              <li>Количество транзакций: <span>1356614</span></li>
+              <li>Сумма выплат: <span>1356614</span></li>
             </ul>
-          ) : null}
+          ) : null }
 
-          <img
-            className={onActive ? "pokemon-banner" : "pokemon-banner_active"}
-            src={logo}
-            alt=""
-          />
-
-          <img
-            src={human}
-            className={onActive ? "icon-user" : "icon-user_active"}
-            onClick={showNewMenu}
-            alt=""
-          />
-          {openNewDropDown ? (
-            <ul className="user-info">
-              <span className="user-id">User Id-</span>
-
-              <li>Balance: </li>
-              <li>Cards profit: </li>
-              <li>Referal profit: </li>
-              <li>Link for invitation</li>
-              <div className="link-invitation"></div>
-
-              <button className="yellow-btn">Deposit</button>
-              <button className="yellow-btn">Withdraw</button>
-
-              <img className="satoshi" src={satoshi} alt="" />
-            </ul>
-          ) : null}
-
-          <button
-            className={onActive ? "white_btn_in" : "white_btn_in_active"}
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+          { openNewDropDown ? <UserId/> : null }
         </nav>
       </div>
-      {/* <img  src={pokeball} alt="" className="pokeball"/> */}
-      <div className={onActive ? "site-main" : "site-main_active"}>
-        <img
-          src={britain}
-          className={
-            onActive ? "english-icon-mainpage" : "english-icon-mainpage_active"
-          }
-          alt=""
-        />
-
-        <img
-          src={support}
-          className={
-            onActive ? "support-icon-mainpage" : "support-icon-mainpage_active"
-          }
-          alt=""
-        />
-      </div>
+      {/* <img  src={pokeball} alt="" className="pokeball"/> */ }
+      <Lang isActive={ onActive }/>
     </div>
   );
 };
