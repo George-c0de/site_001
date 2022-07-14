@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : "
+"n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\n"
+"Language: ru\n"
+"mime-version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src\components\StartGame\startgame.jsx:44
+msgid "start"
+msgstr "старт"
+
+#: src\components\Signup\signup.jsx:73
+#: src\components\Signup\signup.jsx:76
+msgid "Log In"
+msgstr "Войти"
+
+#: src\components\Signup\signup.jsx:84
+#: src\components\Signup\signup.jsx:128
+msgid "Sign Up"
+msgstr "Зарегистрироваться"
+
+#: src\components\Signup\signup.jsx:87
+msgid "Username"
+msgstr "Логин"
+
+#: src\components\Signup\signup.jsx:96
+msgid "Email"
+msgstr "Электронная почта"
+
+#: src\components\Signup\signup.jsx:106
+msgid "Password"
+msgstr "Пароль"
+
+#: src\components\Signup\signup.jsx:116
+msgid "Confirm Password"
+msgstr "Подтвердите пароль"
+
+#: src\components\UserId\UserId.jsx:7
+msgid "User Id"
+msgstr "User Id"
+
+#: src\components\UserId\UserId.jsx:10
+msgid "Balance"
+msgstr "Баланс"
+
+#: src\components\UserId\UserId.jsx:11
+msgid "Cards profit"
+msgstr "Доход с карт"
+
+#: src\components\UserId\UserId.jsx:12
+msgid "Referal profit"
+msgstr "Доход с рефералов"
+
+#: src\components\UserId\UserId.jsx:13
+msgid "Link for invitation"
+msgstr "Ссылка приглашения"
+
+#: src\components\UserId\UserId.jsx:16
+msgid "Deposit"
+msgstr "Пополнить"
+
+#: src\components\UserId\UserId.jsx:17
+msgid "Withdraw"
+msgstr "Вывести"
+
+#: src\components\Submenu\Statistics\statistics.jsx:44
+msgid "TOTAL USERS"
+msgstr "Количество участников"
+
+#: src\components\Submenu\Statistics\statistics.jsx:45
+msgid "TOTAL  TRANSACTIONS"
+msgstr "Количество транзакций"
+
+#: src\components\Submenu\Statistics\statistics.jsx:46
+msgid "TOTAL PAYOUT"
+msgstr "Сумма выплат"
+
+#: src\components\Submenu\Referals\referals.jsx:43
+msgid "Referral link"
+msgstr "Ссылка для приглашения"
+
+#: src\components\Submenu\Referals\referals.jsx:48
+msgid "1 line"
+msgstr "1 линия"
+
+#: src\components\Submenu\Referals\referals.jsx:49
+msgid "Total person"
+msgstr "Количество рефералов"
+
+#: src\components\Submenu\Referals\referals.jsx:57
+msgid "2 line"
+msgstr "2 линия"
+
+#: src\components\Submenu\Referals\referals.jsx:58
+msgid "Profit received"
+msgstr "Полученная прибыль"
+
+#: src\components\Submenu\Referals\referals.jsx:66
+msgid "3 line"
+msgstr "3 линия"
+
+#: src\components\Submenu\Referals\referals.jsx:67
+msgid "Lost profits"
+msgstr "Упущенная прибыль"
+
+#: src\components\Submenu\Game\game.jsx:66
+msgid "JOIN THE FIGHT AND WIN"
+msgstr "УЧАСТВУЙ В БИТВАХ И ВЫИГРЫВАЙ"
+
+#: src\components\Submenu\Game\game.jsx:70
+msgid "Cards"
+msgstr "КАРТЫ"
+
+#: src\components\Submenu\Game\game.jsx:80
+msgid "BRONZE"
+msgstr "БРОНЗА"
+
+#: src\components\Submenu\Game\game.jsx:98
+msgid "SILVER"
+msgstr "СЕРЕБРО"
+
+#: src\components\Submenu\Game\game.jsx:116
+msgid "GOLD"
+msgstr "ЗОЛОТО"
+
+#: src\components\Submenu\Game\game.jsx:134
+msgid "EMERALD"
+msgstr "ИЗУМРУД"
+
+#: src\components\Submenu\Game\game.jsx:144
+msgid "GAME HISTORY"
+msgstr "ИСТОРИЯ ИГРЫ"
+
+#: src\components\Submenu\Game\game.jsx:165
+msgid "SHOW MORE"
+msgstr "показать еще"
+
+#: src\components\MainPage\mainpage.jsx:87
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "MAIN"
+msgstr "Главная страница"
+
+#: src\components\MainPage\mainpage.jsx:88
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "REFFERALS"
+msgstr "Рефералы"
+
+#: src\components\MainPage\mainpage.jsx:89
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "STATISTICS"
+msgstr "Статистика"
+
+#: src\components\MainPage\mainpage.jsx:90
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "RULES"
+msgstr "Правила"
+
+#: src\components\MainPage\mainpage.jsx:95
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "USE TELEGRAM BOT"
+msgstr "Подключить ТГ БОТ"
+
+#: src\components\Login\login.jsx:20
+msgid "Switch lang"
+msgstr "Смена языка"

@@ -14,6 +14,7 @@ import { UserId } from '../../UserId/UserId';
 //Images
 import pokeball from "../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg";
 import axios from "axios";
+import {t} from "ttag";
 
 const Game = () => {
   const [openNewDropDown, setNewOpenDropDown] = useState(false);
@@ -62,11 +63,11 @@ const Game = () => {
 
         <div className={ onActive ? "site-main-game" : "site-main_active" }>
           <div className='site-main-game-wrapper'>
-            <div className="text-game">УЧАСТВУЙ В БИТВАХ И ПОЛУЧАЙ ПРИЗЫ</div>
+            <div className="text-game">{t`УЧАСТВУЙ В БИТВАХ И ПОЛУЧАЙ ПРИЗЫ`}</div>
 
             <div className="container-pack-pokeballs">
               <div className="col-sm" id="title-pack-pokeballs">
-                <span>Cards</span>
+                <span>{t`Cards`}</span>
                 <div className="pokeballs-container">
                   <div id="pokeballs-detail">
                     <img src={ pokeball } className="small-pokeball" alt=""/>
@@ -76,7 +77,7 @@ const Game = () => {
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                   </div>
-                  <div className="text-pokeball-1">BRONZE</div>
+                  <div className="text-pokeball-1">{t`BRONZE`}</div>
                   <FontAwesomeIcon
                     icon={ faChevronDown }
                     className="icon-showdown"
@@ -94,7 +95,7 @@ const Game = () => {
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                   </div>
-                  <div className="text-pokeball-2">SILVER</div>
+                  <div className="text-pokeball-2">{t`SILVER`}</div>
                   <FontAwesomeIcon
                     icon={ faChevronDown }
                     className="icon-showdown"
@@ -112,7 +113,7 @@ const Game = () => {
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                   </div>
-                  <div className="text-pokeball-3">GOLD</div>
+                  <div className="text-pokeball-3">{t`GOLD`}</div>
                   <FontAwesomeIcon
                     icon={ faChevronDown }
                     className="icon-showdown"
@@ -130,7 +131,7 @@ const Game = () => {
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                     <img src={ pokeball } className="small-pokeball" alt=""/>
                   </div>
-                  <div className="text-pokeball-4">EMERALD</div>
+                  <div className="text-pokeball-4">{t`EMERALD`}</div>
                   <FontAwesomeIcon
                     icon={ faChevronDown }
                     className="icon-showdown"
@@ -140,7 +141,7 @@ const Game = () => {
             </div>
 
             <div className="game-history">
-              <span>GAME HISTORY</span>
+              <span>{t`GAME HISTORY`}</span>
               <div className='history-table'>
                 <div className='history-table-row'>
                   <span className="history-table-icon">()</span>
@@ -161,7 +162,7 @@ const Game = () => {
                   <span className="history-table-score green">+ 7865</span>
                 </div>
               </div>
-              <span className='game-history-more'>SHOW MORE</span>
+              <span className='game-history-more'>{t`SHOW MORE`}</span>
             </div>
           </div>
 

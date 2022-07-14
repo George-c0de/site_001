@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { t } from 'ttag';
 // Images
 import Logo from '../../Ảnh Pokemon Dự Trù/логотип.svg';
 import Background from '../../assets/Bg-ball.svg';
@@ -41,7 +41,7 @@ const Startgame = () => {
 
 
       <div className='start-button-container'>
-        <span className="start-game" onClick={ startGame }>start</span>
+        <span className="start-game" onClick={ startGame }>{ t`start` }</span>
       </div>
     </div>
   )

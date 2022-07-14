@@ -2,6 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useState,useCallback} from "react";
 import axios from "axios";
 
+
 //Images
 import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
@@ -10,7 +11,7 @@ import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
 
 //Captcha
 import Captcha from "./captcha";
-
+import { t } from 'ttag';
 const Signup = () => {
     const [data, setData] = useState({
         username: "",
@@ -18,7 +19,6 @@ const Signup = () => {
         password1: "",
         password2: "",
     });
-    
     const [isCheck,setIsCheck]=useState(false);
 
     const navigate = useNavigate();
@@ -70,10 +70,10 @@ const Signup = () => {
             <div className="signup_form_container bubble-speech">
                 {/*Left side: Sign in*/}
                 <div className="left">
-                    <div>Already had account?</div>
+                    <div>{t`Log In`}</div>
                     <Link to="/login">
                         <button type="button" className="green_btn">
-                            Sign in
+                            { t `Log In` }
                         </button>
                     </Link>
                 </div>
@@ -81,10 +81,10 @@ const Signup = () => {
                 {/*Right side: Sign up*/}
                 <div className="right">
                     <form className="form_container" onSubmit={handleSubmit}>
-                        <h1>Create Account</h1>
+                        <h1>{t `Sign Up`}</h1>
                         <input
                             type="text"
-                            placeholder="Username"
+                            placeholder={t `Username`}
                             name="username"
                             onChange={handleChange}
                             value={data.username}
@@ -93,7 +93,7 @@ const Signup = () => {
                         />
                         <input
                             type="email"
-                            placeholder="Email"
+                            placeholder={t `Email`}
                             name="email"
                             onChange={handleChange}
                             value={data.email}
@@ -103,7 +103,7 @@ const Signup = () => {
 
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder={t `Password`}
                             name="password1"
                             onChange={handleChange}
                             value={data.password1}
@@ -113,7 +113,7 @@ const Signup = () => {
 
                         <input
                             type="password"
-                            placeholder="Confirm Password"
+                            placeholder={t `Confirm Password`}
                             name="password2"
                             onChange={handleChange}
                             value={data.password2}
@@ -125,7 +125,7 @@ const Signup = () => {
                         <Captcha parentCallback={handleChangeItem}/>
 
                         <button type="submit" className="yellow_btn">
-                            Further
+                            {t`Sign Up`}
                         </button>
                     </form>
                 </div>

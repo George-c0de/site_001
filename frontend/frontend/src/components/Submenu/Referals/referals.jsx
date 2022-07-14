@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Menu } from '../../MainPage/Menu/Menu';
 import { Lang } from '../../MainPage/Lang/Lang';
 import { UserId } from '../../UserId/UserId';
+import {t} from "ttag";
 
 const Referals = () => {
   const [openDropDown, setOpenDropDown] = useState(true);
@@ -39,13 +40,13 @@ const Referals = () => {
 
           { openDropDown ? (
             <div className="container">
-              <div className="title-referal">Referral link</div>
+              <div className="title-referal">{t`Referral link`}</div>
               <div className="link-invitation"></div>
 
               <div className="row" id="info-3-col">
                 <div className="col-sm">
-                  <button className="row">1 line</button>
-                  <span>Total person:</span>
+                  <button className="row">{t`1 line`}</button>
+                  <span>{t`Total person`}:</span>
                   <ul className="row">
                     <li>140</li>
                     <li>140</li>
@@ -53,8 +54,8 @@ const Referals = () => {
                   </ul>
                 </div>
                 <div className="col-sm">
-                  <button className="row">2 line</button>
-                  <span>Profit received:</span>
+                  <button className="row">{t`2 line`}</button>
+                  <span>{t`Profit received`}:</span>
                   <ul className="row">
                     <li>240$</li>
                     <li>240$</li>
@@ -62,8 +63,8 @@ const Referals = () => {
                   </ul>
                 </div>
                 <div className="col-sm">
-                  <button className="row">3 line</button>
-                  <span>Lost profits:</span>
+                  <button className="row">{t`3 line`}</button>
+                  <span>{t`Lost profits`}:</span>
                   <ul className="row">
                     <li>246$</li>
                     <li>246$</li>

@@ -1,17 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-
+import { t } from 'ttag';
+import { saveLocale } from '../../i18nInit';
 //Images
 import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
 import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
-function getCookie(name) {
- const value = `; ${document.cookie}`;
- const parts = value.split(`; ${name}=`);
-if (parts.length === 2) return parts.pop().split(';').shift();
+
+const setLocale = (locale) => (ev) => {
+  ev.preventDefault();
+  saveLocale(locale);
+  window.location.reload();
 }
+
+const LangSwitcher = () => (
+  <div className="Lang-switch">
+    <h2>{ t`Switch lang`}</h2>
+    <a href='/' onClick={setLocale('uk')}>uk</a>
+    <a href='/' onClick={setLocale('ru')}>ru</a>
+    <a href='/' onClick={setLocale('en')}>en</a>
+  </div>
+)
 const Signup = () => {
   const [data, setData] = useState({
     email: "",
@@ -20,11 +31,6 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  //
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
-  const [loading, setLoading] = useState()
-  const csrftoken = getCookie('csrftoken')
-  //
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
@@ -35,7 +41,6 @@ const Signup = () => {
       let data2 = await axios.post('http://127.0.0.1:8000/api/login', data)
           .catch(function (error){
               console.log(error)
-            setIsLoggedIn(false)
           });
         console.log(data2)
       navigate("/home"); //after registering navigate to login page
@@ -44,8 +49,10 @@ const Signup = () => {
       alert("Wrong email or password!");
     }
   };
+
   return (
     <div className="login_container">
+      <LangSwitcher/>
       <nav className="navbar">
         <img src={ logo } className="logo-tokemon" alt=""/>
       </nav>
