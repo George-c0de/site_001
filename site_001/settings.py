@@ -16,7 +16,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", ]  # since Telegram uses a lot of IPs for webhooks
 # ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -49,6 +49,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'site_001.urls'
 
@@ -137,7 +144,7 @@ LOCALE_PATHS = (
 TIME_ZONE = 'UTC'
 
 USE_TZ = True
-
+USE_L10N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -162,3 +169,4 @@ EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')

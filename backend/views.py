@@ -1,6 +1,8 @@
 import io
 import logging
 import json
+from os import environ
+import uuid
 import xlsxwriter
 from captcha.fields import CaptchaField
 from django.contrib.auth import logout, authenticate, login
@@ -19,9 +21,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from decimal import *
+
+from tgbot.message_for_bot import a
+from tgbot.models import Chat_id, Event, Memcache
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
-    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card
+    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink
 from .serializers import ProfileSerializer, UserSerializer, AllSerializer
 from tronpy import Contract, Tron
 import base58
@@ -42,6 +47,24 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+
+def send_message_tgbot(request):
+    message = {
+        'username': request.user.username,
+
+    }
+    token = "5540149986:AAFOuNxGMHuOQupsn1T2PKpN7GegYL7Xrt4"
+    user = User.objects.get(username=message['username'])
+    if Chat_id.objects.filter(user=user.id).exists():
+        chat_id = Chat_id.objects.get(user=user.id)
+
+        url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + str(829942305) + "&text=" + \
+                  message['text']
+        results = requests.post(url_req, data={'id_user': user.id})
+        print(results.json())
+        Response('OK')
+    Response('Error')
 
 
 @api_view(['GET'])
@@ -116,6 +139,12 @@ def getRoutes(request):
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/send_message_tgbot/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
         }
     ]
     return Response(routes)
@@ -136,7 +165,7 @@ def create_all_and_admin():
         a.save()
 
 
-all_ = All.objects.all().get()
+all_ = All.objects.all().first()
 create_all_and_admin()
 admin_ = Profile.objects.filter(admin_or=True).first()
 
@@ -297,6 +326,15 @@ def register_page(request):
             profile.line_1 = line_one.id
         profile.save()
         messages.success(request, 'Аккаунт создан,' + username)
+        text = 'You have successfully registered\nYour password: {}\nYour username: {}'.format(
+            request.data['password1'],
+            request.data['username'])
+        message = a['bot'].format(request.data['password1'],request.data['username'])
+        Event.objects.create(message=message, user_id=profile.id)
+        memcache = uuid.uuid4().hex[:6].upper()
+        Memcache.objects.create(user=profile.id, memcache=memcache)
+        deep_link = 'https://t.me/Tokemon_game_Bot?start=' + str(memcache)
+        DeepLink.objects.create(profile=profile.id, deep_link=deep_link)
         return Response(status=200)
     else:
         messages.error(request, 'Неверный ввод')

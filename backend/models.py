@@ -10,6 +10,7 @@ class All(models.Model):
     all_transactions = models.IntegerField(default=0)
     coll_user = models.IntegerField(default=0)
 
+
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     money = models.DecimalField('Деньги', max_digits=10, decimal_places=2)
@@ -152,6 +153,11 @@ class History_Transactions(models.Model):
 class Buy_Card(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
+
+
+class DeepLink(models.Model):
+    profile = models.CharField(max_length=250)
+    deep_link = models.CharField(max_length=250)
 
 
 class Matrix(models.Model):
