@@ -1,0 +1,48 @@
+/*Game History*/
+.game-history {
+    border-radius: 30px;
+    border: 3px solid black;
+    background: white;
+    padding: 20px;
+    width: 500px;
+    height: 200px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-history-more {
+    color: #1E3371;
+}
+
+.history-table {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.history-table-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #000;
+}
+
+.history-table-row:last-child {
+    border-bottom: 1px solid #000;
+}
+
+.history-table-score.green {
+    color: #0BDC5F;
+}
+
+.history-table-score.red {
+    color: #F16050;
+}

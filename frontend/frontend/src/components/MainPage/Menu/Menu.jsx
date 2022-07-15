@@ -17,17 +17,19 @@ export const Menu = ({ isActive, showMenu, showNewMenu, handleLogout }) => (
       alt=""
     />
 
-    <img
-      src={ human }
-      className={ isActive ? "icon-user" : "icon-user_active" }
-      onClick={ showNewMenu }
-      alt=""
-    />
-    <button
-      className={ isActive ? "white_btn_in" : "white_btn_in_active" }
-      onClick={ handleLogout }
-    >
-      LOGOUT
-    </button>
+    <div>
+        <img
+          src={ human }
+          className={ isActive ? "icon-user" : "icon-user_active" }
+          onClick={ showNewMenu }
+          alt=""
+        />
+        <button
+          className={ isActive ? "white_btn_in" : "white_btn_in_active" }
+          onClick={ handleLogout }
+        >
+            Logout
+        </button>
+    </div>
   </div>
 )

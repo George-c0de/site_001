@@ -6,7 +6,8 @@
     background-position: right bottom;
     background-attachment: fixed;
     background-size: cover;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /*All infos on menu*/
