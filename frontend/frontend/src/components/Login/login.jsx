@@ -83,7 +83,7 @@ const Signup = () => {
                     <h1>{t`New Here`}?</h1>
                     <Link to="/signup">
                         <button type="button" className="yellow_btn">
-                            {t`Зарегистрироваться`}
+                            {t`Sign Up`}
                         </button>
                     </Link>
                 </div>
