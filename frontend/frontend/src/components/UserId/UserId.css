@@ -23,6 +23,10 @@
     justify-content: space-between;
 }
 
+.user-info {
+    max-width: 70%;
+}
+
 .user-info .user-id {
     position: absolute;
     margin-left: 31%;
@@ -44,12 +48,30 @@
 }
 
 .user-info .link-invitation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 25px;
     outline: 1px solid white;
     padding: 5px 20px;
     color: white;
-    height: 50px;
-    width: 400px;
+    min-height: 50px;
+    min-width: 400px;
+    font-size: 28px;
+}
+
+.copy-icon {
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.copy-icon:hover {
+    color: #FFCC00;
+}
+
+.copy-icon:active {
+    color: #0BDC5F;
 }
 
 .user-info-buttons {
