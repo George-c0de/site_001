@@ -1,33 +1,53 @@
 /*Icon at the right bottom of screen*/
 
-.english-icon-mainpage {
+.site-main, .site-main_active {
     position: absolute;
-    right: 50px;
-    bottom: 100px;
-    width: 55px;
-    height: 70px;
-}
-
-.support-icon-mainpage {
-    position: absolute;
-    right: 27px;
-    bottom: 30px;
-    width: 100px;
-    height: 75px;
-}
-
-.english-icon-mainpage_active {
-    position: absolute;
-    right: 50px;
-    bottom: 100px;
-    width: 55px;
-    height: 70px;
-}
-
-.support-icon-mainpage_active {
-    position: absolute;
-    right: 27px;
     bottom: 20px;
-    width: 100px;
-    height: 75px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.lang-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.lang-list.hidden {
+    display: none;
+}
+
+.lang-list li {
+    margin: 5px 0 0 0;
+    height: 45px;
+    font-size: unset;
+}
+
+.lang-icon, .lang-icon_active {
+    width: 45px;
+    height: 45px;
+}
+
+.lang-icon-preview {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 45px;
+    display: block;
+    cursor: pointer;
+}
+
+.lang-icon-preview.hidden {
+    display: none;
+}
+
+.support-icon-mainpage, .support-icon-mainpage_active {
+    width: 65px;
+    height: 65px;
+}
+

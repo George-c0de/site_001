@@ -10,9 +10,9 @@ import {t} from "ttag";
 
 const Referals = () => {
   const [openDropDown, setOpenDropDown] = useState(true);
-  const [openNewDropDown, setNewOpenDropDown] = useState(false);
-
+  const [openUserInfo, setOpenUserInfo] = useState(false);
   const [onActive, setActive] = useState(false);
+
   const navigate = useNavigate();
 
   //Logout
@@ -27,16 +27,16 @@ const Referals = () => {
   };
 
   //Show informations of user
-  const showNewMenu = () => {
-    setNewOpenDropDown(true);
-    setOpenDropDown(false);
+  const showUserInfo = () => {
+      setOpenUserInfo(!openUserInfo);
+      setOpenDropDown(!openDropDown);
   };
 
   return (
     <div className="homepage">
       <div className="main_container">
         <nav className={ onActive ? "navbar" : "navbar_active" }>
-          <Menu isActive={ onActive } showMenu={ backHome } showNewMenu={ showNewMenu } handleLogout={ handleLogout }/>
+          <Menu isActive={ onActive } showMenu={ backHome } showUserInfo={ showUserInfo } handleLogout={ handleLogout }/>
 
           { openDropDown ? (
             <div className="container">
@@ -75,7 +75,7 @@ const Referals = () => {
             </div>
           ) : null }
 
-          { openNewDropDown ? <UserId /> : null }
+          { openUserInfo ? <UserId /> : null }
         </nav>
       </div>
       {/* <img  src={pokeball} alt="" className="pokeball"/> */ }
