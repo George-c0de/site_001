@@ -10,7 +10,6 @@ import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в па
 
 // Pages
 import { Lang } from '../MainPage/Lang/Lang';
-import {Lang} from '../MainPage/Lang/Lang';
 
 import { t } from "ttag";
 
@@ -64,7 +63,7 @@ const Signup = () => {
                             onChange={handleChange}
                             value={data.email}
                             required
-                            className="login_input"
+                            className="input"
                         />
                         <input
                             type="password"
@@ -73,7 +72,7 @@ const Signup = () => {
                             onChange={handleChange}
                             value={data.password}
                             required
-                            className="login_input"
+                            className="input"
                         />
                         <button type="submit" className="green_btn">
                             {t`Sign Up`}
