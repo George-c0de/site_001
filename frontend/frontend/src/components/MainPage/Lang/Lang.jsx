@@ -55,11 +55,11 @@ export const Lang = ({ isActive }) => {
     setCurrentLang(lang);
   }
 
-  const setLocate = (locale) => (ev) => {
-    ev.preventDefault();
-    // saveLocate(locale);
-    window.location.reload();
-  }
+  // const setLocate = (locale) => (ev) => {
+  //   ev.preventDefault();
+  //   // saveLocate(locale);
+  //   window.location.reload();
+  // }
 
   return (
     <div className={ isActive ? "site-main" : "site-main_active" }>
@@ -78,7 +78,7 @@ export const Lang = ({ isActive }) => {
                 isActive ? "lang-icon" : "lang-icon_active"
               }
               data-lang={ lang[0] }
-              onClick={ setLocate(languagesShort[lang[0]]) }
+              // onClick={ setLocate(languagesShort[lang[0]]) }
               alt=""
             />
           </li>)
