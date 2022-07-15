@@ -40,15 +40,15 @@ const Signup = () => {
     }
   };
 
-  try {
-    let data2 = await axios.post('http://localhost:8000/api/login', data
-    );
-    console.log(data2)
-    navigate("/home"); //after registering navigate to login page
-  } catch (error) {
-    //console.log(error.response.data.msg);
-    alert("Wrong email or password!");
-  }
+  // try {
+  //   let data2 = await axios.post('http://localhost:8000/api/login', data
+  //   );
+  //   console.log(data2)
+  //   navigate("/home"); //after registering navigate to login page
+  // } catch (error) {
+  //   //console.log(error.response.data.msg);
+  //   alert("Wrong email or password!");
+  // }
 
   return (
     <div className="login_container">
@@ -71,7 +71,7 @@ const Signup = () => {
               onChange={ handleChange }
               value={ data.email }
               required
-              className="login_input"
+              className="input"
             />
 
             <input
@@ -81,18 +81,18 @@ const Signup = () => {
               onChange={ handleChange }
               value={ data.password }
               required
-              className="login_input"
+              className="input"
             />
 
             <button type="submit" className="green_btn">
-              { t`Sign Up` }
+              { t`Sign In` }
             </button>
           </form>
         </div>
 
         <div className="right">
           <h1>{ t`New Here` }?</h1>
-          <Link to="/signup">
+          <Link to="/signup" className='login-link'>
             <button type="button" className="yellow_btn">
               { t`Sign Up` }
             </button>

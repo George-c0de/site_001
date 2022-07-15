@@ -1,18 +1,18 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-
+import { t } from 'ttag';
 
 //Images
 import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
-import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
-import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
 
 //Captcha
 import Captcha from "./captcha";
-import { t } from 'ttag';
+
+// Pages
+import { Lang } from '../MainPage/Lang/Lang';
+
 const Signup = () => {
   const [data, setData] = useState({
     username: "",
@@ -59,7 +59,7 @@ const Signup = () => {
         {/*Left side: Sign in*/ }
         <div className="left">
           <div>Already had account?</div>
-          <Link to="/login">
+          <Link to="/login" className="signup-link">
             <button type="button" className="green_btn">
               Sign in
             </button>
@@ -111,27 +111,28 @@ const Signup = () => {
             />
 
             <div className="captcha">Captcha</div>
-            <input
-              type="text"
-              name="captcha"
-              onChange={ handleChange }
-              value={ data.captcha }
-              required
-              className="input-captcha"
-            />
 
-            <div className="captcha-data">HTML</div>
+            <div className="captcha-wrapper">
+              <input
+                type="text"
+                name="captcha"
+                onChange={ handleChange }
+                value={ data.captcha }
+                required
+                className="input"
+              />
+
+              <span className="captcha-data">HTML</span>
+            </div>
 
             <button type="submit" className="yellow_btn">
               Further
             </button>
           </form>
         </div>
-
-        <img src={ britain } className="english-icon-new" alt=""/>
-
-        <img src={ support } className="support-icon-new" alt=""/>
       </div>
+
+      <Lang />
     </div>
   );
 };
