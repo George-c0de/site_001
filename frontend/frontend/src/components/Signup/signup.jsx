@@ -1,5 +1,6 @@
-import {Link, useNavigate} from "react-router-dom";
-import React, {useState,useCallback} from "react";
+
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
 
 
@@ -13,129 +14,126 @@ import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
 import Captcha from "./captcha";
 import { t } from 'ttag';
 const Signup = () => {
-    const [data, setData] = useState({
-        username: "",
-        email: "",
-        password1: "",
-        password2: "",
-    });
-    const [isCheck,setIsCheck]=useState(false);
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password1: "",
+    password2: "",
+  });
 
-    const navigate = useNavigate();
-    
-    const handleChangeItem = useCallback((childData) => {
-      setIsCheck(childData);
-    }, []);
 
-    const handleChange = ({currentTarget: input}) => {
-        setData({...data, [input.name]: input.value});
-    };
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        
-        if(data.password !==data.confirmPassword){
-          alert("Your confirmed password does not match!");
-        }
-        else{
-          if(isCheck===false){
-            alert("Check Captcha please!")
-          }
-          else{
-               try {
-                    //const url = "http://localhost:8080/api/users";
-                    //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
-                    const {data: res} = await axios.post("http://localhost:8080/api/register", data, {
-                        headers: {"Content-Type": "application/json"}
-                    });
-                    console.log(res.data);
-                    navigate("/login"); //after registering navigate to login page
-                    console.log(res.message);
-                } catch (error) {
-                    alert(error.response.data.msg);
-                } 
-          }
-        }
-    };
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
 
-    return (
-        <div className="signup_container">
-            <nav className="navbar">
-                <img src={logo} className="logo-tokemon" alt=""/>
-            </nav>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-            <img src={pikachu_pokeball} className="pikachu-pokeball" alt=""/>
+    try {
+      //const url = "http://localhost:8080/api/users";
+      //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
+      const { data: res } = await axios.post("http://localhost:8080/api/register", data, {
+        headers: { "Content-Type": "application/json" }
+      });
+      console.log(res.data);
+      navigate("/login"); //after registering navigate to login page
+      console.log(res.message);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
 
-            <div className="signup_form_container bubble-speech">
-                {/*Left side: Sign in*/}
-                <div className="left">
-                    <div>{t`Log In`}</div>
-                    <Link to="/login">
-                        <button type="button" className="green_btn">
-                            { t `Log In` }
-                        </button>
-                    </Link>
-                </div>
+  return (
+    <div className="signup_container">
+      <div className='navbar-container'>
+        <nav className="navbar">
+          <img src={ logo } className="logo-tokemon" alt=""/>
+        </nav>
+      </div>
 
-                {/*Right side: Sign up*/}
-                <div className="right">
-                    <form className="form_container" onSubmit={handleSubmit}>
-                        <h1>{t `Sign Up`}</h1>
-                        <input
-                            type="text"
-                            placeholder={t `Username`}
-                            name="username"
-                            onChange={handleChange}
-                            value={data.username}
-                            required
-                            className="input"
-                        />
-                        <input
-                            type="email"
-                            placeholder={t `Email`}
-                            name="email"
-                            onChange={handleChange}
-                            value={data.email}
-                            required
-                            className="input"
-                        />
+      <img src={ pikachu_pokeball } className="pikachu-pokeball" alt=""/>
 
-                        <input
-                            type="password"
-                            placeholder={t `Password`}
-                            name="password1"
-                            onChange={handleChange}
-                            value={data.password1}
-                            required
-                            className="input"
-                        />
+      <div className="signup_form_container bubble-speech">
+        {/*Left side: Sign in*/ }
+        <div className="left">
+          <div>Already had account?</div>
+          <Link to="/login">
+            <button type="button" className="green_btn">
+              Sign in
+            </button>
+          </Link>
 
-                        <input
-                            type="password"
-                            placeholder={t `Confirm Password`}
-                            name="password2"
-                            onChange={handleChange}
-                            value={data.password2}
-                            required
-                            className="input"
-                        />
-
-                        <div className="captcha"></div>
-                        <Captcha parentCallback={handleChangeItem}/>
-
-                        <button type="submit" className="yellow_btn">
-                            {t`Sign Up`}
-                        </button>
-                    </form>
-                </div>
-
-                <img src={britain} className="english-icon-new" alt=""/>
-
-                <img src={support} className="support-icon-new" alt=""/>
-            </div>
         </div>
-    );
+
+        {/*Right side: Sign up*/ }
+        <div className="right">
+          <form className="form_container" onSubmit={ handleSubmit }>
+            <h1>Create Account</h1>
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={ handleChange }
+              value={ data.username }
+              required
+              className="input"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={ handleChange }
+              value={ data.email }
+              required
+              className="input"
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              name="password1"
+              onChange={ handleChange }
+              value={ data.password1 }
+              required
+              className="input"
+            />
+
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              name="password2"
+              onChange={ handleChange }
+              value={ data.password2 }
+              required
+              className="input"
+            />
+
+            <div className="captcha">Captcha</div>
+            <input
+              type="text"
+              name="captcha"
+              onChange={ handleChange }
+              value={ data.captcha }
+              required
+              className="input-captcha"
+            />
+
+            <div className="captcha-data">HTML</div>
+
+            <button type="submit" className="yellow_btn">
+              Further
+            </button>
+          </form>
+        </div>
+
+        <img src={ britain } className="english-icon-new" alt=""/>
+
+        <img src={ support } className="support-icon-new" alt=""/>
+      </div>
+    </div>
+  );
 };
 
 export default Signup;

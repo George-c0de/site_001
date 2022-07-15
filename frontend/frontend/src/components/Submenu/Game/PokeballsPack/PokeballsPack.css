@@ -1,0 +1,92 @@
+#title-pack-pokeballs {
+    color: white;
+    font-weight: 600;
+    font-size: 32px;
+    flex: none;
+    margin: 0 10px;
+}
+
+.pokeballs-container {
+    border-radius: 0 30px 30px 0;
+    background: #FFF;
+    border: 3px solid #000;
+    padding: 5px 50px 5px 20px;
+    width: 500px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.pokeballs-container::before {
+    content: '';
+    position: absolute;
+    display: block;
+    left: 0;
+    height: 44px;
+    width: 60%;
+    background-color: #C0E4EA;
+    border-radius: 0 30px 30px 0;
+}
+
+.pokeballs-container.open {
+    align-items: flex-start;
+    height: 550px;
+    padding-top: 0;
+}
+
+#pokeballs-detail {
+    display: flex;
+    align-items: center;
+}
+
+.small-pokeball {
+    position: relative;
+    height: 100%;
+    width: 40px;
+}
+
+.text-pokeball-1 {
+    position: relative;
+    color: brown;
+    font-size: 30px;
+}
+
+.text-pokeball-2 {
+    position: relative;
+    color: silver;
+    font-size: 30px;
+}
+
+.text-pokeball-3 {
+    position: relative;
+    color: gold;
+    font-size: 30px;;
+}
+
+.text-pokeball-4 {
+    position: relative;
+    color: green;
+    font-size: 30px;
+}
+
+/*Icon ShowDown*/
+.icon-showdown-container {
+    color: black;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    right: 15px;
+    top: 12px;
+    cursor: pointer;
+}
+
+.icon-showdown-container .icon-showdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

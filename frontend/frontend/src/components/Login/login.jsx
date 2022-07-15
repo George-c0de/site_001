@@ -8,6 +8,9 @@ import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
 import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
+
+import { Lang } from '../MainPage/Lang/Lang';
+
 import {t} from "ttag";
 
 const Signup = () => {
@@ -37,11 +40,23 @@ const Signup = () => {
         }
     };
 
-    return (
-        <div className="login_container">
-            <nav className="navbar">
-                <img src={logo} className="logo-tokemon" alt=""/>
-            </nav>
+    try {
+      let data2 = await axios.post('http://localhost:8000/api/login', data
+      );
+      console.log(data2)
+      navigate("/home"); //after registering navigate to login page
+    } catch (error) {
+      //console.log(error.response.data.msg);
+      alert("Wrong email or password!");
+    }
+  };
+  return (
+    <div className="login_container">
+      <div className='navbar-container'>
+        <nav className="navbar">
+          <img src={ logo } className="logo-tokemon" alt=""/>
+        </nav>
+      </div>
 
             <img src={pikachu_pokeball} className="pikachu-pokeball" alt=""/>
 
@@ -85,10 +100,9 @@ const Signup = () => {
                 </div>
             </div>
 
-            <img src={britain} className="english-icon" alt=""/>
-            <img src={support} className="support-icon" alt=""/>
-        </div>
-    );
+      <Lang />
+    </div>
+  );
 };
 
 export default Signup;

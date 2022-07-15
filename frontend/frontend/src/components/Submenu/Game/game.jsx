@@ -1,18 +1,15 @@
 //React, React Router, React Hooks
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
-//Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 // Pages
 import { Lang } from '../../MainPage/Lang/Lang';
 import { Menu } from '../../MainPage/Menu/Menu';
 import { UserId } from '../../UserId/UserId';
+import { PokeballsPack } from './PokeballsPack/PokeballsPack';
+import { GameHistory } from './GameHistory/GameHistory';
 
 //Images
-import pokeball from "../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg";
 import axios from "axios";
 import {t} from "ttag";
 
@@ -27,10 +24,10 @@ const Game = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
+
   useEffect(() => {
     getUsername()
   }, [])
-
 
   let getUsername = async () => {
     const username = await axios.get('api/user')
@@ -66,104 +63,15 @@ const Game = () => {
             <div className="text-game">{t`JOIN THE FIGHT AND WIN`}</div>
 
             <div className="container-pack-pokeballs">
-              <div className="col-sm" id="title-pack-pokeballs">
-                <span>{t`Cards`}</span>
-                <div className="pokeballs-container">
-                  <div id="pokeballs-detail">
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                  </div>
-                  <div className="text-pokeball-1">{t`BRONZE`}</div>
-                  <FontAwesomeIcon
-                    icon={ faChevronDown }
-                    className="icon-showdown"
-                  />
-                </div>
-              </div>
-              <div className="col-sm" id="title-pack-pokeballs">
-                <span>Cards</span>
-                <div className="pokeballs-container">
-                  <div id="pokeballs-detail">
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                  </div>
-                  <div className="text-pokeball-2">{t`SILVER`}</div>
-                  <FontAwesomeIcon
-                    icon={ faChevronDown }
-                    className="icon-showdown"
-                  />
-                </div>
-              </div>
-              <div className="col-sm" id="title-pack-pokeballs">
-                <span>Cards</span>
-                <div className="pokeballs-container">
-                  <div id="pokeballs-detail">
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                  </div>
-                  <div className="text-pokeball-3">{t`GOLD`}</div>
-                  <FontAwesomeIcon
-                    icon={ faChevronDown }
-                    className="icon-showdown"
-                  />
-                </div>
-              </div>
-              <div className="col-sm" id="title-pack-pokeballs">
-                <span>Cards</span>
-                <div className="pokeballs-container">
-                  <div id="pokeballs-detail">
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                    <img src={ pokeball } className="small-pokeball" alt=""/>
-                  </div>
-                  <div className="text-pokeball-4">{t`EMERALD`}</div>
-                  <FontAwesomeIcon
-                    icon={ faChevronDown }
-                    className="icon-showdown"
-                  />
-                </div>
-              </div>
+
+              <PokeballsPack title={ 'BRONZE' }/>
+              <PokeballsPack title={ 'SILVER' }/>
+              <PokeballsPack title={ 'GOLD' }/>
+              <PokeballsPack title={ 'EMERALD' }/>
             </div>
 
-            <div className="game-history">
-              <span>{t`GAME HISTORY`}</span>
-              <div className='history-table'>
-                <div className='history-table-row'>
-                  <span className="history-table-icon">()</span>
-                  <span className="history-table-time">22-00-B 12.06.2022</span>
-                  <span className="history-table-id">ID 525</span>
-                  <span className="history-table-score green">+ 7865</span>
-                </div>
-                <div className='history-table-row'>
-                  <span className="history-table-icon">()</span>
-                  <span className="history-table-time">22-00-B 12.06.2022</span>
-                  <span className="history-table-id">ID 525</span>
-                  <span className="history-table-score red">- 5674</span>
-                </div>
-                <div className='history-table-row'>
-                  <span className="history-table-icon">()</span>
-                  <span className="history-table-time">22-00-B 12.06.2022</span>
-                  <span className="history-table-id">ID 525</span>
-                  <span className="history-table-score green">+ 7865</span>
-                </div>
-              </div>
-              <span className='game-history-more'>{t`SHOW MORE`}</span>
-            </div>
+            <GameHistory />
+
           </div>
 
           <Lang isActive={ onActive }/>

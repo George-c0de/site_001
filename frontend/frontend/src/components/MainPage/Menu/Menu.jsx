@@ -18,6 +18,7 @@ export const Menu = ({ isActive, showMenu, showNewMenu, handleLogout }) => (
       alt=""
     />
 
+
     <img
       src={ human }
       className={ isActive ? "icon-user" : "icon-user_active" }
