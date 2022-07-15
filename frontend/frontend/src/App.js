@@ -7,6 +7,7 @@ import StartGame from './components/StartGame/startgame';
 import Statistics from './components/Submenu/Statistics/statistics.jsx';
 import Referals from './components/Submenu/Referals/referals';
 import Game from './components/Submenu/Game/game';
+import Pay from './components/Pay/Pay';
 
 function App() {
   //const user=localStorage.getItem("token");
@@ -16,6 +17,7 @@ function App() {
       <Route path="/home/game" exact element={<Game/>} />
       <Route path="/home/statistics" exact element={<Statistics/>}/>
       <Route path="/home/referals" exact element={<Referals/>}/>
+      <Route path="/home/pay" exact element={<Pay />}/>
       <Route path="/signup" exact element={<Signup/>} />
       <Route path="/login" exact element={<Login/>} />
       <Route path="/update/:id" exact element={<UpdateUser/>}/>
