@@ -113,16 +113,7 @@ const Signup = () => {
             <div className="captcha">Captcha</div>
 
             <div className="captcha-wrapper">
-              <input
-                type="text"
-                name="captcha"
-                onChange={ handleChange }
-                value={ data.captcha }
-                required
-                className="input"
-              />
-
-              <span className="captcha-data">HTML</span>
+              <Captcha />
             </div>
 
             <button type="submit" className="yellow_btn">
