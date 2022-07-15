@@ -7,6 +7,7 @@ import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
 import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
+import { Lang } from '../MainPage/Lang/Lang';
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -35,9 +36,11 @@ const Signup = () => {
   };
   return (
     <div className="login_container">
-      <nav className="navbar">
-        <img src={ logo } className="logo-tokemon" alt=""/>
-      </nav>
+      <div className='navbar-container'>
+        <nav className="navbar">
+          <img src={ logo } className="logo-tokemon" alt=""/>
+        </nav>
+      </div>
 
       <img src={ pikachu_pokeball } className="pikachu-pokeball" alt=""/>
 
@@ -81,8 +84,7 @@ const Signup = () => {
         </div>
       </div>
 
-      <img src={ britain } className="english-icon" alt=""/>
-      <img src={ support } className="support-icon" alt=""/>
+      <Lang />
     </div>
   );
 };

@@ -11,17 +11,10 @@
 }
 
 /*Navbar*/
-.login_container .navbar {
-    width: unset;
-    margin-left: -50px;
-    margin-right: -50px;
-}
 
-.navbar {
-    height: 110px;
-    background: linear-gradient(87.52deg, #2570B5 21.14%, #67DEEE 91.14%);
-    position: absolute;
-    border-radius: 0 0 25px 25px;
+.navbar-container {
+    height: 120px;
+    width: 100%;
 }
 
 .logo-tokemon {
@@ -188,22 +181,4 @@
 .login_container .yellow_btn:hover {
     background-color: #3bb19b;
     color: #FFF;
-}
-
-/*Icon at the right bottom of screen*/
-
-.english-icon {
-    position: absolute;
-    right: 50px;
-    bottom: 200px;
-    width: 55px;
-    height: 70px;
-}
-
-.support-icon {
-    position: absolute;
-    right: 27px;
-    bottom: 120px;
-    width: 100px;
-    height: 75px;
 }

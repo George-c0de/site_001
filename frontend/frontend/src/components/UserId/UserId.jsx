@@ -10,7 +10,7 @@ export const UserId = ({ note }) => (
         <li>Cards profit: { note?.money }</li>
         <li>Referal profit: { note?.line_1 + note?.line_2 + note?.line_3 }</li>
         <li>Link for invitation { note?.referral_link }</li>
-        <div className="link-invitation"></div>
+        <div className="link-invitation">{ note?.referral_link }</div>
         <div className='user-info-buttons'>
           <button className="yellow-btn">Deposit</button>
           <button className="yellow-btn">Withdraw</button>
