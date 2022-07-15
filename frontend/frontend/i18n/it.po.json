@@ -1,0 +1,290 @@
+{
+  "charset": "utf-8",
+  "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
+    "language": "it",
+    "mime-version": "1.0",
+    "content-transfer-encoding": "8bit"
+  },
+  "translations": {
+    "": {
+      "": {
+        "msgid": "",
+        "msgstr": [
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+        ]
+      },
+      "User Id": {
+        "msgid": "User Id",
+        "msgstr": [
+          "User Id"
+        ]
+      },
+      "Balance": {
+        "msgid": "Balance",
+        "msgstr": [
+          "Saldo"
+        ]
+      },
+      "Cards profit": {
+        "msgid": "Cards profit",
+        "msgstr": [
+          "Carte Profitto"
+        ]
+      },
+      "Referal profit": {
+        "msgid": "Referal profit",
+        "msgstr": [
+          "Referral profitto"
+        ]
+      },
+      "Link for invitation": {
+        "msgid": "Link for invitation",
+        "msgstr": [
+          "Link per invito"
+        ]
+      },
+      "Deposit": {
+        "msgid": "Deposit",
+        "msgstr": [
+          "Ricarica"
+        ]
+      },
+      "Withdraw": {
+        "msgid": "Withdraw",
+        "msgstr": [
+          "Prelievo"
+        ]
+      },
+      "TOTAL USERS": {
+        "msgid": "TOTAL USERS",
+        "msgstr": [
+          "UTENTI TOTALI"
+        ]
+      },
+      "TOTALE TRANSAZIONI": {
+        "msgid": "TOTALE TRANSAZIONI",
+        "msgstr": [
+          ""
+        ]
+      },
+      "TOTAL PAYOUT": {
+        "msgid": "TOTAL PAYOUT",
+        "msgstr": [
+          "PAGAMENTO TOTALE"
+        ]
+      },
+      "Referral link": {
+        "msgid": "Referral link",
+        "msgstr": [
+          "Link per invito"
+        ]
+      },
+      "1 line": {
+        "msgid": "1 line",
+        "msgstr": [
+          "1 linea"
+        ]
+      },
+      "Total person": {
+        "msgid": "Total person",
+        "msgstr": [
+          "Persona totale"
+        ]
+      },
+      "2 line": {
+        "msgid": "2 line",
+        "msgstr": [
+          "2 linea"
+        ]
+      },
+      "Profit received": {
+        "msgid": "Profit received",
+        "msgstr": [
+          "Reddito ricevuto"
+        ]
+      },
+      "3 line": {
+        "msgid": "3 line",
+        "msgstr": [
+          "3 linea"
+        ]
+      },
+      "Lost profits": {
+        "msgid": "Lost profits",
+        "msgstr": [
+          "Guadagno perso"
+        ]
+      },
+      "JOIN THE FIGHT AND WIN": {
+        "msgid": "JOIN THE FIGHT AND WIN",
+        "msgstr": [
+          "UNISCITI ALLA LOTTA E VINCI"
+        ]
+      },
+      "Cards": {
+        "msgid": "Cards",
+        "msgstr": [
+          "CARTE"
+        ]
+      },
+      "BRONZE": {
+        "msgid": "BRONZE",
+        "msgstr": [
+          "BRONZO"
+        ]
+      },
+      "SILVER": {
+        "msgid": "SILVER",
+        "msgstr": [
+          "D'ARGENTO"
+        ]
+      },
+      "GOLD": {
+        "msgid": "GOLD",
+        "msgstr": [
+          "ORO"
+        ]
+      },
+      "EMERALD": {
+        "msgid": "EMERALD",
+        "msgstr": [
+          "SMERALDO"
+        ]
+      },
+      "GAME HISTORY": {
+        "msgid": "GAME HISTORY",
+        "msgstr": [
+          "STORIA DEL GIOCO"
+        ]
+      },
+      "SHOW MORE": {
+        "msgid": "SHOW MORE",
+        "msgstr": [
+          "mostra di pi├╣"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "inizio"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Login"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Registrati"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          ""
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "e-mail"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "Password"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Conferma la password"
+        ]
+      },
+      "MAIN": {
+        "msgid": "MAIN",
+        "msgstr": [
+          "Pagina principale"
+        ]
+      },
+      "REFFERALS": {
+        "msgid": "REFFERALS",
+        "msgstr": [
+          "Rinvii"
+        ]
+      },
+      "STATISTICS": {
+        "msgid": "STATISTICS",
+        "msgstr": [
+          "Statistiche"
+        ]
+      },
+      "RULES": {
+        "msgid": "RULES",
+        "msgstr": [
+          "Regole"
+        ]
+      },
+      "USE TELEGRAM BOT": {
+        "msgid": "USE TELEGRAM BOT",
+        "msgstr": [
+          "Usa il bot di telegramma"
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "Disconnettersi"
+        ]
+      },
+      "Switch lang": {
+        "msgid": "Switch lang",
+        "msgstr": [
+          ""
+        ]
+      },
+      "New Here": {
+        "msgid": "New Here",
+        "msgstr": [
+          ""
+        ]
+      },
+      "Withdrawal": {
+        "msgid": "Withdrawal",
+        "msgstr": [
+          "Prelievo"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "Disponibile per il pagamento"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "Importo del pagamento"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "PAGAMENTO"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "CRONOLOGIA DELLE TRANSAZIONI"
+        ]
+      }
+    }
+  }
+}

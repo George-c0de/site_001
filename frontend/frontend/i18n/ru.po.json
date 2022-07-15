@@ -1,0 +1,284 @@
+{
+  "charset": "utf-8",
+  "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
+    "language": "ru",
+    "mime-version": "1.0",
+    "content-transfer-encoding": "8bit"
+  },
+  "translations": {
+    "": {
+      "": {
+        "msgid": "",
+        "msgstr": [
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "Старт"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Войти"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Зарегистрироваться"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Имя пользователя"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "Почта"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "Пароль"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Подтвердите пароль"
+        ]
+      },
+      "User Id": {
+        "msgid": "User Id",
+        "msgstr": [
+          "User Id"
+        ]
+      },
+      "Balance": {
+        "msgid": "Balance",
+        "msgstr": [
+          "Баланс"
+        ]
+      },
+      "Cards profit": {
+        "msgid": "Cards profit",
+        "msgstr": [
+          "Доход с карт"
+        ]
+      },
+      "Referal profit": {
+        "msgid": "Referal profit",
+        "msgstr": [
+          "Доход с рефералов "
+        ]
+      },
+      "Link for invitation": {
+        "msgid": "Link for invitation",
+        "msgstr": [
+          "Ссылка приглашения"
+        ]
+      },
+      "Deposit": {
+        "msgid": "Deposit",
+        "msgstr": [
+          "Пополнить"
+        ]
+      },
+      "Withdraw": {
+        "msgid": "Withdraw",
+        "msgstr": [
+          "Вывести╕"
+        ]
+      },
+      "TOTAL USERS": {
+        "msgid": "TOTAL USERS",
+        "msgstr": [
+          "КОЛИЧЕСТВО УЧАСТНИКОВ"
+        ]
+      },
+      "TOTAL  TRANSACTIONS": {
+        "msgid": "TOTAL  TRANSACTIONS",
+        "msgstr": [
+          "КОЛИЧЕСТВО ТРАНЗАКЦИЙ"
+        ]
+      },
+      "TOTAL PAYOUT": {
+        "msgid": "TOTAL PAYOUT",
+        "msgstr": [
+          "СУММА ВЫПЛАТ"
+        ]
+      },
+      "Referral link": {
+        "msgid": "Referral link",
+        "msgstr": [
+          "Ссылка для приглашения"
+        ]
+      },
+      "1 line": {
+        "msgid": "1 line",
+        "msgstr": [
+          "1 линия"
+        ]
+      },
+      "Total person": {
+        "msgid": "Total person",
+        "msgstr": [
+          "Количество рефералов"
+        ]
+      },
+      "2 line": {
+        "msgid": "2 line",
+        "msgstr": [
+          "2 линия"
+        ]
+      },
+      "Profit received": {
+        "msgid": "Profit received",
+        "msgstr": [
+          "Полученная прибыль"
+        ]
+      },
+      "3 line": {
+        "msgid": "3 line",
+        "msgstr": [
+          "3 линия"
+        ]
+      },
+      "Lost profits": {
+        "msgid": "Lost profits",
+        "msgstr": [
+          "Упущенная прибыль"
+        ]
+      },
+      "JOIN THE FIGHT AND WIN": {
+        "msgid": "JOIN THE FIGHT AND WIN",
+        "msgstr": [
+          "УЧАСТВУЙ В БИТВАХ И ВЫИГРЫВАЙ"
+        ]
+      },
+      "Cards": {
+        "msgid": "Cards",
+        "msgstr": [
+          "КАРТЫ"
+        ]
+      },
+      "BRONZE": {
+        "msgid": "BRONZE",
+        "msgstr": [
+          "БРОНЗА"
+        ]
+      },
+      "SILVER": {
+        "msgid": "SILVER",
+        "msgstr": [
+          "СЕРЕБРО"
+        ]
+      },
+      "GOLD": {
+        "msgid": "GOLD",
+        "msgstr": [
+          "ЗОЛОТО"
+        ]
+      },
+      "EMERALD": {
+        "msgid": "EMERALD",
+        "msgstr": [
+          "ИЗУМРУД"
+        ]
+      },
+      "GAME HISTORY": {
+        "msgid": "GAME HISTORY",
+        "msgstr": [
+          "ИСТОРИЯ ИГРЫ"
+        ]
+      },
+      "SHOW MORE": {
+        "msgid": "SHOW MORE",
+        "msgstr": [
+          "показать еще"
+        ]
+      },
+      "MAIN": {
+        "msgid": "MAIN",
+        "msgstr": [
+          "Главная страница"
+        ]
+      },
+      "REFFERALS": {
+        "msgid": "REFFERALS",
+        "msgstr": [
+          "Рефералы"
+        ]
+      },
+      "STATISTICS": {
+        "msgid": "STATISTICS",
+        "msgstr": [
+          "Статистика"
+        ]
+      },
+      "RULES": {
+        "msgid": "RULES",
+        "msgstr": [
+          "Правила"
+        ]
+      },
+      "USE TELEGRAM BOT": {
+        "msgid": "USE TELEGRAM BOT",
+        "msgstr": [
+          "Подключить ТГ БОТ"
+        ]
+      },
+      "Switch lang": {
+        "msgid": "Switch lang",
+        "msgstr": [
+          "Смена языка"
+        ]
+      },
+      "New Here": {
+        "msgid": "New Here",
+        "msgstr": [
+          "Уже есть"
+        ]
+      },
+      "Withdrawal": {
+        "msgid": "Withdrawal",
+        "msgstr": [
+          "Вывод средств"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "Доступно для вывода"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "Сумма вывода"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "ВЫВЕСТИ"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "ИСТОРИЯ ТРАНЗАКЦИЙ"
+        ]
+      }
+    }
+  }
+}

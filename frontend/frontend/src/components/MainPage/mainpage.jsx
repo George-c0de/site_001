@@ -8,7 +8,7 @@ import { Menu } from './Menu/Menu';
 import { Lang } from './Lang/Lang';
 import { UserId } from '../UserId/UserId';
 
-
+import { t } from 'ttag';
 //Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +28,7 @@ const Mainpage = () => {
     }, [])
 
     const getNote = async () => {
-      const response = await fetch(`http://localhost:8000/api/user`)
+      const response = await fetch(`http://127.0.0.1:8000/api/user`)
       const data = await response.json()
       setNote(data)
     }
@@ -36,6 +36,7 @@ const Mainpage = () => {
 
     //Logout
     const handleLogout = () => {
+        let data2 = axios.get('http://127.0.0.1:8000/api/logout');
       localStorage.removeItem("token");
       navigate("/login");
     };
@@ -83,15 +84,15 @@ const Mainpage = () => {
             { openDropDown ? (
               <>
                 <ul className="menu-info">
-                  <li onClick={ showGame }>MAIN</li>
-                  <li onClick={ showReferals }>REFFERALS</li>
-                  <li onClick={ showStatistics }>STATISTICS</li>
-                  <li>RULES</li>
+                  <li onClick={ showGame }>{t`MAIN`}</li>
+                  <li onClick={ showReferals }>{t`REFFERALS`}</li>
+                  <li onClick={ showStatistics }>{t`STATISTICS`}</li>
+                  <li>{t`RULES`}</li>
                 </ul>
                 <div className="menu-info-icons">
                   <div className='info-icons-container'>
                     <FontAwesomeIcon icon={ faPaperPlane } className="paper-plane"/>
-                    <span className="telegram-user">USE TELEGRAM BOT</span>
+                    <span className="telegram-user">{t`USE TELEGRAM BOT`}</span>
                   </div>
                 </div>
               </>

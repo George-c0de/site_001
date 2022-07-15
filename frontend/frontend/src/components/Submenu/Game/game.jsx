@@ -11,6 +11,7 @@ import { GameHistory } from './GameHistory/GameHistory';
 
 //Images
 import axios from "axios";
+import {t} from "ttag";
 
 const Game = () => {
   const [openNewDropDown, setNewOpenDropDown] = useState(false);
@@ -59,9 +60,10 @@ const Game = () => {
 
         <div className={ onActive ? "site-main-game" : "site-main_active" }>
           <div className='site-main-game-wrapper'>
-            <div className="text-game">УЧАСТВУЙ В БИТВАХ И ПОЛУЧАЙ ПРИЗЫ</div>
+            <div className="text-game">{t`JOIN THE FIGHT AND WIN`}</div>
 
             <div className="container-pack-pokeballs">
+
               <PokeballsPack title={ 'BRONZE' }/>
               <PokeballsPack title={ 'SILVER' }/>
               <PokeballsPack title={ 'GOLD' }/>
@@ -69,6 +71,7 @@ const Game = () => {
             </div>
 
             <GameHistory />
+
           </div>
 
           <Lang isActive={ onActive }/>

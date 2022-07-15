@@ -1,0 +1,290 @@
+{
+  "charset": "utf-8",
+  "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
+    "language": "uk",
+    "mime-version": "1.0",
+    "content-transfer-encoding": "8bit"
+  },
+  "translations": {
+    "": {
+      "": {
+        "msgid": "",
+        "msgstr": [
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: uk\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+        ]
+      },
+      "User Id": {
+        "msgid": "User Id",
+        "msgstr": [
+          "User Id"
+        ]
+      },
+      "Balance": {
+        "msgid": "Balance",
+        "msgstr": [
+          "Saldo"
+        ]
+      },
+      "Cards profit": {
+        "msgid": "Cards profit",
+        "msgstr": [
+          "Beneficio de Tarjetas"
+        ]
+      },
+      "Referal profit": {
+        "msgid": "Referal profit",
+        "msgstr": [
+          "Beneficio de Referencias"
+        ]
+      },
+      "Link for invitation": {
+        "msgid": "Link for invitation",
+        "msgstr": [
+          "Enlace para invitación"
+        ]
+      },
+      "Deposit": {
+        "msgid": "Deposit",
+        "msgstr": [
+          "Recarga"
+        ]
+      },
+      "Withdraw": {
+        "msgid": "Withdraw",
+        "msgstr": [
+          "Retiro"
+        ]
+      },
+      "TOTAL USERS": {
+        "msgid": "TOTAL USERS",
+        "msgstr": [
+          "USUARIOS TOTALES"
+        ]
+      },
+      "TOTAL  TRANSACTIONS": {
+        "msgid": "TOTAL  TRANSACTIONS",
+        "msgstr": [
+          "TRANSACCIONES TOTALES"
+        ]
+      },
+      "TOTAL PAYOUT": {
+        "msgid": "TOTAL PAYOUT",
+        "msgstr": [
+          "PAGO TOTAL"
+        ]
+      },
+      "Referral link": {
+        "msgid": "Referral link",
+        "msgstr": [
+          "Enlace para invitación"
+        ]
+      },
+      "1 line": {
+        "msgid": "1 line",
+        "msgstr": [
+          "1 línea"
+        ]
+      },
+      "Total person": {
+        "msgid": "Total person",
+        "msgstr": [
+          "Persona total"
+        ]
+      },
+      "2 line": {
+        "msgid": "2 line",
+        "msgstr": [
+          "2 línea"
+        ]
+      },
+      "Profit received": {
+        "msgid": "Profit received",
+        "msgstr": [
+          "Beneficiorecibido"
+        ]
+      },
+      "3 line": {
+        "msgid": "3 line",
+        "msgstr": [
+          "3 línea"
+        ]
+      },
+      "Lost profits": {
+        "msgid": "Lost profits",
+        "msgstr": [
+          "Lucro cesante"
+        ]
+      },
+      "JOIN THE FIGHT AND WIN": {
+        "msgid": "JOIN THE FIGHT AND WIN",
+        "msgstr": [
+          "Participa en batallas y gana"
+        ]
+      },
+      "Cards": {
+        "msgid": "Cards",
+        "msgstr": [
+          "CARDS"
+        ]
+      },
+      "BRONZE": {
+        "msgid": "BRONZE",
+        "msgstr": [
+          "BRONZE"
+        ]
+      },
+      "SILVER": {
+        "msgid": "SILVER",
+        "msgstr": [
+          "SILVER"
+        ]
+      },
+      "GOLD": {
+        "msgid": "GOLD",
+        "msgstr": [
+          "GOLD"
+        ]
+      },
+      "EMERALD": {
+        "msgid": "EMERALD",
+        "msgstr": [
+          "EMERALD"
+        ]
+      },
+      "GAME HISTORY": {
+        "msgid": "GAME HISTORY",
+        "msgstr": [
+          "GAME HISTORY"
+        ]
+      },
+      "SHOW MORE": {
+        "msgid": "SHOW MORE",
+        "msgstr": [
+          "show more"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "jugar"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Iniciar session"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Inscriber"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Nome de usuário"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "Email"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "Contraseña"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Confirmarcontraseña"
+        ]
+      },
+      "MAIN": {
+        "msgid": "MAIN",
+        "msgstr": [
+          "Pagina principal"
+        ]
+      },
+      "REFFERALS": {
+        "msgid": "REFFERALS",
+        "msgstr": [
+          "Referencias"
+        ]
+      },
+      "STATISTICS": {
+        "msgid": "STATISTICS",
+        "msgstr": [
+          "Estadísticas"
+        ]
+      },
+      "RULES": {
+        "msgid": "RULES",
+        "msgstr": [
+          "Reglas"
+        ]
+      },
+      "USE TELEGRAM BOT": {
+        "msgid": "USE TELEGRAM BOT",
+        "msgstr": [
+          "Usarbot de telegram"
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "Cerrar sesión"
+        ]
+      },
+      "Switch lang": {
+        "msgid": "Switch lang",
+        "msgstr": [
+          ""
+        ]
+      },
+      "New Here": {
+        "msgid": "New Here",
+        "msgstr": [
+          ""
+        ]
+      },
+      "Withdrawal": {
+        "msgid": "Withdrawal",
+        "msgstr": [
+          "Retiro"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "Disponible para pago"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "Cantidad a pagar"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "PAGAR"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "HISTORIAL DE TRANSACCIONES"
+        ]
+      }
+    }
+  }
+}

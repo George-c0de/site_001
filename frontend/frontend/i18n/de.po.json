@@ -1,0 +1,284 @@
+{
+  "charset": "utf-8",
+  "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
+    "language": "uk",
+    "mime-version": "1.0",
+    "content-transfer-encoding": "8bit"
+  },
+  "translations": {
+    "": {
+      "": {
+        "msgid": "",
+        "msgstr": [
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: uk\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+        ]
+      },
+      "User Id": {
+        "msgid": "User Id",
+        "msgstr": [
+          "User Id"
+        ]
+      },
+      "Balance": {
+        "msgid": "Balance",
+        "msgstr": [
+          "Balance"
+        ]
+      },
+      "Cards profit": {
+        "msgid": "Cards profit",
+        "msgstr": [
+          "Karteneinnahmen"
+        ]
+      },
+      "Referal profit": {
+        "msgid": "Referal profit",
+        "msgstr": [
+          "Empfehlungenprofitieren"
+        ]
+      },
+      "Link for invitation": {
+        "msgid": "Link for invitation",
+        "msgstr": [
+          "Link zur Einladung"
+        ]
+      },
+      "Deposit": {
+        "msgid": "Deposit",
+        "msgstr": [
+          "Nachfüllen"
+        ]
+      },
+      "Withdraw": {
+        "msgid": "Withdraw",
+        "msgstr": [
+          "Abhebung"
+        ]
+      },
+      "TOTAL USERS": {
+        "msgid": "TOTAL USERS",
+        "msgstr": [
+          "Anzahl der Teilnehmer"
+        ]
+      },
+      "TOTAL TRANSACTIONS": {
+        "msgid": "TOTAL  TRANSACTIONS",
+        "msgstr": [
+          "TRANSAKTIONEN GESAMT"
+        ]
+      },
+      "TOTAL PAYOUT": {
+        "msgid": "TOTAL PAYOUT",
+        "msgstr": [
+          "GESAMTAUSZAHLUNG"
+        ]
+      },
+      "Referral link": {
+        "msgid": "Referral link",
+        "msgstr": [
+          "Link zur Einladung"
+        ]
+      },
+      "1 line": {
+        "msgid": "1 line",
+        "msgstr": [
+          "1 linie"
+        ]
+      },
+      "Total person": {
+        "msgid": "Total person",
+        "msgstr": [
+          "Gesamtmensch"
+        ]
+      },
+      "2 line": {
+        "msgid": "2 line",
+        "msgstr": [
+          "2 linie"
+        ]
+      },
+      "Profit received": {
+        "msgid": "Profit received",
+        "msgstr": [
+          "ErhaltenerGewinn"
+        ]
+      },
+      "3 line": {
+        "msgid": "3 line",
+        "msgstr": [
+          "3 linie"
+        ]
+      },
+      "Lost profits": {
+        "msgid": "Lost profits",
+        "msgstr": [
+          "Entgangener Gewinn"
+        ]
+      },
+      "JOIN THE FIGHT AND WIN": {
+        "msgid": "JOIN THE FIGHT AND WIN",
+        "msgstr": [
+          "SCHLIESSEN SIE SICH DEM KAMPF AN UND GEWINNEN"
+        ]
+      },
+      "Cards": {
+        "msgid": "Cards",
+        "msgstr": [
+          "KARTEN"
+        ]
+      },
+      "BRONZE": {
+        "msgid": "BRONZE",
+        "msgstr": [
+          "BRONZE"
+        ]
+      },
+      "SILVER": {
+        "msgid": "SILVER",
+        "msgstr": [
+          "SILBER"
+        ]
+      },
+      "GOLD": {
+        "msgid": "GOLD",
+        "msgstr": [
+          "GOLD"
+        ]
+      },
+      "EMERALD": {
+        "msgid": "EMERALD",
+        "msgstr": [
+          "SMARAGD"
+        ]
+      },
+      "GAME HISTORY": {
+        "msgid": "GAME HISTORY",
+        "msgstr": [
+          "SPIELGESCHICHTE"
+        ]
+      },
+      "SHOW MORE": {
+        "msgid": "SHOW MORE",
+        "msgstr": [
+          "Zeig mehr"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "start"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Einloggen"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Anmelden"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Nutzername"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "Email"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "Passwort"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Passwortbestätigen"
+        ]
+      },
+      "MAIN": {
+        "msgid": "MAIN",
+        "msgstr": [
+          "Hauptseite"
+        ]
+      },
+      "REFFERALS": {
+        "msgid": "REFFERALS",
+        "msgstr": [
+          "Verweise"
+        ]
+      },
+      "STATISTICS": {
+        "msgid": "STATISTICS",
+        "msgstr": [
+          "Statistiken"
+        ]
+      },
+      "RULES": {
+        "msgid": "RULES",
+        "msgstr": [
+          "Regeln"
+        ]
+      },
+      "USE TELEGRAM BOT": {
+        "msgid": "USE TELEGRAM BOT",
+        "msgstr": [
+          "Telegrambotverwenden"
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "Abmelden"
+        ]
+      },
+      "Switch lang": {
+        "msgid": "Switch lang",
+        "msgstr": [
+          ""
+        ]
+      },
+      "Withdrawal": {
+        "msgid": "Withdrawal",
+        "msgstr": [
+          "Abhebung"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "Zur Auszahlung verfügbar"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "Auszahlungsbetrag"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "AUSZAHLUNG"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "TRANSAKTIONSGESCHICHTE"
+        ]
+      }
+    }
+  }
+}

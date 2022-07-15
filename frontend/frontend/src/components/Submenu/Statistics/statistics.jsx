@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Menu } from '../../MainPage/Menu/Menu';
 import { UserId } from '../../UserId/UserId';
 import { Lang } from '../../MainPage/Lang/Lang';
+import {t} from "ttag";
 
 const Statistics = () => {
   const [openDropDown, setOpenDropDown] = useState(true);
@@ -40,9 +41,9 @@ const Statistics = () => {
 
           { openDropDown ? (
             <ul className="statistic-info">
-              <li>Количество участников: <span>1356614</span></li>
-              <li>Количество транзакций: <span>1356614</span></li>
-              <li>Сумма выплат: <span>1356614</span></li>
+              <li>{t`TOTAL USERS`}: <span>1356614</span></li>
+              <li>{t`TOTAL  TRANSACTIONS`}: <span>1356614</span></li>
+              <li>{t`TOTAL PAYOUT`}: <span>1356614</span></li>
             </ul>
           ) : null }
 

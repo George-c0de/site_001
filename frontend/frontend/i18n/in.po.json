@@ -1,0 +1,290 @@
+{
+  "charset": "utf-8",
+  "headers": {
+    "content-type": "text/plain; charset=utf-8",
+    "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
+    "language": "uk",
+    "mime-version": "1.0",
+    "content-transfer-encoding": "8bit"
+  },
+  "translations": {
+    "": {
+      "": {
+        "msgid": "",
+        "msgstr": [
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: uk\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+        ]
+      },
+      "User Id": {
+        "msgid": "User Id",
+        "msgstr": [
+          "User Id"
+        ]
+      },
+      "Balance": {
+        "msgid": "Balance",
+        "msgstr": [
+          "बैलेंस"
+        ]
+      },
+      "Cards profit": {
+        "msgid": "Cards profit",
+        "msgstr": [
+          "कार्ड लाभ"
+        ]
+      },
+      "Referal profit": {
+        "msgid": "Referal profit",
+        "msgstr": [
+          "रेफरल लाभ"
+        ]
+      },
+      "Link for invitation": {
+        "msgid": "Link for invitation",
+        "msgstr": [
+          "निमंत्रण के लिए लिंक"
+        ]
+      },
+      "Deposit": {
+        "msgid": "Deposit",
+        "msgstr": [
+          "टॉप अप"
+        ]
+      },
+      "Withdraw": {
+        "msgid": "Withdraw",
+        "msgstr": [
+          "निकासी"
+        ]
+      },
+      "TOTAL USERS": {
+        "msgid": "TOTAL USERS",
+        "msgstr": [
+          "कुल उपयोगकर्ता"
+        ]
+      },
+      "TOTAL  TRANSACTIONS": {
+        "msgid": "TOTAL  TRANSACTIONS",
+        "msgstr": [
+          "कुल लेनदेन"
+        ]
+      },
+      "TOTAL PAYOUT": {
+        "msgid": "TOTAL PAYOUT",
+        "msgstr": [
+          "कुल भुगतान"
+        ]
+      },
+      "Referral link": {
+        "msgid": "Referral link",
+        "msgstr": [
+          "निमंत्रण के लिए लिंक"
+        ]
+      },
+      "1 line": {
+        "msgid": "1 line",
+        "msgstr": [
+          "1 पंक्ति"
+        ]
+      },
+      "Total person": {
+        "msgid": "Total person",
+        "msgstr": [
+          "कुल व्यक्ति"
+        ]
+      },
+      "2 line": {
+        "msgid": "2 line",
+        "msgstr": [
+          "2 पंक्ति"
+        ]
+      },
+      "Profit received": {
+        "msgid": "Profit received",
+        "msgstr": [
+          "प्राप्त लाभ"
+        ]
+      },
+      "3 line": {
+        "msgid": "3 line",
+        "msgstr": [
+          "3 पंक्ति"
+        ]
+      },
+      "Lost profits": {
+        "msgid": "Lost profits",
+        "msgstr": [
+          "खोया लाभ"
+        ]
+      },
+      "JOIN THE FIGHT AND WIN": {
+        "msgid": "JOIN THE FIGHT AND WIN",
+        "msgstr": [
+          "लड़ाई में शामिल हों और जीतें"
+        ]
+      },
+      "Cards": {
+        "msgid": "Cards",
+        "msgstr": [
+          "पत्ते"
+        ]
+      },
+      "BRONZE": {
+        "msgid": "BRONZE",
+        "msgstr": [
+          "कांस्य"
+        ]
+      },
+      "SILVER": {
+        "msgid": "SILVER",
+        "msgstr": [
+          "चांदी"
+        ]
+      },
+      "GOLD": {
+        "msgid": "GOLD",
+        "msgstr": [
+          "सोना"
+        ]
+      },
+      "EMERALD": {
+        "msgid": "EMERALD",
+        "msgstr": [
+          "पन्ना"
+        ]
+      },
+      "GAME HISTORY": {
+        "msgid": "GAME HISTORY",
+        "msgstr": [
+          "खेल का इतिहास"
+        ]
+      },
+      "SHOW MORE": {
+        "msgid": "SHOW MORE",
+        "msgstr": [
+          "और दिखाओ"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "प्रारंभ"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "लॉग इन करें"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "साइन अप"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Username"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "ईमेल"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "पासवर्ड"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "पासवर्ड की पुष्टिकीजिये"
+        ]
+      },
+      "MAIN": {
+        "msgid": "MAIN",
+        "msgstr": [
+          "मुख्य पृष्ठ"
+        ]
+      },
+      "REFFERALS": {
+        "msgid": "REFFERALS",
+        "msgstr": [
+          "रेफरल"
+        ]
+      },
+      "STATISTICS": {
+        "msgid": "STATISTICS",
+        "msgstr": [
+          "आंकड़े"
+        ]
+      },
+      "RULES": {
+        "msgid": "RULES",
+        "msgstr": [
+          "नियम"
+        ]
+      },
+      "USE TELEGRAM BOT": {
+        "msgid": "USE TELEGRAM BOT",
+        "msgstr": [
+          "टेलीग्राम बॉट का उपयोग करें "
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "लॉग आउट"
+        ]
+      },
+      "Switch lang": {
+        "msgid": "Switch lang",
+        "msgstr": [
+          ""
+        ]
+      },
+      "New Here": {
+        "msgid": "New Here",
+        "msgstr": [
+          ""
+        ]
+      },
+      "Withdrawal": {
+        "msgid": "Withdrawal",
+        "msgstr": [
+          "निकासी"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "निकासी के लिए उपलब्ध"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "भुगतान राशि"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "भुगतान"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "लेनदेन का इतिहास"
+        ]
+      }
+    }
+  }
+}
