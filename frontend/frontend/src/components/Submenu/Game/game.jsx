@@ -1,5 +1,5 @@
 //React, React Router, React Hooks
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Pages
@@ -14,8 +14,10 @@ import axios from "axios";
 import {t} from "ttag";
 
 const Game = () => {
-  const [openNewDropDown, setNewOpenDropDown] = useState(false);
-  const [onActive, setActive] = useState("false");
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [openUserInfo, setOpenUserInfo] = useState(false);
+  const [onActive, setActive] = useState(true);
+
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
@@ -41,9 +43,14 @@ const Game = () => {
   };
 
   //Show informations of user
-  const showNewMenu = () => {
-    setNewOpenDropDown(!openNewDropDown);
-    setActive(!onActive);
+  const showUserInfo = () => {
+    if (!openDropDown) {
+      setOpenUserInfo(!openUserInfo);
+      setActive(!onActive);
+    } else {
+      setOpenUserInfo(!openUserInfo);
+      setOpenDropDown(!openDropDown);
+    }
   };
 
   return (
@@ -52,9 +59,9 @@ const Game = () => {
       <div className="homepage">
         <div className="main_container">
           <nav className={ onActive ? "navbar" : "navbar_active" }>
-            <Menu isActive={ onActive } showMenu={ backHome } showNewMenu={ showNewMenu }
+            <Menu isActive={ onActive } showMenu={ backHome } showUserInfo={ showUserInfo }
                   handleLogout={ handleLogout }/>
-            { openNewDropDown ? <UserId/> : null }
+            { openUserInfo ? <UserId/> : null }
           </nav>
         </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
+import CardPink from '../../../../assets/game-card-pink.svg';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -55,7 +56,10 @@ export const PokeballsPack = ({ title }) => {
           />
         </div>
 
-        <PokeballsModal status={ status } handleStatusBalls={ handleStatusBalls }/>
+        <PokeballsModal status={ status }
+                        handleStatusBalls={ handleStatusBalls }
+                        imageMain={ CardPink }
+                        cardBackground={ '' }/>
       </div>
     </div>
   )

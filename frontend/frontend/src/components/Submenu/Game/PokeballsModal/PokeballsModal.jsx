@@ -2,13 +2,12 @@ import React from 'react';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
-import CardPink from '../../../../assets/game-card-pink.svg';
 
 import './PokeballsModal.css';
 
-export const PokeballsModal = ({ status, handleStatusBalls }) => (
+export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatusBalls }) => (
   <div className='pokeballs-modal'>
-    <div className='pokeballs-card main'>
+    <div className='pokeballs-card main' style={ { backgroundColor: cardBackground } }>
       <div className='pokeballs-card-status'>
         <div className="card-status-bar" data-status={ status }>
           <span className="card-status-bar-line"></span>
@@ -30,7 +29,7 @@ export const PokeballsModal = ({ status, handleStatusBalls }) => (
         </div>
       </div>
       <div className='pokeballs-card-info'>
-        <img src={ CardPink } alt=''/>
+        <img src={ imageMain } alt=''/>
         <span className="card-info-label">Refelrel Profit: <span>325.23$</span></span>
         <span className="card-info-label">Total Wins: <span>245.85$</span></span>
         <span className="card-info-button">Health</span>
@@ -50,6 +49,14 @@ export const PokeballsModal = ({ status, handleStatusBalls }) => (
         <span>ACRIVATE</span>
         <span>25 USD</span>
       </div>
+      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    </div>
+
+    <div className='pokeballs-card inactive'>
+      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    </div>
+
+    <div className='pokeballs-card inactive'>
       <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
     </div>
 
