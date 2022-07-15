@@ -249,10 +249,34 @@
           ""
         ]
       },
-      "New Here": {
-        "msgid": "New Here",
+      "Withdrawal": {
+        "msgid": "Withdrawal",
         "msgstr": [
-          ""
+          "Abhebung"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "Zur Auszahlung verfügbar"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "Auszahlungsbetrag"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "AUSZAHLUNG"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "TRANSAKTIONSGESCHICHTE"
         ]
       }
     }

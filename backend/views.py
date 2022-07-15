@@ -1,7 +1,7 @@
 import io
 import logging
 import json
-from os import environ
+from os import environ, getenv
 import uuid
 import xlsxwriter
 from captcha.fields import CaptchaField
@@ -22,8 +22,10 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from decimal import *
 
+from tgbot import message_for_bot
 from tgbot.message_for_bot import a
 from tgbot.models import Chat_id, Event, Memcache
+from . import tokemon
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink
@@ -49,22 +51,16 @@ logging.basicConfig(
 )
 
 
-def send_message_tgbot(request):
-    message = {
-        'username': request.user.username,
-
-    }
-    token = "5540149986:AAFOuNxGMHuOQupsn1T2PKpN7GegYL7Xrt4"
-    user = User.objects.get(username=message['username'])
-    if Chat_id.objects.filter(user=user.id).exists():
-        chat_id = Chat_id.objects.get(user=user.id)
-
-        url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + str(829942305) + "&text=" + \
-                  message['text']
-        results = requests.post(url_req, data={'id_user': user.id})
-        print(results.json())
-        Response('OK')
-    Response('Error')
+def send_message_tgbot(message, id):
+    token = getenv('TELEGRAM_TOKEN')
+    if Chat_id.objects.filter(user=id).exists():
+        chat_id = Chat_id.objects.get(user=id).id
+        url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + str(chat_id) + "&text=" + \
+                  message
+        results = requests.get(url_req)
+        print(results)
+        return 1
+    return 0
 
 
 @api_view(['GET'])
@@ -180,29 +176,6 @@ def lan(request):
     render(request, 'backend/len.html')
 
 
-def save_user():
-    a = Profile.objects.get(user__username='User_1')
-    b = Profile.objects.get(user__username='User_2')
-    c = Profile.objects.get(user__username='User_3')
-    d = Profile.objects.get(user__username='User_4')
-    f = Profile.objects.get(user__username='User_5')
-    t = All.objects.all().first()
-    t.money = 100
-    a.money = 100
-    b.money = 100
-    c.money = 100
-    d.money = 100
-    f.money = 100
-    admin_.money = 100
-    admin_.save()
-    t.save()
-    a.save()
-    b.save()
-    c.save()
-    d.save()
-    f.save()
-
-
 def index(request):
     return render(request, 'backend/index.html')
 
@@ -269,9 +242,12 @@ def index_with_utm(request, utm):
 @api_view(['GET'])
 def user_get(request):
     # profile = Profile.objects.get(user=request.user)
-    profile = Profile.objects.all().first()
-    data = ProfileSerializer(profile)
-    return Response(data.data)
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        data = ProfileSerializer(profile)
+        return Response(data.data)
+    else:
+        return Response(status=400)
 
 
 @api_view(['GET', 'POST'])
@@ -367,6 +343,7 @@ def save(*args):
         el.save()
 
 
+# получение уведомления
 def case_3_4_ref(main_user, money_to_card, all_, profile):
     second_line = False
     third_line = False
@@ -418,6 +395,10 @@ def referral_system_bronze(request, id_):
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
+        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        Event.objects.create(message=message, user_id=profile.id)
+        if send_message_tgbot(message, profile.id) == 1:
+            Event.objects.filter(user_id=profile.id).first().delete()
         all_.money += money_to_card
         save(all_, profile, admin_, category_bronze)
         # main_user = Profile.objects.get(referral_link=cookies)
