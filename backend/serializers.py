@@ -21,7 +21,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = '__all__'
 
-
     def create(self, validated_data):
         return Profile.objects.create(**validated_data)
 
@@ -33,3 +32,5 @@ class ProfileSerializer(serializers.ModelSerializer):
             instance.wallet = validated_data.get('wallet', instance.wallet)
         instance.save()
         return instance
+
+

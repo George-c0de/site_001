@@ -1,6 +1,8 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
+
 
 //Images
 import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
@@ -8,6 +10,9 @@ import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в па
 import britain from "../../Ảnh Pokemon Dự Trù/gb-1.svg";
 import support from "../../Ảnh Pokemon Dự Trù/супорт.svg";
 
+//Captcha
+import Captcha from "./captcha";
+import { t } from 'ttag';
 const Signup = () => {
   const [data, setData] = useState({
     username: "",
@@ -59,6 +64,7 @@ const Signup = () => {
               Sign in
             </button>
           </Link>
+
         </div>
 
         {/*Right side: Sign up*/ }
