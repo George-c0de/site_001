@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 // Images
 import britain from '../../../Ảnh Pokemon Dự Trù/gb-1.svg';
@@ -14,36 +14,24 @@ import india from '../../../assets/india.svg';
 import support from '../../../Ảnh Pokemon Dự Trù/супорт.svg';
 
 import './Lang.css';
+import { LangContext } from '../../../context/LangContext';
 
 const languages = {
-  'britain': britain,
-  'russia': russia,
-  'france': france,
-  'germany': germany,
-  'italy': italy,
-  'portugal': portugal,
-  'spain': spain,
-  'brazil': brazil,
-  'argentina': argentina,
-  'india': india
-}
-
-const languagesShort = {
-  'britain': 'en',
-  'russia': 'ru',
-  'france': 'fr',
-  'germany': 'de',
-  'italy': 'it',
-  'portugal': 'pt',
-  'spain': 'es',
-  'brazil': 'br',
-  'argentina': 'ar',
-  'india': 'in'
+  'en': britain,
+  'ru': russia,
+  'fr': france,
+  'de': germany,
+  'it': italy,
+  'pt': portugal,
+  'es': spain,
+  'br': brazil,
+  'ar': argentina,
+  'in': india
 }
 
 export const Lang = ({ isActive }) => {
+  const { lang, updateLang } = useContext(LangContext);
   const [open, setOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('britain');
 
   const handleOpen = () => {
     setOpen(!open);
@@ -52,33 +40,26 @@ export const Lang = ({ isActive }) => {
   const handleOpenList = (e) => {
     const lang = e.target.dataset.lang;
     setOpen(!open);
-    setCurrentLang(lang);
+    updateLang(lang);
   }
-
-  // const setLocate = (locale) => (ev) => {
-  //   ev.preventDefault();
-  //   // saveLocate(locale);
-  //   window.location.reload();
-  // }
 
   return (
     <div className={ isActive ? "site-main" : "site-main_active" }>
       <img
-        src={ languages[currentLang] }
+        src={ languages[lang] }
         className={ open ? 'lang-icon-preview hidden' : 'lang-icon-preview' }
         alt=""
         onClick={ handleOpen }
       />
       <ul className={ open ? 'lang-list' : 'lang-list hidden' } onClick={ handleOpenList }>
-        { Object.entries(languages).map((lang) => {
+        { Object.entries(languages).map((language) => {
           return (<li>
             <img
-              src={ lang[1] }
+              src={ language[1] }
               className={
                 isActive ? "lang-icon" : "lang-icon_active"
               }
-              data-lang={ lang[0] }
-              // onClick={ setLocate(languagesShort[lang[0]]) }
+              data-lang={ language[0] }
               alt=""
             />
           </li>)
