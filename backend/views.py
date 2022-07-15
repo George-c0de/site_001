@@ -1,6 +1,7 @@
 import io
 import logging
 import json
+import profile
 from os import environ, getenv
 import uuid
 import xlsxwriter
@@ -21,10 +22,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from decimal import *
-
 from tgbot import message_for_bot
 from tgbot.message_for_bot import a
-from tgbot.models import Chat_id, Event, Memcache
+from tgbot.models import Chat_id, Event, Memcache, User_Bot
 from . import tokemon
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
@@ -53,12 +53,11 @@ logging.basicConfig(
 
 def send_message_tgbot(message, id):
     token = getenv('TELEGRAM_TOKEN')
-    if Chat_id.objects.filter(user=id).exists():
-        chat_id = Chat_id.objects.get(user=id).id
+    if User_Bot.objects.filter(profile__id=id).exists():
+        chat_id = User_Bot.objects.get(profile__id=id).chat_id
         url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + str(chat_id) + "&text=" + \
                   message
         results = requests.get(url_req)
-        print(results)
         return 1
     return 0
 
@@ -258,14 +257,18 @@ def login_page(request):
         return Response(status=200)
     else:
         email = request.data.get('email')
-        username = User.objects.get(email=email).username
+        if email is None or email == '':
+            return Response(status=400)
+        if User.objects.filter(email=email).exists():
+            username = User.objects.get(email=email).username
+        else:
+            return Response(status=400)
         # username = request.POST.get('email')
         password = request.data.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             request.session.modified = True
-            print(request.user)
             return Response(200)
         else:
             return Response(status=400)
@@ -273,7 +276,6 @@ def login_page(request):
 
 @api_view(['GET'])
 def logout_user(request):
-    print(request.user)
     request.session.modified = True
     logout(request)
     return Response(status=200)
@@ -344,7 +346,7 @@ def save(*args):
 
 
 # получение уведомления
-def case_3_4_ref(main_user, money_to_card, all_, profile):
+def case_3_4_ref(main_user, money_to_card, all_, profile, id_, name):
     second_line = False
     third_line = False
     if Second_Line.objects.filter(main_user__id=main_user.id).exists():
@@ -354,17 +356,30 @@ def case_3_4_ref(main_user, money_to_card, all_, profile):
     if not second_line and not third_line:
         admin_.money += money_to_card * Decimal('0.05')
         main_user.money += money_to_card * Decimal('0.1')
+        mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')))
+        send_message_tgbot(mes, main_user.id)
         all_.money += money_to_card
         profile.money -= money_to_card
+        mes = message_for_bot.a['buy'].format(tokemon[name][id_ - 1])
+        send_message_tgbot(mes, profile.id)
     # четвертый случай
     elif not third_line:
         admin_.money += money_to_card * Decimal('0.01')
         profile.money -= money_to_card
+        mes = message_for_bot.a['buy'].format(tokemon[name][id_ - 1])
+        send_message_tgbot(mes, profile.id)
+
         main_user.money += money_to_card * Decimal('0.1')
+        mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')))
+        send_message_tgbot(mes, main_user.id)
         all_.money += money_to_card
     else:
         profile.money -= money_to_card
+        mes = message_for_bot.a['buy'].format(tokemon[name][id_ - 1])
+        send_message_tgbot(mes, profile.id)
         main_user.money += money_to_card * Decimal('0.1')
+        mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')))
+        send_message_tgbot(mes, main_user.id)
         all_.money += money_to_card
     save(main_user, all_, profile, admin_)
 
@@ -386,19 +401,18 @@ def referral_system_bronze(request, id_):
         category_bronze.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_bronze.card_6_disable is False:
-        messages.add_message(request, messages.error, 'Карта недоступна')
-        return Response(messages, status=400)
+        return Response(status=400)
     else:
         money_to_card = what_card(card, category_bronze)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
+    if profile.money < money_to_card:
+        return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
         message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
-        Event.objects.create(message=message, user_id=profile.id)
-        if send_message_tgbot(message, profile.id) == 1:
-            Event.objects.filter(user_id=profile.id).first().delete()
+        send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_bronze)
         # main_user = Profile.objects.get(referral_link=cookies)
@@ -406,10 +420,8 @@ def referral_system_bronze(request, id_):
     else:
         main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
+        print(max_card_)
         save(main_user)
-        if profile.money < money_to_card:
-            messages.add_message(request, messages.error, 'Недостаточно денег')
-            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -420,6 +432,8 @@ def referral_system_bronze(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
                 line_admin.main_user = admin_
@@ -428,10 +442,12 @@ def referral_system_bronze(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_bronze)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
-            case_3_4_ref(main_user, money_to_card, all_, profile)
+            case_3_4_ref(main_user, money_to_card, all_, profile, id_, 'bronze')
             save(category_bronze)
     buy_card = Buy_Card()
     buy_card.user = profile
@@ -447,12 +463,6 @@ def referral_system_bronze(request, id_):
     logics_matrix(profile, new_money)
     return Response(status=200)
 
-    # проверка на рефку
-    # else:
-    # a = Admin.objects.all().first()
-    # b =
-    # if Category_Bronze.objects.filter(user.id=).exists()
-
 
 # silver
 @api_view(['GET'])
@@ -462,6 +472,7 @@ def referral_system_silver(request, id_):
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     cookies = request.COOKIES.get('utm')
+
     if cookies is None:
         cookies = None
     if Category_Silver.objects.filter(user__id=profile.id).exists():
@@ -471,15 +482,18 @@ def referral_system_silver(request, id_):
         category_silver.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_silver.card_6_disable is False:
-        messages.add_message(request, messages.error, 'Карта недоступна')
-        return Response(messages, status=400)
+        return Response(status=400)
     else:
         money_to_card = what_card(card, category_silver)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
+    if profile.money < money_to_card:
+        return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
+        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_silver)
         # main_user = Profile.objects.get(referral_link=cookies)
@@ -488,8 +502,6 @@ def referral_system_silver(request, id_):
         main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
         save(main_user)
-        if profile.money < money_to_card:
-            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -500,6 +512,8 @@ def referral_system_silver(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
                 line_admin.main_user = admin_
@@ -508,10 +522,12 @@ def referral_system_silver(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_silver)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
-            case_3_4_ref(main_user, money_to_card, all_, profile)
+            case_3_4_ref(main_user, money_to_card, all_, profile, id_, 'silver')
             save(category_silver)
     buy_card = Buy_Card()
     buy_card.user = profile
@@ -526,12 +542,6 @@ def referral_system_silver(request, id_):
     admin_.money += money_to_card * Decimal('0.05')
     logics_matrix(profile, new_money)
     return Response(status=200)
-
-    # проверка на рефку
-    # else:
-    # a = Admin.objects.all().first()
-    # b =
-    # if Category_Bronze.objects.filter(user.id=).exists()
 
 
 # gold
@@ -551,15 +561,18 @@ def referral_system_gold(request, id_):
         category_gold.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_gold.card_6_disable is False:
-        messages.add_message(request, messages.error, 'Карта недоступна')
-        return Response(messages, status=400)
+        return Response(status=400)
     else:
         money_to_card = what_card(card, category_gold)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
+    if profile.money < money_to_card:
+        return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
+        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_gold)
         # main_user = Profile.objects.get(referral_link=cookies)
@@ -568,9 +581,6 @@ def referral_system_gold(request, id_):
         main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
         save(main_user)
-        if profile.money < money_to_card:
-            messages.add_message(request, messages.error, 'Недостаточно денег')
-            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -581,6 +591,8 @@ def referral_system_gold(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
                 line_admin.main_user = admin_
@@ -589,10 +601,12 @@ def referral_system_gold(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_gold)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
-            case_3_4_ref(main_user, money_to_card, all_, profile)
+            case_3_4_ref(main_user, money_to_card, all_, profile, 'gold')
             save(category_gold)
     buy_card = Buy_Card()
     buy_card.user = profile
@@ -632,15 +646,18 @@ def referral_system_emerald(request, id_):
         category_emerald.user = profile
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_emerald.card_6_disable is False:
-        messages.add_message(request, messages.error, 'Карта недоступна')
-        return Response(messages, status=400)
+        return Response(status=400)
     else:
         money_to_card = what_card(card, category_emerald)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
+    if profile.money < money_to_card:
+        return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if cookies is None or cookies == '':
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
+        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_emerald)
         # main_user = Profile.objects.get(referral_link=cookies)
@@ -649,9 +666,6 @@ def referral_system_emerald(request, id_):
         main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
         save(main_user)
-        if profile.money < money_to_card:
-            messages.add_message(request, messages.error, 'Недостаточно денег')
-            return Response(messages, status=400)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if main_user.max_card < int(max_card_):
@@ -662,6 +676,8 @@ def referral_system_emerald(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
                 line_admin.main_user = admin_
@@ -670,10 +686,12 @@ def referral_system_emerald(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
+                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_emerald)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
-            case_3_4_ref(main_user, money_to_card, all_, profile)
+            case_3_4_ref(main_user, money_to_card, all_, profile, id_, 'emerald')
             save(category_emerald)
     buy_card = Buy_Card()
     buy_card.user = profile
@@ -701,6 +719,8 @@ def matrix_pay(main_matrix, money):
     user_2 = User_in_Matrix.objects.get(participant_number=(main_matrix.go_money + 1))
     if user_1.user.id == user_2.user.id:
         user_1.user.money += Decimal(money / 2) * 2
+        mes = message_for_bot.a['win'].format(Decimal(money / 2) * 2)
+        send_message_tgbot(mes, user_1.id)
         user_1.d += 1
         user_2.d += 1
         user_2.save()
@@ -709,7 +729,11 @@ def matrix_pay(main_matrix, money):
         user_1.save()
     else:
         user_1.user.money += Decimal(money / 2)
+        mes = message_for_bot.a['win'].format(Decimal(money / 2))
+        send_message_tgbot(mes, user_1.id)
         user_2.user.money += Decimal(money / 2)
+        mes = message_for_bot.a['win'].format(Decimal(money / 2))
+        send_message_tgbot(mes, user_2.id)
         user_1.d += 1
         user_2.d += 1
         user_1.user.save()
