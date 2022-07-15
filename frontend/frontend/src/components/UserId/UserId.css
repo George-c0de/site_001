@@ -48,6 +48,7 @@
 }
 
 .user-info .link-invitation {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,7 +62,11 @@
 }
 
 .copy-icon {
-    margin: 0 10px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
     cursor: pointer;
     transition: all .3s ease-in-out;
 }
