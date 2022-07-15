@@ -63,7 +63,7 @@ const Game = () => {
 
         <div className={ onActive ? "site-main-game" : "site-main_active" }>
           <div className='site-main-game-wrapper'>
-            <div className="text-game">{t`УЧАСТВУЙ В БИТВАХ И ПОЛУЧАЙ ПРИЗЫ`}</div>
+            <div className="text-game">{t`JOIN THE FIGHT AND WIN`}</div>
 
             <div className="container-pack-pokeballs">
               <div className="col-sm" id="title-pack-pokeballs">

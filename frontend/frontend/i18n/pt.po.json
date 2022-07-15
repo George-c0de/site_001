@@ -15,48 +15,6 @@
           "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
         ]
       },
-      "start": {
-        "msgid": "start",
-        "msgstr": [
-          "Старт"
-        ]
-      },
-      "Log In": {
-        "msgid": "Log In",
-        "msgstr": [
-          "Войти"
-        ]
-      },
-      "Sign Up": {
-        "msgid": "Sign Up",
-        "msgstr": [
-          "Зарегистрироваться"
-        ]
-      },
-      "Username": {
-        "msgid": "Username",
-        "msgstr": [
-          "Имя пользователя"
-        ]
-      },
-      "Email": {
-        "msgid": "Email",
-        "msgstr": [
-          "Почта"
-        ]
-      },
-      "Password": {
-        "msgid": "Password",
-        "msgstr": [
-          "Пароль"
-        ]
-      },
-      "Confirm Password": {
-        "msgid": "Confirm Password",
-        "msgstr": [
-          "Подтвердите пароль"
-        ]
-      },
       "User Id": {
         "msgid": "User Id",
         "msgstr": [
@@ -66,187 +24,235 @@
       "Balance": {
         "msgid": "Balance",
         "msgstr": [
-          "Баланс"
+          "Saldo"
         ]
       },
       "Cards profit": {
         "msgid": "Cards profit",
         "msgstr": [
-          "Доход с карт"
+          "Cartoes lucro "
         ]
       },
       "Referal profit": {
         "msgid": "Referal profit",
         "msgstr": [
-          "Доход с рефералов "
+          "Referencias lucro "
         ]
       },
       "Link for invitation": {
         "msgid": "Link for invitation",
         "msgstr": [
-          "Ссылка приглашения"
+          "Link para convite"
         ]
       },
       "Deposit": {
         "msgid": "Deposit",
         "msgstr": [
-          "Пополнить"
+          "Recarga"
         ]
       },
       "Withdraw": {
         "msgid": "Withdraw",
         "msgstr": [
-          "Вывести╕"
+          "Retirada"
         ]
       },
       "TOTAL USERS": {
         "msgid": "TOTAL USERS",
         "msgstr": [
-          "КОЛИЧЕСТВО УЧАСТНИКОВ"
+          "TOTAL DE USU├БRIOS"
         ]
       },
       "TOTAL  TRANSACTIONS": {
         "msgid": "TOTAL  TRANSACTIONS",
         "msgstr": [
-          "КОЛИЧЕСТВО ТРАНЗАКЦИЙ"
+          "TOTAL DE USUARIOS"
         ]
       },
       "TOTAL PAYOUT": {
         "msgid": "TOTAL PAYOUT",
         "msgstr": [
-          "СУММА ВЫПЛАТ"
+          "PAGAMENTO TOTAL"
         ]
       },
       "Referral link": {
         "msgid": "Referral link",
         "msgstr": [
-          "Ссылка для приглашения"
+          "Link para convite"
         ]
       },
       "1 line": {
         "msgid": "1 line",
         "msgstr": [
-          "1 линия"
+          "1 linha"
         ]
       },
       "Total person": {
         "msgid": "Total person",
         "msgstr": [
-          "Количество рефералов"
+          "Pessoa total"
         ]
       },
       "2 line": {
         "msgid": "2 line",
         "msgstr": [
-          "2 линия"
+          "2 linha"
         ]
       },
       "Profit received": {
         "msgid": "Profit received",
         "msgstr": [
-          "Полученная прибыль"
+          "Lucro recebido"
         ]
       },
       "3 line": {
         "msgid": "3 line",
         "msgstr": [
-          "3 линия"
+          "3 linha"
         ]
       },
       "Lost profits": {
         "msgid": "Lost profits",
         "msgstr": [
-          "Упущенная прибыль"
-        ]
-      },
-      "JOIN THE FIGHT AND WIN": {
-        "msgid": "JOIN THE FIGHT AND WIN",
-        "msgstr": [
-          "УЧАСТВУЙ В БИТВАХ И ВЫИГРЫВАЙ"
+          "Lucro perdido"
         ]
       },
       "Cards": {
         "msgid": "Cards",
         "msgstr": [
-          "КАРТЫ"
+          "CARTOES"
         ]
       },
       "BRONZE": {
         "msgid": "BRONZE",
         "msgstr": [
-          "БРОНЗА"
+          "BRONZE"
         ]
       },
       "SILVER": {
         "msgid": "SILVER",
         "msgstr": [
-          "СЕРЕБРО"
+          "PRATA"
         ]
       },
       "GOLD": {
         "msgid": "GOLD",
         "msgstr": [
-          "ЗОЛОТО"
+          "OURO"
         ]
       },
       "EMERALD": {
         "msgid": "EMERALD",
         "msgstr": [
-          "ИЗУМРУД"
+          "ESMERALDA"
         ]
       },
       "GAME HISTORY": {
         "msgid": "GAME HISTORY",
         "msgstr": [
-          "ИСТОРИЯ ИГРЫ"
+          "HISTÓRICO DO JOGO"
         ]
       },
       "SHOW MORE": {
         "msgid": "SHOW MORE",
         "msgstr": [
-          "показать еще"
+          "mostre mais"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "partida"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Entrar"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Se inscreva"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Nome de usuário"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "Correio eletrônico"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "Senha"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Confirmar senha"
         ]
       },
       "MAIN": {
         "msgid": "MAIN",
         "msgstr": [
-          "Главная страница"
+          "Página principal "
         ]
       },
       "REFFERALS": {
         "msgid": "REFFERALS",
         "msgstr": [
-          "Рефералы"
+          "Referências"
         ]
       },
       "STATISTICS": {
         "msgid": "STATISTICS",
         "msgstr": [
-          "Статистика"
+          "Estatisticas"
         ]
       },
       "RULES": {
         "msgid": "RULES",
         "msgstr": [
-          "Правила"
+          "Regras"
         ]
       },
       "USE TELEGRAM BOT": {
         "msgid": "USE TELEGRAM BOT",
         "msgstr": [
-          "Подключить ТГ БОТ"
+          "Usarbot de telegram"
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "Deslogar"
         ]
       },
       "Switch lang": {
         "msgid": "Switch lang",
         "msgstr": [
-          "Смена языка"
+          ""
         ]
       },
       "New Here": {
         "msgid": "New Here",
         "msgstr": [
-          "Уже есть"
+          ""
+        ]
+      },
+      "JOIN THE FIGHT AND WIN": {
+        "msgid": "JOIN THE FIGHT AND WIN",
+        "msgstr": [
+          "JOIN THE FIGHT AND WIN"
         ]
       }
     }

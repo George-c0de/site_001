@@ -3,7 +3,7 @@
   "headers": {
     "content-type": "text/plain; charset=utf-8",
     "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
-    "language": "ru",
+    "language": "ar",
     "mime-version": "1.0",
     "content-transfer-encoding": "8bit"
   },
@@ -12,49 +12,7 @@
       "": {
         "msgid": "",
         "msgstr": [
-          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
-        ]
-      },
-      "start": {
-        "msgid": "start",
-        "msgstr": [
-          "Старт"
-        ]
-      },
-      "Log In": {
-        "msgid": "Log In",
-        "msgstr": [
-          "Войти"
-        ]
-      },
-      "Sign Up": {
-        "msgid": "Sign Up",
-        "msgstr": [
-          "Зарегистрироваться"
-        ]
-      },
-      "Username": {
-        "msgid": "Username",
-        "msgstr": [
-          "Имя пользователя"
-        ]
-      },
-      "Email": {
-        "msgid": "Email",
-        "msgstr": [
-          "Почта"
-        ]
-      },
-      "Password": {
-        "msgid": "Password",
-        "msgstr": [
-          "Пароль"
-        ]
-      },
-      "Confirm Password": {
-        "msgid": "Confirm Password",
-        "msgstr": [
-          "Подтвердите пароль"
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: uk\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
         ]
       },
       "User Id": {
@@ -66,187 +24,265 @@
       "Balance": {
         "msgid": "Balance",
         "msgstr": [
-          "Баланс"
+          "Saldo"
         ]
       },
       "Cards profit": {
         "msgid": "Cards profit",
         "msgstr": [
-          "Доход с карт"
+          "Beneficio de Tarjetas"
         ]
       },
       "Referal profit": {
         "msgid": "Referal profit",
         "msgstr": [
-          "Доход с рефералов "
+          "Beneficio de Referencias"
         ]
       },
       "Link for invitation": {
         "msgid": "Link for invitation",
         "msgstr": [
-          "Ссылка приглашения"
+          "Enlace para invitación"
         ]
       },
       "Deposit": {
         "msgid": "Deposit",
         "msgstr": [
-          "Пополнить"
+          "Recarga"
         ]
       },
       "Withdraw": {
         "msgid": "Withdraw",
         "msgstr": [
-          "Вывести╕"
+          "Retiro"
         ]
       },
       "TOTAL USERS": {
         "msgid": "TOTAL USERS",
         "msgstr": [
-          "КОЛИЧЕСТВО УЧАСТНИКОВ"
+          "USUARIOS TOTALES"
         ]
       },
       "TOTAL  TRANSACTIONS": {
         "msgid": "TOTAL  TRANSACTIONS",
         "msgstr": [
-          "КОЛИЧЕСТВО ТРАНЗАКЦИЙ"
+          "TRANSACCIONES TOTALES"
         ]
       },
       "TOTAL PAYOUT": {
         "msgid": "TOTAL PAYOUT",
         "msgstr": [
-          "СУММА ВЫПЛАТ"
+          "PAGO TOTAL"
         ]
       },
       "Referral link": {
         "msgid": "Referral link",
         "msgstr": [
-          "Ссылка для приглашения"
+          "Enlace para invitación"
         ]
       },
       "1 line": {
         "msgid": "1 line",
         "msgstr": [
-          "1 линия"
+          "1 línea"
         ]
       },
       "Total person": {
         "msgid": "Total person",
         "msgstr": [
-          "Количество рефералов"
+          "Persona total"
         ]
       },
       "2 line": {
         "msgid": "2 line",
         "msgstr": [
-          "2 линия"
+          "2 línea"
         ]
       },
       "Profit received": {
         "msgid": "Profit received",
         "msgstr": [
-          "Полученная прибыль"
+          "Beneficiorecibido"
         ]
       },
       "3 line": {
         "msgid": "3 line",
         "msgstr": [
-          "3 линия"
+          "3 línea"
         ]
       },
       "Lost profits": {
         "msgid": "Lost profits",
         "msgstr": [
-          "Упущенная прибыль"
+          "Lucro cesante"
         ]
       },
       "JOIN THE FIGHT AND WIN": {
         "msgid": "JOIN THE FIGHT AND WIN",
         "msgstr": [
-          "УЧАСТВУЙ В БИТВАХ И ВЫИГРЫВАЙ"
+          "ÚNETE A LA LUCHA Y GANA"
         ]
       },
       "Cards": {
         "msgid": "Cards",
         "msgstr": [
-          "КАРТЫ"
+          "TARJETAS"
         ]
       },
       "BRONZE": {
         "msgid": "BRONZE",
         "msgstr": [
-          "БРОНЗА"
+          "BRONCE"
         ]
       },
       "SILVER": {
         "msgid": "SILVER",
         "msgstr": [
-          "СЕРЕБРО"
+          "BRONCE"
         ]
       },
       "GOLD": {
         "msgid": "GOLD",
         "msgstr": [
-          "ЗОЛОТО"
+          "ORO"
         ]
       },
       "EMERALD": {
         "msgid": "EMERALD",
         "msgstr": [
-          "ИЗУМРУД"
+          "ESMERALDA"
         ]
       },
       "GAME HISTORY": {
         "msgid": "GAME HISTORY",
         "msgstr": [
-          "ИСТОРИЯ ИГРЫ"
+          "HISTORIAL DEL JUEGO"
         ]
       },
       "SHOW MORE": {
         "msgid": "SHOW MORE",
         "msgstr": [
-          "показать еще"
+          "mostrar más"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "jugar"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Iniciar session"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Inscriber"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Username"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "Email"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "Contraseña"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Confirmarcontraseña"
         ]
       },
       "MAIN": {
         "msgid": "MAIN",
         "msgstr": [
-          "Главная страница"
+          "Pagina principal"
         ]
       },
       "REFFERALS": {
         "msgid": "REFFERALS",
         "msgstr": [
-          "Рефералы"
+          "Referencias"
         ]
       },
       "STATISTICS": {
         "msgid": "STATISTICS",
         "msgstr": [
-          "Статистика"
+          "Estadísticas"
         ]
       },
       "RULES": {
         "msgid": "RULES",
         "msgstr": [
-          "Правила"
+          "Reglas"
         ]
       },
       "USE TELEGRAM BOT": {
         "msgid": "USE TELEGRAM BOT",
         "msgstr": [
-          "Подключить ТГ БОТ"
+          "Usarbot de telegram"
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "Cerrar sesión"
         ]
       },
       "Switch lang": {
         "msgid": "Switch lang",
         "msgstr": [
-          "Смена языка"
+          ""
         ]
       },
       "New Here": {
         "msgid": "New Here",
         "msgstr": [
-          "Уже есть"
+          ""
+        ]
+      },
+      "Withdrawal": {
+        "msgid": "Withdrawal",
+        "msgstr": [
+          "Retiro"
+        ]
+      },
+      "Available for payout": {
+        "msgid": "Available for payout",
+        "msgstr": [
+          "Disponible para pago"
+        ]
+      },
+      "Withdrawal amount": {
+        "msgid": "Withdrawal amount",
+        "msgstr": [
+          "Cantidad a pagar"
+        ]
+      },
+      "PAYOUT": {
+        "msgid": "PAYOUT",
+        "msgstr": [
+          "PAGAR"
+        ]
+      },
+      "TRANSACTION HISTORY": {
+        "msgid": "TRANSACTION HISTORY",
+        "msgstr": [
+          "HISTORIAL DE TRANSACCIONES"
         ]
       }
     }

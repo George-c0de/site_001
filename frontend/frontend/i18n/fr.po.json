@@ -3,7 +3,7 @@
   "headers": {
     "content-type": "text/plain; charset=utf-8",
     "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
-    "language": "ru",
+    "language": "uk",
     "mime-version": "1.0",
     "content-transfer-encoding": "8bit"
   },
@@ -12,49 +12,13 @@
       "": {
         "msgid": "",
         "msgstr": [
-          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: uk\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
         ]
       },
-      "start": {
-        "msgid": "start",
+      "Edit ${ appLink } and save to reload.": {
+        "msgid": "Edit ${ appLink } and save to reload.",
         "msgstr": [
-          "Старт"
-        ]
-      },
-      "Log In": {
-        "msgid": "Log In",
-        "msgstr": [
-          "Войти"
-        ]
-      },
-      "Sign Up": {
-        "msgid": "Sign Up",
-        "msgstr": [
-          "Зарегистрироваться"
-        ]
-      },
-      "Username": {
-        "msgid": "Username",
-        "msgstr": [
-          "Имя пользователя"
-        ]
-      },
-      "Email": {
-        "msgid": "Email",
-        "msgstr": [
-          "Почта"
-        ]
-      },
-      "Password": {
-        "msgid": "Password",
-        "msgstr": [
-          "Пароль"
-        ]
-      },
-      "Confirm Password": {
-        "msgid": "Confirm Password",
-        "msgstr": [
-          "Подтвердите пароль"
+          "Редагуйте ${ appLink } та збережіть для перезавантаження"
         ]
       },
       "User Id": {
@@ -66,187 +30,235 @@
       "Balance": {
         "msgid": "Balance",
         "msgstr": [
-          "Баланс"
+          "Balance"
         ]
       },
       "Cards profit": {
         "msgid": "Cards profit",
         "msgstr": [
-          "Доход с карт"
+          "Cartes Profit"
         ]
       },
       "Referal profit": {
         "msgid": "Referal profit",
         "msgstr": [
-          "Доход с рефералов "
+          "Références profit"
         ]
       },
       "Link for invitation": {
         "msgid": "Link for invitation",
         "msgstr": [
-          "Ссылка приглашения"
+          "Lien pour invitation"
         ]
       },
       "Deposit": {
         "msgid": "Deposit",
         "msgstr": [
-          "Пополнить"
+          "Recharge"
         ]
       },
       "Withdraw": {
         "msgid": "Withdraw",
         "msgstr": [
-          "Вывести╕"
+          "Retrait"
         ]
       },
       "TOTAL USERS": {
         "msgid": "TOTAL USERS",
         "msgstr": [
-          "КОЛИЧЕСТВО УЧАСТНИКОВ"
+          "NOMBRE D'UTILISATEURS"
         ]
       },
       "TOTAL  TRANSACTIONS": {
         "msgid": "TOTAL  TRANSACTIONS",
         "msgstr": [
-          "КОЛИЧЕСТВО ТРАНЗАКЦИЙ"
+          "TRANSACTIONS TOTALES"
         ]
       },
       "TOTAL PAYOUT": {
         "msgid": "TOTAL PAYOUT",
         "msgstr": [
-          "СУММА ВЫПЛАТ"
+          "PAIEMENT TOTAL"
         ]
       },
       "Referral link": {
         "msgid": "Referral link",
         "msgstr": [
-          "Ссылка для приглашения"
+          "Lien pour invitation"
         ]
       },
       "1 line": {
         "msgid": "1 line",
         "msgstr": [
-          "1 линия"
+          "1 ligne"
         ]
       },
       "Total person": {
         "msgid": "Total person",
         "msgstr": [
-          "Количество рефералов"
+          "Personne totale"
         ]
       },
       "2 line": {
         "msgid": "2 line",
         "msgstr": [
-          "2 линия"
+          "2 ligne"
         ]
       },
       "Profit received": {
         "msgid": "Profit received",
         "msgstr": [
-          "Полученная прибыль"
+          "Bénéficereçu"
         ]
       },
       "3 line": {
         "msgid": "3 line",
         "msgstr": [
-          "3 линия"
+          "3 ligne"
         ]
       },
       "Lost profits": {
         "msgid": "Lost profits",
         "msgstr": [
-          "Упущенная прибыль"
+          "Profit perdu"
         ]
       },
       "JOIN THE FIGHT AND WIN": {
         "msgid": "JOIN THE FIGHT AND WIN",
         "msgstr": [
-          "УЧАСТВУЙ В БИТВАХ И ВЫИГРЫВАЙ"
+          "REJOIGNEZ LE COMBAT ET GAGNEZ"
         ]
       },
       "Cards": {
         "msgid": "Cards",
         "msgstr": [
-          "КАРТЫ"
+          "CARTES"
         ]
       },
       "BRONZE": {
         "msgid": "BRONZE",
         "msgstr": [
-          "БРОНЗА"
+          "BRONZE"
         ]
       },
       "SILVER": {
         "msgid": "SILVER",
         "msgstr": [
-          "СЕРЕБРО"
+          "ARGENT"
         ]
       },
       "GOLD": {
         "msgid": "GOLD",
         "msgstr": [
-          "ЗОЛОТО"
+          "OR"
         ]
       },
       "EMERALD": {
         "msgid": "EMERALD",
         "msgstr": [
-          "ИЗУМРУД"
+          "ÉMERAUDE"
         ]
       },
       "GAME HISTORY": {
         "msgid": "GAME HISTORY",
         "msgstr": [
-          "ИСТОРИЯ ИГРЫ"
+          "HISTOIRE DU JEU"
         ]
       },
       "SHOW MORE": {
         "msgid": "SHOW MORE",
         "msgstr": [
-          "показать еще"
+          "montre plus"
+        ]
+      },
+      "start": {
+        "msgid": "start",
+        "msgstr": [
+          "depart"
+        ]
+      },
+      "Log In": {
+        "msgid": "Log In",
+        "msgstr": [
+          "Connexion"
+        ]
+      },
+      "Sign Up": {
+        "msgid": "Sign Up",
+        "msgstr": [
+          "Enregistrer"
+        ]
+      },
+      "Username": {
+        "msgid": "Username",
+        "msgstr": [
+          "Username"
+        ]
+      },
+      "Email": {
+        "msgid": "Email",
+        "msgstr": [
+          "e-mail"
+        ]
+      },
+      "Password": {
+        "msgid": "Password",
+        "msgstr": [
+          "mot de passe"
+        ]
+      },
+      "Confirm Password": {
+        "msgid": "Confirm Password",
+        "msgstr": [
+          "Confirmez le mot de passé"
         ]
       },
       "MAIN": {
         "msgid": "MAIN",
         "msgstr": [
-          "Главная страница"
+          "Page principale"
         ]
       },
       "REFFERALS": {
         "msgid": "REFFERALS",
         "msgstr": [
-          "Рефералы"
+          "References"
         ]
       },
       "STATISTICS": {
         "msgid": "STATISTICS",
         "msgstr": [
-          "Статистика"
+          "Statistiques"
         ]
       },
       "RULES": {
         "msgid": "RULES",
         "msgstr": [
-          "Правила"
+          "Règles"
         ]
       },
       "USE TELEGRAM BOT": {
         "msgid": "USE TELEGRAM BOT",
         "msgstr": [
-          "Подключить ТГ БОТ"
+          "Utiliser le robot télégramme"
+        ]
+      },
+      "LOGOUT": {
+        "msgid": "LOGOUT",
+        "msgstr": [
+          "Se déconnecter"
         ]
       },
       "Switch lang": {
         "msgid": "Switch lang",
         "msgstr": [
-          "Смена языка"
+          ""
         ]
       },
       "New Here": {
         "msgid": "New Here",
         "msgstr": [
-          "Уже есть"
+          ""
         ]
       }
     }

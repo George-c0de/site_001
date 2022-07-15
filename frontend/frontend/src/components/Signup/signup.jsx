@@ -121,7 +121,7 @@ const Signup = () => {
                             className="input"
                         />
 
-                        <div className="captcha">Captcha</div>
+                        <div className="captcha"></div>
                         <Captcha parentCallback={handleChangeItem}/>
 
                         <button type="submit" className="yellow_btn">
