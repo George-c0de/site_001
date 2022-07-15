@@ -41,13 +41,13 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .pay-input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex-wrap: wrap;
     color: #FFF;
 }
 
@@ -122,6 +122,7 @@
 .history-table-title {
     display: block;
     width: 100%;
+    padding: 0 10px;
     font-size: 20px;
     font-weight: 600;
     border-bottom: 2px solid #475176;
@@ -133,4 +134,10 @@
 
 .history-table-column:not(:last-child) {
     border-right: 2px solid #475176;
+}
+
+@media (max-width: 950px) {
+    .history-table-title {
+        min-height: 63px;
+    }
 }
