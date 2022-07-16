@@ -26,6 +26,7 @@ function App() {
             <Route path="/login" exact element={<Login/>}/>
             <Route path="/update/:id" exact element={<UpdateUser/>}/>
             <Route path="/" exact element={<StartGame/>}/>
+
             <Route path="/rules" element={<Rules/>}/>
 
         </Routes>
