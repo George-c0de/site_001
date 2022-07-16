@@ -58,7 +58,7 @@ const Mainpage = () => {
             fetchLink()
         }, [])
         const [get_link_tg, setget_link_tg] = useState({
-            'link_tg': ""
+            'link_tg': "https://t.me/Tokemon_game_Bot"
         })
 
         async function fetchLink() {
@@ -140,6 +140,7 @@ const Mainpage = () => {
                                 <div className="menu-info-icons">
                                     <div className='info-icons-container'>
                                         <FontAwesomeIcon icon={faPaperPlane} className="paper-plane"/>
+                                        <a href={ get_link_tg } className="telegram-user">{ t`USE TELEGRAM BOT` }</a>
                                     </div>
                                 </div>
                             </>
