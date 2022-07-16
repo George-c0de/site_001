@@ -182,15 +182,15 @@
     }
 
     .signup_form_container{
+        top: 16%;
         position: absolute;
         height:60%;
         width:80%;
-        max-width:1200px !important;
         margin-left: 8%;
     }
 
     .signup_form_container .yellow_btn{
-        margin-top: -10%;
+        margin-top: -8%;
         height:10%;
     }
 
@@ -200,7 +200,8 @@
     }
 
     .form_container input{
-        height:5%;
+        height:2%;
+        margin-top:1px;
         width:90% !important;
     }   
 
@@ -233,7 +234,8 @@
     }
 
     .form_container input{
-        height:5%;
+        height:2%;
+        margin-top:1px;
         width:90% !important;
     }   
 }
