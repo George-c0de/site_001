@@ -191,7 +191,7 @@
     }
 
     .login_form_container {
-        margin-top: -40% !important;
+        margin-top: -50% !important;
         margin-left: -20% !important ;
     }
 
@@ -223,13 +223,14 @@
     }
 
     .login_container .bubble-speech::after {
-        margin-left:130% !important;
+        margin-left:80% !important;
         margin-top:-3% !important;
+        transform: rotate(45deg);
     }
 
     .pikachu-pokeball {
-        margin-top: 25% !important;
-        height:30% !important;
+        margin-top: 45% !important;
+        height:20% !important;
     }
 }
 
@@ -268,8 +269,8 @@
     }
 
     .pikachu-pokeball {
-        height: 35%;
-        top:60%;
+        height: 25%;
+        top:65%;
     }
 }
 
@@ -318,9 +319,14 @@
     }
 
     .login_container .bubble-speech::after {
-        margin-left:50% !important;
+        margin-left:40% !important;
         transform: rotate(45deg);
         /* margin-top: 15% !important; */
+    }
+
+    .pikachu-pokeball {
+        height: 30%;
+        top:50%;
     }
 }
 /* For 1366 Resolution */  
@@ -370,54 +376,3 @@
         margin-left: 1% ;
     }
 }
-
-
-/*Devices Responsive*/
-/*Mobile*/
-@media only screen and (max-width: 412px) {
-    .logo-tokemon{
-        height:20% !important;
-    }
-
-    .start-game{
-        top:33%;
-    }
-}
-
-@media only screen and (min-width:413px) and (max-width: 600px) {
-    .start-game {
-        top: 33%;
-    }
-    .logo-tokemon{
-        height:30% !important;
-    }
-}
-
-/*Small devices: tablets, large phones*/
-@media only screen and (min-width: 600px) and (max-width: 767px) {
-    .start-game {
-        top: 33%;
-    }
-}
-
-/*Laptop */
-/* For 1024 Resolution */  
-@media only screen and (min-width : 768px) and (max-width : 1024px){
-    .start-game {
-        top: 35% !important;
-    }
-}
-/* For 1366 Resolution */  
-@media only screen and (min-width: 1030px) and (max-width: 1366px){
-    .start-game {
-        top: 35%;
-    }
-}
-
-/*Desktop*/
-@media only screen and (min-width: 1370px){
-    .start-game {
-        top: 43%;
-    }
-}
-
