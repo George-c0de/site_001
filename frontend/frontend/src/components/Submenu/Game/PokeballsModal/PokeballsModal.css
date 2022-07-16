@@ -35,25 +35,11 @@
     border-radius: 15px;
 }
 
-.pokeballs-modal .pokeballs-card.opened {
+.pokeballs-modal .pokeballs-card.main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: #6b2e07;
-    gap: 10px;
-}
-
-.card-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-}
-
-.pokeballs-card-info {
-    z-index: 10;
 }
 
 .pokeballs-card-label {
@@ -89,7 +75,7 @@
 }
 
 
-.pokeballs-card.opened .pokeballs-card-info {
+.pokeballs-card.main .pokeballs-card-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -101,7 +87,7 @@
     color: #FFCC00;
 }
 
-.pokeballs-card.opened .pokeballs-card-info img {
+.pokeballs-card.main .pokeballs-card-info img {
     width: 90%;
 }
 
