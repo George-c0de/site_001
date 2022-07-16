@@ -20,19 +20,10 @@ const COLORS_TO_CLASS = {
 }
 
 export const PokeballsPack = ({ title, amount, images, background }) => {
-  const [status, setStatus] = useState('25');
   const [modalOpen, setModalOpen] = useState(false);
 
   const handlePokeballsPack = () => {
     setModalOpen(!modalOpen);
-  }
-
-  const handleStatusBalls = (e) => {
-    const statusBall = e.target.closest('[data-status]');
-    if (statusBall) {
-      statusBall.classList.toggle('show');
-      setStatus(statusBall.dataset.status);
-    }
   }
 
   return (
@@ -55,9 +46,7 @@ export const PokeballsPack = ({ title, amount, images, background }) => {
           />
         </div>
 
-        <PokeballsModal status={ status }
-                        handleStatusBalls={ handleStatusBalls }
-                        background={ background }
+        <PokeballsModal background={ background }
                         amount={ amount }
                         images={ images }
         />
