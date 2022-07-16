@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
 
 import './PokeballsModal.css';
 
-export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatusBalls }) => (
-  <div className='pokeballs-modal'>
-    <div className='pokeballs-card main' style={ { backgroundColor: cardBackground } }>
+const CardOpened = ({ image, background }) => {
+  const [status, setStatus] = useState('25');
+
+  const handleStatusBalls = (e) => {
+    const statusBall = e.target.closest('[data-status]');
+    if (statusBall) {
+      statusBall.classList.toggle('show');
+      setStatus(statusBall.dataset.status);
+    }
+  }
+
+  return (
+    <>
+      <img src={ background } alt='' className="card-background"/>
       <div className='pokeballs-card-status'>
         <div className="card-status-bar" data-status={ status }>
           <span className="card-status-bar-line"></span>
@@ -29,39 +40,62 @@ export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatus
         </div>
       </div>
       <div className='pokeballs-card-info'>
-        <img src={ imageMain } alt=''/>
+        <img src={ image } alt=''/>
         <span className="card-info-label">Refelrel Profit: <span>325.23$</span></span>
         <span className="card-info-label">Total Wins: <span>245.85$</span></span>
         <span className="card-info-button">Health</span>
       </div>
+    </>
+  )
+}
+
+
+const CardClosed = ({ price }) => (
+  <>
+    <div className='pokeballs-card-label'>
+      <span>ACRIVATE</span>
+      <span>{ price } USD</span>
+    </div>
+    <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+  </>
+)
+
+export const PokeballsModal = ({ amount, images, background }) => (
+  <div className='pokeballs-modal'>
+    <div data-id='1' className={ 1 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+      { 1 <= amount ? <CardOpened image={ images[0] }
+                                  background={ background }/> :
+        <CardClosed price='15'/> }
     </div>
 
-    <div className='pokeballs-card inactive'>
-      <div className='pokeballs-card-label'>
-        <span>ACRIVATE</span>
-        <span>15 USD</span>
-      </div>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    <div data-id='2' className={ 2 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+      { 2 <= amount ? <CardOpened image={ images[1] }
+                                  background={ background }/> :
+        <CardClosed price='15'/> }
     </div>
 
-    <div className='pokeballs-card inactive'>
-      <div className='pokeballs-card-label'>
-        <span>ACRIVATE</span>
-        <span>25 USD</span>
-      </div>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    <div data-id='3' className={ 3 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+      { 3 <= amount ? <CardOpened image={ images[2] }
+                                  background={ background }/> :
+        <CardClosed price='15'/> }
     </div>
 
-    <div className='pokeballs-card inactive'>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    <div data-id='4' className={ 4 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+      { 4 <= amount ? <CardOpened image={ images[3] }
+                                  background={ background }/> :
+        <CardClosed price='15'/> }
     </div>
 
-    <div className='pokeballs-card inactive'>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    <div data-id='5' className={ 5 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+      { 5 <= amount ? <CardOpened image={ images[4] }
+                                  background={ background }/> :
+        <CardClosed price='15'/> }
     </div>
 
-    <div className='pokeballs-card inactive'>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+    <div data-id='6' className={ 6 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+      { 6 <= amount ? <CardOpened image={ images[5] }
+                                  background={ background }/> :
+        <CardClosed price='15'/> }
     </div>
   </div>
 )
