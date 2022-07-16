@@ -5,13 +5,25 @@ import AffiliateProgram from '../components/Rules/AffiliateProgram/AffiliateProg
 import BudgetAllocation from '../components/Rules/BudgetAllocation/BudgetAllocation.js'
 import LevelStructure from '../components/Rules/LevelStructure/LevelStructure.js';
 import '../index.css'
+import {useEffect} from "react";
 
-const RulesPage = () => <Motion>
-    <Rules />
-    <Costs />
-    <AffiliateProgram />
-    <BudgetAllocation />
-    <LevelStructure />
-</Motion>
+
+const RulesPage = () => {
+    useEffect(() => {
+        setTimeout(() => {
+            window.location.assign("/")
+        }, 25000)
+    })
+
+    return (
+        <Motion>
+            <Rules />
+            <Costs />
+            <AffiliateProgram />
+            <BudgetAllocation />
+            <LevelStructure />
+        </Motion>
+    )
+}
 
 export default RulesPage

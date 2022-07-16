@@ -8,6 +8,7 @@ import Statistics from './components/Submenu/Statistics/statistics.jsx';
 import Referals from './components/Submenu/Referals/referals';
 import Game from './components/Submenu/Game/game';
 import Pay from './components/Pay/Pay';
+import Deposit from './components/Deposit/Pay';
 import Rules from "./pages/Rules.js"
 
 
@@ -20,11 +21,13 @@ function App() {
             <Route path="/home/statistics" exact element={<Statistics/>}/>
             <Route path="/home/referals" exact element={<Referals/>}/>
             <Route path="/home/pay" exact element={<Pay/>}/>
+            <Route path="/home/deposit" exact element={<Deposit/>}/>
             <Route path="/signup" exact element={<Signup/>}/>
             <Route path="/login" exact element={<Login/>}/>
             <Route path="/update/:id" exact element={<UpdateUser/>}/>
             <Route path="/" exact element={<StartGame/>}/>
             <Route path="/rules" element={<Rules/>}/>
+
         </Routes>
     );
 }
