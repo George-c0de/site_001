@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
-import CardPink from '../../../../assets/game-card-pink.svg';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,7 +19,7 @@ const COLORS_TO_CLASS = {
   emerald: 'text-pokeball-4'
 }
 
-export const PokeballsPack = ({ title }) => {
+export const PokeballsPack = ({ title, amount, images, background }) => {
   const [status, setStatus] = useState('25');
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -58,8 +57,10 @@ export const PokeballsPack = ({ title }) => {
 
         <PokeballsModal status={ status }
                         handleStatusBalls={ handleStatusBalls }
-                        imageMain={ CardPink }
-                        cardBackground={ '' }/>
+                        background={ background }
+                        amount={ amount }
+                        images={ images }
+        />
       </div>
     </div>
   )
