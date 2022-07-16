@@ -1,6 +1,7 @@
 import style from "./Costs.module.css"
 import PokebollImg from "../../../assets/pokeboll.svg"
 import Logo from "../../../assets/logo.png";
+import {t} from "ttag";
 
 let Col = ({cost, league, content, delay}) => {
 
@@ -31,7 +32,7 @@ const Fr46 = ({rows=[
 	[50, 500, 2000, 15000],
 	["?", "?", "?", "?"]
 ]}) => {
-	let title = "Cost of cards"
+	let title = t`Cost of cards`
 	return (
 		<div className={style["wrapper"]}>
 			<img src={Logo} alt="" className={style["logo"]} />

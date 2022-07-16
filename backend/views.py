@@ -221,6 +221,19 @@ def get_max(request):
 
 
 @api_view(['GET'])
+def get_link_tg(request):
+    if Profile.objects.filter(user__id=request.user.id).exists():
+        profile = Profile.objects.get(user__id=request.user.id)
+        if User_Bot.objects.filter(profile_id=profile.id).exists():
+            user_bot = User_Bot.objects.get(profile_id=profile.id)
+            data = {
+                'link_tg': user_bot.deep_link
+            }
+            return Response(data=data)
+    return Response(status=401)
+
+
+@api_view(['GET'])
 def get_referrals(request):
     if Profile.objects.filter(user__id=request.user.id).exists():
         profile = Profile.objects.get(user__id=request.user.id)

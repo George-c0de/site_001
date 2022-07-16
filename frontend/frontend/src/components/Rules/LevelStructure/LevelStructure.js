@@ -20,7 +20,7 @@ const Fr49 = () => {
                     {description}
                 </div>
                 <div className={style["link"]}>
-                    <a href="#">с полными правилами игры вы можете ознакомиться по ссылке tokemons.info</a>
+                    <a href="#">t`still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng`</a>
                 </div>
             </div>
         </div>

@@ -392,6 +392,30 @@
         "msgstr": [
           "No Jogo Tokemon, cada carta é uma estrutura separada. Todos os novos jogadores são colocados aleatoriamente numa única grande estrutura em cada carta, dando a todos um igual oportunidade de ganhar prémios sem ter de convidar parceiros pessoais Todos escolhem qualquer cartão. Ao activar um cartão, um participante automaticamente entra numa fila com lugares disponíveis. Os lugares livres são atribuídos e atribuídos aleatoriamente. Um novo jogador toma sempre o lugar certo no ciclo de outro participante aleatório Quando ambos os lugares no ciclo são ocupados por jogadores, passa-se para uma nova fila abaixo - isto é uma reciclagem. Então, esta acção é\nrepetida à medida que a actividade se move no nível Cada participante pode ocupar apenas um lugar (o seu próprio ciclo) na linha, após fechar o seu ciclo, o participante passa para as seguintes linhas bel."
         ]
+      },
+      "game rules": {
+        "msgid": "game rules",
+        "msgstr": [
+          "REGRAS DO JOGO"
+        ]
+      },
+      "Cost of cards": {
+        "msgid": "Cost of cards",
+        "msgstr": [
+          "CUSTO DOS CARTÕES"
+        ]
+      },
+      "line": {
+        "msgid": "line",
+        "msgstr": [
+          ""
+        ]
+      },
+      "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng": {
+        "msgid": "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng",
+        "msgstr": [
+          "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng"
+        ]
       }
     }
   }

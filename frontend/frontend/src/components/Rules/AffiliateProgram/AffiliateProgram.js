@@ -7,7 +7,7 @@ const Fr47 = () => {
     let title =  t`affiliate program`
     let wordsTitle = t`3 lines = 15%`
     let wordsDescription = t`Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged`
-    let line = "line"
+    let line = t`line`
     return (
         <div className={style["wrapper"]}>
         <img src={Logo} alt="" className={style["logo"]} />

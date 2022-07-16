@@ -37,6 +37,7 @@ urlpatterns = [
     path('get_all', views.get_all),
     path('send_message_tgbot', views.send_message_tgbot),
     path('utm/<str:utm>', views.utm),
-    path('referral', views.get_referrals)
+    path('referral', views.get_referrals),
+    path('get_link_tg',views.get_link_tg)
 
 ]
