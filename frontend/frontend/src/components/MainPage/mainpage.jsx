@@ -80,7 +80,9 @@ const Mainpage = () => {
     const showStatistics = () => {
       navigate("/home/statistics");
     };
-
+    const showRules = () =>{
+        navigate("/rules");
+    }
 
 //   useEffect(async() => {
 //   const res= await axios.get('http://localhost:8000/api/user');
@@ -99,7 +101,7 @@ const Mainpage = () => {
                   <li onClick={ showGame }>{ t`MAIN` }</li>
                   <li onClick={ showReferals }>{ t`REFFERALS` }</li>
                   <li onClick={ showStatistics }>{ t`STATISTICS` }</li>
-                  <li>{ t`RULES` }</li>
+                  <li onClick={ showRules }>{ t`RULES` }</li>
                 </ul>
                 <div className="menu-info-icons">
                   <div className='info-icons-container'>

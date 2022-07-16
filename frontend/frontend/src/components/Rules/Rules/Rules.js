@@ -1,19 +1,20 @@
 import Logo from "../../../assets/logo.png"
 import Pokeboll from "../../../assets/pokeboll.svg"
 import style from './Rules.module.css'
+import {t} from "ttag";
 
 const Fr45 = () => {
-    let title = "description"
-    let description = "Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle."
-    let rulesTitle = "game rules"
+    let title = t`description`
+    let description = t`Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.`
+    let rulesTitle = t`game rules`
     let rules = [
-        "The registration is free",
-        "To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards",
-        "You can take part in all cards at the same time.",
-        "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.",
-        "After receiving 4 wins, you can feed the Tokémon to continue the battles",
-        "To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!",
-        "Balance replenishment and withdrawal – instant."
+        t`The registration is free`,
+        t`To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards`,
+        t`You can take part in all cards at the same time.`,
+        t`Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.`,
+        t`After receiving 4 wins, you can feed the Tokémon to continue the battles`,
+        t`To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!`,
+        t`Balance replenishment and withdrawal – instant.`
     ]
     return (
         <div className={style["wrapper"]}>

@@ -1,10 +1,11 @@
 import Logo from "../../../assets/logo.png"
 import SideImage from "../../../assets/fr48-side-image.png"
 import style from './BudgetAllocation.module.css'
+import {t} from "ttag";
 
 const Fr48 = () => {
-    let title = "BUDGET ALLOCATION"
-    let labels = ["Battle payment", "Advertising expenses", "Affiliate rewards"]
+    let title = t`BUDGET ALLOCATION`
+    let labels = [t`Battle payment`, t`Advertising expenses`, t`Affiliate rewards`]
     return (
         <div className={style["wrapper"]}>
             <div className={style["top"]}>

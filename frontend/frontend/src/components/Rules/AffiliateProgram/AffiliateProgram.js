@@ -1,11 +1,12 @@
 import Logo from "../../../assets/logo.png"
 import Pokeboll from "../../../assets/pokeboll.svg"
 import style from './AffiliateProgram.module.css'
+import { t } from 'ttag';
 
 const Fr47 = () => {
-    let title = "affiliate program"
-    let wordsTitle = "3 lines = 15%"
-    let wordsDescription = "Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged"
+    let title =  t`affiliate program`
+    let wordsTitle = t`3 lines = 15%`
+    let wordsDescription = t`Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged`
     let line = "line"
     return (
         <div className={style["wrapper"]}>
