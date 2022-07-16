@@ -1,0 +1,195 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals = 3; plural = (n % 10 == 1 && n % 100 != 11 ? 0 : n "
+"% 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\n"
+"Language: de\n"
+"mime-version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src\components\UserId\UserId.jsx:7
+msgid "User Id"
+msgstr "User Id"
+
+#: src\components\UserId\UserId.jsx:10
+msgid "Balance"
+msgstr "Balance"
+
+#: src\components\UserId\UserId.jsx:11
+msgid "Cards profit"
+msgstr "Karteneinnahmen"
+
+#: src\components\UserId\UserId.jsx:12
+msgid "Referal profit"
+msgstr "Empfehlungenprofitieren"
+
+#: src\components\UserId\UserId.jsx:13
+msgid "Link for invitation"
+msgstr "Link zur Einladung"
+
+#: src\components\UserId\UserId.jsx:16
+msgid "Deposit"
+msgstr "Nachfüllen"
+
+#: src\components\UserId\UserId.jsx:17
+msgid "Withdraw"
+msgstr "Abhebung"
+
+#: src\components\Submenu\Statistics\statistics.jsx:44
+msgid "TOTAL USERS"
+msgstr "Anzahl der Teilnehmer"
+
+#: src\components\Submenu\Statistics\statistics.jsx:45
+msgid "TOTAL  TRANSACTIONS"
+msgstr "TRANSAKTIONEN GESAMT"
+
+#: src\components\Submenu\Statistics\statistics.jsx:46
+msgid "TOTAL PAYOUT"
+msgstr "GESAMTAUSZAHLUNG"
+
+#: src\components\Submenu\Referals\referals.jsx:43
+msgid "Referral link"
+msgstr "Link zur Einladung"
+
+#: src\components\Submenu\Referals\referals.jsx:48
+msgid "1 line"
+msgstr "1 linie"
+
+#: src\components\Submenu\Referals\referals.jsx:49
+msgid "Total person"
+msgstr "Gesamtmensch"
+
+#: src\components\Submenu\Referals\referals.jsx:57
+msgid "2 line"
+msgstr "2 linie"
+
+#: src\components\Submenu\Referals\referals.jsx:58
+msgid "Profit received"
+msgstr "ErhaltenerGewinn"
+
+#: src\components\Submenu\Referals\referals.jsx:66
+msgid "3 line"
+msgstr "3 linie"
+
+#: src\components\Submenu\Referals\referals.jsx:67
+msgid "Lost profits"
+msgstr "Entgangener Gewinn"
+
+#: src\components\Submenu\Game\game.jsx:66
+msgid "УЧАСТВУЙ В БИТВАХ И ПОЛУЧАЙ ПРИЗЫ"
+msgstr "SCHLIESSEN SIE SICH DEM KAMPF AN UND GEWINNEN"
+
+#: src\components\Submenu\Game\game.jsx:70
+msgid "Cards"
+msgstr "KARTEN"
+
+#: src\components\Submenu\Game\game.jsx:80
+msgid "BRONZE"
+msgstr "BRONZE"
+
+#: src\components\Submenu\Game\game.jsx:98
+msgid "SILVER"
+msgstr "SILBER"
+
+#: src\components\Submenu\Game\game.jsx:116
+msgid "GOLD"
+msgstr "GOLD"
+
+#: src\components\Submenu\Game\game.jsx:134
+msgid "EMERALD"
+msgstr "SMARAGD"
+
+#: src\components\Submenu\Game\game.jsx:144
+msgid "GAME HISTORY"
+msgstr "SPIELGESCHICHTE"
+
+#: src\components\Submenu\Game\game.jsx:165
+msgid "SHOW MORE"
+msgstr "Zeig mehr"
+
+#: src\components\StartGame\startgame.jsx:44
+msgid "start"
+msgstr "start"
+
+#: src\components\Login\login.jsx:65
+#: src\components\Signup\signup.jsx:73
+#: src\components\Signup\signup.jsx:76
+msgid "Log In"
+msgstr "Einloggen"
+
+#: src\components\Login\login.jsx:87
+#: src\components\Login\login.jsx:96
+#: src\components\Signup\signup.jsx:84
+#: src\components\Signup\signup.jsx:128
+msgid "Sign Up"
+msgstr "Anmelden"
+
+#: src\components\Signup\signup.jsx:87
+msgid "Username"
+msgstr "Nutzername"
+
+#: src\components\Login\login.jsx:68
+#: src\components\Signup\signup.jsx:96
+msgid "Email"
+msgstr "Email"
+
+#: src\components\Login\login.jsx:78
+#: src\components\Signup\signup.jsx:106
+msgid "Password"
+msgstr "Passwort"
+
+#: src\components\Signup\signup.jsx:116
+msgid "Confirm Password"
+msgstr "Passwortbestätigen"
+
+#: src\components\MainPage\mainpage.jsx:87
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "MAIN"
+msgstr "Hauptseite"
+
+#: src\components\MainPage\mainpage.jsx:88
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "REFFERALS"
+msgstr "Verweise"
+
+#: src\components\MainPage\mainpage.jsx:89
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "STATISTICS"
+msgstr "Statistiken"
+
+#: src\components\MainPage\mainpage.jsx:90
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "RULES"
+msgstr "Regeln"
+
+#: src\components\MainPage\mainpage.jsx:95
+#. useEffect(async() => {
+#. const res= await axios.get('http://localhost:8000/api/user');
+#. console.log(res)
+#. },[]);
+msgid "USE TELEGRAM BOT"
+msgstr "Telegrambotverwenden"
+
+#: src\components\MainPage\Menu\Menu.jsx:31
+msgid "LOGOUT"
+msgstr "AUSLOGGEN"
+
+#: src\components\Login\login.jsx:20
+msgid "Switch lang"
+msgstr ""
+
+#: src\components\Login\login.jsx:93
+msgid "New Here"
+msgstr ""

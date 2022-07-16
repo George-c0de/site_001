@@ -11,7 +11,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import PasswordContextMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils.decorators import method_decorator
@@ -140,7 +140,20 @@ def getRoutes(request):
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
-        }
+        },
+        {
+            'Endpoint': '/?utm/utm/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/referral/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+
     ]
     return Response(routes)
 
@@ -167,8 +180,58 @@ admin_ = Profile.objects.filter(admin_or=True).first()
 
 @api_view(['GET'])
 def get_all(request):
+    all_ = All.objects.all().first()
     data = AllSerializer(all_)
     return Response(data.data)
+
+
+@api_view(['GET'])
+def get_max(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        data = {
+            'max_cards': profile.max_card,
+
+        }
+        return Response(data)
+    return Response(status=200)
+
+
+@api_view(['GET'])
+def get_referrals(request):
+    if Profile.objects.filter(user__id=request.user.id).exists():
+        profile = Profile.objects.get(user__id=request.user.id)
+        if First_Line.objects.filter(main_user__user_id=request.user.id).exists():
+            main_1 = First_Line.objects.get(main_user__user_id=request.user.id)
+            line_1 = Profile.objects.filter(line_1=main_1.id)
+        else:
+            line_1 = 0
+        if Second_Line.objects.filter(main_user__user_id=request.user.id).exists():
+            main_2 = Second_Line.objects.get(main_user__user_id=request.user.id)
+            line_2 = Profile.objects.filter(line_2=main_2.id)
+        else:
+            line_2 = 0
+        if Third_Line.objects.filter(main_user__user_id=request.user.id).exists():
+            main_3 = Third_Line.objects.get(main_user__user_id=request.user.id)
+            line_3 = Profile.objects.filter(line_3=main_3.id)
+        else:
+            line_3 = 0
+        total_line = 0
+        if line_1 != 0:
+            total_line += line_1.count()
+        if line_2 != 0:
+            total_line += line_2.count()
+        if line_3 != 0:
+            total_line += line_3.count()
+        data = {
+            'total_line': total_line,
+            'profit': profile.referral_amount,
+            'lost': profile.missed_amount,
+            'link': profile.referral_link
+        }
+        return Response(data, status=200)
+    else:
+        return Response(status=400)
 
 
 def lan(request):
@@ -230,14 +293,6 @@ def import_users(request):
     return response
 
 
-def index_with_utm(request, utm):
-    pass
-    # a = Response()
-    # # request.session
-    # a.set_cookie('utm', utm)
-    # return Response(request.COOKIES['utm'])
-
-
 @api_view(['GET'])
 def user_get(request):
     # profile = Profile.objects.get(user=request.user)
@@ -279,6 +334,19 @@ def logout_user(request):
     request.session.modified = True
     logout(request)
     return Response(status=200)
+
+
+@api_view(['GET'])
+def utm(request, utm):
+    if utm is None or utm == '' or utm == 'null':
+        return Response("No")
+    cookies = request.COOKIES.get('utm')
+    if cookies is None or cookies == '':
+        response = Response()
+        response.set_cookie("utm", utm, samesite='Lax')
+        return response
+    else:
+        return Response('Yes')
 
 
 @api_view(['POST'])
@@ -382,6 +450,22 @@ def case_3_4_ref(main_user, money_to_card, all_, profile, id_, name):
         send_message_tgbot(mes, main_user.id)
         all_.money += money_to_card
     save(main_user, all_, profile, admin_)
+
+
+@api_view(['GET'])
+def get_category(request):
+    if Category_Bronze.objects.filter(user_id=request.user.id).exists():
+        bronze = Category_Bronze.objects.get(user_id=request.user.id).card_6_disable
+    else:
+        bronze = False
+    if Category_Bronze.objects.filter(user_id=request.user.id).exists():
+        bronze = Category_Bronze.objects.get(user_id=request.user.id).card_6_disable
+    else:
+        bronze = False
+    if Category_Bronze.objects.filter(user_id=request.user.id).exists():
+        bronze = Category_Bronze.objects.get(user_id=request.user.id).card_6_disable
+    else:
+        bronze = False
 
 
 # Логика реферальной системы
