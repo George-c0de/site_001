@@ -179,6 +179,29 @@ admin_ = Profile.objects.filter(admin_or=True).first()
 
 
 @api_view(['GET'])
+def get_user_in_matrix(request):
+    if User_in_Matrix.objects.filter(user__id=request.user.id).exists():
+        profile = User_in_Matrix.objects.filter(user__id=request.user.id)
+        data = {}
+        for el in profile:
+            card_ = el.card
+            name = card_.name
+            if card_.category == 'bronze':
+                category = 0
+            elif card_.category == 'silver':
+                category = 1
+            elif card_.category == 'gold':
+                category = 2
+            else:
+                category = 3
+            name_ = category + name
+            data[name_] = el.d
+        return Response(data=data, status=200)
+    else:
+        return Response(status=400)
+
+
+@api_view(['GET'])
 def get_all(request):
     all_ = All.objects.all().first()
     data = AllSerializer(all_)
@@ -831,6 +854,8 @@ def logics_matrix(user_, money):
     profile = user_
     user_in_matrix = User_in_Matrix()
     user_in_matrix.user = Profile.objects.get(user=profile.user)
+    card = Buy_Card.objects.get(user_id=profile.id)
+    user_in_matrix.card = card
     if User_in_Matrix.objects.all().count() != 0:
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
             '-participant_number').first().participant_number + 1

@@ -181,6 +181,7 @@ class User_in_Matrix(models.Model):
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     d = models.IntegerField('Кол-во зачислений', default=0)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    card = models.ForeignKey(Buy_Card, on_delete=models.CASCADE)
 
 
 # Кошелек
