@@ -83,3 +83,56 @@ ul.row {
     height: 55px;
     width: 500px;
 }
+
+.container .copy-icon{
+	position: relative;
+	margin-left: 100%;
+}
+
+
+@media only screen and (max-width: 412px) {
+    #info-3-col .col-sm{
+		max-width:30% ;
+	}
+
+	#info-3-col{
+		flex-direction: row;
+		margin-left:15px;
+	}
+
+	#info-3-col .col-sm span {
+		font-size:20px;
+	}
+
+	.col-sm button {
+		width:100px;
+		font-size:20px;
+	}
+
+	.container .link-invitation {
+		width:300px;
+	}
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px) {
+	#info-3-col .col-sm{
+		max-width:30% ;
+	}
+
+	#info-3-col{
+		flex-direction: row;
+		margin-left:15px;
+	}
+
+	#info-3-col .col-sm span {
+		font-size:20px;
+	}
+
+	.col-sm button {
+		width:110px;
+	}
+
+	.container .link-invitation {
+		width:400px;
+	}
+}
