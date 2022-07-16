@@ -8,9 +8,7 @@ import {Menu} from './Menu/Menu';
 import {Lang} from './Lang/Lang';
 import {UserId} from '../UserId/UserId';
 
-
-import { t } from 'ttag';
-
+import {t} from 'ttag';
 //Font Awesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
@@ -124,27 +122,32 @@ const Mainpage = () => {
 //   console.log(res)
 // },[]);
 
-    return (
-      <div className="homepage">
-        <div className="main_container">
-          <nav className={ isActive ? "navbar" : "navbar_active" }>
-            <Menu isActive={ isActive } showMenu={ showMenu } showUserInfo={ showUserInfo }
-                  handleLogout={ handleLogout }/>
+        return (
+            <div className="homepage">
+                <div className="main_container">
+                    <nav className={isActive ? "navbar" : "navbar_active"}>
+                        <Menu isActive={isActive} showMenu={showMenu} showUserInfo={showUserInfo}
+                              handleLogout={handleLogout}/>
 
-            { openDropDown ? (
-              <>
-                <ul className="menu-info">
-                  <li onClick={ showGame }>{ t`MAIN` }</li>
-                  <li onClick={ showReferals }>{ t`REFFERALS` }</li>
-                  <li onClick={ showStatistics }>{ t`STATISTICS` }</li>
-                  <li>{ t`RULES` }</li>
-                </ul>
-                <div className="menu-info-icons">
-                  <div className='info-icons-container'>
-                    <FontAwesomeIcon icon={ faPaperPlane } className="paper-plane"/>
-                    <a href={ get_link_tg } className="telegram-user">{ t`USE TELEGRAM BOT` }</a>
-                  </div>
+                        {openDropDown ? (
+                            <>
+                                <ul className="menu-info">
+                                    <li onClick={showGame}>{t`MAIN`}</li>
+                                    <li onClick={showReferals}>{t`REFFERALS`}</li>
+                                    <li onClick={showStatistics}>{t`STATISTICS`}</li>
+                                    <li onClick={showRules}>{t`RULES`}</li>
+                                </ul>
+                                <div className="menu-info-icons">
+                                    <div className='info-icons-container'>
+                                        <FontAwesomeIcon icon={faPaperPlane} className="paper-plane"/>
+                                        <span className="telegram-user">{t`USE TELEGRAM BOT`}</span>
+                                    </div>
+                                </div>
+                            </>
+                        ) : null}
 
+                        {openUserInfo ? <UserId note={posts}/> : null}
+                    </nav>
                 </div>
                 {/* <img  src={pokeball} alt="" className="pokeball"/> */}
                 <Lang isActive={isActive}/>
