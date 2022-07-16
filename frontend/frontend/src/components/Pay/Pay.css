@@ -141,3 +141,9 @@
         min-height: 63px;
     }
 }
+
+@media only screen and (max-width: 412px) {
+    .pay-sum-input, .pay-address-input{
+        min-width:200px !important;
+    }
+}
