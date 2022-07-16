@@ -135,12 +135,11 @@ const Mainpage = () => {
                                     <li onClick={showGame}>{t`MAIN`}</li>
                                     <li onClick={showReferals}>{t`REFFERALS`}</li>
                                     <li onClick={showStatistics}>{t`STATISTICS`}</li>
-                                    <li onClick={showRules}>{t`RULES`}</li>
+                                    <li>{t`RULES`}</li>
                                 </ul>
                                 <div className="menu-info-icons">
                                     <div className='info-icons-container'>
                                         <FontAwesomeIcon icon={faPaperPlane} className="paper-plane"/>
-                                        <span className="telegram-user">{t`USE TELEGRAM BOT`}</span>
                                     </div>
                                 </div>
                             </>
