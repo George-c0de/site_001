@@ -47,7 +47,7 @@ export const PokeballsPack = ({ title, amount, images, background }) => {
           <img src={ pokeball } className="small-pokeball" alt=""/>
           <img src={ pokeball } className="small-pokeball" alt=""/>
         </div>
-        <div className={ COLORS_TO_CLASS[title.toLowerCase()] }>{ title }</div>
+        <div className={ COLORS_TO_CLASS[title.toLowerCase()] || 'text-pokeball-dedfault' }>{ title }</div>
         <div className="icon-showdown-container" onClick={ handlePokeballsPack }>
           <FontAwesomeIcon
             icon={ faChevronDown }

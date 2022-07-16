@@ -91,7 +91,8 @@ const Mainpage = () => {
       <div className="homepage">
         <div className="main_container">
           <nav className={ isActive ? "navbar" : "navbar_active" }>
-            <Menu isActive={ isActive } showMenu={ showMenu } showUserInfo={ showUserInfo } handleLogout={ handleLogout }/>
+            <Menu isActive={ isActive } showMenu={ showMenu } showUserInfo={ showUserInfo }
+                  handleLogout={ handleLogout }/>
 
             { openDropDown ? (
               <>
@@ -104,7 +105,7 @@ const Mainpage = () => {
                 <div className="menu-info-icons">
                   <div className='info-icons-container'>
                     <FontAwesomeIcon icon={ faPaperPlane } className="paper-plane"/>
-                    <span className="telegram-user">{ t`USE TELEGRAM BOT` }</span>
+                    <a href={ get_link_tg } className="telegram-user">{ t`USE TELEGRAM BOT` }</a>
                   </div>
                 </div>
               </>

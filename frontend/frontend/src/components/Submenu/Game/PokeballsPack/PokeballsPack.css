@@ -48,6 +48,11 @@
     width: 40px;
 }
 
+.text-pokeball-default {
+    position: relative;
+    font-size: 30px;
+}
+
 .text-pokeball-1 {
     position: relative;
     color: brown;
