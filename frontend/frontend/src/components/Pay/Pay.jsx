@@ -7,7 +7,6 @@ import {Lang} from '../MainPage/Lang/Lang';
 
 import './Pay.css';
 import axios from "axios";
-import {wait} from "@testing-library/user-event/dist/utils";
 
 const Pay = () => {
     const [openUserInfo, setOpenUserInfo] = useState(false);
@@ -140,7 +139,6 @@ const Pay = () => {
                     <div className='pay-history-table'>
                         <div className='history-table-column'>
                             <span className='history-table-title'>Время</span>
-                            {getTran()}
                         </div>
                         <div className='history-table-column'>
                             <span className='history-table-title'>Дата</span>

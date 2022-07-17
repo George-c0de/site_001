@@ -1,4 +1,3 @@
-//React, React Router, React Hooks
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,15 +9,8 @@ import { PokeballsPack } from './PokeballsPack/PokeballsPack';
 import { GameHistory } from './GameHistory/GameHistory';
 
 //Images
-import {t} from "ttag";
 import axios from "axios";
-
-const initialCardsAmount = {
-  bronze: [0],
-  silver: [0],
-  gold: [0],
-  emerald: [0]
-}
+import {t} from "ttag";
 
 const Game = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -33,21 +25,6 @@ const Game = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
-
-
-  const getCardData = async () => {
-    await axios.get('http://localhost:8000/api/get_user_in_matrix')
-      .then((data) => {
-        const result = {
-          bronze: data.bronze,
-          silver: data.silver,
-          gold: data.gold,
-          emerald: data.emerald
-        }
-
-        setCardsAmount(result);
-      })
-  }
 
   useEffect(() => {
     getUsername()
