@@ -12,7 +12,7 @@ import {t} from 'ttag';
 //Font Awesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
-import {set} from '../../cookie';
+//import {set} from '../../cookie';
 
 const Mainpage = () => {
         const [openDropDown, setOpenDropDown] = useState(false);
@@ -135,12 +135,12 @@ const Mainpage = () => {
                                     <li onClick={showGame}>{t`MAIN`}</li>
                                     <li onClick={showReferals}>{t`REFFERALS`}</li>
                                     <li onClick={showStatistics}>{t`STATISTICS`}</li>
-                                    <li>{t`RULES`}</li>
+                                    <li onClick={showRules}>{t`RULES`}</li>
                                 </ul>
                                 <div className="menu-info-icons">
                                     <div className='info-icons-container'>
                                         <FontAwesomeIcon icon={faPaperPlane} className="paper-plane"/>
-                                        <a href={ get_link_tg } className="telegram-user">{ t`USE TELEGRAM BOT` }</a>
+                                        <a href={get_link_tg} className="telegram-user">{t`USE TELEGRAM BOT`}</a>
                                     </div>
                                 </div>
                             </>
