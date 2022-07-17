@@ -145,6 +145,7 @@ class History_Transactions(models.Model):
     success = models.BooleanField('Успешность', default=False)
     Choices = [('Output', 'Вывод'), ('Input', 'Ввод')]
     name_operation = models.CharField(max_length=50, choices=Choices)
+    txid = models.CharField(max_length=150)
 
     class Meta:
         verbose_name_plural = _("Транзакции")

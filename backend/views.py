@@ -28,7 +28,8 @@ from tgbot.models import Chat_id, Event, Memcache, User_Bot
 from . import tokemon
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
-    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink
+    Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink, \
+    History_Transactions
 from .serializers import ProfileSerializer, UserSerializer, AllSerializer
 from tronpy import Contract, Tron
 import base58
@@ -157,6 +158,46 @@ def getRoutes(request):
     ]
     return Response(routes)
 
+
+@api_view(['GET'])
+def trans_get_output(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        if History_Transactions.objects.filter(user_id=profile.id).exists():
+            ht = History_Transactions.objects.filter(user_id=profile.id)
+            data = []
+            for el in ht:
+                if el.success and el.name_operation == 'Output':
+                    time = el.data.time()
+                    main = {
+                        'quantity': el.quantity,
+                        'data': el.data.date(),
+                        'time': time,
+                        'txid': el.txid,
+                    }
+                    data.append(main)
+            return Response(data=data)
+    return Response(data=[])
+
+@api_view(['GET'])
+def trans_get_input(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        if History_Transactions.objects.filter(user_id=profile.id).exists():
+            ht = History_Transactions.objects.filter(user_id=profile.id)
+            data = []
+            for el in ht:
+                if el.success and el.name_operation == 'Input':
+                    time = el.data.time()
+                    main = {
+                        'quantity': el.quantity,
+                        'data': el.data.date(),
+                        'time': time,
+                        'txid': el.txid,
+                    }
+                    data.append(main)
+            return Response(data=data)
+    return Response(data=[])
 
 def create_all_and_admin():
     if not Profile.objects.filter(admin_or=True).exists():

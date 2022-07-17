@@ -1,6 +1,6 @@
 import Motion from '../components/Rules/Motion/motion.js'
 import Rules from '../components/Rules/Rules/Rules.js';
-// import Costs from '../components/Rules/Costs/Costs.js'
+import Costs from '../components/Rules/Costs/Costs.js'
 import AffiliateProgram from '../components/Rules/AffiliateProgram/AffiliateProgram.js';
 import BudgetAllocation from '../components/Rules/BudgetAllocation/BudgetAllocation.js'
 import LevelStructure from '../components/Rules/LevelStructure/LevelStructure.js';
@@ -18,7 +18,7 @@ const RulesPage = () => {
     return (
         <Motion>
             <Rules />
-            {/*<Costs />*/}
+            <Costs />
             <AffiliateProgram />
             <BudgetAllocation />
             <LevelStructure />

@@ -25,7 +25,8 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let data2 = await axios.post('http://127.0.0.1:8000/api/login', data)
+            let data2 = 200;
+            data2 = await axios.post('http://127.0.0.1:8000/api/login', data)
                 .catch(function (error) {
                     if (error.response) {
                         data2 = error.response.status;

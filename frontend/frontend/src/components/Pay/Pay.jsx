@@ -7,6 +7,7 @@ import {Lang} from '../MainPage/Lang/Lang';
 
 import './Pay.css';
 import axios from "axios";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 const Pay = () => {
     const [openUserInfo, setOpenUserInfo] = useState(false);
@@ -14,61 +15,76 @@ const Pay = () => {
     const navigate = useNavigate();
     const [state_input, SetState] = useState(true);
     const [wallet, SetWallet] = useState("")
-
-  let [user,setUser] = useState({
-            "id": 0,
-            "money": "0.00",
-            "referral_link": "",
-            "referral_amount": "",
-            "missed_amount": "",
-            "wallet": null,
-            "line_1": null,
-            "line_2": null,
-            "line_3": null,
-            "max_card": 0,
-            "admin_or": false,
-            "user": 0
-  })
-    useEffect(()=>{
-            const getPosts = async()=>{
-                try {
-                let response = await axios.get('http://127.0.0.1:8000/api/user');
-
+    const [data, setData] = useState({
+        wallet: "",
+        col: 0,
+    });
+    let [tran, SetTran] = useState([])
+    let [user, setUser] = useState({
+        "id": 0,
+        "money": "0.00",
+        "referral_link": "",
+        "referral_amount": "",
+        "missed_amount": "",
+        "wallet": null,
+        "line_1": null,
+        "line_2": null,
+        "line_3": null,
+        "max_card": 0,
+        "admin_or": false,
+        "user": 0
+    })
+        const getTran = async () => {
+            try {
+                let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input');
                 let data = await response.data
-                console.log(data)
+                SetTran(data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    useEffect(() => {
+        const getPosts = async () => {
+            try {
+                let response = await axios.get('http://127.0.0.1:8000/api/user');
+                let data = await response.data
                 setUser(data);
-                console.log(user)
-                SetState(false);
                 if (user.wallet !== null) {
-                    SetState(false);
                     SetWallet(user.wallet);
+                    setData({
+                        wallet: wallet,
+                        col: 0,
+                    })
                 } else {
-
+                    SetState(false);
                 }
             } catch (e) {
-            }}
+                SetState(false);
+
+            }
+        }
         getPosts();
-},[user.id]);
-  // async function getPosts() {
-  //           try {
-  //               let response = await axios.get('http://127.0.0.1:8000/api/user');
-  //
-  //               let data = await response
-  //               console.log(data)
-  //
-  //               setUser(data);
-  //               console.log(user)
-  //               SetState(false);
-  //               if (user.wallet !== null) {
-  //                   SetState(false);
-  //                   SetWallet(user.wallet);
-  //               } else {
-  //
-  //               }
-  //           } catch (e) {
-  //           }
-  //
-  //       }
+    }, [user.id]);
+    // async function getPosts() {
+    //           try {
+    //               let response = await axios.get('http://127.0.0.1:8000/api/user');
+    //
+    //               let data = await response
+    //               console.log(data)
+    //
+    //               setUser(data);
+    //               console.log(user)
+    //               SetState(false);
+    //               if (user.wallet !== null) {
+    //                   SetState(false);
+    //                   SetWallet(user.wallet);
+    //               } else {
+    //
+    //               }
+    //           } catch (e) {
+    //           }
+    //
+    //       }
 
 
 //Logout
@@ -83,6 +99,7 @@ const Pay = () => {
 
     //Show informations of user
     const showUserInfo = () => {
+
         setOpenUserInfo(!openUserInfo);
         setActive(!onActive);
     };
@@ -106,22 +123,24 @@ const Pay = () => {
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
                         <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input type='text' className='pay-sum-input' name='sum-input'/>
+                        <input value={data.col} type='number' className='pay-sum-input' name='sum-input'/>
                         <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
                     <div className='pay-input'>
                         <label htmlFor='address-input'>Адрес вывода:</label>
-                        <input disabled={state_input} value={wallet} type='text' className='pay-address-input'
+                        <input readOnly={state_input} value={data.wallet} type='text' className='pay-address-input'
                                name='address-input'/>
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
                 <button className='pay-button'>ВЫВЕСТИ</button>
+
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>
                         <div className='history-table-column'>
                             <span className='history-table-title'>Время</span>
+                            {getTran()}
                         </div>
                         <div className='history-table-column'>
                             <span className='history-table-title'>Дата</span>
@@ -133,6 +152,7 @@ const Pay = () => {
                             <span className='history-table-title'>Сумма</span>
                         </div>
                     </div>
+
                 </div>
             </div>
             <Lang isActive={onActive}/>
