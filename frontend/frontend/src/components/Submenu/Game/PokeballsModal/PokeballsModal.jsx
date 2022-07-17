@@ -1,7 +1,13 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
+
+// Icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import './PokeballsModal.css';
 
@@ -34,34 +40,88 @@ export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatus
         <span className="card-info-label">Total Wins: <span>245.85$</span></span>
         <span className="card-info-button">Health</span>
       </div>
-    </div>
 
-    <div className='pokeballs-card inactive'>
-      <div className='pokeballs-card-label'>
-        <span>ACTIVATE</span>
-        <span>15 USD</span>
+    </>
+  )
+}
+
+const CardClosed = ({ price, buyCard, idCard }) => {
+  const [status, setStatus] = useState();
+
+  const handleBuyClick = () => {
+    setStatus('pending');
+
+    setTimeout(async () => {
+      await axios.get(`http://localhost:3000/api/bronze/${ idCard }`)
+        .then((res) => {
+          setStatus('success')
+
+          setTimeout(() => {
+            buyCard();
+          }, 1000)
+        })
+    }, 3000)
+  }
+
+  return (
+    <div>
+      <div className='pokeballs-card-label' onClick={ handleBuyClick }>
+        { status === 'pending' ?
+          <span className='status_pending'></span> :
+          status === 'success' ?
+            (
+              <span className='status_success'>
+                <FontAwesomeIcon icon={ faCheck } className="status_success_check"/>
+              </span>
+            ) :
+            (
+              <>
+                <span>ACRIVATE</span>
+                <span>{ price } USD</span>
+              </>
+            )
+        }
       </div>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
-    </div>
 
-    <div className='pokeballs-card inactive'>
-      <div className='pokeballs-card-label'>
-        <span>ACTIVATE</span>
-        <span>25 USD</span>
-      </div>
       <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
     </div>
+  )
+}
 
-    <div className='pokeballs-card inactive'>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
-    </div>
 
-    <div className='pokeballs-card inactive'>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
-    </div>
+export const PokeballsModal = ({ amount, images, background }) => {
+  const [cards, setCards] = useState([]);
 
-    <div className='pokeballs-card inactive'>
-      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
+  const buyCard = async (id) => {
+    const newCards = [...cards];
+    newCards[id - 1] = id;
+    setCards(newCards)
+  }
+
+  useEffect(() => {
+    const array = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < amount.length; i++) {
+      array[amount[i] - 1] = amount[i]
+    }
+
+    setCards(array);
+  }, [])
+
+  return (
+    <div className='pokeballs-modal'>
+      {
+        cards.map((id, i) => {
+          return (
+            <div data-id={ i + 1 } className={ id ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+              { id ?
+                <CardOpened image={ images[i] } background={ background }/> :
+                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ id }/>
+              }
+            </div>
+          )
+        })
+      }
+
     </div>
-  </div>
-)
+  )
+}
