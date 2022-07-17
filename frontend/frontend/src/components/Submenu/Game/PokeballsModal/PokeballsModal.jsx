@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
+
+// Icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import './PokeballsModal.css';
 
@@ -49,53 +54,80 @@ const CardOpened = ({ image, background }) => {
   )
 }
 
+const CardClosed = ({ price, buyCard, idCard }) => {
+  const [status, setStatus] = useState();
 
-const CardClosed = ({ price }) => (
-  <>
-    <div className='pokeballs-card-label'>
-      <span>ACRIVATE</span>
-      <span>{ price } USD</span>
-    </div>
-    <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
-  </>
-)
+  const handleBuyClick = () => {
+    setStatus('pending');
 
-export const PokeballsModal = ({ amount, images, background }) => (
-  <div className='pokeballs-modal'>
-    <div data-id='1' className={ 1 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
-      { 1 <= amount ? <CardOpened image={ images[0] }
-                                  background={ background }/> :
-        <CardClosed price='15'/> }
-    </div>
+    setTimeout(async () => {
+      await axios.get(`http://localhost:3000/api/bronze/${ idCard }`)
+        .then((res) => {
+          setStatus('success')
 
-    <div data-id='2' className={ 2 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
-      { 2 <= amount ? <CardOpened image={ images[1] }
-                                  background={ background }/> :
-        <CardClosed price='15'/> }
-    </div>
+          setTimeout(() => {
+            buyCard();
+          }, 1000)
+        })
+    }, 3000)
+  }
 
-    <div data-id='3' className={ 3 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
-      { 3 <= amount ? <CardOpened image={ images[2] }
-                                  background={ background }/> :
-        <CardClosed price='15'/> }
+  return (
+    <div>
+      <div className='pokeballs-card-label' onClick={ handleBuyClick }>
+        { status === 'pending' ?
+          <span className='status_pending'></span> :
+          status === 'success' ?
+            (
+              <span className='status_success'>
+                <FontAwesomeIcon icon={ faCheck } className="status_success_check"/>
+              </span>
+            ) :
+            (
+              <>
+                <span>ACRIVATE</span>
+                <span>{ price } USD</span>
+              </>
+            )
+        }
+      </div>
+      <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
     </div>
+  )
+}
 
-    <div data-id='4' className={ 4 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
-      { 4 <= amount ? <CardOpened image={ images[3] }
-                                  background={ background }/> :
-        <CardClosed price='15'/> }
-    </div>
+export const PokeballsModal = ({ amount, images, background }) => {
+  const [cards, setCards] = useState([]);
 
-    <div data-id='5' className={ 5 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
-      { 5 <= amount ? <CardOpened image={ images[4] }
-                                  background={ background }/> :
-        <CardClosed price='15'/> }
-    </div>
+  const buyCard = async (id) => {
+    const newCards = [...cards];
+    newCards[id - 1] = id;
+    setCards(newCards)
+  }
 
-    <div data-id='6' className={ 6 <= amount ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
-      { 6 <= amount ? <CardOpened image={ images[5] }
-                                  background={ background }/> :
-        <CardClosed price='15'/> }
+  useEffect(() => {
+    const array = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < amount.length; i++) {
+      array[amount[i] - 1] = amount[i]
+    }
+
+    setCards(array);
+  }, [])
+
+  return (
+    <div className='pokeballs-modal'>
+      {
+        cards.map((id, i) => {
+          return (
+            <div data-id={ i + 1 } className={ id ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+              { id ?
+                <CardOpened image={ images[i] } background={ background }/> :
+                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ id }/>
+              }
+            </div>
+          )
+        })
+      }
     </div>
-  </div>
-)
+  )
+}

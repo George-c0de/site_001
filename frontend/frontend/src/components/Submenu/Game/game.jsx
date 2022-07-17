@@ -19,22 +19,11 @@ import emerald from '../../../assets/backgrounds/изумруд-min.svg';
 import { t } from "ttag";
 import axios from "axios";
 
-const apiMockData = {
-  max_card: '36'
-}
-
-const indexToCard = {
-  '0': 'bronze',
-  '1': 'silver',
-  '2': 'gold',
-  '3': 'emerald',
-}
-
 const initialCardsAmount = {
-  bronze: 0,
-  silver: 0,
-  gold: 0,
-  emerald: 0
+  bronze: [0],
+  silver: [0],
+  gold: [0],
+  emerald: [0]
 }
 
 const Game = () => {
@@ -52,29 +41,18 @@ const Game = () => {
     navigate("/login");
   };
 
-  const getCardData = () => {
-    const index = (apiMockData.max_card - (apiMockData.max_card % 10)) / 10;
-    const amount = apiMockData.max_card % 10;
+  const getCardData = async () => {
+    await axios.get('http://localhost:8000/api/get_user_in_matrix')
+      .then((data) => {
+        const result = {
+          bronze: data.bronze,
+          silver: data.silver,
+          gold: data.gold,
+          emerald: data.emerald
+        }
 
-    const result = {
-      bronze: 0,
-      silver: 0,
-      gold: 0,
-      emerald: 0
-    }
-
-    for (let i = 0; i <= index; i++) {
-      if (i < index) {
-        const category = indexToCard[i];
-        result[category] = 6
-      }
-      if (i === index) {
-        const category = indexToCard[i];
-        result[category] = amount;
-      }
-    }
-
-    setCardsAmount(result);
+        setCardsAmount(result);
+      })
   }
 
   useEffect(() => {
