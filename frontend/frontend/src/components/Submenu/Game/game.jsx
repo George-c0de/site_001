@@ -31,7 +31,7 @@ const Game = () => {
   }, [])
 
   let getUsername = async () => {
-    const username = await axios.get('http://127.0.0.1:8000//api/user')
+    const username = await axios.get('http://127.0.0.1:8000/api/user')
     console.log(username);
     setUsername(username.data.username);
   }
