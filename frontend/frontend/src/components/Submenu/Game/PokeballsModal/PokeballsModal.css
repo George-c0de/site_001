@@ -187,3 +187,36 @@
 .card-status-balls span.show img {
     visibility: visible;
 }
+
+
+@media only screen and (max-width: 412px) {
+    .pokeballs-modal .pokeballs-card {
+        width:150px;
+    }
+
+    .pokeballs-card-info .card-info-label{
+        font-size:10px !important;
+        margin-left:4px;
+    }
+
+    .pokeballs-card-info .card-info-button{
+        width:75px;
+        margin-left: 4px;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px) {
+    .pokeballs-modal .pokeballs-card {
+        width:175px;
+    }
+
+    .pokeballs-card-info .card-info-label{
+        font-size:13px !important;
+        margin-left:4px;
+    }
+
+    .pokeballs-card-info .card-info-button{
+        width:90px;
+        margin-left: 4px;
+    }
+}

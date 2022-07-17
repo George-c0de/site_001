@@ -30,7 +30,7 @@ export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatus
       </div>
       <div className='pokeballs-card-info'>
         <img src={ imageMain } alt=''/>
-        <span className="card-info-label">Refelrel Profit: <span>325.23$</span></span>
+        <span className="card-info-label">Referral Profit: <span>325.23$</span></span>
         <span className="card-info-label">Total Wins: <span>245.85$</span></span>
         <span className="card-info-button">Health</span>
       </div>
@@ -38,7 +38,7 @@ export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatus
 
     <div className='pokeballs-card inactive'>
       <div className='pokeballs-card-label'>
-        <span>ACRIVATE</span>
+        <span>ACTIVATE</span>
         <span>15 USD</span>
       </div>
       <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
@@ -46,7 +46,7 @@ export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatus
 
     <div className='pokeballs-card inactive'>
       <div className='pokeballs-card-label'>
-        <span>ACRIVATE</span>
+        <span>ACTIVATE</span>
         <span>25 USD</span>
       </div>
       <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
