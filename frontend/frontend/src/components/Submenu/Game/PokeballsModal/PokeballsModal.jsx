@@ -122,7 +122,7 @@ export const PokeballsModal = ({ amount, images, background }) => {
             <div data-id={ i + 1 } className={ id ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
               { id ?
                 <CardOpened image={ images[i] } background={ background }/> :
-                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ id }/>
+                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={id}/>
               }
             </div>
           )
