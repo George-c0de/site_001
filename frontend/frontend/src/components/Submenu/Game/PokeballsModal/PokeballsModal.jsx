@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -10,20 +11,9 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import './PokeballsModal.css';
 
-const CardOpened = ({ image, background }) => {
-  const [status, setStatus] = useState('25');
-
-  const handleStatusBalls = (e) => {
-    const statusBall = e.target.closest('[data-status]');
-    if (statusBall) {
-      statusBall.classList.toggle('show');
-      setStatus(statusBall.dataset.status);
-    }
-  }
-
-  return (
-    <>
-      <img src={ background } alt='' className="card-background"/>
+export const PokeballsModal = ({ status, imageMain, cardBackground, handleStatusBalls }) => (
+  <div className='pokeballs-modal'>
+    <div className='pokeballs-card main' style={ { backgroundColor: cardBackground } }>
       <div className='pokeballs-card-status'>
         <div className="card-status-bar" data-status={ status }>
           <span className="card-status-bar-line"></span>
@@ -45,11 +35,12 @@ const CardOpened = ({ image, background }) => {
         </div>
       </div>
       <div className='pokeballs-card-info'>
-        <img src={ image } alt=''/>
-        <span className="card-info-label">Refelrel Profit: <span>325.23$</span></span>
+        <img src={ imageMain } alt=''/>
+        <span className="card-info-label">Referral Profit: <span>325.23$</span></span>
         <span className="card-info-label">Total Wins: <span>245.85$</span></span>
         <span className="card-info-button">Health</span>
       </div>
+
     </>
   )
 }
@@ -91,10 +82,12 @@ const CardClosed = ({ price, buyCard, idCard }) => {
             )
         }
       </div>
+
       <img src={ pokeball } className="pokeballs-card-ball" alt=''/>
     </div>
   )
 }
+
 
 export const PokeballsModal = ({ amount, images, background }) => {
   const [cards, setCards] = useState([]);
@@ -128,6 +121,7 @@ export const PokeballsModal = ({ amount, images, background }) => {
           )
         })
       }
+
     </div>
   )
 }

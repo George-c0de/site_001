@@ -62,50 +62,51 @@
     z-index: 1000;
 }
 
-@media (max-height: 800px) {
-    .start-game {
-        top: 36%;
+/*Devices Responsive*/
+/*Mobile*/
+@media only screen and (max-width: 412px) {
+    .logo-tokemon{
+        height:20% !important;
+    }
+
+    .start-game{
+        top:33%;
     }
 }
 
-@media (max-height: 700px) {
+@media only screen and (min-width:413px) and (max-width: 600px) {
     .start-game {
-        top: 40%;
+        top: 33%;
+    }
+    .logo-tokemon{
+        height:30% !important;
     }
 }
 
-@media (max-height: 600px) {
+/*Small devices: tablets, large phones*/
+@media only screen and (min-width: 600px) and (max-width: 767px) {
     .start-game {
-        top: 47%;
+        top: 33%;
     }
 }
 
-@media (max-height: 500px) {
+/*Laptop */
+/* For 1024 Resolution */  
+@media only screen and (min-width : 768px) and (max-width : 1024px){
     .start-game {
-        top: 53%;
+        top: 35% !important;
+    }
+}
+/* For 1366 Resolution */  
+@media only screen and (min-width: 1030px) and (max-width: 1366px){
+    .start-game {
+        top: 35%;
     }
 }
 
-@media (max-height: 400px) {
+/*Desktop*/
+@media only screen and (min-width: 1370px){
     .start-game {
-        top: 60%;
-    }
-}
-
-@media (min-width: 1400px) {
-    .start-game {
-        top: 36%;
-    }
-}
-
-@media (min-width: 1500px) {
-    .start-game {
-        top: 38%;
-    }
-}
-
-@media (min-width: 1600px) {
-    .start-game {
-        top: 46%;
+        top: 43%;
     }
 }

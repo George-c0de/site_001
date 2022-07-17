@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 // Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg';
+import CardPink from '../../../../assets/game-card-pink.svg';
 
 // Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,11 +20,20 @@ const COLORS_TO_CLASS = {
   emerald: 'text-pokeball-4'
 }
 
-export const PokeballsPack = ({ title, amount, images, background }) => {
+export const PokeballsPack = ({ title }) => {
+  const [status, setStatus] = useState('25');
   const [modalOpen, setModalOpen] = useState(false);
 
   const handlePokeballsPack = () => {
     setModalOpen(!modalOpen);
+  }
+
+  const handleStatusBalls = (e) => {
+    const statusBall = e.target.closest('[data-status]');
+    if (statusBall) {
+      statusBall.classList.toggle('show');
+      setStatus(statusBall.dataset.status);
+    }
   }
 
   return (
@@ -38,7 +48,7 @@ export const PokeballsPack = ({ title, amount, images, background }) => {
           <img src={ pokeball } className="small-pokeball" alt=""/>
           <img src={ pokeball } className="small-pokeball" alt=""/>
         </div>
-        <div className={ COLORS_TO_CLASS[title.toLowerCase()] || 'text-pokeball-dedfault' }>{ title }</div>
+        <div className={ COLORS_TO_CLASS[title.toLowerCase()] }>{ title }</div>
         <div className="icon-showdown-container" onClick={ handlePokeballsPack }>
           <FontAwesomeIcon
             icon={ faChevronDown }
@@ -46,10 +56,10 @@ export const PokeballsPack = ({ title, amount, images, background }) => {
           />
         </div>
 
-        <PokeballsModal background={ background }
-                        amount={ amount }
-                        images={ images }
-        />
+        <PokeballsModal status={ status }
+                        handleStatusBalls={ handleStatusBalls }
+                        imageMain={ CardPink }
+                        cardBackground={ '' }/>
       </div>
     </div>
   )

@@ -1,0 +1,46 @@
+@media (min-width: 0px) and (max-width: 412px){
+    #captcha{
+        margin-left:8% !important;
+    }
+    #inputType{
+        margin-left: 16% !important;
+        width:65% !important;
+    }
+
+    #succesBTN{
+        margin-left: 16% !important;
+        width:65% !important;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px){
+    #captcha{
+        margin-left:15% !important;
+    }
+
+    #inputType{
+        margin-left:15% !important;
+        width:70% !important;
+    }
+
+    #succesBTN{
+        margin-left:15% !important;
+        width:70% !important;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width:767px){
+    #captcha{
+        margin-left:25% !important;
+    }
+
+    #inputType{
+        margin-left:15% !important;
+        width:70% !important;
+    }
+
+    #succesBTN{
+        margin-left:15% !important;
+        width:70% !important;
+    }
+}

@@ -145,6 +145,7 @@ class History_Transactions(models.Model):
     success = models.BooleanField('Успешность', default=False)
     Choices = [('Output', 'Вывод'), ('Input', 'Ввод')]
     name_operation = models.CharField(max_length=50, choices=Choices)
+    txid = models.CharField(max_length=150)
 
     class Meta:
         verbose_name_plural = _("Транзакции")
@@ -181,6 +182,7 @@ class User_in_Matrix(models.Model):
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     d = models.IntegerField('Кол-во зачислений', default=0)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    card = models.ForeignKey(Buy_Card, on_delete=models.CASCADE)
 
 
 # Кошелек

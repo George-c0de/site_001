@@ -46,3 +46,19 @@
 .history-table-score.red {
     color: #F16050;
 }
+
+@media only screen and (max-width: 412px) {
+   .game-history{
+        width: 250px;
+        margin-left: -15%;
+        height: 250px;
+   }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px) {
+    .game-history{
+        width: 300px;
+        margin-left: -15%;
+        height: 250px;
+   }
+}
