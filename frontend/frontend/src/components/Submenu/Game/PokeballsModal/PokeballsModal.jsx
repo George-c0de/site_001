@@ -54,14 +54,14 @@ const CardOpened = ({ image, background }) => {
   )
 }
 
-const CardClosed = ({ price, buyCard, idCard }) => {
+const CardClosed = ({ price, buyCard, idCard, category }) => {
   const [status, setStatus] = useState();
 
   const handleBuyClick = () => {
     setStatus('pending');
 
     setTimeout(async () => {
-      await axios.get(`http://localhost:3000/api/bronze/${ idCard }`)
+      await axios.get(`http://localhost:3000/api/${ category }/${ idCard }`)
         .then((res) => {
           setStatus('success')
 
@@ -96,7 +96,7 @@ const CardClosed = ({ price, buyCard, idCard }) => {
   )
 }
 
-export const PokeballsModal = ({ amount, images, background }) => {
+export const PokeballsModal = ({ amount, category, images, background }) => {
   const [cards, setCards] = useState([]);
 
   const buyCard = async (id) => {
@@ -107,8 +107,10 @@ export const PokeballsModal = ({ amount, images, background }) => {
 
   useEffect(() => {
     const array = [0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < amount.length; i++) {
-      array[amount[i] - 1] = amount[i]
+    if (amount.length > 0) {
+      for (let i = 0; i < amount.length; i++) {
+        array[amount[i] - 1] = amount[i]
+      }
     }
 
     setCards(array);
@@ -122,7 +124,7 @@ export const PokeballsModal = ({ amount, images, background }) => {
             <div data-id={ i + 1 } className={ id ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
               { id ?
                 <CardOpened image={ images[i] } background={ background } key={ id }/> :
-                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ id } key={ id }/>
+                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ i + 1 } category={ category } key={ id }/>
               }
             </div>
           )

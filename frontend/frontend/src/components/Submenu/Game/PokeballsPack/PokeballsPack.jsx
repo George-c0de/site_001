@@ -49,6 +49,7 @@ export const PokeballsPack = ({ title, amount, images, background }) => {
         <PokeballsModal background={ background }
                         amount={ amount }
                         images={ images }
+                        category={ title?.toLowerCase() }
         />
       </div>
     </div>
