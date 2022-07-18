@@ -19,7 +19,7 @@ from .Tron import TronClient
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink, \
-    History_Transactions
+    History_Transactions, All_card
 from .serializers import ProfileSerializer, AllSerializer
 import requests
 
@@ -162,6 +162,11 @@ def trans_get_output(request):
     return Response(data=[])
 
 
+# @api_view(['GET'])
+# def status_card(request):
+#     if Profile.objects.filter(user__id=request.id).exists():
+#         profile = Profile.objects.get(user__id=request.id)
+#
 @api_view(['GET'])
 def trans_get_input(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
@@ -208,8 +213,125 @@ def create_all_and_admin():
 
 
 @api_view(['GET'])
+def get_card_data(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        cards = Buy_Card.objects.filter(user_id=profile.id)
+
+    return Response(status=400)
+
+
+@api_view(['GET'])
+def get_user_in_card(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile_2 = Profile.objects.get(user_id=request.user.id)
+        if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
+            profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
+            data = []
+            bronze = [[], [], [], [], [], []]
+            silver = [[], [], [], [], [], []]
+            gold = [[], [], [], [], [], []]
+            emerald = [[], [], [], [], [], []]
+            for el in profile:
+                card_ = el.card
+                if card_.card.category == 'bronze':
+                    if len(bronze[int(card_.card.name) - 1]) == 0:
+                        bronze[int(card_.card.name) - 1].append(el.d)
+                        bronze[int(card_.card.name) - 1].append(profile_2.referral_amount)
+                        bronze[int(card_.card.name) - 1].append(el.all_wins)
+                    else:
+                        temp = (bronze[int(card_.card.name) - 1][0] + el.d)
+                        temp = int(temp / 2)
+                        bronze[int(card_.card.name) - 1][0] = temp
+                        bronze[int(card_.card.name) - 1][1] += profile_2.referral_amount
+                        bronze[int(card_.card.name) - 1][2] += el.all_wins
+                elif card_.card.category == 'silver':
+                    if len(silver[int(card_.card.name) - 1]) == 0:
+                        silver[int(card_.card.name) - 1].append(el.d)
+                        silver[int(card_.card.name) - 1].append(profile_2.referral_amount)
+                        silver[int(card_.card.name) - 1].append(el.all_wins)
+                    else:
+                        temp = (silver[int(card_.card.name) - 1][0] + el.d)
+                        temp = int(temp / 2)
+                        silver[int(card_.card.name) - 1][0] = temp
+                        silver[int(card_.card.name) - 1][1] += profile_2.referral_amount
+                        silver[int(card_.card.name) - 1][2] += el.all_wins
+                elif card_.card.category == 'gold':
+                    print(gold[int(card_.card.name) - 1])
+                    if len(gold[int(card_.card.name) - 1]) == 0:
+                        gold[int(card_.card.name) - 1].append(el.d)
+                        gold[int(card_.card.name) - 1].append(profile_2.referral_amount)
+                        gold[int(card_.card.name) - 1].append(el.all_wins)
+                    else:
+                        print(int(card_.card.name) - 1)
+                        temp = (gold[int(card_.card.name) - 1][0] + el.d)
+                        temp = int(temp / 2)
+                        gold[int(card_.card.name) - 1][0] = temp
+                        gold[int(card_.card.name) - 1][1] += profile_2.referral_amount
+                        gold[int(card_.card.name) - 1][2] += el.all_wins
+                else:
+                    if len(emerald[int(card_.card.name) - 1]) == 0:
+                        emerald[int(card_.card.name) - 1].append(el.d)
+                        emerald[int(card_.card.name) - 1].append(profile_2.referral_amount)
+                        emerald[int(card_.card.name) - 1].append(el.all_wins)
+                    else:
+                        temp = (emerald[int(card_.card.name) - 1][0] + el.d)
+                        temp = int(temp / 2)
+                        emerald[int(card_.card.name) - 1][0] = temp
+                        emerald[int(card_.card.name) - 1][1] += profile_2.referral_amount
+                        emerald[int(card_.card.name) - 1][2] += el.all_wins
+
+            for el in bronze:
+                if len(el) != 0:
+                    el[0] *= 25
+                    if el[0] > 100:
+                        el[0] = 100
+                    else:
+                        el[0] = int(el[0])
+                else:
+                    el.append(0)
+                    el.append(0)
+                    el.append(0)
+            for el in emerald:
+                if len(el) != 0:
+                    el[0] *= 25
+                    if el[0] > 100:
+                        el[0] = 100
+                    else:
+                        el[0] = int(el[0])
+                else:
+                    el.append(0)
+                    el.append(0)
+                    el.append(0)
+            for el in silver:
+                if len(el) != 0:
+                    el[0] *= 25
+                    if el[0] > 100:
+                        el[0] = 100
+                    else:
+                        el[0] = int(el[0])
+                else:
+                    el.append(0)
+                    el.append(0)
+                    el.append(0)
+            for el in gold:
+                if len(el) != 0:
+                    el[0] *= 25
+                    if el[0] > 100:
+                        el[0] = 100
+                    else:
+                        el[0] = int(el[0])
+                else:
+                    el.append(0)
+                    el.append(0)
+                    el.append(0)
+            data = {'bronze': bronze, 'silver': silver, 'gold': gold, 'emerald': emerald}
+            return Response(data=data)
+    return Response(status=400)
+
+
+@api_view(['GET'])
 def get_user_in_matrix(request):
-    print(request.user)
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
         if User_in_Matrix.objects.filter(user_id=profile.id).exists():
@@ -231,26 +353,26 @@ def get_user_in_matrix(request):
                     if i == 0:
                         data['bronze'].append(card_.card.name)
                 elif card_.card.category == 'silver':
+                    i = 0
                     for el in data['silver']:
-                        i = 0
                         if el == card_.card.name:
                             i += 1
-                        if i == 0:
-                            data['silver'].append(card_.card.name)
+                    if i == 0:
+                        data['silver'].append(card_.card.name)
                 elif card_.card.category == 'gold':
+                    i = 0
                     for el in data['gold']:
-                        i = 0
                         if el == card_.card.name:
                             i += 1
-                        if i == 0:
-                            data['gold'].append(card_.card.name)
+                    if i == 0:
+                        data['gold'].append(card_.card.name)
                 else:
                     i = 0
                     for el in data['emerald']:
                         if el == card_.card.name:
                             i += 1
                     if i == 0:
-                        data['emerald'].append(card_.id)
+                        data['emerald'].append(card_.card.name)
             return Response(data)
         else:
             return Response(status=400)
@@ -636,6 +758,19 @@ def referral_system_bronze(request, id_):
             save(category_bronze)
     buy_card = Buy_Card()
     buy_card.user = profile
+    all_cards = All_card.objects.all()
+    i = 0
+    for el in all_cards:
+        if el.category == 'bronze' and el.name == id_:
+            i += 1
+            el.profit += money_to_card
+            el.save()
+    if i != 0:
+        prof_c = All_card()
+        prof_c.name = id_
+        prof_c.category = 'bronze'
+        prof_c.profit = money_to_card
+        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'bronze'
@@ -725,7 +860,7 @@ def referral_system_silver(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money, card_)
+    logics_matrix(profile, new_money, buy_card)
     return Response(status=200)
 
 
@@ -804,7 +939,7 @@ def referral_system_gold(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money, card_)
+    logics_matrix(profile, new_money, buy_card)
     return Response(status=200)
 
     # проверка на рефку
@@ -889,7 +1024,7 @@ def referral_system_emerald(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money, card_)
+    logics_matrix(profile, new_money, buy_card)
     return Response(status=200)
 
     # проверка на рефку
@@ -909,6 +1044,7 @@ def matrix_pay(main_matrix, money):
         user_1.d += 1
         user_2.d += 1
         user_2.save()
+        user_2.total_wins += (money / 2) * 2
         user_2.user.save()
         user_1.user.save()
         user_1.save()
@@ -921,6 +1057,8 @@ def matrix_pay(main_matrix, money):
         send_message_tgbot(mes, user_2.id)
         user_1.d += 1
         user_2.d += 1
+        user_2.total_wins += money / 2
+        user_1.total_wins += money / 2
         user_1.user.save()
         user_2.user.save()
         user_1.save()
@@ -935,8 +1073,6 @@ def logics_matrix(user_, money, card_):
     card = card_
     user_in_matrix.card = card
     if User_in_Matrix.objects.all().count() != 0:
-        print(User_in_Matrix.objects.all())
-        print(User_in_Matrix.objects.order_by('-participant_number').first().participant_number)
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
             '-participant_number').first().participant_number + 1
     else:
@@ -1044,7 +1180,7 @@ def dis(request):
         col = request.data['col']
         if col is not None:
             wallet_user = profile.wallet
-            if collect_usdt(wallet_user):
+            if collect_usdt(wallet_user, col):
                 all_.all_transactions += 1
                 all_.save()
                 return Response(status=200)

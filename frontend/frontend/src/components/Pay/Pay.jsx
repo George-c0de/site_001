@@ -52,7 +52,7 @@ const Pay = () => {
                     SetWallet(user.wallet);
                     setData({
                         wallet: wallet,
-                        col: 0,
+                        col: 1,
                     })
                 } else {
                     SetState(false);
@@ -70,7 +70,7 @@ const Pay = () => {
     const walletInput = useRef(null)
 
     const handleSumInput = () => {
-        if(sumInput.current.value <= user.money) {
+        if (sumInput.current.value <= user.money) {
             setData(Object.assign(data, {
                 col: sumInput.current.value
             }))
@@ -86,18 +86,13 @@ const Pay = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(data.col > user.money) {
+        if (data.col > user.money) {
             alert("Not enough money to make transaction")
         }
 
         try {
-            let data2 = 200;
-            data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
-                .catch(function (error) {
-                    if (error.response) {
-                        data2 = error.response.status;
-                    }
-                });
+            let data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
+            console.log(data2);
 
         } catch (error) {
             //console.log(error.response.data.msg);
@@ -140,11 +135,9 @@ const Pay = () => {
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
                         <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input value={data.col} type='number' className='pay-sum-input' name='sum-input'
-                               max={user.money}
-                               min='0'
+                        <input value={data.col} required type='number' className='pay-sum-input' name='sum-input'
+                               min='1'
                                onInput={() => handleSumInput()}
-                               ref={sumInput}
                         />
                         <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
@@ -153,7 +146,8 @@ const Pay = () => {
                         {wallet &&
                             <div className='pay-address-input' name='address-input'>{wallet}</div>
                             ||
-                            <input type='text' className='pay-address-input' name='address-input' onInput={() => handleWalletInput()} ref={walletInput}/>}
+                            <input type='text' className='pay-address-input' name='address-input'
+                                   onInput={() => handleWalletInput()} ref={walletInput}/>}
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
@@ -174,17 +168,18 @@ const Pay = () => {
                             <span className='history-table-title'>Сумма</span>
                         </div>
                     </div>
+                    {tran.map((trans, i) => {
+                        return (
+                            <div className="pay-history-row" key={i}>
+                                <div className="history-table-column">{trans.time}</div>
+                                <div className="history-table-column">{trans.data}</div>
+                                <div className="history-table-column">{trans.txid}</div>
+                                <div className="history-table-column">{trans.quantity}</div>
+                            </div>
+                        )
+                    })}
                 </div>
-                {tran.map((trans, i) => {
-                    return (
-                        <div className="pay-history-row" key={i}>
-                            <div className="history-table-column">{trans.time}</div>
-                            <div className="history-table-column">{trans.data}</div>
-                            <div className="history-table-column">{trans.txid}</div>
-                            <div className="history-table-column">{trans.quantity}</div>
-                        </div>
-                    )
-                })}
+
             </div>
             <Lang isActive={onActive}/>
         </div>

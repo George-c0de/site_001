@@ -163,16 +163,49 @@
     height: 25%;
 }
 
-.card-status-bar[data-status='50'] .card-status-bar-line {
-    height: 50%;
+.card-status-bar[data-status='100'] .card-status-bar-line {
+    height: 100%;
 }
 
 .card-status-bar[data-status='75'] .card-status-bar-line {
     height: 75%;
 }
 
-.card-status-bar[data-status='100'] .card-status-bar-line {
-    height: 100%;
+.card-status-bar[data-status='10'] .card-status-bar-line {
+    height: 10%;
+}
+
+.card-status-bar[data-status='20'] .card-status-bar-line {
+    height: 20%;
+}
+
+.card-status-bar[data-status='30'] .card-status-bar-line {
+    height: 30%;
+
+}
+
+.card-status-bar[data-status='40'] .card-status-bar-line {
+    height: 40%;
+}
+
+.card-status-bar[data-status='50'] .card-status-bar-line {
+    height: 50%;
+}
+
+.card-status-bar[data-status='60'] .card-status-bar-line {
+    height: 60%;
+}
+
+.card-status-bar[data-status='70'] .card-status-bar-line {
+    height: 70%;
+}
+
+.card-status-bar[data-status='80'] .card-status-bar-line {
+    height: 80%;
+}
+
+.card-status-bar[data-status='90'] .card-status-bar-line {
+    height: 90%;
 }
 
 .card-status-balls {

@@ -1,7 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './GameHistory.css';
+import Game from "../game";
+import axios from "axios";
 
-export const GameHistory = () => (
+
+
+export const GameHistory = () => {
+
+    const [data,setData]  = useState({ });
+    useEffect(()=>{
+        getUsername();
+    },[])
+    let getUsername = async () => {
+        const res = await axios.get('http://127.0.0.1:8000/api/user')
+        setData(res.data);
+    }
+    return (<>
   <div className="game-history">
     <span>GAME HISTORY</span>
     <div className='history-table'>
@@ -26,4 +40,6 @@ export const GameHistory = () => (
     </div>
     <span className='game-history-more'>SHOW MORE</span>
   </div>
+        </>
 )
+}

@@ -177,12 +177,19 @@ class Payment(models.Model):
 """
 
 
+class All_card(models.Model):
+    category = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    profit = models.IntegerField(default=0)
+
 class User_in_Matrix(models.Model):
     participant_number = models.IntegerField('Номер участника')
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     d = models.IntegerField('Кол-во зачислений', default=0)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     card = models.ForeignKey(Buy_Card, on_delete=models.CASCADE)
+    total_wins = models.IntegerField(default=0)
+    all_wins = models.IntegerField(default=0)
 
 
 # Кошелек

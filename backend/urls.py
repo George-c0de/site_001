@@ -44,6 +44,7 @@ urlpatterns = [
     path('trans_get_output', views.trans_get_output),
     path('trans_get_input', views.trans_get_input),
     path('get_user_in_matrix', views.get_user_in_matrix),
+    path('get_user_in_card',views.get_user_in_card),
     # Вывод
     path('dis', views.dis)
 
