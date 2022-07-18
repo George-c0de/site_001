@@ -41,24 +41,18 @@ const Game = () => {
     navigate("/login");
   };
 
-  const getCardData = async () => {
-    try{
+ const getCardData = async () => {
     await axios.get('http://127.0.0.1:8000/api/get_user_in_matrix')
       .then((data) => {
         const result = {
-          bronze: data.bronze,
-          silver: data.silver,
-          gold: data.gold,
-          emerald: data.emerald
+          bronze: data.data.bronze,
+          silver: data.data.silver,
+          gold: data.data.gold,
+          emerald: data.data.emerald
         }
-        console.log(result)
-        console.log(cardsAmount)
-        console.log(data)
+
         setCardsAmount(result);
       })
-    }catch (e){
-      console.log(e)
-    }
   }
 
   useEffect(() => {

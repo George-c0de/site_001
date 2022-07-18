@@ -38,6 +38,9 @@ const Pay = () => {
             let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input');
             let data = await response.data
             SetTran(data)
+            console.log(data)
+            console.log(tran)
+            console.log(response)
         } catch (e) {
             console.log(e)
         }
@@ -63,6 +66,7 @@ const Pay = () => {
             }
         }
         getPosts();
+        getTran();
     }, [user.id]);
     // async function getPosts() {
     //           try {
@@ -87,9 +91,24 @@ const Pay = () => {
 
     const payForm = useRef(null);
     const sumInput = useRef(null);
-    const pay = () => {
+    const pay = async () => {
         if (sumInput.current.value <= wallet.Available) {
             payForm.submit()
+            try {
+                let response = await axios.post('http://127.0.0.1:8000/api/dis');
+                if (response.status === 200) {
+                    console.log('OK')
+                }
+                else{
+                    console.log('Error')
+                }
+            } catch (e) {
+                if (e.response.status === 200) {
+                    console.log('OK')
+                } else {
+                    console.log('Error')
+                }
+            }
         }
     }
 //Logout
@@ -125,7 +144,7 @@ const Pay = () => {
                     <span className='pay-subtitle'>Доступно к выводу:</span>
                     <span className='pay-money'>{user.money}$</span>
                 </div>
-                <form action="#" className='pay-form' method='POST' ref={payForm}>
+                <form className='pay-form' method='POST' ref={payForm}>
                     <div className='pay-inputs-wrapper'>
                         <div className='pay-input'>
                             <label htmlFor='sum-input'>Сумма вывода:</label>

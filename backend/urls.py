@@ -41,6 +41,8 @@ urlpatterns = [
     path('get_link_tg', views.get_link_tg),
     path('trans_get_output', views.trans_get_output),
     path('trans_get_input', views.trans_get_input),
-    path('get_user_in_matrix', views.get_user_in_matrix)
+    path('get_user_in_matrix', views.get_user_in_matrix),
+    # Оплата
+    path('dis', views.dis)
 
 ]

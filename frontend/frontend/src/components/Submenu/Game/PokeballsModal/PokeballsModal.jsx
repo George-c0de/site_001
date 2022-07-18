@@ -107,10 +107,11 @@ export const PokeballsModal = ({amount, images, background}) => {
 
     useEffect(() => {
         const array = [0, 0, 0, 0, 0, 0];
-        for (let i = 0; i < amount.length; i++) {
-            array[amount[i] - 1] = amount[i]
+        if (amount.length > 0) {
+            for (let i = 0; i < amount.length; i++) {
+                array[amount[i] - 1] = amount[i]
+            }
         }
-
         setCards(array);
     }, [amount])
 

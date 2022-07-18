@@ -199,7 +199,13 @@ def trans_get_input(request):
                     }
                     data.append(main)
             return Response(data=data)
-    return Response(data=[])
+    main = {
+        'quantity': [],
+        'data': [],
+        'time': [],
+        'txid': [],
+    }
+    return Response(data=main)
 
 
 def create_all_and_admin():
@@ -222,47 +228,51 @@ def create_all_and_admin():
 
 @api_view(['GET'])
 def get_user_in_matrix(request):
-    profile = Profile.objects.get(user_id=request.user.id)
-    if User_in_Matrix.objects.filter(user_id=profile.id).exists():
-        profile = User_in_Matrix.objects.filter(user_id=profile.id)
-        data = {
-            'bronze': [],
-            'silver': [],
-            'gold': [],
-            'emerald': []
+    print(request.user)
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        if User_in_Matrix.objects.filter(user_id=profile.id).exists():
+            profile = User_in_Matrix.objects.filter(user_id=profile.id)
+            data = {
+                'bronze': [],
+                'silver': [],
+                'gold': [],
+                'emerald': []
 
-        }
-        for el in profile:
-            card_ = el.card
-            if card_.card.category == 'bronze':
-                i = 0
-                for el in data['bronze']:
-                    if el == card_.card.name:
-                        i += 1
-                if i == 0:
-                    data['bronze'].append(card_.card.name)
-            elif card_.card.category == 'silver':
-                for el in data['silver']:
+            }
+            for el in profile:
+                card_ = el.card
+                if card_.card.category == 'bronze':
                     i = 0
-                    if el == card_.card.name:
-                        i += 1
+                    for el in data['bronze']:
+                        if el == card_.card.name:
+                            i += 1
                     if i == 0:
-                        data['silver'].append(card_.card.name)
-            elif card_.card.category == 'gold':
-                for el in data['gold']:
+                        data['bronze'].append(card_.card.name)
+                elif card_.card.category == 'silver':
+                    for el in data['silver']:
+                        i = 0
+                        if el == card_.card.name:
+                            i += 1
+                        if i == 0:
+                            data['silver'].append(card_.card.name)
+                elif card_.card.category == 'gold':
+                    for el in data['gold']:
+                        i = 0
+                        if el == card_.card.name:
+                            i += 1
+                        if i == 0:
+                            data['gold'].append(card_.card.name)
+                else:
                     i = 0
-                    if el == card_.card.name:
-                        i += 1
-                if i == 0:
-                    data['gold'].append(card_.card.name)
-            else:
-                i = 0
-                for el in data['emerald']:
-                    if el == card_.card.name:
-                        i += 1
-                if i == 0:
-                    data['emerald'].append(card_.id)
-        return Response(data)
+                    for el in data['emerald']:
+                        if el == card_.card.name:
+                            i += 1
+                    if i == 0:
+                        data['emerald'].append(card_.id)
+            return Response(data)
+        else:
+            return Response(status=400)
     else:
         return Response(status=400)
 
@@ -1048,11 +1058,12 @@ central = Wallet.objects.all().first()
 # Газ, необходимый для транзакции пересылки (TRX wei)
 gas_needed = 8 * 10 ** 6
 
-
+@api_view(['POST'])
 def dis(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
         col = request.data['col']
+
         if col != None:
             wallet_user = profile.wallet
             if collect_usdt(wallet_user):
