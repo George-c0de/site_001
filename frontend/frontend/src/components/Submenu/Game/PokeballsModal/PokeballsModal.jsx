@@ -54,16 +54,19 @@ const CardOpened = ({image, background}) => {
     )
 }
 
-const CardClosed = ({price, buyCard, idCard}) => {
-    const [status, setStatus] = useState();
+
+const CardClosed = ({ price, buyCard, idCard, category }) => {
+  const [status, setStatus] = useState();
+
 
     const handleBuyClick = () => {
         setStatus('pending');
 
-        setTimeout(async () => {
-            await axios.get(`http://127.0.0.1:8000/api/bronze/${idCard + 1}`)
-                .then((res) => {
-                    setStatus('success')
+
+    setTimeout(async () => {
+      await axios.get(`http://127.0.0.1:8000/api/${ category }/${ idCard }`)
+        .then((res) => {
+          setStatus('success')
 
                     setTimeout(() => {
                         buyCard();
@@ -96,39 +99,40 @@ const CardClosed = ({price, buyCard, idCard}) => {
     )
 }
 
-export const PokeballsModal = ({amount, images, background}) => {
-    const [cards, setCards] = useState([]);
+export const PokeballsModal = ({ amount, category, images, background }) => {
+  const [cards, setCards] = useState([]);
 
-    const buyCard = async (id) => {
-        const newCards = [...cards];
-        newCards[id - 1] = id;
-        setCards(newCards)
+  const buyCard = async (id) => {
+    const newCards = [...cards];
+    newCards[id - 1] = id;
+    setCards(newCards)
+  }
+
+  useEffect(() => {
+    const array = [0, 0, 0, 0, 0, 0];
+    if (amount.length > 0) {
+      for (let i = 0; i < amount.length; i++) {
+        array[amount[i] - 1] = amount[i]
+      }
     }
 
-    useEffect(() => {
-        const array = [0, 0, 0, 0, 0, 0];
-        if (amount.length > 0) {
-            for (let i = 0; i < amount.length; i++) {
-                array[amount[i] - 1] = amount[i]
-            }
-        }
-        setCards(array);
-    }, [amount])
+    setCards(array);
+  }, [amount])
 
-    return (
-        <div className='pokeballs-modal'>
-            {
-                cards.map((id, i) => {
-                    return (
-                        <div data-id={i + 1} className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}>
-                            {id ?
-                                <CardOpened image={images[i]} background={background}/> :
-                                <CardClosed price='15' buyCard={() => buyCard(i + 1)} idCard={id}/>
-                            }
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
+  return (
+    <div className='pokeballs-modal'>
+      {
+        cards.map((id, i) => {
+          return (
+            <div data-id={ i + 1 } className={ id ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
+              { id ?
+                <CardOpened image={ images[i] } background={ background } key={ id }/> :
+                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ i + 1 } category={ category } key={ id }/>
+              }
+            </div>
+          )
+        })
+      }
+    </div>
+  )
 }
