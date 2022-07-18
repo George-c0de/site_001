@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 // Pages
 import {Menu} from '../MainPage/Menu/Menu';
@@ -20,28 +20,28 @@ const Pay = () => {
     });
     let [tran, SetTran] = useState([])
     let [user, setUser] = useState({
-        "id": 0,
-        "money": "0.00",
-        "referral_link": "",
-        "referral_amount": "",
-        "missed_amount": "",
-        "wallet": null,
-        "line_1": null,
-        "line_2": null,
-        "line_3": null,
-        "max_card": 0,
-        "admin_or": false,
-        "user": 0
+        id: 0,
+        money: 0,
+        referral_link: "",
+        referral_amount: "",
+        missed_amount: "",
+        wallet: null,
+        line_1: null,
+        line_2: null,
+        line_3: null,
+        max_card: 0,
+        admin_or: false,
+        user: 0
     })
-        const getTran = async () => {
-            try {
-                let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input');
-                let data = await response.data
-                SetTran(data)
-            } catch (e) {
-                console.log(e)
-            }
+    const getTran = async () => {
+        try {
+            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input');
+            let data = await response.data
+            SetTran(data)
+        } catch (e) {
+            console.log(e)
         }
+    }
     useEffect(() => {
         const getPosts = async () => {
             try {
@@ -49,7 +49,7 @@ const Pay = () => {
                 let data = await response.data
                 setUser(data);
                 if (user.wallet !== null) {
-                    SetWallet(user.wallet);
+                    SetWallet(Math.round(Math.random()) > 0 ? user.wallet : null);
                     setData({
                         wallet: wallet,
                         col: 0,
@@ -85,7 +85,13 @@ const Pay = () => {
     //
     //       }
 
-
+    const payForm = useRef(null);
+    const sumInput = useRef(null);
+    const pay = () => {
+        if (sumInput.current.value <= wallet.Available) {
+            payForm.submit()
+        }
+    }
 //Logout
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -119,21 +125,26 @@ const Pay = () => {
                     <span className='pay-subtitle'>Доступно к выводу:</span>
                     <span className='pay-money'>{user.money}$</span>
                 </div>
-                <div className='pay-inputs-wrapper'>
-                    <div className='pay-input'>
-                        <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input value={data.col} type='number' className='pay-sum-input' name='sum-input'/>
-                        <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
+                <form action="#" className='pay-form' method='POST' ref={payForm}>
+                    <div className='pay-inputs-wrapper'>
+                        <div className='pay-input'>
+                            <label htmlFor='sum-input'>Сумма вывода:</label>
+                            <input value={data.col} type='number' className='pay-sum-input' name='sum-input'
+                                   max={user.money}
+                                   min='0' ref={sumInput}/>
+                            <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
+                        </div>
+                        <div className='pay-input'>
+                            <label htmlFor='address-input'>Адрес вывода:</label>
+                            {wallet &&
+                                <div className='pay-address-input' name='address-input'>{wallet}</div>
+                                ||
+                                <input value={wallet} type='text' className='pay-address-input' name='address-input'/>}
+                            <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
+                        </div>
                     </div>
-                    <div className='pay-input'>
-                        <label htmlFor='address-input'>Адрес вывода:</label>
-                        <input readOnly={state_input} value={data.wallet} type='text' className='pay-address-input'
-                               name='address-input'/>
-                        <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
-                    </div>
-                </div>
-                <button className='pay-button'>ВЫВЕСТИ</button>
-
+                    <button className='pay-button' onClick={() => pay()}>ВЫВЕСТИ</button>
+                </form>
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>
@@ -150,8 +161,17 @@ const Pay = () => {
                             <span className='history-table-title'>Сумма</span>
                         </div>
                     </div>
-
                 </div>
+                {tran.map((trans, i) => {
+                    return (
+                        <div className="pay-history-row" key={i}>
+                            <div className="history-table-column">{trans.time}</div>
+                            <div className="history-table-column">{trans.data}</div>
+                            <div className="history-table-column">{trans.txid}</div>
+                            <div className="history-table-column">{trans.quantity}</div>
+                        </div>
+                    )
+                })}
             </div>
             <Lang isActive={onActive}/>
         </div>

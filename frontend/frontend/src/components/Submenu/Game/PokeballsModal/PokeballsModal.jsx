@@ -61,7 +61,7 @@ const CardClosed = ({price, buyCard, idCard}) => {
         setStatus('pending');
 
         setTimeout(async () => {
-            await axios.get(`http://127.0.0.1:8000/api/bronze/${idCard}`)
+            await axios.get(`http://127.0.0.1:8000/api/bronze/${idCard + 1}`)
                 .then((res) => {
                     setStatus('success')
 
@@ -112,7 +112,7 @@ export const PokeballsModal = ({amount, images, background}) => {
         }
 
         setCards(array);
-    }, [])
+    }, [amount])
 
     return (
         <div className='pokeballs-modal'>

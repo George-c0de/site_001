@@ -26,6 +26,7 @@ from tgbot import message_for_bot
 from tgbot.message_for_bot import a
 from tgbot.models import Chat_id, Event, Memcache, User_Bot
 from . import tokemon
+from .Tron import TronClient
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink, \
@@ -179,6 +180,7 @@ def trans_get_output(request):
             return Response(data=data)
     return Response(data=[])
 
+
 @api_view(['GET'])
 def trans_get_input(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
@@ -199,12 +201,16 @@ def trans_get_input(request):
             return Response(data=data)
     return Response(data=[])
 
+
 def create_all_and_admin():
     if not Profile.objects.filter(admin_or=True).exists():
         user = User()
-        user.username = 'admin'
-        user.password = 'admin'
-        user.save()
+        if not User.objects.filter(username='admin').exists():
+            user.username = 'admin'
+            user.password = 'admin'
+            user.save()
+        else:
+            user = User.objects.get(username='admin')
         profile2 = Profile()
         profile2.user = user
         profile2.save()
@@ -214,30 +220,49 @@ def create_all_and_admin():
         a.save()
 
 
-all_ = All.objects.all().first()
-create_all_and_admin()
-admin_ = Profile.objects.filter(admin_or=True).first()
-
-
 @api_view(['GET'])
 def get_user_in_matrix(request):
-    if User_in_Matrix.objects.filter(user__id=request.user.id).exists():
-        profile = User_in_Matrix.objects.filter(user__id=request.user.id)
-        data = {}
+    profile = Profile.objects.get(user_id=request.user.id)
+    if User_in_Matrix.objects.filter(user_id=profile.id).exists():
+        profile = User_in_Matrix.objects.filter(user_id=profile.id)
+        data = {
+            'bronze': [],
+            'silver': [],
+            'gold': [],
+            'emerald': []
+
+        }
         for el in profile:
             card_ = el.card
-            name = card_.name
-            if card_.category == 'bronze':
-                category = 0
-            elif card_.category == 'silver':
-                category = 1
-            elif card_.category == 'gold':
-                category = 2
+            if card_.card.category == 'bronze':
+                i = 0
+                for el in data['bronze']:
+                    if el == card_.card.name:
+                        i += 1
+                if i == 0:
+                    data['bronze'].append(card_.card.name)
+            elif card_.card.category == 'silver':
+                for el in data['silver']:
+                    i = 0
+                    if el == card_.card.name:
+                        i += 1
+                    if i == 0:
+                        data['silver'].append(card_.card.name)
+            elif card_.card.category == 'gold':
+                for el in data['gold']:
+                    i = 0
+                    if el == card_.card.name:
+                        i += 1
+                if i == 0:
+                    data['gold'].append(card_.card.name)
             else:
-                category = 3
-            name_ = category + name
-            data[name_] = el.d
-        return Response(data=data, status=200)
+                i = 0
+                for el in data['emerald']:
+                    if el == card_.card.name:
+                        i += 1
+                if i == 0:
+                    data['emerald'].append(card_.id)
+        return Response(data)
     else:
         return Response(status=400)
 
@@ -263,14 +288,14 @@ def get_max(request):
 
 @api_view(['GET'])
 def get_link_tg(request):
-    if Profile.objects.filter(user__id=request.user.id).exists():
-        profile = Profile.objects.get(user__id=request.user.id)
-        if User_Bot.objects.filter(profile_id=profile.id).exists():
-            user_bot = User_Bot.objects.get(profile_id=profile.id)
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        if DeepLink.objects.filter(profile=profile.id).exists():
+            user_bot = DeepLink.objects.get(profile=profile.id)
             data = {
                 'link_tg': user_bot.deep_link
             }
-            return Response(data=data)
+            return Response(data=data, status=200)
     return Response(status=401)
 
 
@@ -309,6 +334,14 @@ def get_referrals(request):
         return Response(data, status=200)
     else:
         return Response(status=400)
+
+
+if All.objects.all().exists():
+    all_ = All.objects.all().first()
+else:
+    all_ = All.objects.create()
+create_all_and_admin()
+admin_ = Profile.objects.filter(admin_or=True).first()
 
 
 def lan(request):
@@ -463,6 +496,10 @@ def register_page(request):
         Memcache.objects.create(user=profile.id, memcache=memcache)
         deep_link = 'https://t.me/Tokemon_game_Bot?start=' + str(memcache)
         DeepLink.objects.create(profile=profile.id, deep_link=deep_link)
+        alo = All.objects.all().first()
+        alo.coll_user += 1
+        alo.save()
+
         return Response(status=200)
     else:
         messages.error(request, 'Неверный ввод')
@@ -621,7 +658,7 @@ def referral_system_bronze(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money)
+    logics_matrix(profile, new_money, buy_card)
     return Response(status=200)
 
 
@@ -904,13 +941,15 @@ def matrix_pay(main_matrix, money):
 
 
 # Логика матрицы
-def logics_matrix(user_, money):
+def logics_matrix(user_, money, card_):
     profile = user_
     user_in_matrix = User_in_Matrix()
-    user_in_matrix.user = Profile.objects.get(user=profile.user)
-    card = Buy_Card.objects.get(user_id=profile.id)
+    user_in_matrix.user = Profile.objects.get(id=profile.id)
+    card = card_
     user_in_matrix.card = card
     if User_in_Matrix.objects.all().count() != 0:
+        print(User_in_Matrix.objects.all())
+        print(User_in_Matrix.objects.order_by('-participant_number').first().participant_number)
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
             '-participant_number').first().participant_number + 1
     else:
@@ -996,275 +1035,6 @@ def logics_matrix(user_, money):
 
 # Модуль оплаты
 
-# Класс оплаты
-# Service function for working wit USDT contract
-def address_to_parameter(addr):
-    return "0" * 24 + base58.b58decode_check(addr)[1:].hex()
-
-
-def amount_to_parameter(amount):
-    return '%064x' % amount
-
-
-# USDT contract interface
-usdt_abi = [{"inputs": [{"name": "name_", "type": "string"}, {"name": "symbol_", "type": "string"}],
-             "stateMutability": "Nonpayable", "type": "Constructor"}, {
-                "inputs": [{"indexed": True, "name": "owner", "type": "address"},
-                           {"indexed": True, "name": "spender", "type": "address"},
-                           {"name": "value", "type": "uint256"}], "name": "Approval", "type": "Event"}, {
-                "inputs": [{"name": "userAddress", "type": "address"},
-                           {"name": "relayerAddress", "type": "address"},
-                           {"name": "functionSignature", "type": "bytes"}], "name": "MetaTransactionExecuted",
-                "type": "Event"}, {"inputs": [{"indexed": True, "name": "previousOwner", "type": "address"},
-                                              {"indexed": True, "name": "newOwner", "type": "address"}],
-                                   "name": "OwnershipTransferred", "type": "Event"}, {
-                "inputs": [{"indexed": True, "name": "from", "type": "address"},
-                           {"indexed": True, "name": "to", "type": "address"},
-                           {"name": "value", "type": "uint256"}],
-                "name": "Transfer", "type": "Event"},
-            {"outputs": [{"type": "string"}], "name": "ERC712_VERSION", "stateMutability": "View",
-             "type": "Function"},
-            {"outputs": [{"type": "uint256"}],
-             "inputs": [{"name": "owner", "type": "address"}, {"name": "spender", "type": "address"}],
-             "name": "allowance", "stateMutability": "View", "type": "Function"}, {"outputs": [{"type": "bool"}],
-                                                                                   "inputs": [{"name": "spender",
-                                                                                               "type": "address"},
-                                                                                              {"name": "amount",
-                                                                                               "type": "uint256"}],
-                                                                                   "name": "approve",
-                                                                                   "stateMutability": "Nonpayable",
-                                                                                   "type": "Function"},
-            {"outputs": [{"type": "uint256"}], "inputs": [{"name": "account", "type": "address"}],
-             "name": "balanceOf",
-             "stateMutability": "View", "type": "Function"},
-            {"outputs": [{"type": "uint8"}], "name": "decimals", "stateMutability": "View", "type": "Function"},
-            {"outputs": [{"type": "bool"}],
-             "inputs": [{"name": "spender", "type": "address"}, {"name": "subtractedValue", "type": "uint256"}],
-             "name": "decreaseAllowance", "stateMutability": "Nonpayable", "type": "Function"},
-            {"outputs": [{"type": "bytes"}],
-             "inputs": [{"name": "userAddress", "type": "address"}, {"name": "functionSignature", "type": "bytes"},
-                        {"name": "sigR", "type": "bytes32"}, {"name": "sigS", "type": "bytes32"},
-                        {"name": "sigV", "type": "uint8"}], "name": "executeMetaTransaction",
-             "stateMutability": "Payable", "type": "Function"},
-            {"outputs": [{"type": "uint256"}], "name": "getChainId", "stateMutability": "Pure", "type": "Function"},
-            {"outputs": [{"type": "bytes32"}], "name": "getDomainSeperator", "stateMutability": "View",
-             "type": "Function"},
-            {"outputs": [{"name": "nonce", "type": "uint256"}], "inputs": [{"name": "user", "type": "address"}],
-             "name": "getNonce", "stateMutability": "View", "type": "Function"}, {"outputs": [{"type": "bool"}],
-                                                                                  "inputs": [{"name": "spender",
-                                                                                              "type": "address"},
-                                                                                             {"name": "addedValue",
-                                                                                              "type": "uint256"}],
-                                                                                  "name": "increaseAllowance",
-                                                                                  "stateMutability": "Nonpayable",
-                                                                                  "type": "Function"},
-            {"inputs": [{"name": "amount", "type": "uint256"}], "name": "mint", "stateMutability": "Nonpayable",
-             "type": "Function"},
-            {"outputs": [{"type": "string"}], "name": "name", "stateMutability": "View", "type": "Function"},
-            {"outputs": [{"type": "address"}], "name": "owner", "stateMutability": "View", "type": "Function"},
-            {"name": "renounceOwnership", "stateMutability": "Nonpayable", "type": "Function"},
-            {"outputs": [{"type": "string"}], "name": "symbol", "stateMutability": "View", "type": "Function"},
-            {"outputs": [{"type": "uint256"}], "name": "totalSupply", "stateMutability": "View",
-             "type": "Function"},
-            {"outputs": [{"type": "bool"}],
-             "inputs": [{"name": "recipient", "type": "address"}, {"name": "amount", "type": "uint256"}],
-             "name": "transfer", "stateMutability": "Nonpayable", "type": "Function"},
-            {"outputs": [{"type": "bool"}],
-             "inputs": [{"name": "sender",
-                         "type": "address"},
-                        {"name": "recipient",
-                         "type": "address"},
-                        {"name": "amount",
-                         "type": "uint256"}],
-             "name": "transferFrom",
-             "stateMutability": "Nonpayable",
-             "type": "Function"},
-            {"inputs": [{"name": "newOwner", "type": "address"}], "name": "transferOwnership",
-             "stateMutability": "Nonpayable", "type": "Function"}]
-
-
-# Main Class
-class TronClient:
-    """TRON API Client
-    """
-
-    def __init__(self, config=False):
-        """class initialization
-
-        Args:
-            config (optional): app config object, defaults to nile testnet
-        """
-        if not config or config == {}:
-            self.tron_url = "https://api.nileex.io"
-            self.trongrid_url = 'https://nile.trongrid.io'
-            self.usdt_address = "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj"
-            self.fee_limit = 20000000
-            self.api_key = 'f1870c5e-191b-406e-8531-070d9c8ec425'
-
-        else:
-            self.tron_url = config['TRON_URL']
-            self.usdt_address = config['USDT_CONTRACT_ADDRESS']
-            self.fee_limit = config['DEFAULT_FEE_LIMIT']
-            self.api_key = config['API_KEY']
-        try:
-            self.client = Tron(HTTPProvider(self.tron_url, api_key=self.api_key))
-            # self.client = Tron(network='nile', api_key=self.api_key)
-            self.usdt_contract = self.client.get_contract(str(self.usdt_address))
-        except Exception as e:
-            print('Error Tron initialization', str(e))
-        else:
-            pass
-
-    def is_address(self, address: str) -> bool:
-        """Check if string if valid TRON address
-
-        Args:
-            address (str): address
-
-        Returns:
-            bool : valid address or not
-        """
-        return address and self.client.is_address(address)
-
-    def create_wallet(self) -> dict:
-        """Generate new wallet
-
-        Returns:
-            dict : wallet private and public keys
-        """
-
-        wallet = self.client.generate_address()
-        return wallet
-
-    def trx_balance(self, address: str) -> float:
-        """TRX Balance of address, 0 if not activated
-
-        Args:
-            address (str): wallet address
-
-        Returns:
-            float: TRX balance
-        """
-        try:
-            balance = self.client.get_account_balance(str(address))
-        except Exception as e:
-            return 0.0
-        return float(balance)
-
-    def usdt_balance(self, address: str) -> int:
-        url = self.tron_url + '/wallet/triggerconstantcontract'
-        METHOD_BALANCE_OF = 'balanceOf(address)'
-        payload = {
-            'owner_address': base58.b58decode_check(address).hex(),
-            'contract_address': base58.b58decode_check(self.usdt_address).hex(),
-            'function_selector': METHOD_BALANCE_OF,
-            'parameter': address_to_parameter(address),
-        }
-        resp = requests.post(url, json=payload)
-        data = resp.json()
-
-        if data['result'].get('result', None):
-            print(data['constant_result'])
-            val = data['constant_result'][0]
-            print(address, 'balance =', int(val, 16))
-            return int(val, 16)
-        else:
-            print('error:', bytes.fromhex(data['result']['message']).decode())
-            return 0
-
-    def usdt_txns(self, address: str) -> dict:
-        """USDT Transactions of the wallet
-         taken from the  trongrid  API 200 last
-        Args:
-            address (str): wallet adress
-
-        Returns:
-            dict: {success, result:[transaction list]}
-        """
-        url = f"{self.trongrid_url}/v1/accounts/{address}/transactions/trc20?limit=200&contract_address=" \
-              f"{self.usdt_address}"
-        try:
-            r = requests.get(url)
-        except Exception as e:
-            error_string = f"Error getting usdt txns from {address} - {str(e)}"
-            return {'success': False, 'result': error_string}
-        else:
-            print(url)
-            return {'success': True, 'result': r.json()}
-
-    def transaction_detail(self, transaction_hash: str) -> dict:
-        """Transaction details of a given tx hash
-
-        Args:
-            transaction_hash (str): tx hash
-
-        Returns:
-            dict: transaction details
-        """
-        info = self.client.get_transaction_info(str(transaction_hash))
-        return info
-
-    def send_usdt(self, source: str, destination: str, amount: int, private_key: str) -> dict:
-        """Send USDT
-
-        Args:
-            source (str): sender address
-            destination (str): receiver address
-            amount (int): amount to send in wei
-            private_key (str): sender private key
-
-        Returns:
-            dict: status, result check
-        """
-        try:
-            priv_key = PrivateKey(bytes.fromhex(private_key))
-            txn = (
-                self.usdt_contract.functions.transfer(destination, amount)
-                .with_owner(source)  # address of the private key
-                .fee_limit(self.fee_limit)
-                .build()
-                .sign(priv_key)
-                .broadcast()
-                .wait()
-            )
-
-        except Exception as ex:
-            return {"result": "Error",
-                    "description": f"Error transferring of {amount} USDT from {source} to {destination} - {str(ex)} "}
-        else:
-            print(txn)
-            return {"result": "Success", "tx": txn}
-
-    def send_trx(self, source: str, destination: str, amount: int, private_key: str) -> dict:
-        """Send TRX
-
-        Args:
-            source (str): sender address
-            destination (str): receiver address
-            amount (int): amount to send in wei
-            private_key (str): sender key
-
-        Returns:
-            dict: status, result
-        """
-        try:
-            priv_key = PrivateKey(bytes.fromhex(private_key))
-            txn = (
-                self.client.trx.transfer(str(source), str(destination), int(amount))
-                .build()
-                .inspect()
-                .sign(priv_key)
-                .broadcast()
-                .wait()
-            )
-
-        except Exception as ex:
-            return {"result": "Error",
-                    "description": f"Error transferring of {amount} TRX from {source} to {destination} - {str(ex)}"}
-        else:
-            return {"result": "Success", "tx": txn}
-
-
 # Оплата
 tc = TronClient()
 # Центральный кошелек для этого демо - первый кошелек в базе. Если его нет, создаем его
@@ -1277,6 +1047,18 @@ central = Wallet.objects.all().first()
 
 # Газ, необходимый для транзакции пересылки (TRX wei)
 gas_needed = 8 * 10 ** 6
+
+
+def dis(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        col = request.data['col']
+        if col != None:
+            wallet_user = profile.wallet
+            if collect_usdt(wallet_user):
+                return Response(status=200)
+            else:
+                return Response(status=400)
 
 
 # Создание нового кошелька
@@ -1292,26 +1074,26 @@ def generate_wallet(request):
 
 # Сбор USDT с кошелька
 # @app.route('/collect_usdt', methods=['POST'])
-def collect_usdt(request):
-    w = Wallet.objects.get(address=request.form.get('address'))
+def collect_usdt(wallet):
+    w = wallet
     pkey = w.pkey
     trx_bal = tc.trx_balance(w.address)
     if trx_bal < gas_needed:
         a = tc.send_trx(central.address, w.address, gas_needed - trx_bal, central.pkey)
         if a.get('result') == 'Success':
             tx = a.get('tx', {})
-        tx_id = tx.get('id', '')
-        tx_fee = tx.get('fee', 0)
-        tx_timestamp = int(tx.get('blockTimeStamp', 0) / 1000)
-        new_tx = Transaction(tx_id=tx_id,
-                             sender=central.address,
-                             receiver=w.address,
-                             currency='TRX',
-                             amount=trx_bal,
-                             fee=tx_fee,
-                             timestamp=tx_timestamp,
-                             )
-        new_tx.save()
+            tx_id = tx.get('id', '')
+            tx_fee = tx.get('fee', 0)
+            tx_timestamp = int(tx.get('blockTimeStamp', 0) / 1000)
+            new_tx = Transaction(tx_id=tx_id,
+                                 sender=central.address,
+                                 receiver=w.address,
+                                 currency='TRX',
+                                 amount=trx_bal,
+                                 fee=tx_fee,
+                                 timestamp=tx_timestamp,
+                                 )
+            new_tx.save()
 
     a = tc.send_usdt(w.address, central.address, 1 * 10 ** 6, w.pkey)
     if a.get('result') == 'Success':
