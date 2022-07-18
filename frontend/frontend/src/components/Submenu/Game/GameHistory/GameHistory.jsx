@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-export const GameHistory = () => {
+export const GameHistory = ({history}) => {
 
     const [data,setData]  = useState({ });
     useEffect(()=>{
@@ -21,21 +21,21 @@ export const GameHistory = () => {
     <div className='history-table'>
       <div className='history-table-row'>
         <span className="history-table-icon">()</span>
-        <span className="history-table-time">22-00-B 12.06.2022</span>
-        <span className="history-table-id">ID 525</span>
-        <span className="history-table-score green">+ 7865</span>
+        <span className="history-table-time">{history.oneq[1]}</span>
+        <span className="history-table-id">ID {history.oneq[0]}</span>
+        <span className="history-table-score green"> {history.oneq[2]}</span>
       </div>
       <div className='history-table-row'>
         <span className="history-table-icon">()</span>
-        <span className="history-table-time">22-00-B 12.06.2022</span>
-        <span className="history-table-id">ID 525</span>
-        <span className="history-table-score red">- 5674</span>
+        <span className="history-table-time">{history.tw[1]}</span>
+        <span className="history-table-id">ID {history.tw[0]}</span>
+        <span className="history-table-score red">{history.tw[2]}</span>
       </div>
       <div className='history-table-row'>
         <span className="history-table-icon">()</span>
-        <span className="history-table-time">22-00-B 12.06.2022</span>
-        <span className="history-table-id">ID 525</span>
-        <span className="history-table-score green">+ 7865</span>
+        <span className="history-table-time">{history.the[1]}</span>
+        <span className="history-table-id">ID {history.the[0]}</span>
+        <span className="history-table-score green">{history.the[2]}</span>
       </div>
     </div>
     <span className='game-history-more'>SHOW MORE</span>

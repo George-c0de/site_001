@@ -82,10 +82,9 @@ const Game = () => {
             await axios.get('http://127.0.0.1:8000/api/get_hist_card')
                 .then((data) => {
                     const result = {
-                        bronze: data.data.bronze,
-                        silver: data.data.silver,
-                        gold: data.data.gold,
-                        emerald: data.data.emerald
+                        1: data.data.oneq,
+                        2: data.data.two,
+                        3: data.data.the,
                     }
 
                     setHistory(result);

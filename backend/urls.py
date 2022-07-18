@@ -17,11 +17,16 @@ urlpatterns = [
          auth_views.PasswordResetView.as_view(template_name="registration/password_reset.html"),
          name="reset_password"),
     # path('password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_done'),
+    path('reset_password_sent/',
+         auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"),
+         name='password_reset_done'),
 
-    path('password-reset/confirm/<uidb64>/<token>/', auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_form.html"),
+    path('password-reset/confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_form.html"),
          name='password_reset_confirm'),
-    path('password-reset/complete/', auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_done.html"), name='password_reset_complete'),
+    path('password-reset/complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_done.html"),
+         name='password_reset_complete'),
     path('new_wallet/', views.generate_wallet),
     path('collect_usdt/', views.collect_usdt),
     path('send_trx/', views.send_trx),
@@ -44,8 +49,8 @@ urlpatterns = [
     path('trans_get_output', views.trans_get_output),
     path('trans_get_input', views.trans_get_input),
     path('get_user_in_matrix', views.get_user_in_matrix),
-    path('get_user_in_card',views.get_user_in_card),
-    path('_get_hist_card',views.get_hist_card),
+    path('get_user_in_card', views.get_user_in_card),
+    path('get_hist_card', views.get_hist_card),
     # Вывод
     path('dis', views.dis)
 

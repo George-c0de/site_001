@@ -221,6 +221,14 @@ def get_card_data(request):
     return Response(status=400)
 
 
+def check(name, category):
+    buy = All_card.objects.all()
+    for el in buy:
+        if el.name == name and el.category == category:
+            return el.profit
+    return 0
+
+
 @api_view(['GET'])
 def get_user_in_card(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
@@ -228,6 +236,7 @@ def get_user_in_card(request):
         if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
             profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
             data = []
+
             bronze = [[], [], [], [], [], []]
             silver = [[], [], [], [], [], []]
             gold = [[], [], [], [], [], []]
@@ -280,9 +289,10 @@ def get_user_in_card(request):
                         emerald[int(card_.card.name) - 1][0] = temp
                         emerald[int(card_.card.name) - 1][1] += profile_2.referral_amount
                         emerald[int(card_.card.name) - 1][2] += el.all_wins
-
+            i = 0
             for el in bronze:
                 if len(el) != 0:
+                    el[2] = check(i, 'bronze')
                     el[0] *= 25
                     if el[0] > 100:
                         el[0] = 100
@@ -292,8 +302,11 @@ def get_user_in_card(request):
                     el.append(0)
                     el.append(0)
                     el.append(0)
+                i += 1
+            i = 0
             for el in emerald:
                 if len(el) != 0:
+                    el[2] = check(i, 'bronze')
                     el[0] *= 25
                     if el[0] > 100:
                         el[0] = 100
@@ -303,8 +316,11 @@ def get_user_in_card(request):
                     el.append(0)
                     el.append(0)
                     el.append(0)
+                i += 1
+            i = 0
             for el in silver:
                 if len(el) != 0:
+                    el[2] = check(i, 'bronze')
                     el[0] *= 25
                     if el[0] > 100:
                         el[0] = 100
@@ -314,8 +330,11 @@ def get_user_in_card(request):
                     el.append(0)
                     el.append(0)
                     el.append(0)
+                i += 1
+            i = 0
             for el in gold:
                 if len(el) != 0:
+                    el[2] = check(i, 'bronze')
                     el[0] *= 25
                     if el[0] > 100:
                         el[0] = 100
@@ -325,6 +344,7 @@ def get_user_in_card(request):
                     el.append(0)
                     el.append(0)
                     el.append(0)
+                i += 1
             data = {'bronze': bronze, 'silver': silver, 'gold': gold, 'emerald': emerald}
             return Response(data=data)
     return Response(status=400)
@@ -974,12 +994,24 @@ def referral_system_gold(request, id_):
     # b =
     # if Category_Bronze.objects.filter(user.id=).exists()
 
+
 @api_view(['GET'])
 def get_hist_card(request):
     if Buy_Card.objects.all().exists():
         buy = Buy_Card.objects.order_by('-time')
-        b = [buy[0],buy[1],buy[2]]
-        return Response(data=b)
+        b = [buy[0], buy[1], buy[2]]
+        time = buy[0].time
+        str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        time = buy[1].time
+        str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        time = buy[2].time
+        str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        data = {
+            'on': [buy[0].id, str_time_1, buy[0].card.price],
+            'tw': [buy[1].id, str_time_2, buy[1].card.price],
+            'th': [buy[2].id, str_time_3, buy[2].card.price]
+        }
+        return Response(data=data)
     else:
         return Response(status=400)
 
