@@ -1,46 +1,27 @@
 import io
 import logging
-import json
-import profile
-from os import environ, getenv
+from os import getenv
 import uuid
 import xlsxwriter
-from captcha.fields import CaptchaField
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import PasswordContextMixin
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, FileResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.views.generic import FormView
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from decimal import *
 from tgbot import message_for_bot
 from tgbot.message_for_bot import a
-from tgbot.models import Chat_id, Event, Memcache, User_Bot
+from tgbot.models import Event, Memcache, User_Bot
 from . import tokemon
 from .Tron import TronClient
 from .forms import CreateUserForm
-from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, Admin, All, First_Line, \
+from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink, \
     History_Transactions
-from .serializers import ProfileSerializer, UserSerializer, AllSerializer
-from tronpy import Contract, Tron
-import base58
-from tronpy.keys import PrivateKey
-from tronpy.providers import HTTPProvider
+from .serializers import ProfileSerializer, AllSerializer
 import requests
-from rest_framework.authtoken.models import Token
-from rest_framework.request import Request
-from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
 
 # Лог выводим на экран и в файл
 logging.basicConfig(
@@ -59,7 +40,7 @@ def send_message_tgbot(message, id):
         chat_id = User_Bot.objects.get(profile__id=id).chat_id
         url_req = "https://api.telegram.org/bot" + token + "/sendMessage" + "?chat_id=" + str(chat_id) + "&text=" + \
                   message
-        results = requests.get(url_req)
+        requests.get(url_req)
         return 1
     return 0
 
@@ -354,10 +335,6 @@ create_all_and_admin()
 admin_ = Profile.objects.filter(admin_or=True).first()
 
 
-def lan(request):
-    render(request, 'backend/len.html')
-
-
 def index(request):
     return render(request, 'backend/index.html')
 
@@ -552,13 +529,13 @@ def case_3_4_ref(main_user, money_to_card, all_, profile, id_, name):
         send_message_tgbot(mes, main_user.id)
         all_.money += money_to_card
         profile.money -= money_to_card
-        mes = message_for_bot.a['buy'].format(tokemon[name][id_ - 1])
+        mes = message_for_bot.a['buy'].format(tokemon.tokemon[name][id_ - 1])
         send_message_tgbot(mes, profile.id)
     # четвертый случай
     elif not third_line:
         admin_.money += money_to_card * Decimal('0.01')
         profile.money -= money_to_card
-        mes = message_for_bot.a['buy'].format(tokemon[name][id_ - 1])
+        mes = message_for_bot.a['buy'].format(tokemon.tokemon[name][id_ - 1])
         send_message_tgbot(mes, profile.id)
 
         main_user.money += money_to_card * Decimal('0.1')
@@ -567,7 +544,7 @@ def case_3_4_ref(main_user, money_to_card, all_, profile, id_, name):
         all_.money += money_to_card
     else:
         profile.money -= money_to_card
-        mes = message_for_bot.a['buy'].format(tokemon[name][id_ - 1])
+        mes = message_for_bot.a['buy'].format(tokemon.tokemon[name][id_ - 1])
         send_message_tgbot(mes, profile.id)
         main_user.money += money_to_card * Decimal('0.1')
         mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')))
@@ -748,7 +725,7 @@ def referral_system_silver(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money)
+    logics_matrix(profile, new_money, card_)
     return Response(status=200)
 
 
@@ -814,7 +791,7 @@ def referral_system_gold(request, id_):
             save(main_user, all_, profile, admin_, category_gold)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
-            case_3_4_ref(main_user, money_to_card, all_, profile, 'gold')
+            case_3_4_ref(main_user, money_to_card, all_, profile, id_, 'gold')
             save(category_gold)
     buy_card = Buy_Card()
     buy_card.user = profile
@@ -827,7 +804,7 @@ def referral_system_gold(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money)
+    logics_matrix(profile, new_money, card_)
     return Response(status=200)
 
     # проверка на рефку
@@ -912,7 +889,7 @@ def referral_system_emerald(request, id_):
     buy_card.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
-    logics_matrix(profile, new_money)
+    logics_matrix(profile, new_money, card_)
     return Response(status=200)
 
     # проверка на рефку
@@ -1058,15 +1035,37 @@ central = Wallet.objects.all().first()
 # Газ, необходимый для транзакции пересылки (TRX wei)
 gas_needed = 8 * 10 ** 6
 
+
+# Вывод
 @api_view(['POST'])
 def dis(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
         col = request.data['col']
-
-        if col != None:
+        if col is not None:
             wallet_user = profile.wallet
             if collect_usdt(wallet_user):
+                all_.all_transactions += 1
+                all_.save()
+                return Response(status=200)
+            else:
+                return Response(status=400)
+
+
+# Ввод
+@api_view(['POST'])
+def dis_input(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        col = request.data['col']
+        if col is not None:
+            if profile.wallet is None:
+                wallet_user = request.data['wallet']
+            else:
+                wallet_user = profile.wallet
+            if send_usdt(wallet_user, col):
+                all_.all_transactions += 1
+                all_.save()
                 return Response(status=200)
             else:
                 return Response(status=400)
@@ -1085,7 +1084,7 @@ def generate_wallet(request):
 
 # Сбор USDT с кошелька
 # @app.route('/collect_usdt', methods=['POST'])
-def collect_usdt(wallet):
+def collect_usdt(wallet, col):
     w = wallet
     pkey = w.pkey
     trx_bal = tc.trx_balance(w.address)
@@ -1106,7 +1105,7 @@ def collect_usdt(wallet):
                                  )
             new_tx.save()
 
-    a = tc.send_usdt(w.address, central.address, 1 * 10 ** 6, w.pkey)
+    a = tc.send_usdt(w.address, central.address, col * 10 ** 6, w.pkey)
     if a.get('result') == 'Success':
         tx = a.get('tx', {})
         tx_id = tx.get('id', '')
@@ -1116,7 +1115,7 @@ def collect_usdt(wallet):
                              sender=w.address,
                              receiver=central.address,
                              currency='USDT',
-                             amount=1,
+                             amount=col,
                              fee=tx_fee,
                              timestamp=tx_timestamp,
                              )
@@ -1155,30 +1154,27 @@ def send_trx(request):
 
 # Отправка USDT на кошелек
 # @app.route('/send_usdt', methods=['POST'])
-def send_usdt(request):
-    if request.method == "POST":
-        w = Wallet.objects.get(address=request.form.get('address'))
-        pkey = w.pkey
-        a = tc.send_usdt(central.address, w.address, 1 * 10 ** 6, central.pkey)
-        if a.get('result') == 'Success':
-            tx = a.get('tx', {})
-            tx_id = tx.get('id', '')
-            tx_fee = tx.get('fee', 0)
-            tx_timestamp = int(tx.get('blockTimeStamp', 0) / 1000)
-            new_tx = Transaction(tx_id=tx_id,
-                                 sender=central.address,
-                                 receiver=w.address,
-                                 currency='USDT',
-                                 amount=1,
-                                 fee=tx_fee,
-                                 timestamp=tx_timestamp,
-                                 )
-            new_tx.save()
-            return new_tx
-        else:
-            return False
+def send_usdt(wallet, col):
+    w = wallet
+    pkey = w.pkey
+    a = tc.send_usdt(central.address, w.address, col * 10 ** 6, central.pkey)
+    if a.get('result') == 'Success':
+        tx = a.get('tx', {})
+        tx_id = tx.get('id', '')
+        tx_fee = tx.get('fee', 0)
+        tx_timestamp = int(tx.get('blockTimeStamp', 0) / 1000)
+        new_tx = Transaction(tx_id=tx_id,
+                             sender=central.address,
+                             receiver=w.address,
+                             currency='USDT',
+                             amount=col,
+                             fee=tx_fee,
+                             timestamp=tx_timestamp,
+                             )
+        new_tx.save()
+        return new_tx
     else:
-        return render(request, 'backend/send_usdt.html')
+        return False
 
 
 # Удаление из базы всех кошельков кроме центрального

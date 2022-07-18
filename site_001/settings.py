@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'tgbot',
     'frontend.frontend',
     'corsheaders',
+    'crispy_forms'
 ]
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.locale.LocaleMiddleware',

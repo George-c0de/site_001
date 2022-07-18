@@ -73,6 +73,7 @@ const Signup = () => {
                             required
                             className="input"
                         />
+                    <a href={'/api/password-reset/'}>Restore password ?</a>
                         <button type="submit" className="green_btn">
                             {t`Sign Up`}
                         </button>
