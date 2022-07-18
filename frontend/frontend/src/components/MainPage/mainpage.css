@@ -125,4 +125,69 @@ ul li {
 .telegram-user:hover {
     cursor: pointer;
     color: aqua;
+
 }
+
+@media (min-width:0px) and (max-width: 412px){
+	.menu-info{
+		margin-left:-40%;
+	}
+
+	ul li{
+		font-size:16px;
+		margin-left: 5%;
+	}
+
+	.telegram-user{
+		font-size:16px
+	}
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px){
+	.menu-info{
+		position: relative;
+		margin-left:-20%;
+	}
+
+	ul li{
+		font-size:16px;
+		margin-left: 5%;
+	}
+
+	.telegram-user{
+		font-size:16px
+	}
+}
+
+@media only screen and (min-width: 600px) and (max-width:767px){
+    .menu-info{
+		position: relative;
+		margin-left:-10%;
+	}
+
+	ul li{
+		font-size:20px;
+		margin-left: 5%;
+	}
+
+	.telegram-user{
+		font-size:16px
+	}
+}
+
+@media only screen and (min-width : 768px) and (max-width : 1024px){
+	.menu-info{
+		position: relative;
+		margin-left:-10%;
+	}
+
+	ul li{
+		font-size:25px;
+		margin-left: 5%;
+	}
+
+	.telegram-user{
+		font-size:16px
+	}
+}
+

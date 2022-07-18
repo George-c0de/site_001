@@ -49,3 +49,46 @@
 .white_btn_in:hover, .white_btn_in_active:hover {
     background-color: #FFCC00;
 }
+
+
+@media (min-width:0px) and (max-width: 412px){
+    .icon-menu, .icon_menu_active{
+        width:30px;
+        height:30px;
+    }
+
+    .pokemon-banner, .pokemon-banner_active{
+        width:130px;
+        left:30%;
+    }
+
+    .icon-user, .icon-user_active{
+        height:50px;
+    }
+
+    .white_btn_in, .white_btn_in_active{
+        margin-left:0px;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px){
+    .icon-menu, .icon_menu_active{
+        width:30px;
+        height:30px;
+    }
+
+   .pokemon-banner, .pokemon-banner_active{
+     width:130px;
+     left:35%;
+   }
+
+   .icon-user, .icon-user_active{
+     height:50px;
+   }
+}
+
+@media only screen and (min-width: 600px) and (max-width:767px){
+    .pokemon-banner, .pokemon-banner_active{
+        left:40%;
+    }
+}
