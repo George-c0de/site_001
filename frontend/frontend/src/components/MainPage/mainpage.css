@@ -118,11 +118,14 @@ ul li {
     display: block;
     color: white;
     font-size: 24px;
+    text-decoration: none;
+    text-underline: none;
 }
 
 .telegram-user:hover {
     cursor: pointer;
     color: aqua;
+
 }
 
 @media (min-width:0px) and (max-width: 412px){

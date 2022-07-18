@@ -35,11 +35,25 @@
     border-radius: 15px;
 }
 
-.pokeballs-modal .pokeballs-card.main {
+.pokeballs-modal .pokeballs-card.opened {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: #6b2e07;
+    gap: 10px;
+}
+
+.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.pokeballs-card-info {
+    z-index: 10;
 }
 
 .pokeballs-card-label {
@@ -48,10 +62,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70%;
+    height: 70px;
     padding: 5px;
     border-radius: 15px;
     background-color: rgba(42, 42, 42, 0.76);
     font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     transition: all .3s ease-in-out;
     cursor: pointer;
@@ -75,7 +94,7 @@
 }
 
 
-.pokeballs-card.main .pokeballs-card-info {
+.pokeballs-card.opened .pokeballs-card-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -87,7 +106,7 @@
     color: #FFCC00;
 }
 
-.pokeballs-card.main .pokeballs-card-info img {
+.pokeballs-card.opened .pokeballs-card-info img {
     width: 90%;
 }
 
@@ -186,4 +205,19 @@
 
 .card-status-balls span.show img {
     visibility: visible;
+}
+
+.status_pending {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px dashed #FFF;
+    animation: circle 7s infinite linear;
+}
+
+@keyframes circle {
+    100% {
+        transform: rotate(360deg);
+    }
 }

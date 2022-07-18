@@ -22,7 +22,7 @@
     --delay: 500ms
 }
 .fade {
-    opacity: 0; 
+    opacity: 0;
     animation: fade 100s ease-out infinite var(--delay);
 }
 .wrapper{
@@ -64,7 +64,6 @@
 .table{
     display: flex;
     flex-direction: column;
-    /* max-height: 600px; */
     width: 100%;
     margin-right: 15px;
     gap: 2rem;

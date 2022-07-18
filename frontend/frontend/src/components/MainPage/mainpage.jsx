@@ -12,7 +12,7 @@ import {t} from 'ttag';
 //Font Awesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
-import {set} from '../../cookie';
+//import {set} from '../../cookie';
 
 const Mainpage = () => {
         const [openDropDown, setOpenDropDown] = useState(false);
@@ -58,13 +58,14 @@ const Mainpage = () => {
             fetchLink()
         }, [])
         const [get_link_tg, setget_link_tg] = useState({
-            'link_tg': ""
+            'link_tg': "https://t.me/Tokemon_game_Bot"
         })
 
         async function fetchLink() {
             try {
                 const response = await axios.get('http://127.0.0.1:8000/api/get_link_tg')
-                setget_link_tg(response.data)
+                setget_link_tg(response.data.link_tg)
+
             } catch (e) {
                 if (e.response.status !== 200) {
                     let data_ = "https://t.me/Tokemon_game_Bot"
@@ -114,9 +115,6 @@ const Mainpage = () => {
         const showRules = () => {
             navigate("/rules");
         }
-        const showtg = () => {
-            navigate(get_link_tg.link_tg);
-        };
 //   useEffect(async() => {
 //   const res= await axios.get('http://localhost:8000/api/user');
 //   console.log(res)
@@ -140,7 +138,7 @@ const Mainpage = () => {
                                 <div className="menu-info-icons">
                                     <div className='info-icons-container'>
                                         <FontAwesomeIcon icon={faPaperPlane} className="paper-plane"/>
-                                        <span className="telegram-user">{t`USE TELEGRAM BOT`}</span>
+                                        <a href={get_link_tg} className="telegram-user">{t`USE TELEGRAM BOT`}</a>
                                     </div>
                                 </div>
                             </>

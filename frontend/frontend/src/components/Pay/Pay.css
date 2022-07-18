@@ -35,7 +35,13 @@
 }
 
 /*INPUTS*/
-
+.pay-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 40px;
+    align-items: center;
+}
 .pay-inputs-wrapper {
     width: 100%;
     display: flex;
@@ -68,6 +74,8 @@
     font-weight: 600;
     color: #475176;
     outline: none;
+    display: flex;
+    align-items: center;
 }
 
 .pay-input-info {
@@ -88,6 +96,8 @@
     font-size: 32px;
     font-weight: 600;
     transition: all .3s ease-in-out;
+    max-width: 350px;
+    width: 100%;
 }
 
 .pay-button:hover {
@@ -113,7 +123,7 @@
     margin-bottom: 30px;
 }
 
-.pay-history-table {
+.pay-history-row {
     display: grid;
     grid-template-columns: minmax(70px, 200px) minmax(70px, 200px) 1fr minmax(70px, 200px);
     color: #475176;
@@ -129,9 +139,11 @@
 }
 
 .history-table-column {
-    min-height: 100px;
+    min-height: 40px;
 }
-
+.pay-history-row:first-child .history-table-column{
+    min-height: 60px;
+}
 .history-table-column:not(:last-child) {
     border-right: 2px solid #475176;
 }
