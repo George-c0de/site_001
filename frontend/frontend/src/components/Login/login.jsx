@@ -25,14 +25,13 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let data2 = await axios.post('http://127.0.0.1:8000/api/login', data)
+            let data2 = 200;
+            data2 = await axios.post('http://127.0.0.1:8000/api/login', data)
                 .catch(function (error) {
                     if (error.response) {
                         data2 = error.response.status;
                     }
                 });
-            console.log("data2")
-            console.log(data2.data)
             if (data2.data === 200) {
                 navigate("/home"); //after registering navigate to login page
             }

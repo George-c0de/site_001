@@ -181,3 +181,198 @@
     background-color: #3bb19b;
     color: #FFF;
 }
+
+
+/*Devices Responsive*/
+/*Mobile*/
+@media (min-width:0px) and (max-width: 412px) {
+    .navbar .logo-tokemon {
+        height:100% !important;
+    }
+
+    .login_form_container {
+        margin-top: -50% !important;
+        margin-left: -20% !important ;
+    }
+
+    /* .login_form_container .left{
+        max-width:400px;
+    } */
+    
+    .login_form_container .left{
+        margin-top: 120%;
+        margin-left:20%;
+        height:350px;
+    }
+
+    .login_form_container .right {
+        margin-top:120%;
+        margin-left:-5%;
+        max-width:120px !important;
+        height:350px !important;
+    }
+
+    .form_container input{
+        width:120%;
+    }
+    
+    .yellow_btn {
+        height:100px; 
+        font-size:calc(30px + 8 * ((100vw - 320px) / (1980 - 320))) !important;
+        transform: scale(0.5) !important;
+    }
+
+    .login_container .bubble-speech::after {
+        margin-left:80% !important;
+        margin-top:-3% !important;
+        transform: rotate(45deg);
+    }
+
+    .pikachu-pokeball {
+        margin-top: 45% !important;
+        height:20% !important;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px) {
+    .navbar .logo-tokemon {
+        left:50%;
+        height:100% !important;
+    }
+
+    .login_form_container {
+        margin-top: 20%;
+        margin-left: 5%;
+    }
+
+    .login_container .left {
+        max-width:300px;
+    }
+
+    .input{
+        width:120% !important;
+    }
+
+    .login_container .right {
+        max-width:110px;
+    }
+    
+    .yellow_btn {
+        height:100px !important; 
+        font-size:calc(30px + 8 * ((100vw - 320px) / (1980 - 320))) !important;
+        transform: scale(0.6);
+    }
+
+    .login_container .bubble-speech::after {
+        margin-left:50%;
+        transform: rotate(45deg);
+    }
+
+    .pikachu-pokeball {
+        height: 25%;
+        top:65%;
+    }
+}
+
+/*Small devices: tablets, large phones*/
+@media only screen and (min-width: 600px) and (max-width:767px) {
+    .login_form_container {
+        margin-top: 25%;
+        margin-left: 5%;
+    }
+
+    .login_container .left {
+        max-width:400px;
+    }
+
+    .login_container .right {
+        max-width:150px;
+    }
+    
+    .yellow_btn {
+        height:100px !important; 
+        font-size:calc(30px + 8 * ((100vw - 320px) / (1980 - 320))) !important;
+        transform: scale(0.5);
+    }
+
+    .login_container .bubble-speech::after {
+        margin-left:50%;
+        transform: rotate(45deg);
+    }
+
+    .pikachu-pokeball {
+        height: 40%;
+        top:63%;
+    }
+}
+
+/*Laptop */
+/* For 1024 Resolution */  
+@media only screen and (min-width : 768px) and (max-width : 1024px){
+    .login_form_container {
+        margin-top: 5%;
+        margin-left: 5%;
+    }
+
+    .login_container .right {
+        max-width:300px;
+    }
+
+    .login_container .bubble-speech::after {
+        margin-left:40% !important;
+        transform: rotate(45deg);
+        /* margin-top: 15% !important; */
+    }
+
+    .pikachu-pokeball {
+        height: 30%;
+        top:50%;
+    }
+}
+/* For 1366 Resolution */  
+@media only screen and (min-width: 1025px) and (max-width: 1366px){
+    .login_form_container {
+        margin-top: 10%;
+        margin-left: 5%;
+    }
+
+    .login_container .right {
+        max-width:400px;
+    }
+
+    .pikachu-pokeball {
+        height: 40%;
+        top:63%;
+        left:20%;
+    }
+    .login_container .bubble-speech::after {
+        margin-left:50% !important;
+        transform: rotate(45deg);
+        /* margin-top: 15% !important; */
+    }
+}
+
+/*Desktop*/
+@media only screen and (min-width: 1370px){
+    /*Pikachu-Pokeball*/
+    .pikachu-pokeball {
+        position: absolute;
+        height: 50%;
+        top: 50%;
+        left: 30%;
+    }
+    
+    /*Login Form*/
+    .login_form_container {
+        max-width: 600px !important;
+        width: 100%;
+        margin-top: 30px;
+        margin-left: 50%;
+        margin-right: 50px;
+        display: flex;
+    }
+
+    .login_form_container .bubble-speech::after {
+        margin-left: 1% ;
+    }
+}

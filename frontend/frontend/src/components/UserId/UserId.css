@@ -102,3 +102,58 @@
 .user-info-wrapper .satoshi {
     height: 100%;
 }
+
+@media (min-width:0px) and (max-width: 412px){
+    .user-id{
+        font-size:20px;
+    }
+
+    .user-info li{
+        font-size:20px;
+    }
+
+    .user-info .link-invitation{
+        min-height:40px;
+        min-width:200px;
+    }
+
+    .user-info-wrapper .satoshi{
+        height:200px;
+        margin-left: -10%;
+    }
+
+    .user-info-buttons .yellow-btn{
+        font-size:25px;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px) {
+    .user-id{
+        font-size:16px;
+    }
+
+    .user-info li{
+        font-size:16px;
+    }
+
+    .user-info .link-invitation{
+        min-height:40px;
+        min-width:150px;
+    }
+
+    .user-info-wrapper .satoshi{
+        height:200px;
+        margin-left: -10%;
+    }
+
+    .user-info-buttons .yellow-btn{
+        font-size:20px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width:767px){
+    .user-info-wrapper .satoshi{
+        height:300px;
+        margin-left: -10%;
+    }
+}

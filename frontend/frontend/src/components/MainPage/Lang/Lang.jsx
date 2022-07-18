@@ -15,6 +15,7 @@ import support from '../../../Ảnh Pokemon Dự Trù/супорт.svg';
 
 import './Lang.css';
 import { LangContext } from '../../../context/LangContext';
+import {saveLocale} from "../../../i18nInit";
 
 const languages = {
   'en': britain,
@@ -41,6 +42,8 @@ export const Lang = ({ isActive }) => {
     const lang = e.target.dataset.lang;
     setOpen(!open);
     updateLang(lang);
+    saveLocale(lang);
+    window.location.reload();
   }
 
   return (
