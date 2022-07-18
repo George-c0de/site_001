@@ -5,17 +5,21 @@
     #inputType{
         margin-left: 16% !important;
         width:65% !important;
+        height:25px;
+        margin-top:-5px;
     }
 
     #succesBTN{
         margin-left: 16% !important;
         width:65% !important;
+        height:30px;
+        margin-top:5px !important;
     }
 }
 
 @media only screen and (min-width:413px) and (max-width: 600px){
     #captcha{
-        margin-left:15% !important;
+        margin-left:11% !important;
     }
 
     #inputType{
