@@ -105,6 +105,7 @@ export const PokeballsModal = ({ amount, category, images, background }) => {
   const buyCard = async (id) => {
     const newCards = [...cards];
     newCards[id - 1] = id;
+    console.log(newCards)
     setCards(newCards)
   }
 
@@ -126,8 +127,9 @@ export const PokeballsModal = ({ amount, category, images, background }) => {
           return (
             <div data-id={ i + 1 } className={ id ? 'pokeballs-card opened' : 'pokeballs-card inactive' }>
               { id ?
-                <CardOpened image={ images[i] } background={ background } key={ id }/> :
-                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ i + 1 } category={ category } key={ id }/>
+                <CardOpened image={ images[i] } background={ background } key={ `${i}-${category}-open` }/> :
+                <CardClosed price='15' buyCard={ () => buyCard(i + 1) } idCard={ i + 1 } category={ category }
+                            key={ `${i}-${category}-closed` }/>
               }
             </div>
           )
