@@ -58,7 +58,7 @@ export const UserId = ({ note }) => {
           <li>{t`Balance`}: { user?.money }</li>
           <li>{t`Cards profit`}: { user?.money }</li>
           <li>{t`Referal profit`}: { user?.line_1 + user?.line_2 + user?.line_3 }</li>
-          <li>{t`Link for invitation`} { user?.referral_link }</li>
+          <li>{t`Link for invitation`} </li>
 
           <span className="link-invitation" ref={linkRef}>
             { user?.referral_link }

@@ -851,6 +851,19 @@ def referral_system_silver(request, id_):
             save(category_silver)
     buy_card = Buy_Card()
     buy_card.user = profile
+    all_cards = All_card.objects.all()
+    i = 0
+    for el in all_cards:
+        if el.category == 'silver' and el.name == id_:
+            i += 1
+            el.profit += money_to_card
+            el.save()
+    if i != 0:
+        prof_c = All_card()
+        prof_c.name = id_
+        prof_c.category = 'silver'
+        prof_c.profit = money_to_card
+        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'silver'
@@ -930,6 +943,19 @@ def referral_system_gold(request, id_):
             save(category_gold)
     buy_card = Buy_Card()
     buy_card.user = profile
+    all_cards = All_card.objects.all()
+    i = 0
+    for el in all_cards:
+        if el.category == 'gold' and el.name == id_:
+            i += 1
+            el.profit += money_to_card
+            el.save()
+    if i != 0:
+        prof_c = All_card()
+        prof_c.name = id_
+        prof_c.category = 'gold'
+        prof_c.profit = money_to_card
+        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'gold'
@@ -947,6 +973,15 @@ def referral_system_gold(request, id_):
     # a = Admin.objects.all().first()
     # b =
     # if Category_Bronze.objects.filter(user.id=).exists()
+
+@api_view(['GET'])
+def get_hist_card(request):
+    if Buy_Card.objects.all().exists():
+        buy = Buy_Card.objects.order_by('-time')
+        b = [buy[0],buy[1],buy[2]]
+        return Response(data=b)
+    else:
+        return Response(status=400)
 
 
 # emerald
@@ -1015,6 +1050,19 @@ def referral_system_emerald(request, id_):
             save(category_emerald)
     buy_card = Buy_Card()
     buy_card.user = profile
+    all_cards = All_card.objects.all()
+    i = 0
+    for el in all_cards:
+        if el.category == 'emerald' and el.name == id_:
+            i += 1
+            el.profit += money_to_card
+            el.save()
+    if i != 0:
+        prof_c = All_card()
+        prof_c.name = id_
+        prof_c.category = 'emerald'
+        prof_c.profit = money_to_card
+        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'emerald'

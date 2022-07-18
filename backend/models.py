@@ -154,6 +154,7 @@ class History_Transactions(models.Model):
 class Buy_Card(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
 
 
 class DeepLink(models.Model):
@@ -181,6 +182,7 @@ class All_card(models.Model):
     category = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     profit = models.IntegerField(default=0)
+
 
 class User_in_Matrix(models.Model):
     participant_number = models.IntegerField('Номер участника')

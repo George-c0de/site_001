@@ -38,7 +38,7 @@ const Game = () => {
             gold: [750,1000,1250,1500,2000,2222],
             emerald: [2500,5000,7500,10000,15000,22222]
         });
-
+        const [history,setHistory] = useState()
         const [card_data, setCard_data] = useState({
             bronze : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
             silver : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
@@ -69,11 +69,27 @@ const Game = () => {
             getCard();
             getUsername();
             getCard_data();
+            getHist();
         }, [])
 
         let getUsername = async () => {
             const username = await axios.get('http://127.0.0.1:8000/api/user')
             setUsername(username.data.username);
+        }
+        let getHist = async () => {
+            // const username = await axios.get('http://127.0.0.1:8000/api/get_user_in_card')
+            // setCard_data(username.data);
+            await axios.get('http://127.0.0.1:8000/api/get_hist_card')
+                .then((data) => {
+                    const result = {
+                        bronze: data.data.bronze,
+                        silver: data.data.silver,
+                        gold: data.data.gold,
+                        emerald: data.data.emerald
+                    }
+
+                    setHistory(result);
+                })
         }
         let getCard_data = async () => {
             // const username = await axios.get('http://127.0.0.1:8000/api/get_user_in_card')
@@ -160,7 +176,7 @@ const Game = () => {
                                 />
                             </div>
 
-                            <GameHistory/>
+                            <GameHistory history = {history}/>
 
                         </div>
 
