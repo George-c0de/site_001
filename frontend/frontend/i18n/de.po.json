@@ -278,6 +278,138 @@
         "msgstr": [
           "TRANSAKTIONSGESCHICHTE"
         ]
+      },
+      "description": {
+        "msgid": "description",
+        "msgstr": [
+          "Beschreibung"
+        ]
+      },
+      "Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.": {
+        "msgid": "Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.",
+        "msgstr": [
+          "Tokemon Game ist ein Finanzspiel im Tron Chain Netzwerk, das sowohl passiven als auch aktiven Spielern ermöglicht, Geld zu verdienen. Zum Erhalt von Gewinne zu erhalten, müssen die Spieler eine Karte mit einem Tokemon kaufen, das an der Schlacht teilnehmen. "
+        ]
+      },
+      "The registration is free": {
+        "msgid": "The registration is free",
+        "msgstr": [
+          "Die Anmeldung ist kostenlos"
+        ]
+      },
+      "To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards": {
+        "msgid": "To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards",
+        "msgstr": [
+          "Um mit dem Spielen und Verdienen zu beginnen, müssen Sie Ihr Guthaben in USD TRACK-20 aufladen und Zugang zu Ihren Karten kaufen"
+        ]
+      },
+      "affiliate program": {
+        "msgid": "affiliate program",
+        "msgstr": [
+          "PARTNERPROGRAMM"
+        ]
+      },
+      "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.": {
+        "msgid": "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.",
+        "msgstr": [
+          "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card."
+        ]
+      },
+      "After receiving 4 wins, you can feed the Tokémon to continue the battles": {
+        "msgid": "After receiving 4 wins, you can feed the Tokémon to continue the battles",
+        "msgstr": [
+          "Nach 4 Siegen kannst du das Pokemon füttern, um die Kämpfe fortzusetzen. Um Gewinne zu erhalten, müssen Sie Ihrem Konto eine USD"
+        ]
+      },
+      "To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!": {
+        "msgid": "To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!",
+        "msgstr": [
+          "Brieftaschenadresse im TRS20-Netzwerk hinzufügen. ACHTUNG! Auszahlung Adresse kann nicht geändert werden!"
+        ]
+      },
+      "Balance replenishment and withdrawal – instant.": {
+        "msgid": "Balance replenishment and withdrawal – instant.",
+        "msgstr": [
+          "Guthabenauffüllung und Abhebung - sofort."
+        ]
+      },
+      "3 lines = 15%": {
+        "msgid": "3 lines = 15%",
+        "msgstr": [
+          "3 LINIEN = 15%."
+        ]
+      },
+      "Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged": {
+        "msgid": "Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged",
+        "msgstr": [
+          "A recompensa da afiliação vem apenas de cartões activos. Se o seu cartão for não activo, então o Afiliado a recompensa não é cobrada"
+        ]
+      },
+      "You can take part in all cards at the same time.": {
+        "msgid": "You can take part in all cards at the same time.",
+        "msgstr": [
+          "Partnerprämien gibt es nur von aktiven Karten. Wenn Ihre Karte nicht aktiv, dann wird die Affiliate Prämie nicht belastet"
+        ]
+      },
+      "BUDGET ALLOCATION": {
+        "msgid": "BUDGET ALLOCATION",
+        "msgstr": [
+          "BUDGETZUTEILUNG"
+        ]
+      },
+      "Battle payment": {
+        "msgid": "Battle payment",
+        "msgstr": [
+          "KAMPFBEZAHLUNG"
+        ]
+      },
+      "Advertising expenses": {
+        "msgid": "Advertising expenses",
+        "msgstr": [
+          "KAMPFBEZAHLUNG"
+        ]
+      },
+      "Affiliate rewards": {
+        "msgid": "Affiliate rewards",
+        "msgstr": [
+          "KAMPFBEZAHLUNG"
+        ]
+      },
+      "Structure of each level": {
+        "msgid": "Structure of each level",
+        "msgstr": [
+          "KAMPFBEZAHLUNG"
+        ]
+      },
+      "In Tokemon Game, each card is a separate structure. All new players are randomly placed in a  single large structure on each card, giving  everyone an equal chance to earn rewards  without having to invite personal partners Everyone chooses any card. By  activating a card, a participant  automatically gets into a line with  available seats. Free seats are allocated  and assigned randomly. A new player always takes the right seat in  the cycle of another random participant When both seats in the cycle are occupied  by players, you move to a new row below -  this is a recycle. Then, this action is  repeated as the activity moves on the  level Each participant can take only one seat  (their own cycle) on the line, after closing  their cycle, the participant moves to the  following lines below\n": {
+        "msgid": "In Tokemon Game, each card is a separate structure. All new players are randomly placed in a  single large structure on each card, giving  everyone an equal chance to earn rewards  without having to invite personal partners Everyone chooses any card. By  activating a card, a participant  automatically gets into a line with  available seats. Free seats are allocated  and assigned randomly. A new player always takes the right seat in  the cycle of another random participant When both seats in the cycle are occupied  by players, you move to a new row below -  this is a recycle. Then, this action is  repeated as the activity moves on the  level Each participant can take only one seat  (their own cycle) on the line, after closing  their cycle, the participant moves to the  following lines below",
+        "msgstr": [
+          "Bei Tokemon Game ist jede Karte eine eigene Struktur. Alle neuen Spieler werden nach dem Zufallsprinzip in einer einzigen großen Struktur auf jeder Karte platziert, so dass jeder So hat jeder die gleiche Chance, Belohnungen zu verdienen, ohne persönliche Partner einladen zu müssen Jeder wählt eine beliebige Karte. Durch das Aktivieren einer Karte wird ein Teilnehmer automatisch automatisch in eine Reihe mit freien Plätzen ein. Die freien Plätze werden nach dem Zufallsprinzip zugewiesen. Ein neuer Spieler nimmt immer den rechten Platz in der Reihe eines anderen Wenn beide Plätze im Zyklus von Spielern besetzt sind, wird eine neue Reihe darunter gebildet - das ist ein Recycling. Diese Aktion wird dann Jeder Teilnehmer kann nur einen Platz (seinen eigenen Kreislauf) in der Reihe einnehmen. Nachdem er seinen Kreislauf geschlossen hat, bewegt sich der Teilnehmer zu den folgenden Zeilen bel"
+        ]
+      },
+      "game rules": {
+        "msgid": "game rules",
+        "msgstr": [
+          "SPIELREGELN"
+        ]
+      },
+      "Cost of cards": {
+        "msgid": "Cost of cards",
+        "msgstr": [
+          "KOSTEN FÜR KARTEN"
+        ]
+      },
+      "line": {
+        "msgid": "LINIEN",
+        "msgstr": [
+          ""
+        ]
+      },
+      "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng": {
+        "msgid": "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng",
+        "msgstr": [
+          "Haben Sie noch Fragen? Vollstandige Anweisungen zum Spiel, zur Einzahlung und zur Abhebung Ihrer Gewinne finden Sie unter folgendem Link tokemons.info/Ger"
+        ]
       }
     }
   }

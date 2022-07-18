@@ -38,9 +38,6 @@ const Pay = () => {
             let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input');
             let data = await response.data
             SetTran(data)
-            console.log(data)
-            console.log(tran)
-            console.log(response)
         } catch (e) {
             console.log(e)
         }
@@ -52,7 +49,7 @@ const Pay = () => {
                 let data = await response.data
                 setUser(data);
                 if (user.wallet !== null) {
-                    SetWallet(Math.round(Math.random()) > 0 ? user.wallet : null);
+                    SetWallet(user.wallet);
                     setData({
                         wallet: wallet,
                         col: 0,
@@ -66,51 +63,47 @@ const Pay = () => {
             }
         }
         getPosts();
-        getTran();
     }, [user.id]);
-    // async function getPosts() {
-    //           try {
-    //               let response = await axios.get('http://127.0.0.1:8000/api/user');
-    //
-    //               let data = await response
-    //               console.log(data)
-    //
-    //               setUser(data);
-    //               console.log(user)
-    //               SetState(false);
-    //               if (user.wallet !== null) {
-    //                   SetState(false);
-    //                   SetWallet(user.wallet);
-    //               } else {
-    //
-    //               }
-    //           } catch (e) {
-    //           }
-    //
-    //       }
 
-    const payForm = useRef(null);
-    const sumInput = useRef(null);
-    const pay = async () => {
-        if (sumInput.current.value <= wallet.Available) {
-            payForm.submit()
-            try {
-                let response = await axios.post('http://127.0.0.1:8000/api/dis');
-                if (response.status === 200) {
-                    console.log('OK')
-                }
-                else{
-                    console.log('Error')
-                }
-            } catch (e) {
-                if (e.response.status === 200) {
-                    console.log('OK')
-                } else {
-                    console.log('Error')
-                }
-            }
+    //Send transaction
+    const sumInput = useRef(null)
+    const walletInput = useRef(null)
+
+    const handleSumInput = () => {
+        if(sumInput.current.value <= user.money) {
+            setData(Object.assign(data, {
+                col: sumInput.current.value
+            }))
         }
     }
+
+    const handleWalletInput = () => {
+        setData(Object.assign(data, {
+            wallet: walletInput.current.value
+        }))
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if(data.col > user.money) {
+            alert("Not enough money to make transaction")
+        }
+
+        try {
+            let data2 = 200;
+            data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
+                .catch(function (error) {
+                    if (error.response) {
+                        data2 = error.response.status;
+                    }
+                });
+
+        } catch (error) {
+            //console.log(error.response.data.msg);
+            alert("Transaction error, please try again");
+        }
+    };
 //Logout
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -144,26 +137,27 @@ const Pay = () => {
                     <span className='pay-subtitle'>Доступно к выводу:</span>
                     <span className='pay-money'>{user.money}$</span>
                 </div>
-                <form className='pay-form' method='POST' ref={payForm}>
-                    <div className='pay-inputs-wrapper'>
-                        <div className='pay-input'>
-                            <label htmlFor='sum-input'>Сумма вывода:</label>
-                            <input value={data.col} type='number' className='pay-sum-input' name='sum-input'
-                                   max={user.money}
-                                   min='0' ref={sumInput}/>
-                            <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
-                        </div>
-                        <div className='pay-input'>
-                            <label htmlFor='address-input'>Адрес вывода:</label>
-                            {wallet &&
-                                <div className='pay-address-input' name='address-input'>{wallet}</div>
-                                ||
-                                <input value={wallet} type='text' className='pay-address-input' name='address-input'/>}
-                            <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
-                        </div>
+                <div className='pay-inputs-wrapper'>
+                    <div className='pay-input'>
+                        <label htmlFor='sum-input'>Сумма вывода:</label>
+                        <input value={data.col} type='number' className='pay-sum-input' name='sum-input'
+                               max={user.money}
+                               min='0'
+                               onInput={() => handleSumInput()}
+                               ref={sumInput}
+                        />
+                        <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
-                    <button className='pay-button' onClick={() => pay()}>ВЫВЕСТИ</button>
-                </form>
+                    <div className='pay-input'>
+                        <label htmlFor='address-input'>Адрес вывода:</label>
+                        {wallet &&
+                            <div className='pay-address-input' name='address-input'>{wallet}</div>
+                            ||
+                            <input type='text' className='pay-address-input' name='address-input' onInput={() => handleWalletInput()} ref={walletInput}/>}
+                        <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
+                    </div>
+                </div>
+                <button className='pay-button' onClick={() => handleSubmit()}>ВЫВЕСТИ</button>
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>
