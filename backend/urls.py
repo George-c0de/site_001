@@ -32,7 +32,6 @@ urlpatterns = [
     path('send_trx/', views.send_trx),
     path('send_usdt/', views.send_usdt),
     path('delete/', views.delete),
-    path('paymant/', views.main),
     path('bronze/<int:id_>', views.referral_system_bronze),
     path('silver/<int:id_>', views.referral_system_silver),
     path('gold/<int:id_>', views.referral_system_gold),

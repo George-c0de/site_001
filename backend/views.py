@@ -1,4 +1,5 @@
 import io
+import json
 import logging
 from os import getenv
 import uuid
@@ -7,6 +8,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
@@ -133,6 +135,12 @@ def getRoutes(request):
         {
             'Endpoint': '/referral/',
             'method': 'GET',
+            'body': None,
+            'description': 'Returns a single note object'
+        },
+        {
+            'Endpoint': '/dis/',
+            'method': 'POST',
             'body': None,
             'description': 'Returns a single note object'
         },
@@ -1000,11 +1008,14 @@ def get_hist_card(request):
     if Buy_Card.objects.all().exists():
         buy = Buy_Card.objects.order_by('-time')
         time = buy[0].time
-        str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
+            time.month) + '.' + str(time.year)
         time = buy[1].time
-        str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
+            time.month) + '.' + str(time.year)
         time = buy[2].time
-        str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
+            time.month) + '.' + str(time.year)
         data = {
             'oneq': [buy[0].id, str_time_1, buy[0].card.price],
             'two': [buy[1].id, str_time_2, buy[1].card.price],
@@ -1252,38 +1263,67 @@ gas_needed = 8 * 10 ** 6
 
 
 # Вывод
-@api_view(['POST'])
+@csrf_exempt
 def dis(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
-        col = request.data['col']
+        col = request.body
+        col = col.decode('utf8').replace("'", '"')
+        data = json.loads(col)
+        # s = json.dumps(data, indent=4, sort_keys=True)
+        wall = data['wallet']
+        col = data['col']
         if col is not None:
-            wallet_user = profile.wallet
-            if collect_usdt(wallet_user, col):
+            if profile.wallet is not None:
+                wall = Wallet.objects.get(pkey=profile.wallet)
+            else:
+                wallet = tc.create_wallet()
+                w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
+                profile.wallet = w.pkey
+                w.save()
+                wall = w
+            if profile.money < col:
+                return Response(status=400)
+            profile.money -= col
+            profile.save()
+            if collect_usdt(wall, col):
                 all_.all_transactions += 1
                 all_.save()
                 return Response(status=200)
             else:
                 return Response(status=400)
+    return Response(status=400)
 
 
 # Ввод
-@api_view(['POST'])
 def dis_input(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
-        col = request.data['col']
+        col = request.body
+        col = col.decode('utf8').replace("'", '"')
+        data = json.loads(col)
+        # s = json.dumps(data, indent=4, sort_keys=True)
+        wall = data['wallet']
+        col = data['col']
         if col is not None:
-            if profile.wallet is None:
-                wallet_user = request.data['wallet']
+            if profile.wallet is not None:
+                wall = Wallet.objects.get(pkey=profile.wallet)
             else:
-                wallet_user = profile.wallet
-            if send_usdt(wallet_user, col):
+                wallet = tc.create_wallet()
+                w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
+                profile.wallet = w.pkey
+                w.save()
+                wall = w
+            profile.money += col
+            profile.save()
+            if collect_usdt(wall, col):
                 all_.all_transactions += 1
                 all_.save()
                 return Response(status=200)
             else:
                 return Response(status=400)
+    return Response(status=400)
+
 
 
 # Создание нового кошелька
@@ -1435,21 +1475,21 @@ def get_trx_balance(address):
     bal = tc.trx_balance(address)
     return bal
 
-
-# Главная
-# @app.route('/', methods=['GET'])
-def main(request):
-    # wallets = select(w for w in Wallet)[:]
-    wallets = Wallet.objects.all()
-    # transactions = select(t for t in Transaction)[:]
-    transactions = Transaction.objects.all()
-    # usdt_balances = {a: await get_usdt_balance(a) for a in  select(t.address for t in Wallet)[:]}
-    # trx_balances = {a: await get_trx_balance(a) for a in  select(t.address for t in Wallet)[:]}
-    a = dict()
-    for el in wallets:
-        a[el] = get_usdt_balance(w.address)
-    b = dict()
-    for el in wallets:
-        b[el] = get_trx_balance(w.address)
-    return render(request, 'backend/paymant.html', {'wallets': wallets, 'transactions': transactions,
-                                                    'a': a, 'b': b})
+#
+# # Главная
+# # @app.route('/', methods=['GET'])
+# def main(request):
+#     # wallets = select(w for w in Wallet)[:]
+#     wallets = Wallet.objects.all()
+#     # transactions = select(t for t in Transaction)[:]
+#     transactions = Transaction.objects.all()
+#     # usdt_balances = {a: await get_usdt_balance(a) for a in  select(t.address for t in Wallet)[:]}
+#     # trx_balances = {a: await get_trx_balance(a) for a in  select(t.address for t in Wallet)[:]}
+#     a = dict()
+#     for el in wallets:
+#         a[el] = get_usdt_balance(w.address)
+#     b = dict()
+#     for el in wallets:
+#         b[el] = get_trx_balance(w.address)
+#     return render(request, 'backend/paymant.html', {'wallets': wallets, 'transactions': transactions,
+#                                                     'a': a, 'b': b})

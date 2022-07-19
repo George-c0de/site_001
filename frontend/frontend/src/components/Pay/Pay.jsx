@@ -107,27 +107,36 @@ const Pay = () => {
 
     const handleSum = (e) => {
         console.log(e.target.value)
+        console.log('maxi')
+        console.log(Number(user.money))
+        console.log(data.col)
         setData({
             wallet: data.wallet,
             col: e.target.value
         })
-        if (e.target.value > maxi) {
-            e.target.value = maxi;
+        if (Number(data.col) > Number(user.money)) {
+            e.target.value = Number(user.money);
             setData({
                 wallet: data.wallet,
-                col: maxi
+                col: Number(user.money)
             })
-        } else if (e.target.value < 1) {
-            e.target.value = maxi
+            console.log(1)
+            console.log(data.col)
+        } else if (Number(data.col) < 1) {
+            e.target.value = 1
             setData({
                 wallet: data.wallet,
-                col: maxi
+                col: 1
             })
+            console.log(2)
+            console.log(data.col)
         } else {
+            console.log(3)
             setData({
                 wallet: data.wallet,
                 col: e.target.value
             })
+            console.log(data.col)
         }
     }
 //Logout
@@ -146,14 +155,26 @@ const Pay = () => {
         setOpenUserInfo(!openUserInfo);
         setActive(!onActive);
     };
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (data.col < 1 || data.col > user.money) {
             alert('Error')
         } else if (data.wallet === '') {
             alert('Error')
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/dis', data)
+                console.log(data)
+                axios.post('http://127.0.0.1:8000/api/dis', {
+                    wallet: data.wallet,
+                    col: data.col
+                }, {
+        headers: { "Content-Type": "application/json" }
+      }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
             } catch (e) {
                 if (e.response.status === 200) {
                     data.col = 1
@@ -180,6 +201,7 @@ const Pay = () => {
                     {openUserInfo ? <UserId/> : null}
                 </nav>
             </div>
+            <form onSubmit={handleSubmit}>
             <div className='pay-container'>
                 <div className='pay-title-wrapper'>
                     <h1 className='pay-title'>ВЫВОД СРЕДСТВ</h1>
@@ -202,7 +224,8 @@ const Pay = () => {
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button className='pay-button' onClick={handleSubmit}>ВЫВЕСТИ</button>
+                <button type={"submit"} className='pay-button'>ВЫВЕСТИ</button>
+
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>
@@ -222,10 +245,14 @@ const Pay = () => {
                         {tran.map((trans, i) => {
                             return (
                                 <div className="pay-history-row" key={i}>
-                                    <div className="history-table-column"><span className='history-table-title'>{trans.time}</span></div>
-                                    <div className="history-table-column"><span className='history-table-title'>{trans.data}</span></div>
-                                    <div className="history-table-column"><span className='history-table-title'>{trans.txid}</span></div>
-                                    <div className="history-table-column"><span className='history-table-title'>{trans.quantity}</span></div>
+                                    <div className="history-table-column"><span
+                                        className='history-table-title'>{trans.time}</span></div>
+                                    <div className="history-table-column"><span
+                                        className='history-table-title'>{trans.data}</span></div>
+                                    <div className="history-table-column"><span
+                                        className='history-table-title'>{trans.txid}</span></div>
+                                    <div className="history-table-column"><span
+                                        className='history-table-title'>{trans.quantity}</span></div>
                                 </div>
                             )
                         })}
@@ -233,6 +260,7 @@ const Pay = () => {
                 </div>
 
             </div>
+            </form>
             <Lang isActive={onActive}/>
         </div>
     )
