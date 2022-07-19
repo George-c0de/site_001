@@ -51,8 +51,10 @@ urlpatterns = [
     path('get_user_in_matrix', views.get_user_in_matrix),
     path('get_user_in_card', views.get_user_in_card),
     path('get_hist_card', views.get_hist_card),
-   # path('get_transacrion', views.get_transacrion),
+    # path('get_transacrion', views.get_transacrion),
     # Вывод
-    path('dis', views.dis)
+    path('dis', views.dis),
+    # Ввод
+    path('dis_input', views.dis_input)
 
 ]
