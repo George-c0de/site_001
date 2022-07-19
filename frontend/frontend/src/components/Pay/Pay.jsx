@@ -102,6 +102,8 @@ const Pay = () => {
                 alert("Transaction error, please try again");
             }
         }
+        
+        getTran()
     };
 //Logout
     const handleLogout = () => {
@@ -154,33 +156,35 @@ const Pay = () => {
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button className='pay-button' onSubmit={handleSubmit}>ВЫВЕСТИ</button>
+                <button className='pay-button' onClick={handleSubmit}>ВЫВЕСТИ</button>
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
-                    <div className='pay-history-table'>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Время</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Дата</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Txid транзакции</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Сумма</span>
-                        </div>
+                   <div className="pay-history-table">
+                    <div className="history-table-column">
+                      <span className="history-table-title">Время</span>
+                      {transaction.map((trans)=>{
+                        return (<h3>{trans.time}</h3>)
+                      })}
                     </div>
-                    {tran.map((trans, i) => {
-                        return (
-                            <div className="pay-history-row" key={i}>
-                                <div className="history-table-column">{trans.time}</div>
-                                <div className="history-table-column">{trans.data}</div>
-                                <div className="history-table-column">{trans.txid}</div>
-                                <div className="history-table-column">{trans.quantity}</div>
-                            </div>
-                        )
-                    })}
+                    <div className="history-table-column">
+                      <span className="history-table-title">Дата</span>
+                      {transaction.map((trans)=>{
+                        return (<h3>{trans.data}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Txid транзакции</span>
+                      {transaction.map((trans)=>{
+                        return (<h3>{trans.txid}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Сумма</span>
+                      {transaction.map((trans)=>{
+                        return (<h3>{trans.quantity}</h3>)
+                      })}
+                    </div>
+                    </div>
                 </div>
 
             </div>
