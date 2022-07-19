@@ -154,8 +154,36 @@
     }
 }
 
+
 @media only screen and (max-width: 412px) {
     .pay-sum-input, .pay-address-input{
         min-width:200px !important;
+    }
+
+    .pay-history-wrapper {
+        width: 85% !important;
+        margin-left: -20%;
+    }
+
+    .history-table-title{
+        font-size:13px !important;
+        margin-left: -10px;
+    }
+    .history-table-column {
+        width: 70px;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px){
+    .pay-history-wrapper {
+        width: 90% !important;
+        margin-left: -15%;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width:767px){
+    .pay-history-wrapper {
+        width: 90% !important;
+        margin-left: -15%;
     }
 }
