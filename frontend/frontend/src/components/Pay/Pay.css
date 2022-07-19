@@ -167,10 +167,19 @@
 
     .history-table-title{
         font-size:13px !important;
-        margin-left: -10px;
+        margin-left: -20px;
     }
     .history-table-column {
-        width: 70px;
+        width: 60px;
+    }
+
+    .history-table-column h3{
+        font-size:12px;
+        margin-left:-40%;
+    }
+
+    .history-table-column .sum{
+        margin-left:-10px;
     }
 }
 
@@ -179,11 +188,25 @@
         width: 90% !important;
         margin-left: -15%;
     }
+
+    .history-table-title{
+        margin-left:-5%;
+        font-size:13px !important;
+    }
+
+    .history-table-column h3{
+        font-size:12px;
+        margin-left:-8%;
+    }
 }
 
 @media only screen and (min-width: 600px) and (max-width:767px){
     .pay-history-wrapper {
         width: 90% !important;
         margin-left: -15%;
+    }
+
+    .history-table-column h3{
+        font-size:15px;
     }
 }
