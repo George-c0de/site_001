@@ -16,7 +16,7 @@ const Pay = () => {
     const [wallet, SetWallet] = useState("")
     const [data, setData] = useState({
         wallet: "",
-        col: 0,
+        col: 1,
     });
     let [tran, SetTran] = useState([])
     let [user, setUser] = useState({
@@ -35,7 +35,15 @@ const Pay = () => {
     })
     const getTran = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input');
+            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input').then((data) => {
+                    const result = {
+                        time: data.data.time,
+                        data: data.data.data,
+                        txid: data.data.txid,
+                        quantity: data.data.quantity,
+                    }
+                    setUser(result);
+                })
             let data = await response.data
             SetTran(data)
         } catch (e) {
@@ -45,58 +53,54 @@ const Pay = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                let response = await axios.get('http://127.0.0.1:8000/api/user');
-                let data = await response.data
-                setUser(data);
+                await axios.get('http://127.0.0.1:8000/api/user').then((data) => {
+                    const result = {
+                        id: data.data.id,
+                        money: data.data.money,
+                        referral_link: data.data.referral_link,
+                        referral_amount: data.data.referral_amount,
+                        missed_amount: data.data.missed_amount,
+                        wallet: data.data.wallet,
+                        line_1: data.data.line_1,
+                        line_2: data.data.line_2,
+                        line_3: data.data.line_3,
+                        max_card: data.data.max_card,
+                        admin_or: data.data.admin_or,
+                        user: data.data.user,
+                    }
+                    setUser(result);
+                })
                 if (user.wallet !== null) {
                     SetWallet(user.wallet);
                     setData({
-                        wallet: wallet,
+                        wallet: user.wallet,
                         col: 1,
                     })
                 } else {
                     SetState(false);
                 }
             } catch (e) {
-                SetState(false);
+
 
             }
+            console.log(user)
         }
         getPosts();
     }, [user.id]);
 
-    //Send transaction
-    const sumInput = useRef(null)
-    const walletInput = useRef(null)
 
-    const handleSumInput = () => {
-        if (sumInput.current.value <= user.money) {
-            setData(Object.assign(data, {
-                col: sumInput.current.value
-            }))
-        }
-    }
-
-    const handleWalletInput = () => {
-        setData(Object.assign(data, {
-            wallet: walletInput.current.value
-        }))
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
 
         if (data.col > user.money) {
             alert("Not enough money to make transaction")
-        }
+        } else {
+            try {
+                let data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
 
-        try {
-            let data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
-            console.log(data2);
-
-        } catch (error) {
-            //console.log(error.response.data.msg);
-            alert("Transaction error, please try again");
+            } catch (error) {
+                //console.log(error.response.data.msg);
+                alert("Transaction error, please try again");
+            }
         }
     };
 //Logout
@@ -116,7 +120,9 @@ const Pay = () => {
         setActive(!onActive);
     };
 
-
+    const handleChange = ({currentTarget: input}) => {
+        setData({...data, [input.name]: input.value});
+    };
     return (
         <div className="homepage">
             <div className="main_container">
@@ -135,23 +141,19 @@ const Pay = () => {
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
                         <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input value={data.col} required type='number' className='pay-sum-input' name='sum-input'
-                               min='1'
-                               onInput={() => handleSumInput()}
+                        <input onChange={handleChange} value={data.col} required type='number' className='pay-sum-input'
+                               name='sum-input'
                         />
                         <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
                     <div className='pay-input'>
                         <label htmlFor='address-input'>Адрес вывода:</label>
-                        {wallet &&
-                            <div className='pay-address-input' name='address-input'>{wallet}</div>
-                            ||
-                            <input type='text' className='pay-address-input' name='address-input'
-                                   onInput={() => handleWalletInput()} ref={walletInput}/>}
+                        <input onChange={handleChange} disabled={state_input} required type='text'
+                               className='pay-address-input' name='address-input' value={data.wallet}/>
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button className='pay-button' onClick={() => handleSubmit()}>ВЫВЕСТИ</button>
+                <button className='pay-button' onSubmit={handleSubmit}>ВЫВЕСТИ</button>
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>

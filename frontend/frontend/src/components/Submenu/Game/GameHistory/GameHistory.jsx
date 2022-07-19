@@ -27,9 +27,9 @@ export const GameHistory = ({history}) => {
       </div>
       <div className='history-table-row'>
         <span className="history-table-icon">()</span>
-        <span className="history-table-time">{history.tw[1]}</span>
-        <span className="history-table-id">ID {history.tw[0]}</span>
-        <span className="history-table-score red">{history.tw[2]}</span>
+        <span className="history-table-time">{history.two[1]}</span>
+        <span className="history-table-id">ID {history.two[0]}</span>
+        <span className="history-table-score red">{history.two[2]}</span>
       </div>
       <div className='history-table-row'>
         <span className="history-table-icon">()</span>
@@ -38,7 +38,7 @@ export const GameHistory = ({history}) => {
         <span className="history-table-score green">{history.the[2]}</span>
       </div>
     </div>
-    <span className='game-history-more'>SHOW MORE</span>
+    <span className='game-history-more'></span>
   </div>
         </>
 )

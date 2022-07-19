@@ -38,7 +38,11 @@ const Game = () => {
             gold: [750,1000,1250,1500,2000,2222],
             emerald: [2500,5000,7500,10000,15000,22222]
         });
-        const [history,setHistory] = useState()
+        const [history,setHistory] = useState({
+            oneq :  [0,0,0],
+            two: [0,0,0],
+            the: [0,0,0]
+        })
         const [card_data, setCard_data] = useState({
             bronze : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
             silver : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
@@ -82,11 +86,12 @@ const Game = () => {
             await axios.get('http://127.0.0.1:8000/api/get_hist_card')
                 .then((data) => {
                     const result = {
-                        1: data.data.oneq,
-                        2: data.data.two,
-                        3: data.data.the,
+                        oneq: data.data.oneq,
+                        two: data.data.two,
+                        the: data.data.the,
                     }
-
+                    console.log(result)
+                    console.log(history)
                     setHistory(result);
                 })
         }

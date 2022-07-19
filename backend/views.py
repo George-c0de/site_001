@@ -999,17 +999,16 @@ def referral_system_gold(request, id_):
 def get_hist_card(request):
     if Buy_Card.objects.all().exists():
         buy = Buy_Card.objects.order_by('-time')
-        b = [buy[0], buy[1], buy[2]]
         time = buy[0].time
-        str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
         time = buy[1].time
-        str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
         time = buy[2].time
-        str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
+        str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(time.month) + '.' + str(time.year)
         data = {
-            'on': [buy[0].id, str_time_1, buy[0].card.price],
-            'tw': [buy[1].id, str_time_2, buy[1].card.price],
-            'th': [buy[2].id, str_time_3, buy[2].card.price]
+            'oneq': [buy[0].id, str_time_1, buy[0].card.price],
+            'two': [buy[1].id, str_time_2, buy[1].card.price],
+            'the': [buy[2].id, str_time_3, buy[2].card.price]
         }
         return Response(data=data)
     else:
