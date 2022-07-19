@@ -120,9 +120,16 @@ const Pay = () => {
         setActive(!onActive);
     };
 
-    const handleChange = ({currentTarget: input}) => {
+    /*
+        const handleChange = ({currentTarget: input}) => {
         setData({...data, [input.name]: input.value});
     };
+    */
+    
+    const handleChange=(e)=>{
+        setData({wallet: "", col:e.target.value});
+    }
+
     return (
         <div className="homepage">
             <div className="main_container">
