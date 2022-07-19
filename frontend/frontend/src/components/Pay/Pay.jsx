@@ -40,21 +40,20 @@ const Pay = () => {
         try {
             let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input')
 
-            //SetTran(response.data);
+            SetTran(response.data);
 
-            let a =
-                [{
-                    'quantity': '10.00',
-                    'data': '2022, 7, 18',
-                    'time': '13, 58, 12, 728000',
-                    'txid': 'sfsfgsfjshkfjs'
-                }, {'quantity': '465.00', 'data': '2022, 7, 18', 'time': '13, 58, 54, 870000', 'txid': 'asf4gsgs'}]
+            // let a =
+            //     [{
+            //         'quantity': '10.00',
+            //         'data': '2022, 7, 18',
+            //         'time': '13:58:12',
+            //         'txid': 'sfsfgsfjshkfjs'
+            //     }, {'quantity': '465.00', 'data': '2022, 7, 18', 'time': '13:58:12', 'txid': 'asf4gsgs'}]
 
-            let data = await response.data
+            //let data = await response.data
 
-            SetTran(a)
-            console.log(a)
-            console.log(tran)
+            //SetTran(a)
+            //console.log(a)
         } catch (e) {
             console.log(e)
         }
@@ -106,10 +105,6 @@ const Pay = () => {
     }, [user.id]);
 
     const handleSum = (e) => {
-        console.log(e.target.value)
-        console.log('maxi')
-        console.log(Number(user.money))
-        console.log(data.col)
         setData({
             wallet: data.wallet,
             col: e.target.value
@@ -120,23 +115,17 @@ const Pay = () => {
                 wallet: data.wallet,
                 col: Number(user.money)
             })
-            console.log(1)
-            console.log(data.col)
         } else if (Number(data.col) < 1) {
             e.target.value = 1
             setData({
                 wallet: data.wallet,
                 col: 1
             })
-            console.log(2)
-            console.log(data.col)
         } else {
-            console.log(3)
             setData({
                 wallet: data.wallet,
                 col: e.target.value
             })
-            console.log(data.col)
         }
     }
 //Logout
@@ -228,34 +217,31 @@ const Pay = () => {
 
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
-                    <div className='pay-history-table'>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Время</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Дата</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Txid транзакции</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Сумма</span>
-                        </div>
-
-                        {tran.map((trans, i) => {
-                            return (
-                                <div className="pay-history-row" key={i}>
-                                    <div className="history-table-column"><span
-                                        className='history-table-title'>{trans.time}</span></div>
-                                    <div className="history-table-column"><span
-                                        className='history-table-title'>{trans.data}</span></div>
-                                    <div className="history-table-column"><span
-                                        className='history-table-title'>{trans.txid}</span></div>
-                                    <div className="history-table-column"><span
-                                        className='history-table-title'>{trans.quantity}</span></div>
-                                </div>
-                            )
-                        })}
+                    <div className="pay-history-table">
+                    <div className="history-table-column">
+                      <span className="history-table-title">Время</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.time}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Дата</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.data}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Txid транзакции</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.txid}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Сумма</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.quantity}</h3>)
+                      })}
+                    </div>
                     </div>
                 </div>
 

@@ -13,12 +13,11 @@ const Deposit = () => {
     const [onActive, setActive] = useState(true);
     const navigate = useNavigate();
     const [state_input, SetState] = useState(true);
-    const [wallet, SetWallet] = useState("")
-    const [col,setcol] = useState()
     const [data, setData] = useState({
         wallet: "",
         col: 1,
     });
+    const [maxi, setMax] = useState(1)
     let [tran, SetTran] = useState([])
     let [user, setUser] = useState({
         id: 0,
@@ -34,19 +33,28 @@ const Deposit = () => {
         admin_or: false,
         user: 0
     })
+    useEffect(() => {
+        getTran();
+    }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input').then((data) => {
-                    const result = {
-                        time: data.data.time,
-                        data: data.data.data,
-                        txid: data.data.txid,
-                        quantity: data.data.quantity,
-                    }
-                    setUser(result);
-                })
-            let data = await response.data
-            SetTran(data)
+            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_output')
+
+            SetTran(response.data);
+
+            // let a =
+            //     [{
+            //         'quantity': '10.00',
+            //         'data': '2022, 7, 18',
+            //         'time': '13:58:12',
+            //         'txid': 'sfsfgsfjshkfjs'
+            //     }, {'quantity': '465.00', 'data': '2022, 7, 18', 'time': '13:58:12', 'txid': 'asf4gsgs'}]
+
+            //let data = await response.data
+
+            //SetTran(a)
+            //console.log(a)
+            console.log(tran)
         } catch (e) {
             console.log(e)
         }
@@ -70,14 +78,22 @@ const Deposit = () => {
                         user: data.data.user,
                     }
                     setUser(result);
+                    setMax(result.money)
                 })
+
                 if (user.wallet !== null) {
-                    SetWallet(user.wallet);
                     setData({
                         wallet: user.wallet,
                         col: 1,
                     })
+                    console.log(data.wallet)
+                    SetState(true);
                 } else {
+                    setData({
+                        wallet: '',
+                        col: 1,
+                    })
+                    console.log('yes')
                     SetState(false);
                 }
             } catch (e) {
@@ -89,21 +105,40 @@ const Deposit = () => {
         getPosts();
     }, [user.id]);
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        if (data.col > user.money) {
-            alert("Not enough money to make transaction")
+    const handleSum = (e) => {
+        console.log(e.target.value)
+        console.log('maxi')
+        console.log(Number(user.money))
+        console.log(data.col)
+        setData({
+            wallet: data.wallet,
+            col: e.target.value
+        })
+        if (Number(data.col) > Number(user.money)) {
+            e.target.value = Number(user.money);
+            setData({
+                wallet: data.wallet,
+                col: Number(user.money)
+            })
+            console.log(1)
+            console.log(data.col)
+        } else if (Number(data.col) < 1) {
+            e.target.value = 1
+            setData({
+                wallet: data.wallet,
+                col: 1
+            })
+            console.log(2)
+            console.log(data.col)
         } else {
-            try {
-                await axios.post('http://127.0.0.1:8000/api/dis', data)
-
-            } catch (error) {
-                //console.log(error.response.data.msg);
-                alert("Transaction error, please try again");
-            }
+            console.log(3)
+            setData({
+                wallet: data.wallet,
+                col: e.target.value
+            })
+            console.log(data.col)
         }
-    };
+    }
 //Logout
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -120,8 +155,43 @@ const Deposit = () => {
         setOpenUserInfo(!openUserInfo);
         setActive(!onActive);
     };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (data.col < 1 || data.col > user.money) {
+            alert('Error')
+        } else if (data.wallet === '') {
+            alert('Error')
+        } else {
+            try {
+                console.log(data)
+                axios.post('http://127.0.0.1:8000/api/dis_input', {
+                    wallet: data.wallet,
+                    col: data.col
+                }, {
+        headers: { "Content-Type": "application/json" }
+      }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+            } catch (e) {
+                if (e.response.status === 200) {
+                    data.col = 1
 
-
+                    alert('Ok')
+                } else {
+                    alert('Error')
+                }
+            }
+        }
+    }
+    const hundSum = (e) => {
+        setData({
+            wallet: e.target.value,
+            col: data.col
+        })
+    }
     return (
         <div className="homepage">
             <div className="main_container">
@@ -131,6 +201,7 @@ const Deposit = () => {
                     {openUserInfo ? <UserId/> : null}
                 </nav>
             </div>
+            <form onSubmit={handleSubmit}>
             <div className='pay-container'>
                 <div className='pay-title-wrapper'>
                     <h1 className='pay-title'>ВЫВОД СРЕДСТВ</h1>
@@ -140,48 +211,53 @@ const Deposit = () => {
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
                         <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input onChange={e=>setcol(e.target.value)} value={data.col} required type='number' className='pay-sum-input'
+                        <input onChange={e => handleSum(e)} value={data.col} required type='number'
+                               className='pay-sum-input'
                                name='sum-input'
                         />
                         <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
                     <div className='pay-input'>
                         <label htmlFor='address-input'>Адрес вывода:</label>
-                        <input onChange={e=>SetWallet(e.target.value)} disabled={state_input} required type='text'
+                        <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
                                className='pay-address-input' name='address-input' value={data.wallet}/>
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button className='pay-button' onClick={handleSubmit}>ВЫВЕСТИ</button>
+                <button type={"submit"} className='pay-button'>ВЫВЕСТИ</button>
+
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
-                    <div className='pay-history-table'>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Время</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Дата</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Txid транзакции</span>
-                        </div>
-                        <div className='history-table-column'>
-                            <span className='history-table-title'>Сумма</span>
-                        </div>
+                    <div className="pay-history-table">
+                    <div className="history-table-column">
+                      <span className="history-table-title">Время</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.time}</h3>)
+                      })}
                     </div>
-                    {tran.map((trans, i) => {
-                        return (
-                            <div className="pay-history-row" key={i}>
-                                <div className="history-table-column">{trans.time}</div>
-                                <div className="history-table-column">{trans.data}</div>
-                                <div className="history-table-column">{trans.txid}</div>
-                                <div className="history-table-column">{trans.quantity}</div>
-                            </div>
-                        )
-                    })}
+                    <div className="history-table-column">
+                      <span className="history-table-title">Дата</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.data}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Txid транзакции</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.txid}</h3>)
+                      })}
+                    </div>
+                    <div className="history-table-column">
+                      <span className="history-table-title">Сумма</span>
+                      {tran.map((trans)=>{
+                        return (<h3>{trans.quantity}</h3>)
+                      })}
+                    </div>
+                    </div>
                 </div>
 
             </div>
+            </form>
             <Lang isActive={onActive}/>
         </div>
     )

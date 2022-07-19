@@ -159,15 +159,23 @@ def trans_get_output(request):
             for el in ht:
                 if el.success and el.name_operation == 'Output':
                     time = el.data.time()
+                    t = str(time.hour) + ':' + str(time.minute) + ':' + str(time.second)
+                    d = str(el.data.date().year) + '.' + str((el.data.date().month)) + ':' + str((el.data.date().day))
                     main = {
-                        'quantity': el.quantity,
-                        'data': el.data.date(),
-                        'time': time,
+                        'quantity': int(el.quantity),
+                        'data': d,
+                        'time': t,
                         'txid': el.txid,
                     }
                     data.append(main)
             return Response(data=data)
-    return Response(data=[])
+    main = {
+        'quantity': [],
+        'data': [],
+        'time': [],
+        'txid': [],
+    }
+    return Response(data=main)
 
 
 # @api_view(['GET'])
@@ -185,10 +193,12 @@ def trans_get_input(request):
             for el in ht:
                 if el.success and el.name_operation == 'Input':
                     time = el.data.time()
+                    t = str(time.hour) + ':' + str(time.minute) + ':' + str(time.second)
+                    d = str(el.data.date().year) + '.' + str((el.data.date().month)) + ':' + str((el.data.date().day))
                     main = {
-                        'quantity': el.quantity,
-                        'data': el.data.date(),
-                        'time': time,
+                        'quantity': int(el.quantity),
+                        'data': d,
+                        'time': t,
                         'txid': el.txid,
                     }
                     data.append(main)
@@ -1286,7 +1296,7 @@ def dis(request):
                 return Response(status=400)
             profile.money -= col
             profile.save()
-            if collect_usdt(wall, col):
+            if send_usdt(wall, col):
                 all_.all_transactions += 1
                 all_.save()
                 return Response(status=200)
@@ -1316,14 +1326,13 @@ def dis_input(request):
                 wall = w
             profile.money += col
             profile.save()
-            if collect_usdt(wall, col):
+            if send_usdt(wall, col):
                 all_.all_transactions += 1
                 all_.save()
                 return Response(status=200)
             else:
                 return Response(status=400)
     return Response(status=400)
-
 
 
 # Создание нового кошелька
