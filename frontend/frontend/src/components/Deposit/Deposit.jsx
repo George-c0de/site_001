@@ -249,7 +249,7 @@ const Deposit = () => {
                       })}
                     </div>
                     <div className="history-table-column">
-                      <span className="history-table-title">{`Sum`}</span>
+                      <span className="history-table-title sum">{`Sum`}</span>
                       {tran.map((trans)=>{
                         return (<h3>{trans.quantity}</h3>)
                       })}
