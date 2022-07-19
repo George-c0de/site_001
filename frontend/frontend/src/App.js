@@ -8,7 +8,7 @@ import Statistics from './components/Submenu/Statistics/statistics.jsx';
 import Referals from './components/Submenu/Referals/referals';
 import Game from './components/Submenu/Game/game';
 import Pay from './components/Pay/Pay';
-import Deposit from './components/Deposit/Pay';
+import Deposit from './components/Deposit/Deposit';
 import Rules from "./pages/Rules.js"
 
 

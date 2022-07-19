@@ -7,6 +7,7 @@ import {Lang} from '../MainPage/Lang/Lang';
 
 import './Pay.css';
 import axios from "axios";
+import {t} from "ttag";
 
 const Pay = () => {
     const [openUserInfo, setOpenUserInfo] = useState(false);
@@ -193,18 +194,18 @@ const Pay = () => {
             <form onSubmit={handleSubmit}>
             <div className='pay-container'>
                 <div className='pay-title-wrapper'>
-                    <h1 className='pay-title'>ВЫВОД СРЕДСТВ</h1>
-                    <span className='pay-subtitle'>Доступно к выводу:</span>
+                    <h1 className='pay-title'>{t`Withdrawal`}</h1>
+                    <span className='pay-subtitle'>{t`Available for payout`}:</span>
                     <span className='pay-money'>{user.money}$</span>
                 </div>
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
-                        <label htmlFor='sum-input'>Сумма вывода:</label>
+                        <label htmlFor='sum-input'>{t`Withdrawal amount`}:</label>
                         <input onChange={e => handleSum(e)} value={data.col} required type='number'
                                className='pay-sum-input'
                                name='sum-input'
                         />
-                        <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
+                        <span className='pay-input-info'>{t`fee - 1%, min 1 USD `}</span>
                     </div>
                     <div className='pay-input'>
                         <label htmlFor='address-input'>Адрес вывода:</label>
@@ -213,31 +214,31 @@ const Pay = () => {
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button type={"submit"} className='pay-button'>ВЫВЕСТИ</button>
+                <button type={"submit"} className='pay-button'>{t`PAYOUT`}</button>
 
                 <div className='pay-history-wrapper'>
-                    <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
+                    <span className='pay-history-title'>{t`TRANSACTION HISTORY`}</span>
                     <div className="pay-history-table">
                     <div className="history-table-column">
-                      <span className="history-table-title">Время</span>
+                      <span className="history-table-title">{t`Time`}</span>
                       {tran.map((trans)=>{
                         return (<h3>{trans.time}</h3>)
                       })}
                     </div>
                     <div className="history-table-column">
-                      <span className="history-table-title">Дата</span>
+                      <span className="history-table-title">{t`Date`}</span>
                       {tran.map((trans)=>{
                         return (<h3>{trans.data}</h3>)
                       })}
                     </div>
                     <div className="history-table-column">
-                      <span className="history-table-title">Txid транзакции</span>
+                      <span className="history-table-title">Txid {t`TRANSACTION`}</span>
                       {tran.map((trans)=>{
                         return (<h3>{trans.txid}</h3>)
                       })}
                     </div>
                     <div className="history-table-column">
-                      <span className="history-table-title">Сумма</span>
+                      <span className="history-table-title">{`Sum`}</span>
                       {tran.map((trans)=>{
                         return (<h3>{trans.quantity}</h3>)
                       })}
