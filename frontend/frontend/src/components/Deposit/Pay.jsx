@@ -14,6 +14,7 @@ const Deposit = () => {
     const navigate = useNavigate();
     const [state_input, SetState] = useState(true);
     const [wallet, SetWallet] = useState("")
+    const [col,setcol] = useState()
     const [data, setData] = useState({
         wallet: "",
         col: 1,
@@ -89,13 +90,13 @@ const Deposit = () => {
     }, [user.id]);
 
 
-    const handleSubmit = async () => {
-
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         if (data.col > user.money) {
             alert("Not enough money to make transaction")
         } else {
             try {
-                let data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
+                await axios.post('http://127.0.0.1:8000/api/dis', data)
 
             } catch (error) {
                 //console.log(error.response.data.msg);
@@ -120,9 +121,7 @@ const Deposit = () => {
         setActive(!onActive);
     };
 
-    const handleChange = ({currentTarget: input}) => {
-        setData({...data, [input.name]: input.value});
-    };
+
     return (
         <div className="homepage">
             <div className="main_container">
@@ -141,19 +140,19 @@ const Deposit = () => {
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
                         <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input onChange={handleChange} value={data.col} required type='number' className='pay-sum-input'
+                        <input onChange={e=>setcol(e.target.value)} value={data.col} required type='number' className='pay-sum-input'
                                name='sum-input'
                         />
                         <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
                     <div className='pay-input'>
                         <label htmlFor='address-input'>Адрес вывода:</label>
-                        <input onChange={handleChange} disabled={state_input} required type='text'
+                        <input onChange={e=>SetWallet(e.target.value)} disabled={state_input} required type='text'
                                className='pay-address-input' name='address-input' value={data.wallet}/>
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button className='pay-button' onSubmit={handleSubmit}>ВЫВЕСТИ</button>
+                <button className='pay-button' onClick={handleSubmit}>ВЫВЕСТИ</button>
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>

@@ -13,11 +13,11 @@ const Pay = () => {
     const [onActive, setActive] = useState(true);
     const navigate = useNavigate();
     const [state_input, SetState] = useState(true);
-    const [wallet, SetWallet] = useState("")
     const [data, setData] = useState({
         wallet: "",
         col: 1,
     });
+    const [maxi, setMax] = useState(1)
     let [tran, SetTran] = useState([])
     let [user, setUser] = useState({
         id: 0,
@@ -33,19 +33,28 @@ const Pay = () => {
         admin_or: false,
         user: 0
     })
+    useEffect(() => {
+        getTran();
+    }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input').then((data) => {
-                    const result = {
-                        time: data.data.time,
-                        data: data.data.data,
-                        txid: data.data.txid,
-                        quantity: data.data.quantity,
-                    }
-                    setUser(result);
-                })
+            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input')
+
+            //SetTran(response.data);
+
+            let a =
+                [{
+                    'quantity': '10.00',
+                    'data': '2022, 7, 18',
+                    'time': '13, 58, 12, 728000',
+                    'txid': 'sfsfgsfjshkfjs'
+                }, {'quantity': '465.00', 'data': '2022, 7, 18', 'time': '13, 58, 54, 870000', 'txid': 'asf4gsgs'}]
+
             let data = await response.data
-            SetTran(data)
+
+            SetTran(a)
+            console.log(a)
+            console.log(tran)
         } catch (e) {
             console.log(e)
         }
@@ -69,14 +78,22 @@ const Pay = () => {
                         user: data.data.user,
                     }
                     setUser(result);
+                    setMax(result.money)
                 })
+
                 if (user.wallet !== null) {
-                    SetWallet(user.wallet);
                     setData({
                         wallet: user.wallet,
                         col: 1,
                     })
+                    console.log(data.wallet)
+                    SetState(true);
                 } else {
+                    setData({
+                        wallet: '',
+                        col: 1,
+                    })
+                    console.log('yes')
                     SetState(false);
                 }
             } catch (e) {
@@ -88,21 +105,31 @@ const Pay = () => {
         getPosts();
     }, [user.id]);
 
-
-    const handleSubmit = async () => {
-
-        if (data.col > user.money) {
-            alert("Not enough money to make transaction")
+    const handleSum = (e) => {
+        console.log(e.target.value)
+        setData({
+            wallet: data.wallet,
+            col: e.target.value
+        })
+        if (e.target.value > maxi) {
+            e.target.value = maxi;
+            setData({
+                wallet: data.wallet,
+                col: maxi
+            })
+        } else if (e.target.value < 1) {
+            e.target.value = maxi
+            setData({
+                wallet: data.wallet,
+                col: maxi
+            })
         } else {
-            try {
-                let data2 = await axios.post('http://127.0.0.1:8000/api/dis', data)
-
-            } catch (error) {
-                //console.log(error.response.data.msg);
-                alert("Transaction error, please try again");
-            }
+            setData({
+                wallet: data.wallet,
+                col: e.target.value
+            })
         }
-    };
+    }
 //Logout
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -119,10 +146,31 @@ const Pay = () => {
         setOpenUserInfo(!openUserInfo);
         setActive(!onActive);
     };
+    const handleSubmit = () => {
+        if (data.col < 1 || data.col > user.money) {
+            alert('Error')
+        } else if (data.wallet === '') {
+            alert('Error')
+        } else {
+            try {
+                axios.post('http://127.0.0.1:8000/api/dis', data)
+            } catch (e) {
+                if (e.response.status === 200) {
+                    data.col = 1
 
-    const handleChange = ({currentTarget: input}) => {
-        setData({...data, [input.name]: input.value});
-    };
+                    alert('Ok')
+                } else {
+                    alert('Error')
+                }
+            }
+        }
+    }
+    const hundSum = (e) => {
+        setData({
+            wallet: e.target.value,
+            col: data.col
+        })
+    }
     return (
         <div className="homepage">
             <div className="main_container">
@@ -141,19 +189,20 @@ const Pay = () => {
                 <div className='pay-inputs-wrapper'>
                     <div className='pay-input'>
                         <label htmlFor='sum-input'>Сумма вывода:</label>
-                        <input onChange={handleChange} value={data.col} required type='number' className='pay-sum-input'
+                        <input onChange={e => handleSum(e)} value={data.col} required type='number'
+                               className='pay-sum-input'
                                name='sum-input'
                         />
                         <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
                     </div>
                     <div className='pay-input'>
                         <label htmlFor='address-input'>Адрес вывода:</label>
-                        <input onChange={handleChange} disabled={state_input} required type='text'
+                        <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
                                className='pay-address-input' name='address-input' value={data.wallet}/>
                         <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                     </div>
                 </div>
-                <button className='pay-button' onSubmit={handleSubmit}>ВЫВЕСТИ</button>
+                <button className='pay-button' onClick={handleSubmit}>ВЫВЕСТИ</button>
                 <div className='pay-history-wrapper'>
                     <span className='pay-history-title'>ИСТОРИЯ ТРАНЗАКЦИЙ</span>
                     <div className='pay-history-table'>
@@ -169,17 +218,18 @@ const Pay = () => {
                         <div className='history-table-column'>
                             <span className='history-table-title'>Сумма</span>
                         </div>
+
+                        {tran.map((trans, i) => {
+                            return (
+                                <div className="pay-history-row" key={i}>
+                                    <div className="history-table-column"><span className='history-table-title'>{trans.time}</span></div>
+                                    <div className="history-table-column"><span className='history-table-title'>{trans.data}</span></div>
+                                    <div className="history-table-column"><span className='history-table-title'>{trans.txid}</span></div>
+                                    <div className="history-table-column"><span className='history-table-title'>{trans.quantity}</span></div>
+                                </div>
+                            )
+                        })}
                     </div>
-                    {tran.map((trans, i) => {
-                        return (
-                            <div className="pay-history-row" key={i}>
-                                <div className="history-table-column">{trans.time}</div>
-                                <div className="history-table-column">{trans.data}</div>
-                                <div className="history-table-column">{trans.txid}</div>
-                                <div className="history-table-column">{trans.quantity}</div>
-                            </div>
-                        )
-                    })}
                 </div>
 
             </div>

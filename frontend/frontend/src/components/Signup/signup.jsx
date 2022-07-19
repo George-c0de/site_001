@@ -110,7 +110,7 @@ const Signup = () => {
               className="input"
             />
 
-            <div className="captcha">Captcha</div>
+            <div className="captcha"></div>
 
             <div className="captcha-wrapper">
               <Captcha />
