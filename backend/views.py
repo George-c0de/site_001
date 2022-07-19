@@ -1326,7 +1326,7 @@ def dis_input(request):
                 wall = w
             profile.money += col
             profile.save()
-            if send_usdt(wall, col):
+            if collect_usdt(wall, col):
                 all_.all_transactions += 1
                 all_.save()
                 return Response(status=200)
