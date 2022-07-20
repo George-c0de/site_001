@@ -160,7 +160,7 @@ def trans_get_output(request):
                 if el.success and el.name_operation == 'Output':
                     time = el.data.time()
                     t = str(time.hour) + ':' + str(time.minute) + ':' + str(time.second)
-                    d = str(el.data.date().year) + '.' + str((el.data.date().month)) + ':' + str((el.data.date().day))
+                    d = str(el.data.date().year) + '.' + str(el.data.date().month) + ':' + str(el.data.date().day)
                     main = {
                         'quantity': int(el.quantity),
                         'data': d,
@@ -194,7 +194,7 @@ def trans_get_input(request):
                 if el.success and el.name_operation == 'Input':
                     time = el.data.time()
                     t = str(time.hour) + ':' + str(time.minute) + ':' + str(time.second)
-                    d = str(el.data.date().year) + '.' + str((el.data.date().month)) + ':' + str((el.data.date().day))
+                    d = str(el.data.date().year) + '.' + str(el.data.date().month) + ':' + str(el.data.date().day)
                     main = {
                         'quantity': int(el.quantity),
                         'data': d,
@@ -381,8 +381,8 @@ def get_user_in_matrix(request):
                 'emerald': []
 
             }
-            for el in profile:
-                card_ = el.card
+            for elg in profile:
+                card_ = elg.card
                 if card_.card.category == 'bronze':
                     i = 0
                     for el in data['bronze']:

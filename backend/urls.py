@@ -6,7 +6,6 @@ from django.contrib.auth import views as auth_views
 from tgbot.views import TutorialBotView
 
 urlpatterns = [
-    # path('', views.index, name='home'),
     path('', views.getRoutes, name="routes"),
     path('login', views.login_page, name='login'),
     path('logout', views.logout_user, name='logout'),
@@ -16,11 +15,9 @@ urlpatterns = [
     path('reset_password/',
          auth_views.PasswordResetView.as_view(template_name="registration/password_reset.html"),
          name="reset_password"),
-    # path('password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('reset_password_sent/',
          auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"),
          name='password_reset_done'),
-
     path('password-reset/confirm/<uidb64>/<token>/',
          auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_form.html"),
          name='password_reset_confirm'),
