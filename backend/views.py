@@ -280,13 +280,11 @@ def get_user_in_card(request):
                         silver[int(card_.card.name) - 1][1] += profile_2.referral_amount
                         silver[int(card_.card.name) - 1][2] += el.all_wins
                 elif card_.card.category == 'gold':
-                    print(gold[int(card_.card.name) - 1])
                     if len(gold[int(card_.card.name) - 1]) == 0:
                         gold[int(card_.card.name) - 1].append(el.d)
                         gold[int(card_.card.name) - 1].append(profile_2.referral_amount)
                         gold[int(card_.card.name) - 1].append(el.all_wins)
                     else:
-                        print(int(card_.card.name) - 1)
                         temp = (gold[int(card_.card.name) - 1][0] + el.d)
                         temp = int(temp / 2)
                         gold[int(card_.card.name) - 1][0] = temp
@@ -761,7 +759,6 @@ def referral_system_bronze(request, id_):
     else:
         main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
-        print(max_card_)
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
@@ -1183,7 +1180,6 @@ def logics_matrix(user_, money, card_):
                 down_matrix = Matrix.objects.get(up=False)
                 # Проверка на максимальность матрицы
                 if down_matrix.col == down_matrix.max_users:
-                    print('Матрица полна')
                     down_matrix.up = True
 
                     temp = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('-participant_number')
@@ -1388,7 +1384,6 @@ def collect_usdt(wallet, col):
 # Отправка TRX на кошелек
 # @app.route('/send_trx', methods=['POST'])
 def send_trx(request):
-    # print(request.form)
     w = Wallet.objects.get(address=request.form.get('address'))
     pkey = w.pkey
 
