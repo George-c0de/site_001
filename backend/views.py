@@ -85,29 +85,25 @@ def getRoutes(request):
             'method': 'POST',
             'body': None,
             'description': 'Returns a single note object'
-        }
-        ,
+        },
         {
             'Endpoint': '/bronze/id_/',
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
-        }
-        ,
+        },
         {
             'Endpoint': '/silver/id_/',
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
-        }
-        ,
+        },
         {
             'Endpoint': '/gold/id_/',
             'method': 'GET',
             'body': None,
             'description': 'Returns a single note object'
-        }
-        ,
+        },
         {
             'Endpoint': '/emerald/id_/',
             'method': 'GET',
