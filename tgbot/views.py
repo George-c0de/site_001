@@ -1,10 +1,8 @@
 import json
-import os
 import telebot
 from rest_framework.response import Response
 import requests
 from django.http import JsonResponse
-from django.views import View
 from .models import *
 from rest_framework.views import APIView
 
@@ -164,4 +162,3 @@ def sent(request):
             f"{TELEGRAM_URL}{TUTORIAL_BOT_TOKEN}/sendMessage", data=data
         )
         return response
-    return JsonResponse({"ok": "POST request processed"})
