@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-
+import React, {useState, useContext} from 'react';
+import * as cookie from '../../../cookie';
 // Images
 import britain from '../../../Ảnh Pokemon Dự Trù/gb-1.svg';
 import russia from '../../../assets/russia.svg';
@@ -14,68 +14,73 @@ import india from '../../../assets/india.svg';
 import support from '../../../Ảnh Pokemon Dự Trù/супорт.svg';
 
 import './Lang.css';
-import { LangContext } from '../../../context/LangContext';
+import {LangContext} from '../../../context/LangContext';
 import {saveLocale} from "../../../i18nInit";
 
 const languages = {
-  'en': britain,
-  'ru': russia,
-  'fr': france,
-  'de': germany,
-  'it': italy,
-  'pt': portugal,
-  'es': spain,
-  'br': brazil,
-  'ar': argentina,
-  'in': india
+    'en': britain,
+    'ru': russia,
+    'fr': france,
+    'de': germany,
+    'it': italy,
+    'pt': portugal,
+    'es': spain,
+    'br': brazil,
+    'ar': argentina,
+    'in': india
 }
+const LOCALE_COOKIE = '__locale';
 
-export const Lang = ({ isActive }) => {
-  const { lang, updateLang } = useContext(LangContext);
-  const [open, setOpen] = useState(false);
+function getLocale() {
+    return cookie.get(LOCALE_COOKIE) || 'en';
+}
+const locale = getLocale();
+export const Lang = ({isActive}) => {
+    const {lang, updateLang} = useContext(LangContext);
+    const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(!open);
-  }
+    const handleOpen = () => {
+        setOpen(!open);
+    }
 
-  const handleOpenList = (e) => {
-    const lang = e.target.dataset.lang;
-    setOpen(!open);
-    updateLang(lang);
-    saveLocale(lang);
-    window.location.reload();
-  }
+    const handleOpenList = (e) => {
+        const lang = e.target.dataset.lang;
+        setOpen(!open);
+        updateLang(lang);
+        saveLocale(lang);
+        window.location.reload();
+    }
 
-  return (
-    <div className={ isActive ? "site-main" : "site-main_active" }>
-      <img
-        src={ languages[lang] }
-        className={ open ? 'lang-icon-preview hidden' : 'lang-icon-preview' }
-        alt=""
-        onClick={ handleOpen }
-      />
-      <ul className={ open ? 'lang-list' : 'lang-list hidden' } onClick={ handleOpenList }>
-        { Object.entries(languages).map((language) => {
-          return (<li>
+    return (
+        <div className={isActive ? "site-main" : "site-main_active"}>
             <img
-              src={ language[1] }
-              className={
-                isActive ? "lang-icon" : "lang-icon_active"
-              }
-              data-lang={ language[0] }
-              alt=""
+                src={languages[locale]}
+                className={open ? 'lang-icon-preview hidden' : 'lang-icon-preview'}
+                alt=""
+                onClick={handleOpen}
             />
-          </li>)
-        }) }
-      </ul>
+            <ul className={open ? 'lang-list' : 'lang-list hidden'} onClick={handleOpenList}>
+                {Object.entries(languages).map((language) => {
+                    return (<li>
+                        <img
+                            src={language[1]}
+                            className={
+                                isActive ? "lang-icon" : "lang-icon_active"
+                            }
+                            data-lang={language[0]}
+                            alt=""
+                        />
+                    </li>)
+                })}
+            </ul>
 
-      <img
-        src={ support }
-        className={
-          isActive ? "support-icon-mainpage" : "support-icon-mainpage_active"
-        }
-        alt=""
-      />
-    </div>
-  )
+            <img
+                src={support}
+                className={
+                    isActive ? "support-icon-mainpage" : "support-icon-mainpage_active"
+                }
+                alt=""
+            />
+        </div>
+    )
 }
