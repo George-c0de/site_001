@@ -26,6 +26,8 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+
+      <script src="//code.jivo.ru/widget/0zJLZC9wuo" async></script>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
@@ -43,4 +45,67 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+<script>function jivo_onLoadCallback(){
+	// Create a DIV element for the label
+	window.jivo_cstm_widget = document.createElement('div');
+	jivo_cstm_widget.setAttribute('id', 'jivo_custom_widget');
+	document.body.appendChild(jivo_cstm_widget);
+
+	// Adds handlers click on the icon - to maximize the window when clicked
+	jivo_cstm_widget.onclick = function(){
+		jivo_api.open();
+	}
+
+	// Change the CSS class if there are agents online
+	if (jivo_config.chat_mode === "online"){
+		jivo_cstm_widget.setAttribute("class", "jivo_online");
+	}
+
+	// Now you can show the user a shortcut
+	window.jivo_cstm_widget.style.display='block';
+}
+
+/*
+	Callback function jivo_onOpen and jivo_onClose called whenever the chat window JivoChat is expanded or collapsed by the user or by the proactive invitations rule.
+*/
+function jivo_onOpen(){
+	// If chat is deployed - hide shortcut
+	if (jivo_cstm_widget)
+		jivo_cstm_widget.style.display = 'none';
+}
+function jivo_onClose(){
+	// If chat is minimized - show label
+	if (jivo_cstm_widget)
+		jivo_cstm_widget.style.display = 'block';
+}</script>
+<style>
+    /* hide the original widget - that there were no two labels on the screen*/
+#jivo_chat_widget{
+	display: none;
+}
+
+/* the default style - for offline messages if no one is online */
+#jivo_custom_widget{
+	position: fixed;
+	left: -3px;
+	top: 30%;
+	width: 35px;
+	z-index: 300000;
+	cursor: pointer;
+
+	height: 170px;
+	background-image: url(../../jivosite/images/jivo_widget_offline.png);
+}
+
+/* when you hover the label should be shifted to the right by 3px */
+#jivo_custom_widget:hover{
+	left:0;
+}
+
+/* if there are operators online - show other label*/
+#jivo_custom_widget.jivo_online{
+	height: 215px;
+	background-image: url(../../jivosite/images/jivo_widget_online.png);
+}
+</style>
 </html>

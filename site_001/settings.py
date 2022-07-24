@@ -61,6 +61,17 @@ INTERNAL_IPS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+REACT_ROUTES = [
+    'login',
+    'home',
+    'rules',
+    'signup',
+    'home/game',
+    'home/referals',
+    'home/statistics',
+    'home/deposit',
+    'home/pay'
+]
 
 ROOT_URLCONF = 'site_001.urls'
 

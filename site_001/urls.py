@@ -7,6 +7,10 @@ from django.views.generic import TemplateView
 
 from tgbot import views
 from tgbot.views import TutorialBotView
+from django.conf import settings
+
+react_routes = getattr(settings, 'REACT_ROUTES', [])
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,3 +21,7 @@ urlpatterns = [
     # path('super_secter_webhook/', csrf_exempt(views.TutorialBotView.as_view())),
     path('webhooks/tutorial/', csrf_exempt(TutorialBotView.as_view())),
 ]
+for route in react_routes:
+    urlpatterns += [
+        path('{}'.format(route), TemplateView.as_view(template_name='index.html'))
+    ]
