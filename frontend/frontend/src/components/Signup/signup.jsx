@@ -61,7 +61,7 @@ const Signup = () => {
           <div>Already had account?</div>
           <Link to="/login" className="signup-link">
             <button type="button" className="green_btn">
-              Sign in
+              {t`Sign Up`}
             </button>
           </Link>
 
@@ -73,7 +73,7 @@ const Signup = () => {
             <h1>Create Account</h1>
             <input
               type="text"
-              placeholder="Username"
+              placeholder={t`Username`}
               name="username"
               onChange={ handleChange }
               value={ data.username }
@@ -82,7 +82,7 @@ const Signup = () => {
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t`Email`}
               name="email"
               onChange={ handleChange }
               value={ data.email }
@@ -92,7 +92,7 @@ const Signup = () => {
 
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t`Password`}
               name="password1"
               onChange={ handleChange }
               value={ data.password1 }
@@ -102,7 +102,7 @@ const Signup = () => {
 
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder={t`Confirm Password`}
               name="password2"
               onChange={ handleChange }
               value={ data.password2 }
@@ -117,7 +117,7 @@ const Signup = () => {
             </div>
 
             <button type="submit" className="yellow_btn">
-              Further
+              {t`Sign Up`}
             </button>
           </form>
         </div>
