@@ -51,6 +51,7 @@ urlpatterns = [
     # Вывод
     path('dis', views.dis),
     # Ввод
-    path('dis_input', views.dis_input)
+    path('dis_input', views.dis_input),
+    path('six',views.six)
 
 ]

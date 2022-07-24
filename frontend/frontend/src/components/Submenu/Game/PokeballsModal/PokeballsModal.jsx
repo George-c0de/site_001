@@ -7,7 +7,7 @@ import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.
 // Icons
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
-
+import q from "../../../../Ảnh Pokemon Dự Trù/Знак вопроса.svg"
 import './PokeballsModal.css';
 
 const CardOpened = ({image, buyCard, background, card_data, idCard, category}) => {
@@ -66,13 +66,11 @@ const CardOpened = ({image, buyCard, background, card_data, idCard, category}) =
 }
 
 
-const CardClosed = ({price, buyCard, idCard, category}) => {
+const CardClosed = ({price, buyCard, idCard, category, six}) => {
     const [status, setStatus] = useState();
 
     const handleBuyClick = () => {
         setStatus('pending');
-
-
         setTimeout(async () => {
             await axios.get(`http://127.0.0.1:8000/api/${category}/${idCard}`)
                 .then((res) => {
@@ -87,29 +85,37 @@ const CardClosed = ({price, buyCard, idCard, category}) => {
 
     return (
         <div>
-            <div className='pokeballs-card-label' onClick={handleBuyClick}>
-                {status === 'pending' ?
-                    <span className='status_pending'></span> :
-                    status === 'success' ?
-                        (
-                            <span className='status_success'>
+            {(six === false && idCard === 6) ? (
+                <span>
+                    <div className='pokeballs-card-label2'>
+                    <img src={q}/></div>
+                </span>
+            ) : (
+
+                <div className='pokeballs-card-label' onClick={handleBuyClick}>
+                    {status === 'pending' ?
+                        <span className='status_pending'></span> :
+                        status === 'success' ?
+                            (
+                                <span className='status_success'>
                 <FontAwesomeIcon icon={faCheck} className="status_success_check"/>
-              </span>
-                        ) :
-                        (
-                            <>
-                                <span>ACRIVATE</span>
-                                <span>{price} USD</span>
-                            </>
-                        )
-                }
-            </div>
+                </span>
+                            ) :
+                            (
+                                <>
+                                    <span>ACTIVATE</span>
+                                    <span>{price} USD</span>
+                                </>
+                            )
+                    }
+                </div>
+            )}
             <img src={pokeball} className="pokeballs-card-ball" alt=''/>
         </div>
     )
 }
 
-export const PokeballsModal = ({amount, category, images, background, card_data, price}) => {
+export const PokeballsModal = ({amount, category, images, background, card_data, price, six}) => {
     const [cards, setCards] = useState([]);
     const buyCard = async (id) => {
         const newCards = [...cards];
@@ -140,7 +146,7 @@ export const PokeballsModal = ({amount, category, images, background, card_data,
                                             card_data={card_data[i]} buyCard={() => buyCard(i + 1)} category={category}
                                             idCard={i + 1}/> :
                                 <CardClosed price={price[i]} buyCard={() => buyCard(i + 1)} idCard={i + 1}
-                                            category={category}
+                                            category={category} six={six}
                                             key={id}/>
                             }
                         </div>

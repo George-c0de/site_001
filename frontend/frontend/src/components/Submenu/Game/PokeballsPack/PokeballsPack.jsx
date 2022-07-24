@@ -19,7 +19,7 @@ const COLORS_TO_CLASS = {
     emerald: 'text-pokeball-4'
 }
 
-export const PokeballsPack = ({title, amount, images, background, card_data,price}) => {
+export const PokeballsPack = ({title, amount, images, background, card_data,price,six}) => {
     const [modalOpen, setModalOpen] = useState(false);
     const handlePokeballsPack = () => {
         setModalOpen(!modalOpen);
@@ -28,7 +28,7 @@ export const PokeballsPack = ({title, amount, images, background, card_data,pric
     return (
         <div className="col-sm" id="title-pack-pokeballs">
             <span>Cards</span>
-            <div className={modalOpen ? "pokeballs-container open" : "pokeballs-container"}>
+            <div onClick={handlePokeballsPack} className={modalOpen ? "pokeballs-container open" : "pokeballs-container"}>
                 <div id="pokeballs-detail">
                     <img src={pokeball} className="small-pokeball" alt=""/>
                     <img src={pokeball} className="small-pokeball" alt=""/>
@@ -51,6 +51,7 @@ export const PokeballsPack = ({title, amount, images, background, card_data,pric
                                 category={title?.toLowerCase()}
                                 card_data={card_data}
                                 price = {price}
+                                six = {six}
                 />
             </div>
         </div>

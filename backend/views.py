@@ -1127,6 +1127,33 @@ def referral_system_emerald(request, id_):
     # if Category_Bronze.objects.filter(user.id=).exists()
 
 
+@api_view(['GET'])
+def six(request):
+    if Profile.objects.filter(user_id=request.user.id).exists():
+        profile = Profile.objects.get(user_id=request.user.id)
+        bronze = False
+        silver = False
+        gold = False
+        emerald = False
+        if Category_Bronze.objects.filter(user_id=profile.id).exists():
+            bronze = Category_Bronze.objects.get(user_id=profile.id).card_6_disable
+        if Category_Silver.objects.filter(user_id=profile.id).exists():
+            silver = Category_Silver.objects.get(user_id=profile.id).card_6_disable
+        if Category_Gold.objects.filter(user_id=profile.id).exists():
+            gold = Category_Gold.objects.get(user_id=profile.id).card_6_disable
+        if Category_Emerald.objects.filter(user_id=profile.id).exists():
+            emerald = Category_Emerald.objects.get(user_id=profile.id).card_6_disable
+        data = {
+            'bronze': bronze,
+            'silver': silver,
+            'gold': gold,
+            'emerald': emerald,
+        }
+        print(data)
+        return Response(data=data)
+    return Response(200)
+
+
 def matrix_pay(main_matrix, money):
     user_1 = User_in_Matrix.objects.get(participant_number=main_matrix.go_money)
     user_2 = User_in_Matrix.objects.get(participant_number=(main_matrix.go_money + 1))

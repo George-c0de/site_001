@@ -32,28 +32,43 @@ const Game = () => {
         const [cardsAmount, setCardsAmount] = useState(initialCardsAmount);
         const navigate = useNavigate();
         const [username, setUsername] = useState("");
-        const [price,setPrice] = useState({
-            bronze: [10,15,25,40,50,77],
-            silver: [100,150,250,400,500,666],
-            gold: [750,1000,1250,1500,2000,2222],
-            emerald: [2500,5000,7500,10000,15000,22222]
+        const [price, setPrice] = useState({
+            bronze: [10, 15, 25, 40, 50, 77],
+            silver: [100, 150, 250, 400, 500, 666],
+            gold: [750, 1000, 1250, 1500, 2000, 2222],
+            emerald: [2500, 5000, 7500, 10000, 15000, 22222]
         });
-        const [history,setHistory] = useState({
-            oneq :  [0,0,0],
-            two: [0,0,0],
-            the: [0,0,0]
+        const [history, setHistory] = useState({
+            oneq: [0, 0, 0],
+            two: [0, 0, 0],
+            the: [0, 0, 0]
         })
         const [card_data, setCard_data] = useState({
-            bronze : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
-            silver : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
-            gold : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]],
-            emerald : [[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]]})
+            bronze: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+            silver: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+            gold: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+            emerald: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        })
+        const [six, setsix] = useState({bronze: false, silver: false, gold: false, emerald: false}
+        )
 //Logout
         const handleLogout = () => {
             localStorage.removeItem("token");
             navigate("/login");
         };
+        const getSix = async ()=>{
+            await axios.get('http://127.0.0.1:8000/api/six')
+                .then((data) => {
+                    const result = {
+                        bronze: data.data.bronze,
+                        silver: data.data.silver,
+                        gold: data.data.gold,
+                        emerald: data.data.emerald
+                    }
 
+                    setsix(result);
+                })
+        }
         const getCard = async () => {
             await axios.get('http://127.0.0.1:8000/api/get_user_in_matrix')
                 .then((data) => {
@@ -66,7 +81,6 @@ const Game = () => {
 
                     setCardsAmount(result);
                 })
-
         }
 
         useEffect(() => {
@@ -74,6 +88,7 @@ const Game = () => {
             getUsername();
             getCard_data();
             getHist();
+            getSix();
         }, [])
 
         let getUsername = async () => {
@@ -81,8 +96,6 @@ const Game = () => {
             setUsername(username.data.username);
         }
         let getHist = async () => {
-            // const username = await axios.get('http://127.0.0.1:8000/api/get_user_in_card')
-            // setCard_data(username.data);
             await axios.get('http://127.0.0.1:8000/api/get_hist_card')
                 .then((data) => {
                     const result = {
@@ -90,14 +103,10 @@ const Game = () => {
                         two: data.data.two,
                         the: data.data.the,
                     }
-                    console.log(result)
-                    console.log(history)
                     setHistory(result);
                 })
         }
         let getCard_data = async () => {
-            // const username = await axios.get('http://127.0.0.1:8000/api/get_user_in_card')
-            // setCard_data(username.data);
             await axios.get('http://127.0.0.1:8000/api/get_user_in_card')
                 .then((data) => {
                     const result = {
@@ -109,12 +118,6 @@ const Game = () => {
 
                     setCard_data(result);
                 })
-            // setCard_data({
-            //     bronze: [[78, 300, 400], [2, 6300, 400], [3, 700, 900], [1, 800, 900], [], [],],
-            //     silver: [[77, 300, 400], [2, 6300, 400], [3, 700, 900], [1, 800, 900], [], [],],
-            //     gold: [[80, 300, 400], [2, 6300, 400], [3, 700, 900], [1, 800, 900], [], [],],
-            //     emerald: [[1, 300, 400], [2, 6300, 400], [3, 700, 900], [1, 800, 900], [], [],]
-            // })
         }
 //Show Menu
         const backHome = () => {
@@ -155,32 +158,36 @@ const Game = () => {
                                                images={IMAGES.slice(0, 6)}
                                                background={bronze}
                                                card_data={card_data.bronze}
-                                               price ={price.bronze}
+                                               price={price.bronze}
+                                               six={six.bronze}
                                 />
                                 <PokeballsPack title={'SILVER'}
                                                amount={cardsAmount.silver}
                                                images={IMAGES.slice(6, 12)}
                                                background={silver}
                                                card_data={card_data.silver}
-                                               price ={price.silver}
+                                               price={price.silver}
+                                               six={six.silver}
                                 />
                                 <PokeballsPack title={'GOLD'}
                                                amount={cardsAmount.gold}
                                                images={IMAGES.slice(12, 18)}
                                                background={gold}
                                                card_data={card_data.gold}
-                                               price = {price.gold}
+                                               price={price.gold}
+                                               six={six.gold}
                                 />
                                 <PokeballsPack title={'EMERALD'}
                                                amount={cardsAmount.emerald}
                                                images={IMAGES.slice(18, 24)}
                                                background={emerald}
                                                card_data={card_data.emerald}
-                                               price = {price.emerald}
+                                               price={price.emerald}
+                                               six={six.emerald}
                                 />
                             </div>
 
-                            <GameHistory history = {history}/>
+                            <GameHistory history={history}/>
 
                         </div>
 

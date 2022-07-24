@@ -12,12 +12,14 @@ import {t} from 'ttag';
 //Font Awesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import  q from "../../Ảnh Pokemon Dự Trù/значок выйти-min.svg";
+import tele from"../../Ảnh Pokemon Dự Trù/telegram-min.svg";
 //import {set} from '../../cookie';
 
 const Mainpage = () => {
-        const [openDropDown, setOpenDropDown] = useState(false);
+        const [openDropDown, setOpenDropDown] = useState(true);
         const [openUserInfo, setOpenUserInfo] = useState(false);
-        const [isActive, setActive] = useState(true);
+        const [isActive, setActive] = useState(false);
 
         const navigate = useNavigate();
         useEffect(() => {
@@ -86,9 +88,17 @@ const Mainpage = () => {
                 setActive(false);
             }
         };
+        const showMenuHome=()=>{
+            if(isActive===false){
+                setOpenDropDown(false);
+                setOpenUserInfo(false);
+                setActive(true);
+            }
+        };
 
         //Show informations of user
         const showUserInfo = () => {
+            console.log(openDropDown)
             if (!openDropDown) {
                 setOpenUserInfo(!openUserInfo);
                 setActive(!isActive);
@@ -121,7 +131,7 @@ const Mainpage = () => {
 // },[]);
 
         return (
-            <div className="homepage">
+            <div className="homepage" onClick={showMenuHome}>
                 <div className="main_container">
                     <nav className={isActive ? "navbar" : "navbar_active"}>
                         <Menu isActive={isActive} showMenu={showMenu} showUserInfo={showUserInfo}
@@ -137,8 +147,14 @@ const Mainpage = () => {
                                 </ul>
                                 <div className="menu-info-icons">
                                     <div className='info-icons-container'>
-                                        <FontAwesomeIcon icon={faPaperPlane} className="paper-plane"/>
+                                        <img src={tele} className="paper-plane"/>
                                         <a href={get_link_tg} className="telegram-user">{t`USE TELEGRAM BOT`}</a>
+                                    </div>
+                                </div>
+                                <div className="menu-info-icons">
+                                    <div className='info-icons-container'>
+                                        <img src={q}  className="paper-plane"/>
+                                        <a href={get_link_tg} className="telegram-user">{t`LOGOUT`}</a>
                                     </div>
                                 </div>
                             </>

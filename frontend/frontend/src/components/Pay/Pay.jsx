@@ -40,8 +40,12 @@ const Pay = () => {
     const getTran = async () => {
         try {
             let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input')
-
-            SetTran(response.data);
+            if (response.data.lenth > 0) {
+                SetTran(response.data);
+            }
+            else{
+                SetTran([0]);
+            }
 
             // let a =
             //     [{
@@ -100,7 +104,6 @@ const Pay = () => {
 
 
             }
-            console.log(user)
         }
         getPosts();
     }, [user.id]);
@@ -153,22 +156,17 @@ const Pay = () => {
             alert('Error')
         } else {
             try {
-                console.log(data)
                 axios.post('http://127.0.0.1:8000/api/dis', {
                     wallet: data.wallet,
                     col: data.col
                 }, {
-        headers: { "Content-Type": "application/json" }
-      }).then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+                    headers: {"Content-Type": "application/json"}
+                }).then(function (response) {
+                }).catch(function (error) {
+                });
             } catch (e) {
                 if (e.response.status === 200) {
                     data.col = 1
-
                     alert('Ok')
                 } else {
                     alert('Error')
@@ -182,6 +180,7 @@ const Pay = () => {
             col: data.col
         })
     }
+
     return (
         <div className="homepage">
             <div className="main_container">
@@ -192,61 +191,61 @@ const Pay = () => {
                 </nav>
             </div>
             <form onSubmit={handleSubmit}>
-            <div className='pay-container'>
-                <div className='pay-title-wrapper'>
-                    <h1 className='pay-title'>{t`Withdrawal`}</h1>
-                    <span className='pay-subtitle'>{t`Available for payout`}:</span>
-                    <span className='pay-money'>{user.money}$</span>
-                </div>
-                <div className='pay-inputs-wrapper'>
-                    <div className='pay-input'>
-                        <label htmlFor='sum-input'>{t`Withdrawal amount`}:</label>
-                        <input onChange={e => handleSum(e)} value={data.col} required type='number'
-                               className='pay-sum-input'
-                               name='sum-input'
-                        />
-                        <span className='pay-input-info'>{t`fee - 1%, min 1 USD `}</span>
+                <div className='pay-container'>
+                    <div className='pay-title-wrapper'>
+                        <h1 className='pay-title'>{t`Withdrawal`}</h1>
+                        <span className='pay-subtitle'>{t`Available for payout`}:</span>
+                        <span className='pay-money'>{user.money}$</span>
                     </div>
-                    <div className='pay-input'>
-                        <label htmlFor='address-input'>Адрес вывода:</label>
-                        <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
-                               className='pay-address-input' name='address-input' value={data.wallet}/>
-                        <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
+                    <div className='pay-inputs-wrapper'>
+                        <div className='pay-input'>
+                            <label htmlFor='sum-input'>{t`Withdrawal amount`}:</label>
+                            <input onChange={e => handleSum(e)} value={data.col} required type='number'
+                                   className='pay-sum-input'
+                                   name='sum-input'
+                            />
+                            <span className='pay-input-info'>{t`fee - 1%, min 1 USD `}</span>
+                        </div>
+                        <div className='pay-input'>
+                            <label htmlFor='address-input'>Адрес вывода:</label>
+                            <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
+                                   className='pay-address-input' name='address-input' value={data.wallet}/>
+                            <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
+                        </div>
                     </div>
-                </div>
-                <button type={"submit"} className='pay-button'>{t`PAYOUT`}</button>
+                    <button type={"submit"} className='pay-button'>{t`PAYOUT`}</button>
 
-                <div className='pay-history-wrapper'>
-                    <span className='pay-history-title'>{t`TRANSACTION HISTORY`}</span>
-                    <div className="pay-history-table">
-                    <div className="history-table-column">
-                      <span className="history-table-title">{t`Time`}</span>
-                      {tran.map((trans)=>{
-                        return (<h3>{trans.time}</h3>)
-                      })}
+                    <div className='pay-history-wrapper'>
+                        <span className='pay-history-title'>{t`TRANSACTION HISTORY`}</span>
+                        <div className="pay-history-table">
+                            <div className="history-table-column">
+                                <span className="history-table-title">{t`Time`}</span>
+                                {tran.map((trans) => {
+                                    return (<h3>{trans.time}</h3>)
+                                })}
+                            </div>
+                            <div className="history-table-column">
+                                <span className="history-table-title">{t`Date`}</span>
+                                {tran.map((trans) => {
+                                    return (<h3>{trans.data}</h3>)
+                                })}
+                            </div>
+                            <div className="history-table-column">
+                                <span className="history-table-title">Txid {t`TRANSACTION`}</span>
+                                {tran.map((trans) => {
+                                    return (<h3>{trans.txid}</h3>)
+                                })}
+                            </div>
+                            <div className="history-table-column">
+                                <span className="history-table-title sum">{`Sum`}</span>
+                                {tran.map((trans) => {
+                                    return (<h3>{trans.quantity}</h3>)
+                                })}
+                            </div>
+                        </div>
                     </div>
-                    <div className="history-table-column">
-                      <span className="history-table-title">{t`Date`}</span>
-                      {tran.map((trans)=>{
-                        return (<h3>{trans.data}</h3>)
-                      })}
-                    </div>
-                    <div className="history-table-column">
-                      <span className="history-table-title">Txid {t`TRANSACTION`}</span>
-                      {tran.map((trans)=>{
-                        return (<h3>{trans.txid}</h3>)
-                      })}
-                    </div>
-                    <div className="history-table-column">
-                      <span className="history-table-title sum">{`Sum`}</span>
-                      {tran.map((trans)=>{
-                        return (<h3>{trans.quantity}</h3>)
-                      })}
-                    </div>
-                    </div>
-                </div>
 
-            </div>
+                </div>
             </form>
             <Lang isActive={onActive}/>
         </div>

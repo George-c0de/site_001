@@ -55,7 +55,24 @@
 .pokeballs-card-info {
     z-index: 10;
 }
-
+.pokeballs-card-label2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70px;
+    padding: 5px;
+    border-radius: 15px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
 .pokeballs-card-label {
     position: absolute;
     top: 50%;
