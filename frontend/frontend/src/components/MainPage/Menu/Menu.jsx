@@ -8,7 +8,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 // Images
 import logo from '../../../Ảnh Pokemon Dự Trù/логотип.svg';
 import human from '../../../Ảnh Pokemon Dự Trù/Чел.svg';
-import logout from '../../../Ảnh Pokemon Dự Trù/значок выйти-min.svg';
+
 import './Menu.css';
 
 export const Menu = ({ isActive, showMenu, showUserInfo, handleLogout }) => (
@@ -33,7 +33,6 @@ export const Menu = ({ isActive, showMenu, showUserInfo, handleLogout }) => (
         alt=""
       />
       <button
-
         className={ isActive ? "white_btn_in" : "white_btn_in_active" }
         onClick={ handleLogout }
       >

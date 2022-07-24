@@ -75,7 +75,6 @@ const CardClosed = ({price, buyCard, idCard, category, six}) => {
             await axios.get(`http://127.0.0.1:8000/api/${category}/${idCard}`)
                 .then((res) => {
                     setStatus('success')
-
                     setTimeout(() => {
                         buyCard();
                     }, 1000)

@@ -214,6 +214,7 @@ def create_all_and_admin():
         if not User.objects.filter(username='admin').exists():
             user.username = 'admin'
             user.password = 'admin'
+            user.is_superuser = True
             user.save()
         else:
             user = User.objects.get(username='admin')

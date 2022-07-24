@@ -151,12 +151,6 @@ const Mainpage = () => {
                                         <a href={get_link_tg} className="telegram-user">{t`USE TELEGRAM BOT`}</a>
                                     </div>
                                 </div>
-                                <div className="menu-info-icons">
-                                    <div className='info-icons-container'>
-                                        <img src={q}  className="paper-plane"/>
-                                        <a href={get_link_tg} className="telegram-user">{t`LOGOUT`}</a>
-                                    </div>
-                                </div>
                             </>
                         ) : null}
 

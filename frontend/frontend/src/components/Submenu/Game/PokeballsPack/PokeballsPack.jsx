@@ -28,7 +28,7 @@ export const PokeballsPack = ({title, amount, images, background, card_data,pric
     return (
         <div className="col-sm" id="title-pack-pokeballs">
             <span>Cards</span>
-            <div onClick={handlePokeballsPack} className={modalOpen ? "pokeballs-container open" : "pokeballs-container"}>
+            <div className={modalOpen ? "pokeballs-container open" : "pokeballs-container"}>
                 <div id="pokeballs-detail">
                     <img src={pokeball} className="small-pokeball" alt=""/>
                     <img src={pokeball} className="small-pokeball" alt=""/>
