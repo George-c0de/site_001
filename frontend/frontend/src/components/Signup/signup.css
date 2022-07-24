@@ -217,6 +217,11 @@
         font-size:10px;
     }
 
+    .yellow_btn{
+        width:130%;
+        margin-top:1px !important;
+    }
+
 }
 
 @media only screen and (min-width:413px) and (max-width: 600px) {
@@ -250,9 +255,14 @@
         margin-top:1px;
         width:90% !important;
     }   
-    
-     .input::placeholder{
+
+    .input::placeholder{
         font-size:13px;
+    }
+
+    .yellow_btn{
+        width:120%;
+        height:10% !important;
     }
 }
 
@@ -280,6 +290,12 @@
 
     .form_container h1{
         font-size:25px;
+    }
+
+    
+    .yellow_btn{
+        width:140%;
+        height:20% !important;
     }
     
 }
