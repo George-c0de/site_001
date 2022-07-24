@@ -8,6 +8,10 @@
         height:25px;
         margin-top:-5px;
     }
+    
+    #inputType::placeholder{
+        font-size: 10px;
+    }
 
     #succesBTN{
         margin-left: 16% !important;
