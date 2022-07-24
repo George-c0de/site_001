@@ -21,3 +21,15 @@
     font-weight: 600;
     margin: 10px 0;
 }
+
+@media (min-width:0px) and (max-width: 412px){
+    .statistic-info li{
+        font-size: 26px;
+    }
+}
+
+@media only screen and (min-width:413px) and (max-width: 600px){
+    .statistic-info li{
+        font-size: 30px;
+    }
+}
