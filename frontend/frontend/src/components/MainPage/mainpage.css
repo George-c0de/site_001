@@ -130,16 +130,21 @@ ul li {
 
 @media (min-width:0px) and (max-width: 412px){
 	.menu-info{
-		margin-left:-40%;
+		margin-left:-35%;
 	}
 
 	ul li{
-		font-size:16px;
-		margin-left: 5%;
+        display: inline-block;
+		font-size:10.3px;
+		margin-left: 10%;
 	}
 
+    .paper-plane {
+        height: 30px;
+    }
+
 	.telegram-user{
-		font-size:16px
+		font-size:13px
 	}
 }
 
@@ -154,8 +159,12 @@ ul li {
 		margin-left: 5%;
 	}
 
+    .paper-plane {
+        height: 35px;
+    }
+
 	.telegram-user{
-		font-size:16px
+		font-size:15px
 	}
 }
 
@@ -190,4 +199,3 @@ ul li {
 		font-size:16px
 	}
 }
-
