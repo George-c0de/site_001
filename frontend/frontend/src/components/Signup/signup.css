@@ -217,7 +217,7 @@
         font-size:10px;
     }
 
-    .yellow_btn{
+    .signup_form_container .yellow_btn{
         width:130%;
         margin-top:1px !important;
     }
@@ -260,7 +260,7 @@
         font-size:13px;
     }
 
-    .yellow_btn{
+    .signup_form_container .yellow_btn{
         width:120%;
         height:10% !important;
     }
@@ -293,7 +293,7 @@
     }
 
     
-    .yellow_btn{
+    .signup_form_container .yellow_btn{
         width:140%;
         height:20% !important;
     }
