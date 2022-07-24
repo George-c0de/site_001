@@ -171,22 +171,30 @@
 @media (min-width:0px) and (max-width: 412px) {
     .signup_container .pikachu-pokeball{
         margin-left: -5%;
-        margin-top: 50% !important;
+        margin-top: 55% !important;
         height:20% !important;
     }
 
     
     .signup_container .bubble-speech::after{
-        margin-left:20%;
+        margin-left:25%;
         transform: rotate(45deg);
+    }
+
+    .left div{
+        font-size: 20px !important;
+    }
+
+    .left .green_btn{
+        min-width:120px;
     }
 
     .signup_form_container{
         top: 16%;
         position: absolute;
-        height:60%;
+        height:55%;
         width:80%;
-        margin-left: 8%;
+        margin-left:1%;
     }
 
     .signup_form_container .yellow_btn{
@@ -204,6 +212,15 @@
         margin-top:1px;
         width:90% !important;
     }   
+
+    .input::placeholder{
+        font-size:10px;
+    }
+
+    .signup_form_container .yellow_btn{
+        width:130%;
+        margin-top:1px !important;
+    }
 
 }
 
@@ -238,6 +255,15 @@
         margin-top:1px;
         width:90% !important;
     }   
+
+    .input::placeholder{
+        font-size:13px;
+    }
+
+    .signup_form_container .yellow_btn{
+        width:120%;
+        height:10% !important;
+    }
 }
 
 /*Small devices: tablets, large phones*/
@@ -264,6 +290,12 @@
 
     .form_container h1{
         font-size:25px;
+    }
+
+    
+    .signup_form_container .yellow_btn{
+        width:140%;
+        height:20% !important;
     }
     
 }

@@ -59,7 +59,7 @@
 
     .pokemon-banner, .pokemon-banner_active{
         width:130px;
-        left:30%;
+        left:37%;
     }
 
     .icon-user, .icon-user_active{
@@ -68,6 +68,7 @@
 
     .white_btn_in, .white_btn_in_active{
         margin-left:0px;
+        font-size:10px;
     }
 }
 
