@@ -70,11 +70,11 @@ REACT_ROUTES = [
     'home/referals',
     'home/statistics',
     'home/deposit',
-    'home/pay'
+    'home/pay',
+    'signup/<str:id>',
 ]
 
 ROOT_URLCONF = 'site_001.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

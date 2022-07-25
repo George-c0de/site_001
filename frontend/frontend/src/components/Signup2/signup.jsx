@@ -2,26 +2,29 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import React, {useState} from "react";
 import axios from "axios";
 import {t} from 'ttag';
-
 //Images
 import logo from "../../Ảnh Pokemon Dự Trù/логотип.svg";
 import pikachu_pokeball from "../../Ảnh Pokemon Dự Trù/пикачу в пакеболе-min.svg";
 
 //Captcha
 import Captcha from "./captcha";
-
+import {saveLocale} from "../../utm";
 // Pages
 import {Lang} from '../MainPage/Lang/Lang';
+import {setRawCookie} from "react-cookies";
+import {get} from "../../cookie";
 
 const Signup = () => {
+    const params = useParams();
     const [data, setData] = useState({
         username: "",
         email: "",
         password1: "",
         password2: "",
+        utm: get('utm')
     });
 
-    const params = useParams();
+
     const navigate = useNavigate();
 
     const handleChange = ({currentTarget: input}) => {
@@ -29,17 +32,26 @@ const Signup = () => {
     };
 
     const handleSubmit = async (e) => {
+        console.log(get('utm'))
+        if (get('utm') != null) {
+            setData({
+                username: data.username,
+                email: data.email,
+                password1: data.password1,
+                password2: data.password2,
+                utm: get('utm')
+            })
+        } else {
+            saveLocale(params.id)
+        }
         e.preventDefault();
-
         try {
             //const url = "http://localhost:8080/api/users";
             //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
-            const {data: res} = await axios.post("http://127.0.0.1:8000/api/register", data, {
+            const {data: res} = await axios.post(`http://127.0.0.1:8000/api/register`, data, {
                 headers: {"Content-Type": "application/json"}
             });
-            console.log(res.data);
             navigate("/login"); //after registering navigate to login page
-            console.log(res.message);
         } catch (error) {
             alert(error.response.data.msg);
         }

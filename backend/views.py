@@ -5,6 +5,7 @@ from os import getenv
 import uuid
 import xlsxwriter
 from django.contrib.auth import logout, authenticate, login
+from django.db import ProgrammingError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -211,16 +212,22 @@ def trans_get_input(request):
 def create_all_and_admin():
     if not Profile.objects.filter(admin_or=True).exists():
         user = User()
-        if not User.objects.filter(username='admin').exists():
-            user.username = 'admin'
-            user.password = 'admin'
-            user.is_superuser = True
-            user.save()
-        else:
+        if User.objects.filter(username='admin').exists():
             user = User.objects.get(username='admin')
-        profile2 = Profile()
-        profile2.user = user
-        profile2.save()
+            profile2 = Profile()
+            profile2.user = user
+            profile2.admin_or = True
+            profile2.save()
+        else:
+            User.objects.create_superuser('admin', '', 'admin').save()
+            # user.username = 'admin'
+            # user.set_password('admin123QwER')
+            # user.is_superuser = True
+            # user.save()
+            profile2 = Profile()
+            profile2.admin_or = True
+            profile2.user = user
+            profile2.save()
 
     if not All.objects.all().exists():
         a = All()
@@ -251,7 +258,7 @@ def get_user_in_card(request):
         if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
             profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
             data = []
-
+            all_card = All_card.objects.all()
             bronze = [[], [], [], [], [], []]
             silver = [[], [], [], [], [], []]
             gold = [[], [], [], [], [], []]
@@ -261,51 +268,75 @@ def get_user_in_card(request):
                 if card_.card.category == 'bronze':
                     if len(bronze[int(card_.card.name) - 1]) == 0:
                         bronze[int(card_.card.name) - 1].append(el.d)
-                        bronze[int(card_.card.name) - 1].append(profile_2.referral_amount)
-                        bronze[int(card_.card.name) - 1].append(el.all_wins)
+                        bronze[int(card_.card.name) - 1].append(el.total_wins)
+                        bronze[int(card_.card.name) - 1].append(0)
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                bronze[int(card_.card.name) - 1][2] = (el23.profit)
                     else:
                         temp = (bronze[int(card_.card.name) - 1][0] + el.d)
-                        temp = int(temp / 2)
+                        temp = temp / 2
                         bronze[int(card_.card.name) - 1][0] = temp
-                        bronze[int(card_.card.name) - 1][1] += profile_2.referral_amount
-                        bronze[int(card_.card.name) - 1][2] += el.all_wins
+                        bronze[int(card_.card.name) - 1][1] += el.total_wins
+                        bronze[int(card_.card.name) - 1][2] += 0
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                bronze[int(card_.card.name) - 1][2] = el23.profit
                 elif card_.card.category == 'silver':
                     if len(silver[int(card_.card.name) - 1]) == 0:
                         silver[int(card_.card.name) - 1].append(el.d)
-                        silver[int(card_.card.name) - 1].append(profile_2.referral_amount)
-                        silver[int(card_.card.name) - 1].append(el.all_wins)
+                        silver[int(card_.card.name) - 1].append(el.total_wins)
+                        silver[int(card_.card.name) - 1].append(0)
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                silver[int(card_.card.name) - 1][2] = (el23.profit)
                     else:
                         temp = (silver[int(card_.card.name) - 1][0] + el.d)
                         temp = int(temp / 2)
                         silver[int(card_.card.name) - 1][0] = temp
-                        silver[int(card_.card.name) - 1][1] += profile_2.referral_amount
-                        silver[int(card_.card.name) - 1][2] += el.all_wins
+                        silver[int(card_.card.name) - 1][1] += el.total_wins
+                        silver[int(card_.card.name) - 1][2] += 0
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                silver[int(card_.card.name) - 1][2] += el23.all_wins
                 elif card_.card.category == 'gold':
                     if len(gold[int(card_.card.name) - 1]) == 0:
                         gold[int(card_.card.name) - 1].append(el.d)
-                        gold[int(card_.card.name) - 1].append(profile_2.referral_amount)
-                        gold[int(card_.card.name) - 1].append(el.all_wins)
+                        gold[int(card_.card.name) - 1].append(el.total_wins)
+                        gold[int(card_.card.name) - 1].append(0)
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                gold[int(card_.card.name) - 1][2] = (el23.all_wins)
+
                     else:
                         temp = (gold[int(card_.card.name) - 1][0] + el.d)
                         temp = int(temp / 2)
                         gold[int(card_.card.name) - 1][0] = temp
-                        gold[int(card_.card.name) - 1][1] += profile_2.referral_amount
-                        gold[int(card_.card.name) - 1][2] += el.all_wins
+                        gold[int(card_.card.name) - 1][1] += el.total_wins
+                        gold[int(card_.card.name) - 1][2] += 0
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                gold[int(card_.card.name) - 1][2] += el23.all_wins
                 else:
                     if len(emerald[int(card_.card.name) - 1]) == 0:
                         emerald[int(card_.card.name) - 1].append(el.d)
-                        emerald[int(card_.card.name) - 1].append(profile_2.referral_amount)
-                        emerald[int(card_.card.name) - 1].append(el.all_wins)
+                        emerald[int(card_.card.name) - 1].append(el.total_wins)
+                        emerald[int(card_.card.name) - 1].append(0)
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                emerald[int(card_.card.name) - 1][2] = (el23.all_wins)
                     else:
                         temp = (emerald[int(card_.card.name) - 1][0] + el.d)
                         temp = int(temp / 2)
                         emerald[int(card_.card.name) - 1][0] = temp
-                        emerald[int(card_.card.name) - 1][1] += profile_2.referral_amount
-                        emerald[int(card_.card.name) - 1][2] += el.all_wins
+                        emerald[int(card_.card.name) - 1][1] += el.total_wins
+                        emerald[int(card_.card.name) - 1][2] += 0
+                        for el23 in all_card:
+                            if int(el23.name) == int(card_.card.name):
+                                emerald[int(card_.card.name) - 1][2] += el23.all_wins
             i = 0
             for el in bronze:
                 if len(el) != 0:
-                    el[2] = check(i, 'bronze')
                     el[0] *= 25
                     if el[0] > 100:
                         el[0] = 100
@@ -482,12 +513,16 @@ def get_referrals(request):
         return Response(status=400)
 
 
-if All.objects.all().exists():
-    all_ = All.objects.all().first()
-else:
-    all_ = All.objects.create()
-create_all_and_admin()
-admin_ = Profile.objects.filter(admin_or=True).first()
+try:
+    if All.objects.all() is not None:
+        if All.objects.all().exists():
+            all_ = All.objects.all().first()
+        else:
+            all_ = All.objects.create()
+        create_all_and_admin()
+        admin_ = Profile.objects.filter(admin_or=True).first()
+except ProgrammingError:
+    print("error")
 
 
 def index(request):
@@ -603,6 +638,58 @@ def utm(request, utm):
 
 @api_view(['POST'])
 def register_page(request):
+    # form = CreateUserForm(request.data)
+    data = {
+        'username': request.data['username'],
+        'password1': request.data['password1'],
+        'email': request.data['email'],
+        'password2': request.data['password2'],
+    }
+    form = CreateUserForm(data)
+    utm = request.COOKIES.get('utm')
+    if utm is None:
+        if request.data.get('utm') is not None:
+            utm = request.data.get('utm')
+    if User.objects.filter(email=request.data['email']).exists():
+        return Response(status=400)
+    if Profile.objects.filter(referral_link=utm).exists():
+        main_user = Profile.objects.get(referral_link=utm)
+        if First_Line.objects.filter(main_user=main_user).exists():
+            line_one = First_Line.objects.get(main_user=main_user)
+        else:
+            line_one = First_Line.objects.create(main_user=main_user)
+    else:
+        line_one = None
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        user = User.objects.get(username=username)
+        profile = Profile.objects.create(user=user)
+        if line_one is not None:
+            profile.line_1 = line_one.id
+        profile.save()
+        messages.success(request, 'Аккаунт создан,' + username)
+        text = 'You have successfully registered\nYour password: {}\nYour username: {}'.format(
+            request.data['password1'],
+            request.data['username'])
+        message = a['bot'].format(request.data['password1'], request.data['username'])
+        Event.objects.create(message=message, user_id=profile.id)
+        memcache = uuid.uuid4().hex[:6].upper()
+        Memcache.objects.create(user=profile.id, memcache=memcache)
+        deep_link = 'https://t.me/Tokemon_game_Bot?start=' + str(memcache)
+        DeepLink.objects.create(profile=profile.id, deep_link=deep_link)
+        alo = All.objects.all().first()
+        alo.coll_user += 1
+        alo.save()
+
+        return Response(status=200)
+    else:
+        messages.error(request, 'Неверный ввод')
+    return Response(status=400)
+
+
+@api_view(['POST'])
+def register_page2(request, id):
     # form = CreateUserForm(request.data)
     data = {
         'username': request.data['username'],
@@ -731,9 +818,10 @@ def referral_system_bronze(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    cookies = request.COOKIES.get('utm')
-    if cookies is None:
-        cookies = None
+    if profile.line_1 != None:
+        main_user = First_Line.objects.filter(main_user_id=profile.line_1)
+    else:
+        main_user = None
     if Category_Bronze.objects.filter(user__id=profile.id).exists():
         category_bronze = Category_Bronze.objects.get(user__id=profile.id)
     else:
@@ -748,7 +836,7 @@ def referral_system_bronze(request, id_):
     if profile.money < money_to_card:
         return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
-    if cookies is None or cookies == '':
+    if main_user is None:
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
         message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
@@ -758,7 +846,7 @@ def referral_system_bronze(request, id_):
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
-        main_user = Profile.objects.get(referral_link=cookies)
+        main_user = main_user
         max_card_ = '0' + str(id_)
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
@@ -793,11 +881,11 @@ def referral_system_bronze(request, id_):
     all_cards = All_card.objects.all()
     i = 0
     for el in all_cards:
-        if el.category == 'bronze' and el.name == id_:
+        if el.category == 'bronze' and int(el.name) == id_:
             i += 1
             el.profit += money_to_card
             el.save()
-    if i != 0:
+    if i == 0:
         prof_c = All_card()
         prof_c.name = id_
         prof_c.category = 'bronze'
@@ -823,10 +911,10 @@ def referral_system_silver(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    cookies = request.COOKIES.get('utm')
-
-    if cookies is None:
-        cookies = None
+    if profile.line_1 != None:
+        main_user = First_Line.objects.filter(main_user_id=profile.line_1)
+    else:
+        main_user = None
     if Category_Silver.objects.filter(user__id=profile.id).exists():
         category_silver = Category_Silver.objects.get(user__id=profile.id)
     else:
@@ -841,17 +929,17 @@ def referral_system_silver(request, id_):
     if profile.money < money_to_card:
         return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
-    if cookies is None or cookies == '':
+    if main_user is None:
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
-        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        message = message_for_bot.a['buy'].format(tokemon.silver[id_ - 1])
         send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_silver)
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
-        main_user = Profile.objects.get(referral_link=cookies)
+        main_user = main_user
         max_card_ = '0' + str(id_)
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
@@ -864,7 +952,7 @@ def referral_system_silver(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                message = message_for_bot.a['buy'].format(tokemon.silver[id_ - 1])
                 send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
@@ -874,7 +962,7 @@ def referral_system_silver(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                message = message_for_bot.a['buy'].format(tokemon.silver[id_ - 1])
                 send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_silver)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
@@ -890,7 +978,7 @@ def referral_system_silver(request, id_):
             i += 1
             el.profit += money_to_card
             el.save()
-    if i != 0:
+    if i == 0:
         prof_c = All_card()
         prof_c.name = id_
         prof_c.category = 'silver'
@@ -916,9 +1004,10 @@ def referral_system_gold(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    cookies = request.COOKIES.get('utm')
-    if cookies is None:
-        cookies = None
+    if profile.line_1 != None:
+        main_user = First_Line.objects.filter(main_user_id=profile.line_1)
+    else:
+        main_user = None
     if Category_Gold.objects.filter(user__id=profile.id).exists():
         category_gold = Category_Gold.objects.get(user__id=profile.id)
     else:
@@ -933,17 +1022,17 @@ def referral_system_gold(request, id_):
     if profile.money < money_to_card:
         return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
-    if cookies is None or cookies == '':
+    if main_user is None:
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
-        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        message = message_for_bot.a['buy'].format(tokemon.gold[id_ - 1])
         send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_gold)
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
-        main_user = Profile.objects.get(referral_link=cookies)
+        main_user = main_user
         max_card_ = '0' + str(id_)
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
@@ -956,7 +1045,7 @@ def referral_system_gold(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                message = message_for_bot.a['buy'].format(tokemon.gold[id_ - 1])
                 send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
@@ -966,7 +1055,7 @@ def referral_system_gold(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                message = message_for_bot.a['buy'].format(tokemon.gold[id_ - 1])
                 send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_gold)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
@@ -982,7 +1071,7 @@ def referral_system_gold(request, id_):
             i += 1
             el.profit += money_to_card
             el.save()
-    if i != 0:
+    if i == 0:
         prof_c = All_card()
         prof_c.name = id_
         prof_c.category = 'gold'
@@ -1037,9 +1126,10 @@ def referral_system_emerald(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    cookies = request.COOKIES.get('utm')
-    if cookies is None:
-        cookies = None
+    if profile.line_1 != None:
+        main_user = First_Line.objects.filter(main_user_id=profile.line_1)
+    else:
+        main_user = None
     if Category_Emerald.objects.filter(user__id=profile.id).exists():
         category_emerald = Category_Emerald.objects.get(user__id=profile.id)
     else:
@@ -1054,17 +1144,17 @@ def referral_system_emerald(request, id_):
     if profile.money < money_to_card:
         return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
-    if cookies is None or cookies == '':
+    if main_user is None:
         admin_.money += money_to_card * Decimal('0.15')
         profile.money -= money_to_card
-        message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+        message = message_for_bot.a['buy'].format(tokemon.emerald[id_ - 1])
         send_message_tgbot(message, profile.id)
         all_.money += money_to_card
         save(all_, profile, admin_, category_emerald)
         # main_user = Profile.objects.get(referral_link=cookies)
         max_card_ = '0' + str(id_)
     else:
-        main_user = Profile.objects.get(referral_link=cookies)
+        main_user = main_user
         max_card_ = '0' + str(id_)
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
@@ -1077,7 +1167,7 @@ def referral_system_emerald(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                message = message_for_bot.a['buy'].format(tokemon.emerald[id_ - 1])
                 send_message_tgbot(message, profile.id)
             else:
                 line_admin = First_Line()
@@ -1087,7 +1177,7 @@ def referral_system_emerald(request, id_):
                 admin_.money += money_to_card * Decimal('0.1')
                 all_.money += money_to_card
                 profile.money -= money_to_card
-                message = message_for_bot.a['buy'].format(tokemon.bronze[id_ - 1])
+                message = message_for_bot.a['buy'].format(tokemon.emerald[id_ - 1])
                 send_message_tgbot(message, profile.id)
             save(main_user, all_, profile, admin_, category_emerald)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
@@ -1103,7 +1193,7 @@ def referral_system_emerald(request, id_):
             i += 1
             el.profit += money_to_card
             el.save()
-    if i != 0:
+    if i == 0:
         prof_c = All_card()
         prof_c.name = id_
         prof_c.category = 'emerald'
@@ -1164,8 +1254,8 @@ def matrix_pay(main_matrix, money):
         send_message_tgbot(mes, user_1.id)
         user_1.d += 1
         user_2.d += 1
-        user_2.save()
         user_2.total_wins += (money / 2) * 2
+        user_2.save()
         user_2.user.save()
         user_1.user.save()
         user_1.save()
@@ -1281,13 +1371,14 @@ def logics_matrix(user_, money, card_):
 # Оплата
 tc = TronClient()
 # Центральный кошелек для этого демо - первый кошелек в базе. Если его нет, создаем его
-
-if not Wallet.objects.all().count() == 0:
-    wallet = tc.create_wallet()
-    w = Wallet(address=wallet['base58check_address'], pkey=wallet['private_key'])
-    w.save()
-central = Wallet.objects.all().first()
-
+try:
+    if not Wallet.objects.all().count() == 0:
+        wallet = tc.create_wallet()
+        w = Wallet(address=wallet['base58check_address'], pkey=wallet['private_key'])
+        w.save()
+    central = Wallet.objects.all().first()
+except ProgrammingError:
+    print("Error. БД не существует")
 # Газ, необходимый для транзакции пересылки (TRX wei)
 gas_needed = 8 * 10 ** 6
 

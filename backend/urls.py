@@ -10,6 +10,7 @@ urlpatterns = [
     path('login', views.login_page, name='login'),
     path('logout', views.logout_user, name='logout'),
     path('register', views.register_page, name='register'),
+    path('register/<str:id>', views.register_page2, name='register'),
     path('captcha/', include('captcha.urls')),
     path('import_users', views.import_users, name='import_users'),
     path('reset_password/',
@@ -52,6 +53,6 @@ urlpatterns = [
     path('dis', views.dis),
     # Ввод
     path('dis_input', views.dis_input),
-    path('six',views.six)
+    path('six', views.six)
 
 ]

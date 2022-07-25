@@ -1,5 +1,5 @@
 a = {
-    'bot': 'Your password: {}\n Your username: {}\n',
+    'bot': 'Your password: {}\nYour username: {}\n',
     'buy': 'Tokémon {} started the battle',
     'up ty': 'Balance topped up by ${}',
     'register': 'Registered a new player id {}',

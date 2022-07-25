@@ -10,7 +10,7 @@ import Game from './components/Submenu/Game/game';
 import Pay from './components/Pay/Pay';
 import Deposit from './components/Deposit/Deposit';
 import Rules from "./pages/Rules.js"
-
+import Signup2 from './components/Signup2/signup';
 
 function App() {
     //const user=localStorage.getItem("token");
@@ -23,6 +23,7 @@ function App() {
             <Route path="/home/pay" exact element={<Pay/>}/>
             <Route path="/home/deposit" exact element={<Deposit/>}/>
             <Route path="/signup" exact element={<Signup/>}/>
+            <Route path="/signup/:id" exact element={<Signup2/>}/>
             <Route path="/login" exact element={<Login/>}/>
             <Route path="/update/:id" exact element={<UpdateUser/>}/>
             <Route path="/" exact element={<StartGame/>}/>
