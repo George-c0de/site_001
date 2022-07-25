@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-
 class All(models.Model):
     money = models.DecimalField('Деньги', max_digits=10, decimal_places=2, default=0)
     all_transactions = models.IntegerField(default=0)
