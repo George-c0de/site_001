@@ -39,7 +39,7 @@ const Deposit = () => {
     }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_output')
+            let response = await axios.get('http://127.0.0.1:8000//api/trans_get_output')
 
             if (response.data.lenth > 0) {
                 SetTran(response.data);
@@ -64,7 +64,7 @@ const Deposit = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                await axios.get('http://127.0.0.1:8000/api/user').then((data) => {
+                await axios.get('http://127.0.0.1:8000//api/user').then((data) => {
                     const result = {
                         id: data.data.id,
                         money: data.data.money,
@@ -112,24 +112,6 @@ const Deposit = () => {
             wallet: data.wallet,
             col: e.target.value
         })
-        if (Number(data.col) > Number(user.money)) {
-            e.target.value = Number(user.money);
-            setData({
-                wallet: data.wallet,
-                col: Number(user.money)
-            })
-        } else if (Number(data.col) < 1) {
-            e.target.value = 1
-            setData({
-                wallet: data.wallet,
-                col: 1
-            })
-        } else {
-            setData({
-                wallet: data.wallet,
-                col: e.target.value
-            })
-        }
     }
 //Logout
     const handleLogout = () => {
@@ -156,7 +138,7 @@ const Deposit = () => {
         } else {
             try {
                 console.log(data)
-                axios.post('http://127.0.0.1:8000/api/dis_input', {
+                axios.post('http://127.0.0.1:8000//api/dis_input', {
                     wallet: data.wallet,
                     col: data.col
                 }, {

@@ -35,7 +35,7 @@ export const UserId = ({ note }) => {
   })
   async function fetchPosts() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/user')
+                const response = await axios.get('http://127.0.0.1:8000//api/user')
                 setUser(response.data)
             } catch (e) {
             }

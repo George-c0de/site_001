@@ -665,6 +665,7 @@ def register_page(request):
         username = form.cleaned_data.get('username')
         user = User.objects.get(username=username)
         profile = Profile.objects.create(user=user)
+        profile.wallet_output = tc.create_wallet()['base58check_address']
         if line_one is not None:
             profile.line_1 = line_one.id
         profile.save()
@@ -1282,6 +1283,7 @@ def logics_matrix(user_, money, card_):
     user_in_matrix = User_in_Matrix()
     user_in_matrix.user = Profile.objects.get(id=profile.id)
     card = card_
+    price = card.card.price
     user_in_matrix.card = card
     if User_in_Matrix.objects.all().count() != 0:
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
@@ -1289,17 +1291,16 @@ def logics_matrix(user_, money, card_):
     else:
         user_in_matrix.participant_number = 0
     # Проверка существ главной матрицы
-    if Matrix.objects.filter(up=True).exists():
-        main_matrix = Matrix.objects.get(up=True)
+    if Matrix.objects.filter(up=True).filter(price=price).exists():
+        main_matrix = Matrix.objects.filter(up=True).get(price=price)
         # Проверка на максимальность матрицы
         if main_matrix.col == main_matrix.max_users:
             # Проверка на вторую матрицу(принимающую)
-            if Matrix.objects.filter(up=False).exists():
-                down_matrix = Matrix.objects.get(up=False)
+            if Matrix.objects.filter(up=False).filter(price=price).exists():
+                down_matrix = Matrix.objects.filter(up=False).get(price=price)
                 # Проверка на максимальность матрицы
                 if down_matrix.col == down_matrix.max_users:
                     down_matrix.up = True
-
                     temp = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('-participant_number')
                     temp = temp.first().participant_number + 1
                     down_matrix.go_money = temp
@@ -1338,6 +1339,7 @@ def logics_matrix(user_, money, card_):
             else:
                 down_matrix = Matrix()
                 down_matrix.max_users = main_matrix.max_users * 2
+                down_matrix.price = price
                 down_matrix.col += 1
                 user_in_matrix.matrix = down_matrix
                 matrix_pay(main_matrix, money)
@@ -1362,6 +1364,7 @@ def logics_matrix(user_, money, card_):
         main_matrix.col += 1
         user_in_matrix.matrix = main_matrix
         main_matrix.up = True
+        main_matrix.price = price
         main_matrix.save()
         user_in_matrix.save()
 

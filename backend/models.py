@@ -27,7 +27,8 @@ class Profile(models.Model):
     referral_amount = models.DecimalField('Сумма полученных средств по реферальной системе', max_digits=10,
                                           decimal_places=2, default=0)
     missed_amount = models.DecimalField('Упущенная сумма', max_digits=10, decimal_places=2, default=0)
-    wallet = models.CharField('Кошелек', max_length=150, null=True, blank=True)
+    wallet = models.CharField('Вывод', max_length=150, null=True, blank=True)
+    wallet_output = models.CharField('Пополнение', max_length=150, null=True, blank=True)
     line_1 = models.CharField('First_Line', null=True, blank=True, max_length=150)
     line_2 = models.CharField('Second_Line', null=True, blank=True, max_length=150)
     line_3 = models.CharField('Third_Line', null=True, blank=True, max_length=150)
@@ -163,6 +164,7 @@ class DeepLink(models.Model):
 
 
 class Matrix(models.Model):
+    price = models.IntegerField('Стоимость карты', default=0)
     up = models.BooleanField('Верх, если да - true', default=False)
     max_users = models.IntegerField('Максимальное кол-во участников', default=4)
     go_money = models.IntegerField('Номер участника, который получает след выплату', default=0)
