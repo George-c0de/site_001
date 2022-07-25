@@ -480,18 +480,18 @@ def get_link_tg(request):
 def get_referrals(request):
     if Profile.objects.filter(user__id=request.user.id).exists():
         profile = Profile.objects.get(user__id=request.user.id)
-        if First_Line.objects.filter(main_user__user_id=request.user.id).exists():
-            main_1 = First_Line.objects.get(main_user__user_id=request.user.id)
+        if First_Line.objects.filter(main_user__user_id=profile.id).exists():
+            main_1 = First_Line.objects.get(main_user__user_id=profile.id)
             line_1 = Profile.objects.filter(line_1=main_1.id)
         else:
             line_1 = 0
-        if Second_Line.objects.filter(main_user__user_id=request.user.id).exists():
-            main_2 = Second_Line.objects.get(main_user__user_id=request.user.id)
+        if Second_Line.objects.filter(main_user__user_id=profile.id).exists():
+            main_2 = Second_Line.objects.get(main_user__user_id=profile.id)
             line_2 = Profile.objects.filter(line_2=main_2.id)
         else:
             line_2 = 0
-        if Third_Line.objects.filter(main_user__user_id=request.user.id).exists():
-            main_3 = Third_Line.objects.get(main_user__user_id=request.user.id)
+        if Third_Line.objects.filter(main_user__user_id=profile.id).exists():
+            main_3 = Third_Line.objects.get(main_user__user_id=profile.id)
             line_3 = Profile.objects.filter(line_3=main_3.id)
         else:
             line_3 = 0
