@@ -26,19 +26,13 @@ class TutorialBotView(APIView):
         except Exception as e:
             return JsonResponse({"ok": "POST request processed"})
         text = text.replace(text[0], "", 1)
-        print(text)
         if text.startswith('start'):
             if text != 'start':
-                print('yes')
                 text = text.split()
                 if text[1] is not None:
-                    print('yes')
-                    print(text[1])
                     if Memcache.objects.filter(memcache=text[1]).exists():
-                        print('yes')
                         user = Memcache.objects.get(memcache=text[1]).user
                         if Profile.objects.filter(id=user).exists():
-                            print('yes')
                             profile = Profile.objects.get(id=user)
                             if not User_Bot.objects.filter(profile=profile).exists():
                                 User_Bot.objects.create(chat_id=t_chat["id"], profile=profile)

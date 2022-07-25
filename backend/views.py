@@ -234,15 +234,6 @@ def create_all_and_admin():
         a.save()
 
 
-@api_view(['GET'])
-def get_card_data(request):
-    if Profile.objects.filter(user_id=request.user.id).exists():
-        profile = Profile.objects.get(user_id=request.user.id)
-        cards = Buy_Card.objects.filter(user_id=profile.id)
-
-    return Response(status=400)
-
-
 def check(name, category):
     buy = All_card.objects.all()
     for el in buy:
@@ -257,7 +248,6 @@ def get_user_in_card(request):
         profile_2 = Profile.objects.get(user_id=request.user.id)
         if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
             profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
-            data = []
             all_card = All_card.objects.all()
             bronze = [[], [], [], [], [], []]
             silver = [[], [], [], [], [], []]
@@ -272,10 +262,10 @@ def get_user_in_card(request):
                         bronze[int(card_.card.name) - 1].append(0)
                         for el23 in all_card:
                             if int(el23.name) == int(card_.card.name):
-                                bronze[int(card_.card.name) - 1][2] = (el23.profit)
+                                bronze[int(card_.card.name) - 1][2] = el23.profit
                     else:
                         temp = (bronze[int(card_.card.name) - 1][0] + el.d)
-                        temp = temp / 2
+                        temp /= 2
                         bronze[int(card_.card.name) - 1][0] = temp
                         bronze[int(card_.card.name) - 1][1] += el.total_wins
                         bronze[int(card_.card.name) - 1][2] += 0
@@ -289,7 +279,7 @@ def get_user_in_card(request):
                         silver[int(card_.card.name) - 1].append(0)
                         for el23 in all_card:
                             if int(el23.name) == int(card_.card.name):
-                                silver[int(card_.card.name) - 1][2] = (el23.profit)
+                                silver[int(card_.card.name) - 1][2] = el23.profit
                     else:
                         temp = (silver[int(card_.card.name) - 1][0] + el.d)
                         temp = int(temp / 2)
@@ -306,7 +296,7 @@ def get_user_in_card(request):
                         gold[int(card_.card.name) - 1].append(0)
                         for el23 in all_card:
                             if int(el23.name) == int(card_.card.name):
-                                gold[int(card_.card.name) - 1][2] = (el23.all_wins)
+                                gold[int(card_.card.name) - 1][2] = el23.all_wins
 
                     else:
                         temp = (gold[int(card_.card.name) - 1][0] + el.d)
@@ -324,7 +314,7 @@ def get_user_in_card(request):
                         emerald[int(card_.card.name) - 1].append(0)
                         for el23 in all_card:
                             if int(el23.name) == int(card_.card.name):
-                                emerald[int(card_.card.name) - 1][2] = (el23.all_wins)
+                                emerald[int(card_.card.name) - 1][2] = el23.all_wins
                     else:
                         temp = (emerald[int(card_.card.name) - 1][0] + el.d)
                         temp = int(temp / 2)
@@ -665,13 +655,15 @@ def register_page(request):
         username = form.cleaned_data.get('username')
         user = User.objects.get(username=username)
         profile = Profile.objects.create(user=user)
+        wallet = tc.create_wallet()
+        w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
+        profile.wallet = w.address
+        profile.wallet_output = w.pkey
+        w.save()
         if line_one is not None:
             profile.line_1 = line_one.id
         profile.save()
         messages.success(request, 'Аккаунт создан,' + username)
-        text = 'You have successfully registered\nYour password: {}\nYour username: {}'.format(
-            request.data['password1'],
-            request.data['username'])
         message = a['bot'].format(request.data['password1'], request.data['username'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
@@ -716,9 +708,6 @@ def register_page2(request, id):
             profile.line_1 = line_one.id
         profile.save()
         messages.success(request, 'Аккаунт создан,' + username)
-        text = 'You have successfully registered\nYour password: {}\nYour username: {}'.format(
-            request.data['password1'],
-            request.data['username'])
         message = a['bot'].format(request.data['password1'], request.data['username'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
@@ -795,22 +784,6 @@ def case_3_4_ref(main_user, money_to_card, all_, profile, id_, name):
     save(main_user, all_, profile, admin_)
 
 
-@api_view(['GET'])
-def get_category(request):
-    if Category_Bronze.objects.filter(user_id=request.user.id).exists():
-        bronze = Category_Bronze.objects.get(user_id=request.user.id).card_6_disable
-    else:
-        bronze = False
-    if Category_Bronze.objects.filter(user_id=request.user.id).exists():
-        bronze = Category_Bronze.objects.get(user_id=request.user.id).card_6_disable
-    else:
-        bronze = False
-    if Category_Bronze.objects.filter(user_id=request.user.id).exists():
-        bronze = Category_Bronze.objects.get(user_id=request.user.id).card_6_disable
-    else:
-        bronze = False
-
-
 # Логика реферальной системы
 @api_view(['GET'])
 def referral_system_bronze(request, id_):
@@ -818,7 +791,7 @@ def referral_system_bronze(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    if profile.line_1 != None:
+    if profile.line_1 is not None:
         main_user = First_Line.objects.filter(main_user_id=profile.line_1)
     else:
         main_user = None
@@ -844,7 +817,6 @@ def referral_system_bronze(request, id_):
         all_.money += money_to_card
         save(all_, profile, admin_, category_bronze)
         # main_user = Profile.objects.get(referral_link=cookies)
-        max_card_ = '0' + str(id_)
     else:
         main_user = main_user
         max_card_ = '0' + str(id_)
@@ -911,7 +883,7 @@ def referral_system_silver(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    if profile.line_1 != None:
+    if profile.line_1 is not None:
         main_user = First_Line.objects.filter(main_user_id=profile.line_1)
     else:
         main_user = None
@@ -937,7 +909,6 @@ def referral_system_silver(request, id_):
         all_.money += money_to_card
         save(all_, profile, admin_, category_silver)
         # main_user = Profile.objects.get(referral_link=cookies)
-        max_card_ = '0' + str(id_)
     else:
         main_user = main_user
         max_card_ = '0' + str(id_)
@@ -1004,7 +975,7 @@ def referral_system_gold(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    if profile.line_1 != None:
+    if profile.line_1 is not None:
         main_user = First_Line.objects.filter(main_user_id=profile.line_1)
     else:
         main_user = None
@@ -1030,7 +1001,6 @@ def referral_system_gold(request, id_):
         all_.money += money_to_card
         save(all_, profile, admin_, category_gold)
         # main_user = Profile.objects.get(referral_link=cookies)
-        max_card_ = '0' + str(id_)
     else:
         main_user = main_user
         max_card_ = '0' + str(id_)
@@ -1126,7 +1096,7 @@ def referral_system_emerald(request, id_):
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
-    if profile.line_1 != None:
+    if profile.line_1 is not None:
         main_user = First_Line.objects.filter(main_user_id=profile.line_1)
     else:
         main_user = None
@@ -1152,7 +1122,6 @@ def referral_system_emerald(request, id_):
         all_.money += money_to_card
         save(all_, profile, admin_, category_emerald)
         # main_user = Profile.objects.get(referral_link=cookies)
-        max_card_ = '0' + str(id_)
     else:
         main_user = main_user
         max_card_ = '0' + str(id_)
@@ -1282,6 +1251,7 @@ def logics_matrix(user_, money, card_):
     user_in_matrix = User_in_Matrix()
     user_in_matrix.user = Profile.objects.get(id=profile.id)
     card = card_
+    price = card.card.price
     user_in_matrix.card = card
     if User_in_Matrix.objects.all().count() != 0:
         user_in_matrix.participant_number = User_in_Matrix.objects.order_by(
@@ -1289,17 +1259,16 @@ def logics_matrix(user_, money, card_):
     else:
         user_in_matrix.participant_number = 0
     # Проверка существ главной матрицы
-    if Matrix.objects.filter(up=True).exists():
-        main_matrix = Matrix.objects.get(up=True)
+    if Matrix.objects.filter(up=True).filter(price=price).exists():
+        main_matrix = Matrix.objects.filter(up=True).get(price=price)
         # Проверка на максимальность матрицы
         if main_matrix.col == main_matrix.max_users:
             # Проверка на вторую матрицу(принимающую)
-            if Matrix.objects.filter(up=False).exists():
-                down_matrix = Matrix.objects.get(up=False)
+            if Matrix.objects.filter(up=False).filter(price=price).exists():
+                down_matrix = Matrix.objects.filter(up=False).get(price=price)
                 # Проверка на максимальность матрицы
                 if down_matrix.col == down_matrix.max_users:
                     down_matrix.up = True
-
                     temp = User_in_Matrix.objects.filter(matrix=main_matrix).order_by('-participant_number')
                     temp = temp.first().participant_number + 1
                     down_matrix.go_money = temp
@@ -1338,6 +1307,7 @@ def logics_matrix(user_, money, card_):
             else:
                 down_matrix = Matrix()
                 down_matrix.max_users = main_matrix.max_users * 2
+                down_matrix.price = price
                 down_matrix.col += 1
                 user_in_matrix.matrix = down_matrix
                 matrix_pay(main_matrix, money)
@@ -1362,6 +1332,7 @@ def logics_matrix(user_, money, card_):
         main_matrix.col += 1
         user_in_matrix.matrix = main_matrix
         main_matrix.up = True
+        main_matrix.price = price
         main_matrix.save()
         user_in_matrix.save()
 
@@ -1392,24 +1363,31 @@ def dis(request):
         col = col.decode('utf8').replace("'", '"')
         data = json.loads(col)
         # s = json.dumps(data, indent=4, sort_keys=True)
-        wall = data['wallet']
+        wall = data['wallet_input']
         col = data['col']
         if col is not None:
             if profile.wallet is not None:
-                wall = Wallet.objects.get(pkey=profile.wallet)
+                wall = Wallet.objects.get(address=profile.wallet_input)
             else:
                 wallet = tc.create_wallet()
-                w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
-                profile.wallet = w.pkey
+                w = Wallet.objects.create(address=data['wallet_input'], pkey=wallet['private_key'])
+                profile.wallet_input = w.address
                 w.save()
                 wall = w
             if profile.money < col:
                 return Response(status=400)
-            profile.money -= col
-            profile.save()
+            if col * 0.01 < 1:
+                col += 1
+            else:
+                col += col * 0.01
             if send_usdt(wall, col):
+                profile.money -= col
+                profile.save()
                 all_.all_transactions += 1
+                all_.money += col
                 all_.save()
+                mes = message_for_bot.a['withdrawal'].format(col)
+                send_message_tgbot(mes, profile.id)
                 return Response(status=200)
             else:
                 return Response(status=400)
@@ -1428,18 +1406,20 @@ def dis_input(request):
         col = data['col']
         if col is not None:
             if profile.wallet is not None:
-                wall = Wallet.objects.get(pkey=profile.wallet)
+                wall = Wallet.objects.get(pkey=profile.wallet_output)
             else:
                 wallet = tc.create_wallet()
                 w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
-                profile.wallet = w.pkey
+                profile.wallet = w.address
                 w.save()
                 wall = w
-            profile.money += col
-            profile.save()
             if collect_usdt(wall, col):
+                profile.money += col
+                profile.save()
                 all_.all_transactions += 1
                 all_.save()
+                mes = message_for_bot.a['up ty'].format(col)
+                send_message_tgbot(mes, profile.id)
                 return Response(status=200)
             else:
                 return Response(status=400)

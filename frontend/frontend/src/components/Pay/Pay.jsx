@@ -15,7 +15,7 @@ const Pay = () => {
     const navigate = useNavigate();
     const [state_input, SetState] = useState(true);
     const [data, setData] = useState({
-        wallet: "",
+        wallet_input: "",
         col: 1,
     });
     const [maxi, setMax] = useState(1)
@@ -26,7 +26,7 @@ const Pay = () => {
         referral_link: "",
         referral_amount: "",
         missed_amount: "",
-        wallet: null,
+        wallet_input: null,
         line_1: null,
         line_2: null,
         line_3: null,
@@ -73,7 +73,7 @@ const Pay = () => {
                         referral_link: data.data.referral_link,
                         referral_amount: data.data.referral_amount,
                         missed_amount: data.data.missed_amount,
-                        wallet: data.data.wallet,
+                        wallet_input_input: data.data.wallet_input_input,
                         line_1: data.data.line_1,
                         line_2: data.data.line_2,
                         line_3: data.data.line_3,
@@ -85,16 +85,16 @@ const Pay = () => {
                     setMax(result.money)
                 })
 
-                if (user.wallet !== null) {
+                if (user.wallet_input_input !== null) {
                     setData({
-                        wallet: user.wallet,
+                        wallet_input: user.wallet_input_input,
                         col: 1,
                     })
-                    console.log(data.wallet)
+                    console.log(data.wallet_input)
                     SetState(true);
                 } else {
                     setData({
-                        wallet: '',
+                        wallet_input: '',
                         col: 1,
                     })
                     console.log('yes')
@@ -110,24 +110,24 @@ const Pay = () => {
 
     const handleSum = (e) => {
         setData({
-            wallet: data.wallet,
+            wallet_input: data.wallet_input,
             col: e.target.value
         })
         if (Number(data.col) > Number(user.money)) {
             e.target.value = Number(user.money);
             setData({
-                wallet: data.wallet,
+                wallet_input: data.wallet_input,
                 col: Number(user.money)
             })
         } else if (Number(data.col) < 1) {
             e.target.value = 1
             setData({
-                wallet: data.wallet,
+                wallet_input: data.wallet_input,
                 col: 1
             })
         } else {
             setData({
-                wallet: data.wallet,
+                wallet_input: data.wallet_input,
                 col: e.target.value
             })
         }
@@ -152,12 +152,12 @@ const Pay = () => {
         e.preventDefault();
         if (data.col < 1 || data.col > user.money) {
             alert('Error')
-        } else if (data.wallet === '') {
+        } else if (data.wallet_input === '') {
             alert('Error')
         } else {
             try {
-                axios.post('https://8b99-176-193-182-242.eu.ngrok.io/api/dis', {
-                    wallet: data.wallet,
+                axios.post('http://127.0.0.1:8000/api/dis', {
+                    wallet_input: data.wallet_input,
                     col: data.col
                 }, {
                     headers: {"Content-Type": "application/json"}
@@ -176,7 +176,7 @@ const Pay = () => {
     }
     const hundSum = (e) => {
         setData({
-            wallet: e.target.value,
+            wallet_input: e.target.value,
             col: data.col
         })
     }
@@ -209,7 +209,7 @@ const Pay = () => {
                         <div className='pay-input'>
                             <label htmlFor='address-input'>Адрес вывода:</label>
                             <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
-                                   className='pay-address-input' name='address-input' value={data.wallet}/>
+                                   className='pay-address-input' name='address-input' value={data.wallet_input}/>
                             <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                         </div>
                     </div>

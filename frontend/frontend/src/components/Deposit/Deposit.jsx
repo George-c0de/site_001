@@ -112,30 +112,6 @@ const Deposit = () => {
             wallet: data.wallet,
             col: e.target.value
         })
-        if (Number(data.col) > Number(user.money)) {
-            e.target.value = Number(user.money);
-            setData({
-                wallet: data.wallet,
-                col: Number(user.money)
-            })
-            console.log(1)
-            console.log(data.col)
-        } else if (Number(data.col) < 1) {
-            e.target.value = 1
-            setData({
-                wallet: data.wallet,
-                col: 1
-            })
-            console.log(2)
-            console.log(data.col)
-        } else {
-            console.log(3)
-            setData({
-                wallet: data.wallet,
-                col: e.target.value
-            })
-            console.log(data.col)
-        }
     }
 //Logout
     const handleLogout = () => {
@@ -161,8 +137,7 @@ const Deposit = () => {
             alert('Error')
         } else {
             try {
-                console.log(data)
-                axios.post('https://8b99-176-193-182-242.eu.ngrok.io/api/dis_input', {
+                axios.post('http://127.0.0.1:8000/api/dis_input', {
                     wallet: data.wallet,
                     col: data.col
                 }, {
@@ -199,27 +174,27 @@ const Deposit = () => {
             <form onSubmit={handleSubmit}>
                 <div className='pay-container'>
                     <div className='pay-title-wrapper'>
-                        <h1 className='pay-title'>Пополнить</h1>
-                        <span className='pay-subtitle'>Баланс:</span>
+                        <h1 className='pay-title'>{t`Deposit`}</h1>
+                        <span className='pay-subtitle'>{t`Balance`}:</span>
                         <span className='pay-money'>{user.money}$</span>
                     </div>
                     <div className='pay-inputs-wrapper'>
                         <div className='pay-input'>
-                            <label htmlFor='sum-input'>Сумма пополнения:</label>
+                            <label htmlFor='sum-input'>{t`Top - up amount`}:</label>
                             <input onChange={e => handleSum(e)} value={data.col} required type='number'
                                    className='pay-sum-input'
                                    name='sum-input'
                             />
-                            <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
+                            {/*<span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>*/}
                         </div>
                         <div className='pay-input'>
-                            <label htmlFor='address-input'>Адрес вывода:</label>
+                            <label htmlFor='address-input'>{t`Top up address`}:</label>
                             <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
                                    className='pay-address-input' name='address-input' value={data.wallet}/>
-                            <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
+                            {/*<span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>*/}
                         </div>
                     </div>
-                    <button type={"submit"} className='pay-button'>Пополнить</button>
+                    <button type={"submit"} className='pay-button'>{t`Deposit`}</button>
 
                     <div className='pay-history-wrapper'>
                         <span className='pay-history-title'>{t`TRANSACTION HISTORY`}</span>
