@@ -118,23 +118,17 @@ const Deposit = () => {
                 wallet: data.wallet,
                 col: Number(user.money)
             })
-            console.log(1)
-            console.log(data.col)
         } else if (Number(data.col) < 1) {
             e.target.value = 1
             setData({
                 wallet: data.wallet,
                 col: 1
             })
-            console.log(2)
-            console.log(data.col)
         } else {
-            console.log(3)
             setData({
                 wallet: data.wallet,
                 col: e.target.value
             })
-            console.log(data.col)
         }
     }
 //Logout
