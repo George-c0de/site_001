@@ -48,7 +48,7 @@ const Referals = () => {
 
     async function fetchPosts() {
         try {
-            const response = await axios.get('http://127.0.0.1:8000//api/referral')
+            const response = await axios.get('http://127.0.0.1:8000/api/referral')
             setPosts(response.data)
         } catch (e) {
         }

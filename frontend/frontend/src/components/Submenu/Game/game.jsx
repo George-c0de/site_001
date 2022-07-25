@@ -57,7 +57,7 @@ const Game = () => {
             navigate("/login");
         };
         const getSix = async ()=>{
-            await axios.get('http://127.0.0.1:8000//api/six')
+            await axios.get('http://127.0.0.1:8000/api/six')
                 .then((data) => {
                     const result = {
                         bronze: data.data.bronze,
@@ -70,7 +70,7 @@ const Game = () => {
                 })
         }
         const getCard = async () => {
-            await axios.get('http://127.0.0.1:8000//api/get_user_in_matrix')
+            await axios.get('http://127.0.0.1:8000/api/get_user_in_matrix')
                 .then((data) => {
                     const result = {
                         bronze: data.data.bronze,
@@ -92,11 +92,11 @@ const Game = () => {
         }, [])
 
         let getUsername = async () => {
-            const username = await axios.get('http://127.0.0.1:8000//api/user')
+            const username = await axios.get('http://127.0.0.1:8000/api/user')
             setUsername(username.data.username);
         }
         let getHist = async () => {
-            await axios.get('http://127.0.0.1:8000//api/get_hist_card')
+            await axios.get('http://127.0.0.1:8000/api/get_hist_card')
                 .then((data) => {
                     const result = {
                         oneq: data.data.oneq,
@@ -107,7 +107,7 @@ const Game = () => {
                 })
         }
         let getCard_data = async () => {
-            await axios.get('http://127.0.0.1:8000//api/get_user_in_card')
+            await axios.get('http://127.0.0.1:8000/api/get_user_in_card')
                 .then((data) => {
                     const result = {
                         bronze: data.data.bronze,

@@ -655,7 +655,11 @@ def register_page(request):
         username = form.cleaned_data.get('username')
         user = User.objects.get(username=username)
         profile = Profile.objects.create(user=user)
-        profile.wallet_output = tc.create_wallet()['base58check_address']
+        wallet = tc.create_wallet()
+        w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
+        profile.wallet = w.address
+        profile.wallet_output = w.pkey
+        w.save()
         if line_one is not None:
             profile.line_1 = line_one.id
         profile.save()
@@ -1359,24 +1363,31 @@ def dis(request):
         col = col.decode('utf8').replace("'", '"')
         data = json.loads(col)
         # s = json.dumps(data, indent=4, sort_keys=True)
-        wall = data['wallet']
+        wall = data['wallet_input']
         col = data['col']
         if col is not None:
             if profile.wallet is not None:
-                wall = Wallet.objects.get(pkey=profile.wallet)
+                wall = Wallet.objects.get(address=profile.wallet_input)
             else:
                 wallet = tc.create_wallet()
-                w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
-                profile.wallet = w.pkey
+                w = Wallet.objects.create(address=data['wallet_input'], pkey=wallet['private_key'])
+                profile.wallet_input = w.address
                 w.save()
                 wall = w
             if profile.money < col:
                 return Response(status=400)
-            profile.money -= col
-            profile.save()
+            if col * 0.01 < 1:
+                col += 1
+            else:
+                col += col * 0.01
             if send_usdt(wall, col):
+                profile.money -= col
+                profile.save()
                 all_.all_transactions += 1
+                all_.money += col
                 all_.save()
+                mes = message_for_bot.a['withdrawal'].format(col)
+                send_message_tgbot(mes, profile.id)
                 return Response(status=200)
             else:
                 return Response(status=400)
@@ -1395,18 +1406,20 @@ def dis_input(request):
         col = data['col']
         if col is not None:
             if profile.wallet is not None:
-                wall = Wallet.objects.get(pkey=profile.wallet)
+                wall = Wallet.objects.get(pkey=profile.wallet_output)
             else:
                 wallet = tc.create_wallet()
                 w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
-                profile.wallet = w.pkey
+                profile.wallet = w.address
                 w.save()
                 wall = w
-            profile.money += col
-            profile.save()
             if collect_usdt(wall, col):
+                profile.money += col
+                profile.save()
                 all_.all_transactions += 1
                 all_.save()
+                mes = message_for_bot.a['up ty'].format(col)
+                send_message_tgbot(mes, profile.id)
                 return Response(status=200)
             else:
                 return Response(status=400)
