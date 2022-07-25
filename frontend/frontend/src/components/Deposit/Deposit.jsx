@@ -174,27 +174,27 @@ const Deposit = () => {
             <form onSubmit={handleSubmit}>
                 <div className='pay-container'>
                     <div className='pay-title-wrapper'>
-                        <h1 className='pay-title'>Пополнить</h1>
-                        <span className='pay-subtitle'>Баланс:</span>
+                        <h1 className='pay-title'>{t`Deposit`}</h1>
+                        <span className='pay-subtitle'>{t`Balance`}:</span>
                         <span className='pay-money'>{user.money}$</span>
                     </div>
                     <div className='pay-inputs-wrapper'>
                         <div className='pay-input'>
-                            <label htmlFor='sum-input'>Сумма пополнения:</label>
+                            <label htmlFor='sum-input'>{t`Top - up amount`}:</label>
                             <input onChange={e => handleSum(e)} value={data.col} required type='number'
                                    className='pay-sum-input'
                                    name='sum-input'
                             />
-                            <span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>
+                            {/*<span className='pay-input-info'>Комиссия за вывод 1%, min 1 USD</span>*/}
                         </div>
                         <div className='pay-input'>
-                            <label htmlFor='address-input'>Адрес вывода:</label>
+                            <label htmlFor='address-input'>{t`Top up address`}:</label>
                             <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
                                    className='pay-address-input' name='address-input' value={data.wallet}/>
-                            <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
+                            {/*<span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>*/}
                         </div>
                     </div>
-                    <button type={"submit"} className='pay-button'>Пополнить</button>
+                    <button type={"submit"} className='pay-button'>{t`Deposit`}</button>
 
                     <div className='pay-history-wrapper'>
                         <span className='pay-history-title'>{t`TRANSACTION HISTORY`}</span>
