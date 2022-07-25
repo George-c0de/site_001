@@ -217,9 +217,13 @@
         font-size:10px;
     }
 
+    .captcha-wrapper{
+        margin-top: -20%;
+    }
+
     .signup_form_container .yellow_btn{
         width:130%;
-        margin-top:1px !important;
+        margin-top:-5px !important;
     }
 
 }
@@ -292,7 +296,6 @@
         font-size:25px;
     }
 
-    
     .signup_form_container .yellow_btn{
         width:140%;
         height:20% !important;
