@@ -642,6 +642,7 @@ def register_page(request):
             utm = request.data.get('utm')
     if User.objects.filter(email=request.data['email']).exists():
         return Response(status=400)
+    main_user = None
     if Profile.objects.filter(referral_link=utm).exists():
         main_user = Profile.objects.get(referral_link=utm)
         if First_Line.objects.filter(main_user=main_user).exists():
@@ -663,50 +664,9 @@ def register_page(request):
         if line_one is not None:
             profile.line_1 = line_one.id
         profile.save()
-        messages.success(request, 'Аккаунт создан,' + username)
-        message = a['bot'].format(request.data['password1'], request.data['username'])
-        Event.objects.create(message=message, user_id=profile.id)
-        memcache = uuid.uuid4().hex[:6].upper()
-        Memcache.objects.create(user=profile.id, memcache=memcache)
-        deep_link = 'https://t.me/Tokemon_game_Bot?start=' + str(memcache)
-        DeepLink.objects.create(profile=profile.id, deep_link=deep_link)
-        alo = All.objects.all().first()
-        alo.coll_user += 1
-        alo.save()
-
-        return Response(status=200)
-    else:
-        messages.error(request, 'Неверный ввод')
-    return Response(status=400)
-
-
-@api_view(['POST'])
-def register_page2(request, id):
-    # form = CreateUserForm(request.data)
-    data = {
-        'username': request.data['username'],
-        'password1': request.data['password1'],
-        'email': request.data['email'],
-        'password2': request.data['password2'],
-    }
-    form = CreateUserForm(data)
-    utm = request.COOKIES.get('utm')
-    if Profile.objects.filter(referral_link=utm).exists():
-        main_user = Profile.objects.get(referral_link=utm)
-        if First_Line.objects.filter(main_user=main_user).exists():
-            line_one = First_Line.objects.get(main_user=main_user)
-        else:
-            line_one = First_Line.objects.create(main_user=main_user)
-    else:
-        line_one = None
-    if form.is_valid():
-        form.save()
-        username = form.cleaned_data.get('username')
-        user = User.objects.get(username=username)
-        profile = Profile.objects.create(user=user)
-        if line_one is not None:
-            profile.line_1 = line_one.id
-        profile.save()
+        if main_user is not None:
+            mes = message_for_bot.a['register'].format(profile.id)
+            send_message_tgbot(mes, main_user.id)
         messages.success(request, 'Аккаунт создан,' + username)
         message = a['bot'].format(request.data['password1'], request.data['username'])
         Event.objects.create(message=message, user_id=profile.id)

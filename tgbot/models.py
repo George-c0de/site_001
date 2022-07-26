@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from backend.models import Profile
 
+
 class User_Bot(models.Model):
     chat_id = models.PositiveBigIntegerField(default=0)  # telegram_id
     username = models.CharField('Имя', max_length=50, default=0)
@@ -35,6 +36,5 @@ class Event(models.Model):
 class Memcache(models.Model):
     user = models.CharField(max_length=150)
     memcache = models.CharField(max_length=150)
-
 
 # tg
