@@ -35,7 +35,7 @@ export const UserId = ({ note }) => {
   })
   async function fetchPosts() {
             try {
-                const response = await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/user')
+                const response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user')
                 setUser(response.data)
             } catch (e) {
             }

@@ -34,12 +34,13 @@ const Pay = () => {
         admin_or: false,
         user: 0
     })
+    let [wallet,setWallet] = useState(null)
     useEffect(() => {
         getTran();
     }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/trans_get_input')
+            let response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/trans_get_input')
             if (response.data.lenth > 0) {
                 SetTran(response.data);
             }
@@ -66,14 +67,14 @@ const Pay = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/user').then((data) => {
+                await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user').then((data) => {
                     const result = {
                         id: data.data.id,
                         money: data.data.money,
                         referral_link: data.data.referral_link,
                         referral_amount: data.data.referral_amount,
                         missed_amount: data.data.missed_amount,
-                        wallet_input_input: data.data.wallet_input_input,
+                        wallet_input: data.data.wallet_input,
                         line_1: data.data.line_1,
                         line_2: data.data.line_2,
                         line_3: data.data.line_3,
@@ -82,23 +83,24 @@ const Pay = () => {
                         user: data.data.user,
                     }
                     setUser(result);
+                    console.log(result.wallet_input)
                     setMax(result.money)
+                    setWallet(result.wallet_input)
                 })
-
-                if (user.wallet_input_input !== null) {
+                if (user.wallet_input !== null) {
                     setData({
-                        wallet_input: user.wallet_input_input,
+                        wallet_input: user.wallet_input,
                         col: 1,
                     })
-                    console.log(data.wallet_input)
-                    SetState(true);
+                    console.log(user.wallet_input)
+                    SetState(false);
                 } else {
                     setData({
                         wallet_input: '',
                         col: 1,
                     })
                     console.log('yes')
-                    SetState(false);
+                    SetState(true);
                 }
             } catch (e) {
 
@@ -151,12 +153,15 @@ const Pay = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (data.col < 1 || data.col > user.money) {
+            console.log(data.col)
+            console.log(user.money)
             alert('Error')
         } else if (data.wallet_input === '') {
+            console.log(data.wallet_input)
             alert('Error')
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/dis', {
+                axios.post('https://1ba8-176-193-182-242.eu.ngrok.io/api/dis', {
                     wallet_input: data.wallet_input,
                     col: data.col
                 }, {
@@ -175,10 +180,16 @@ const Pay = () => {
         }
     }
     const hundSum = (e) => {
-        setData({
+        console.log(state_input)
+        if(state_input){
+            setData({
             wallet_input: e.target.value,
             col: data.col
         })
+        }
+        else{
+            e.target.value = ''
+        }
     }
 
     return (
@@ -208,7 +219,7 @@ const Pay = () => {
                         </div>
                         <div className='pay-input'>
                             <label htmlFor='address-input'>Адрес вывода:</label>
-                            <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
+                            <input onChange={e => hundSum(e)} required type='text'
                                    className='pay-address-input' name='address-input' value={data.wallet_input}/>
                             <span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>
                         </div>

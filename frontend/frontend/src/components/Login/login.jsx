@@ -26,7 +26,7 @@ const Signup = () => {
         e.preventDefault();
         try {
             let data2 = 200;
-            data2 = await axios.post('https://8b99-176-193-182-242.eu.ngrok.io/api/login', data)
+            data2 = await axios.post('https://1ba8-176-193-182-242.eu.ngrok.io/api/login', data)
                 .catch(function (error) {
                     if (error.response) {
                         data2 = error.response.status;
@@ -73,7 +73,7 @@ const Signup = () => {
                             required
                             className="input"
                         />
-                    <a href={'/api/password-reset/'}>Restore password ?</a>
+                    <a href={'/api/reset_password/'}>Restore password ?</a>
                         <button type="submit" className="green_btn">
                             {t`Sign Up`}
                         </button>

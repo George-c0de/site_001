@@ -21,7 +21,7 @@ const Updateuser = () => {
     //Prefill Update Form
     useEffect(()=>{
         const getUserDetails=async()=>{
-            const {data} =await axios.get(`https://8b99-176-193-182-242.eu.ngrok.io/api/user/${params.id}`);
+            const {data} =await axios.get(`https://1ba8-176-193-182-242.eu.ngrok.io/api/user/${params.id}`);
             setAllValues(data);
         }
 
@@ -46,7 +46,7 @@ const Updateuser = () => {
             password:allValues.password
         }
     
-        let result= await axios.put(`https://8b99-176-193-182-242.eu.ngrok.io/api/user/${params.id}`,data);
+        let result= await axios.put(`https://1ba8-176-193-182-242.eu.ngrok.io/api/user/${params.id}`,data);
         if(result){
             navigate('/home');
         }

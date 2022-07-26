@@ -42,7 +42,7 @@ const Mainpage = () => {
 
         async function fetchPosts() {
             try {
-                const response = await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/user')
+                const response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user')
                 setPosts(response.data)
             } catch (e) {
             }
@@ -52,7 +52,7 @@ const Mainpage = () => {
         //const { id } = useParams();
         //Logout
         const handleLogout = () => {
-            let data2 = axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/logout');
+            let data2 = axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/logout');
             localStorage.removeItem("token");
             navigate("/login");
         };
@@ -65,7 +65,7 @@ const Mainpage = () => {
 
         async function fetchLink() {
             try {
-                const response = await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/get_link_tg')
+                const response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/get_link_tg')
                 setget_link_tg(response.data.link_tg)
 
             } catch (e) {
@@ -126,7 +126,7 @@ const Mainpage = () => {
             navigate("/rules");
         }
 //   useEffect(async() => {
-//   const res= await axios.get('http://localhost:8000/api/user');
+//   const res= await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user');
 //   console.log(res)
 // },[]);
 

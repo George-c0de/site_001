@@ -39,7 +39,7 @@ const Deposit = () => {
     }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/trans_get_output')
+            let response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/trans_get_output')
 
             if (response.data.lenth > 0) {
                 SetTran(response.data);
@@ -64,7 +64,7 @@ const Deposit = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/user').then((data) => {
+                await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user').then((data) => {
                     const result = {
                         id: data.data.id,
                         money: data.data.money,
@@ -131,13 +131,11 @@ const Deposit = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (data.col < 1 || data.col > user.money) {
-            alert('Error')
-        } else if (data.wallet === '') {
+        if (data.col < 1) {
             alert('Error')
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/dis_input', {
+                axios.post('https://1ba8-176-193-182-242.eu.ngrok.io/api/dis_input', {
                     wallet: data.wallet,
                     col: data.col
                 }, {
@@ -189,7 +187,7 @@ const Deposit = () => {
                         </div>
                         <div className='pay-input'>
                             <label htmlFor='address-input'>{t`Top up address`}:</label>
-                            <input readOnly={state_input} onChange={e => hundSum(e)} required type='text'
+                            <input readOnly required type='text'
                                    className='pay-address-input' name='address-input' value={data.wallet}/>
                             {/*<span className='pay-input-info'>Кошелек для вывода изменить будет нельзя</span>*/}
                         </div>

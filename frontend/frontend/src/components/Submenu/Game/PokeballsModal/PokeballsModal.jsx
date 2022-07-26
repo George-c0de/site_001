@@ -23,7 +23,7 @@ const CardOpened = ({image, buyCard, background, card_data, idCard, category}) =
 
 
         setTimeout(async () => {
-            await axios.get(`https://8b99-176-193-182-242.eu.ngrok.io/api/${category}/${idCard}`)
+            await axios.get(`https://1ba8-176-193-182-242.eu.ngrok.io/api/${category}/${idCard}`)
                 .then((res) => {
                     setTimeout(() => {
                         buyCard();
@@ -72,7 +72,7 @@ const CardClosed = ({price, buyCard, idCard, category, six}) => {
     const handleBuyClick = () => {
         setStatus('pending');
         setTimeout(async () => {
-            await axios.get(`https://8b99-176-193-182-242.eu.ngrok.io/api/${category}/${idCard}`)
+            await axios.get(`https://1ba8-176-193-182-242.eu.ngrok.io/api/${category}/${idCard}`)
                 .then((res) => {
                     setStatus('success')
                     setTimeout(() => {

@@ -33,8 +33,8 @@ const Signup = () => {
 
         try {
             //const url = "http://localhost:8080/api/users";
-            //const {data: res} = await axios.post("http://localhost:8000/api/register", data);
-            const {data: res} = await axios.post("https://8b99-176-193-182-242.eu.ngrok.io/api/register", data, {
+            //const {data: res} = await axios.post("https://1ba8-176-193-182-242.eu.ngrok.io/api/register", data);
+            const {data: res} = await axios.post("https://1ba8-176-193-182-242.eu.ngrok.io/api/register", data, {
                 headers: {"Content-Type": "application/json"}
             });
             console.log(res.data);

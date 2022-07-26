@@ -1,3 +1,4 @@
+import smtplib
 from pathlib import Path
 import os
 import dotenv
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'tgbot',
     'frontend.frontend',
     'corsheaders',
-    'crispy_forms'
+    'crispy_forms',
+    'sendgrid_backend'
 ]
 CRISPY_TEMPLATE_PACK = 'uni_form'
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ MIDDLEWARE = [
 ]
 INTERNAL_IPS = [
     # ...
-    'http://127.0.0.1:8000/',
+    'https://1ba8-176-193-182-242.eu.ngrok.io/',
     # ...
 ]
 
@@ -176,13 +178,16 @@ CORS_ALLOW_ALL_ORIGINS = True
 # SMTP Hostname
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Для проверки писем
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' # сохранять
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
-
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
+CSRF_TRUSTED_ORIGINS = ['https://1ba8-176-193-182-242.eu.ngrok.io']

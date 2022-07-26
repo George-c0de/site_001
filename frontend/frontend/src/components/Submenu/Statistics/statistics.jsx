@@ -39,7 +39,7 @@ const Statistics = () => {
 
     async function fetchPosts() {
         try {
-            const response = await axios.get('https://8b99-176-193-182-242.eu.ngrok.io/api/get_all')
+            const response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/get_all')
             setPosts(response.data)
         } catch (e) {
         }

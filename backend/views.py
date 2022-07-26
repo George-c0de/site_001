@@ -5,7 +5,7 @@ from os import getenv
 import uuid
 import xlsxwriter
 from django.contrib.auth import logout, authenticate, login
-from django.db import ProgrammingError
+from django.db import ProgrammingError, OperationalError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -211,7 +211,6 @@ def trans_get_input(request):
 
 def create_all_and_admin():
     if not Profile.objects.filter(admin_or=True).exists():
-        user = User()
         if User.objects.filter(username='admin').exists():
             user = User.objects.get(username='admin')
             profile2 = Profile()
@@ -219,7 +218,8 @@ def create_all_and_admin():
             profile2.admin_or = True
             profile2.save()
         else:
-            User.objects.create_superuser('admin', '', 'admin').save()
+            user = User.objects.create_superuser('admin', '', 'admin')
+            user.save()
             # user.username = 'admin'
             # user.set_password('admin123QwER')
             # user.is_superuser = True
@@ -512,6 +512,8 @@ try:
         create_all_and_admin()
         admin_ = Profile.objects.filter(admin_or=True).first()
 except ProgrammingError:
+    print("error")
+except OperationalError:
     print("error")
 
 
@@ -1310,6 +1312,8 @@ try:
     central = Wallet.objects.all().first()
 except ProgrammingError:
     print("Error. БД не существует")
+except OperationalError:
+    print("error")
 # Газ, необходимый для транзакции пересылки (TRX wei)
 gas_needed = 8 * 10 ** 6
 
@@ -1326,20 +1330,23 @@ def dis(request):
         wall = data['wallet_input']
         col = data['col']
         if col is not None:
-            if profile.wallet is not None:
+            if profile.wallet_input is not None:
                 wall = Wallet.objects.get(address=profile.wallet_input)
             else:
                 wallet = tc.create_wallet()
+                if Wallet.objects.filter(address=data['wallet_input']).exists():
+                    return Response(status=400)
                 w = Wallet.objects.create(address=data['wallet_input'], pkey=wallet['private_key'])
                 profile.wallet_input = w.address
                 w.save()
                 wall = w
-            if profile.money < col:
-                return Response(status=400)
+            profile.save()
             if col * 0.01 < 1:
                 col += 1
             else:
                 col += col * 0.01
+            if profile.money < col:
+                return Response(status=400)
             if send_usdt(wall, col):
                 profile.money -= col
                 profile.save()
@@ -1355,6 +1362,7 @@ def dis(request):
 
 
 # Ввод
+@csrf_exempt
 def dis_input(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
