@@ -2,6 +2,7 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
@@ -138,6 +139,13 @@ class History_Output(models.Model):
 """
 
 
+class History_card(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    date = models.DateTimeField('Время', default=timezone.now)
+    price = models.DecimalField('Кол-во', max_digits=10, decimal_places=2)
+    buy = models.BooleanField('Покупка')
+
+
 # Ввод
 class History_Transactions(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -157,6 +165,8 @@ class Buy_Card(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now=True)
+    total_wins = models.DecimalField(default=0, max_digits=10, decimal_places=2)
+    ref_profit = models.DecimalField(default=0, max_digits=10, decimal_places=2)
 
 
 class DeepLink(models.Model):
@@ -181,20 +191,14 @@ class Payment(models.Model):
 """
 
 
-class All_card(models.Model):
-    category = models.CharField(max_length=50)
-    name = models.CharField(max_length=50)
-    profit = models.IntegerField(default=0)
-
-
 class User_in_Matrix(models.Model):
     participant_number = models.IntegerField('Номер участника')
     matrix = models.ForeignKey(Matrix, on_delete=models.CASCADE)
     d = models.IntegerField('Кол-во зачислений', default=0)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     card = models.ForeignKey(Buy_Card, on_delete=models.CASCADE)
-    total_wins = models.IntegerField(default=0)
-    all_wins = models.IntegerField(default=0)
+    total_wins = models.DecimalField(default=0, max_digits=10, decimal_places=2)
+    all_wins = models.DecimalField(default=0, max_digits=10, decimal_places=2)
 
 
 # Кошелек

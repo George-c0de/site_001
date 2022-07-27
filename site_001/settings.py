@@ -159,7 +159,7 @@ LOCALE_PATHS = (
     'locale',
     # os.path.join(PROJECT_DIR, 'locale'),
 )
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC+03:00'
 
 USE_TZ = True
 USE_L10N = True

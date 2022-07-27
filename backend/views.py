@@ -22,7 +22,7 @@ from .Tron import TronClient
 from .forms import CreateUserForm
 from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Category_Bronze, All, First_Line, \
     Second_Line, Third_Line, Category_Silver, Category_Gold, Category_Emerald, Buy_Card, Card, DeepLink, \
-    History_Transactions, All_card
+    History_Transactions
 from .serializers import ProfileSerializer, AllSerializer
 import requests
 
@@ -235,7 +235,7 @@ def create_all_and_admin():
 
 
 def check(name, category):
-    buy = All_card.objects.all()
+    buy = Buy_Card.objects.all()
     for el in buy:
         if el.name == name and el.category == category:
             return el.profit
@@ -248,7 +248,7 @@ def get_user_in_card(request):
         profile_2 = Profile.objects.get(user_id=request.user.id)
         if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
             profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
-            all_card = All_card.objects.all()
+            all_card = Buy_Card.objects.all()
             bronze = [[], [], [], [], [], []]
             silver = [[], [], [], [], [], []]
             gold = [[], [], [], [], [], []]
@@ -645,12 +645,27 @@ def register_page(request):
     if User.objects.filter(email=request.data['email']).exists():
         return Response(status=400)
     main_user = None
+    line_th = None
+    line_two = None
     if Profile.objects.filter(referral_link=utm).exists():
         main_user = Profile.objects.get(referral_link=utm)
         if First_Line.objects.filter(main_user=main_user).exists():
             line_one = First_Line.objects.get(main_user=main_user)
         else:
             line_one = First_Line.objects.create(main_user=main_user)
+            line_one.save()
+        if main_user.line_1 is not None:
+            main_user_2 = First_Line.objects.get(id=main_user.line_1).main_user
+            if Second_Line.objects.filter(main_user=main_user_2).exists():
+                line_two = Second_Line.objects.get(main_user=main_user_2)
+            else:
+                line_two = Second_Line.objects.create(main_user=main_user_2)
+            if main_user_2.line_1 is not None:
+                main_user_3 = First_Line.objects.get(id=main_user_2.line_1).main_user
+                if Third_Line.objects.filter(main_user=main_user_3).exists():
+                    line_th = Third_Line.objects.get(main_user=main_user_3)
+                else:
+                    line_th = Third_Line.objects.create(main_user=main_user_3)
     else:
         line_one = None
     if form.is_valid():
@@ -665,6 +680,12 @@ def register_page(request):
         w.save()
         if line_one is not None:
             profile.line_1 = line_one.id
+        if line_two is not None:
+            line_two.save()
+            profile.line_2 = line_two.id
+        if line_th is not None:
+            line_th.save()
+            profile.line_3 = line_th.id
         profile.save()
         if main_user is not None:
             mes = message_for_bot.a['register'].format(profile.id)
@@ -679,7 +700,6 @@ def register_page(request):
         alo = All.objects.all().first()
         alo.coll_user += 1
         alo.save()
-
         return Response(status=200)
     else:
         messages.error(request, 'Неверный ввод')
@@ -904,19 +924,6 @@ def referral_system_silver(request, id_):
             save(category_silver)
     buy_card = Buy_Card()
     buy_card.user = profile
-    all_cards = All_card.objects.all()
-    i = 0
-    for el in all_cards:
-        if el.category == 'silver' and el.name == id_:
-            i += 1
-            el.profit += money_to_card
-            el.save()
-    if i == 0:
-        prof_c = All_card()
-        prof_c.name = id_
-        prof_c.category = 'silver'
-        prof_c.profit = money_to_card
-        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'silver'
@@ -996,19 +1003,6 @@ def referral_system_gold(request, id_):
             save(category_gold)
     buy_card = Buy_Card()
     buy_card.user = profile
-    all_cards = All_card.objects.all()
-    i = 0
-    for el in all_cards:
-        if el.category == 'gold' and el.name == id_:
-            i += 1
-            el.profit += money_to_card
-            el.save()
-    if i == 0:
-        prof_c = All_card()
-        prof_c.name = id_
-        prof_c.category = 'gold'
-        prof_c.profit = money_to_card
-        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'gold'
@@ -1117,19 +1111,6 @@ def referral_system_emerald(request, id_):
             save(category_emerald)
     buy_card = Buy_Card()
     buy_card.user = profile
-    all_cards = All_card.objects.all()
-    i = 0
-    for el in all_cards:
-        if el.category == 'emerald' and el.name == id_:
-            i += 1
-            el.profit += money_to_card
-            el.save()
-    if i == 0:
-        prof_c = All_card()
-        prof_c.name = id_
-        prof_c.category = 'emerald'
-        prof_c.profit = money_to_card
-        prof_c.save()
     card_ = Card()
     card_.price = money_to_card
     card_.category = 'emerald'
