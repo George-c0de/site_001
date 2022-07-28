@@ -144,7 +144,7 @@ msgstr ""
 
 #: src\components\MainPage\mainpage.jsx:87
 #. useEffect(async() => {
-#. const res= await axios.get('http://127.0.0.1:8000/api/user');
+#. const res= await axios.get('/api/user');
 #. console.log(res)
 #. },[]);
 msgid "MAIN"
@@ -152,7 +152,7 @@ msgstr ""
 
 #: src\components\MainPage\mainpage.jsx:88
 #. useEffect(async() => {
-#. const res= await axios.get('http://127.0.0.1:8000/api/user');
+#. const res= await axios.get('/api/user');
 #. console.log(res)
 #. },[]);
 msgid "REFFERALS"
@@ -160,7 +160,7 @@ msgstr ""
 
 #: src\components\MainPage\mainpage.jsx:89
 #. useEffect(async() => {
-#. const res= await axios.get('http://127.0.0.1:8000/api/user');
+#. const res= await axios.get('/api/user');
 #. console.log(res)
 #. },[]);
 msgid "STATISTICS"
@@ -168,7 +168,7 @@ msgstr ""
 
 #: src\components\MainPage\mainpage.jsx:90
 #. useEffect(async() => {
-#. const res= await axios.get('http://127.0.0.1:8000/api/user');
+#. const res= await axios.get('/api/user');
 #. console.log(res)
 #. },[]);
 msgid "RULES"
@@ -176,7 +176,7 @@ msgstr ""
 
 #: src\components\MainPage\mainpage.jsx:95
 #. useEffect(async() => {
-#. const res= await axios.get('http://127.0.0.1:8000/api/user');
+#. const res= await axios.get('/api/user');
 #. console.log(res)
 #. },[]);
 msgid "USE TELEGRAM BOT"

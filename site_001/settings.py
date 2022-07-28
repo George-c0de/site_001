@@ -17,7 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
-ALLOWED_HOSTS = ["45.85.117.38", ]  # since Telegram uses a lot of IPs for webhooks
+ALLOWED_HOSTS = ["*", ]  # since Telegram uses a lot of IPs for webhooks
 # ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 INTERNAL_IPS = [
     # ...
-    'http://127.0.0.1:8000/',
+    'http://45.85.117.38/',
     # ...
 ]
 
@@ -168,7 +168,7 @@ USE_L10N = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'frontend/frontend/build/static'
+    BASE_DIR / 'templates/build/static'
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -190,4 +190,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = ['http://45.85.117.38/']

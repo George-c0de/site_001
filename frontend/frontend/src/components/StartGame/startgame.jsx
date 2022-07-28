@@ -9,7 +9,7 @@ import axios from "axios";
 
 let data2;
 try {
-    axios.get('http://127.0.0.1:8000/api/login')
+    axios.get('/api/login')
         .catch(function (error) {
                 if (error.response) {
                     data2 = error.response.status;

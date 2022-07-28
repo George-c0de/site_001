@@ -39,7 +39,7 @@ const Deposit = () => {
     }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_output')
+            let response = await axios.get('/api/trans_get_output')
 
             if (response.data.lenth > 0) {
                 SetTran(response.data);
@@ -64,7 +64,7 @@ const Deposit = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                await axios.get('http://127.0.0.1:8000/api/user').then((data) => {
+                await axios.get('/api/user').then((data) => {
                     const result = {
                         id: data.data.id,
                         money: data.data.money,
@@ -135,7 +135,7 @@ const Deposit = () => {
             alert('Error')
         } else {
             try {
-                axios.post('http://127.0.0.1:8000/api/dis_input', {
+                axios.post('/api/dis_input', {
                     wallet: data.wallet,
                     col: data.col
                 }, {
