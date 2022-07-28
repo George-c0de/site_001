@@ -17,7 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
-ALLOWED_HOSTS = ["*", ]  # since Telegram uses a lot of IPs for webhooks
+ALLOWED_HOSTS = ["45.85.117.38", ]  # since Telegram uses a lot of IPs for webhooks
 # ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
