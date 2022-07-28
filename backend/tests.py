@@ -1,5 +1,3 @@
-import datetime
-
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -7,6 +5,10 @@ from django.utils import timezone
 from backend.models import User_in_Matrix, Matrix, Profile, All, First_Line, Second_Line, Third_Line, \
     Category_Bronze, Buy_Card, Card, Category_Silver, Category_Gold, Category_Emerald, History_card
 from decimal import *
+
+from backend.views import send_message_tgbot
+from tgbot import message_for_bot
+
 
 def what_card(card, category_bronze):
     if card == 'card_1':
@@ -32,9 +34,7 @@ def save(*args):
 def matrix_pay(main_matrix, money):
     hist = History_card()
     hist.buy = False
-    hist.date = timezone.now
     hist2 = History_card()
-    hist2.date = timezone.now
     hist2.buy = False
     user_1 = User_in_Matrix.objects.filter(matrix__price=main_matrix.price).get(participant_number=main_matrix.go_money)
     user_2 = User_in_Matrix.objects.filter(matrix__price=main_matrix.price).get(
@@ -252,12 +252,13 @@ def referral_system_bronze(el, id_, admin_):
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
-        if main_user.max_card < int(max_card_):
+        if not Buy_Card.objects.filter(user=main_user).filter(card__category='bronze').filter(card__name=id_).exists():
             if First_Line.objects.filter(main_user__id=admin_.id).exists():
                 line_admin = First_Line.objects.get(main_user__id=admin_.id)
                 profile.line_1 = line_admin.id
                 line_admin.save()
                 admin_.money += money_to_card * Decimal('0.1')
+                print(money_to_card * Decimal('0.1'))
                 all_.money += money_to_card
                 profile.money -= money_to_card
             else:
@@ -266,6 +267,7 @@ def referral_system_bronze(el, id_, admin_):
                 profile.line_1 = line_admin.id
                 line_admin.save()
                 admin_.money += money_to_card * Decimal('0.1')
+                print(money_to_card * Decimal('0.1'))
                 all_.money += money_to_card
                 profile.money -= money_to_card
             save(main_user, all_, profile, admin_, category_bronze)
@@ -291,6 +293,7 @@ def referral_system_bronze(el, id_, admin_):
     profile.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
+    print(money_to_card * Decimal('0.05'))
     logics_matrix(profile, new_money, buy_card)
     return 1
 
@@ -332,7 +335,7 @@ def referral_system_silver(el, id_, admin_):
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
-        if main_user.max_card < int(max_card_):
+        if Buy_Card.objects.filter(user=main_user).filter(card__category='bronze').filter(card__name=id_).exists():
             if First_Line.objects.filter(main_user__id=admin_.id).exists():
                 line_admin = First_Line.objects.get(main_user__id=admin_.id)
                 profile.line_1 = line_admin.id
@@ -407,7 +410,7 @@ def referral_system_gold(el, id_, admin_):
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
-        if main_user.max_card < int(max_card_):
+        if Buy_Card.objects.filter(user=main_user).filter(card__category='bronze').filter(card__name=id_).exists():
             if First_Line.objects.filter(main_user__id=admin_.id).exists():
                 line_admin = First_Line.objects.get(main_user__id=admin_.id)
                 profile.line_1 = line_admin.id
@@ -488,7 +491,7 @@ def referral_system_emerald(request, id_, admin_):
         save(main_user)
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
-        if main_user.max_card < int(max_card_):
+        if Buy_Card.objects.filter(user=main_user).filter(card__category='bronze').filter(card__name=id_).exists():
             if First_Line.objects.filter(main_user__id=admin_.id).exists():
                 line_admin = First_Line.objects.get(main_user__id=admin_.id)
                 profile.line_1 = line_admin.id
@@ -533,20 +536,12 @@ def referral_system_emerald(request, id_, admin_):
     # if Category_Bronze.objects.filter(user.id=).exists()
 
 
-def check(name, category):
-    buy = Buy_Card.objects.all()
-    for el in buy:
-        if el.card.name == name and el.card.category == category:
-            return el.profit
-    return 0
-
-
 def get_user_in_card(el):
     if Profile.objects.filter(user_id=el.user.id).exists():
+        all_user_in_matrix = User_in_Matrix.objects.all()
         profile_2 = Profile.objects.get(user_id=el.user.id)
         if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
             profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
-            all_card = Buy_Card.objects.all()
             bronze = [[], [], [], [], [], []]
             silver = [[], [], [], [], [], []]
             gold = [[], [], [], [], [], []]
@@ -554,6 +549,16 @@ def get_user_in_card(el):
             for el in profile:
                 card_ = el.card
                 if card_.card.category == 'bronze':
+                    go_percent = all_user_in_matrix.filter(card__card__category='bronze').filter(
+                        card__card__name=card_.card.name).filter(matrix=el.matrix)
+                    all_d = 0
+                    for el_in_d in go_percent:
+                        all_d += el_in_d.d
+                    all = go_percent.count() * 4
+                    if all != 0:
+                        now_percent = (all_d / all) * 100
+                    else:
+                        now_percent = 0
                     if len(bronze[int(card_.card.name) - 1]) == 0:
                         bronze[int(card_.card.name) - 1].append(el.d)
                         bronze[int(card_.card.name) - 1].append(el.total_wins)
@@ -564,7 +569,18 @@ def get_user_in_card(el):
                         bronze[int(card_.card.name) - 1][0] = temp
                         bronze[int(card_.card.name) - 1][1] += el.total_wins
                         bronze[int(card_.card.name) - 1][2] += el.all_wins
+                    bronze[int(card_.card.name) - 1][0] = now_percent
                 elif card_.card.category == 'silver':
+                    go_percent = all_user_in_matrix.filter(card__card__category='silver').filter(
+                        card__card__name=card_.card.name).filter(matrix=el.matrix)
+                    all_d = 0
+                    for el_in_d in go_percent:
+                        all_d += el_in_d.d
+                    all = go_percent.count() * 4
+                    if all != 0:
+                        now_percent = (all_d / all) * 100
+                    else:
+                        now_percent = 0
                     if len(silver[int(card_.card.name) - 1]) == 0:
                         silver[int(card_.card.name) - 1].append(el.d)
                         silver[int(card_.card.name) - 1].append(el.total_wins)
@@ -575,19 +591,40 @@ def get_user_in_card(el):
                         silver[int(card_.card.name) - 1][0] = temp
                         silver[int(card_.card.name) - 1][1] += el.total_wins
                         silver[int(card_.card.name) - 1][2] += el.all_wins
+                    silver[int(card_.card.name) - 1][0] = now_percent
                 elif card_.card.category == 'gold':
+                    go_percent = all_user_in_matrix.filter(card__card__category='gold').filter(
+                        card__card__name=card_.card.name).filter(matrix=el.matrix)
+                    all_d = 0
+                    for el_in_d in go_percent:
+                        all_d += el_in_d.d
+                    all = go_percent.count() * 4
+                    if all != 0:
+                        now_percent = (all_d / all) * 100
+                    else:
+                        now_percent = 0
                     if len(gold[int(card_.card.name) - 1]) == 0:
                         gold[int(card_.card.name) - 1].append(el.d)
                         gold[int(card_.card.name) - 1].append(el.total_wins)
                         gold[int(card_.card.name) - 1].append(el.all_wins)
-
                     else:
                         temp = (gold[int(card_.card.name) - 1][0] + el.d)
                         temp = Decimal(temp / 2)
                         gold[int(card_.card.name) - 1][0] = temp
                         gold[int(card_.card.name) - 1][1] += el.total_wins
                         gold[int(card_.card.name) - 1][2] += el.all_wins
+                    gold[int(card_.card.name) - 1][0] = now_percent
                 else:
+                    go_percent = all_user_in_matrix.filter(card__card__category='emerald').filter(
+                        card__card__name=card_.card.name).filter(matrix=el.matrix)
+                    all_d = 0
+                    for el_in_d in go_percent:
+                        all_d += el_in_d.d
+                    all = go_percent.count() * 4
+                    if all != 0:
+                        now_percent = (all_d / all) * 100
+                    else:
+                        now_percent = 0
                     if len(emerald[int(card_.card.name) - 1]) == 0:
                         emerald[int(card_.card.name) - 1].append(el.d)
                         emerald[int(card_.card.name) - 1].append(el.total_wins)
@@ -598,17 +635,10 @@ def get_user_in_card(el):
                         emerald[int(card_.card.name) - 1][0] = temp
                         emerald[int(card_.card.name) - 1][1] += el.total_wins
                         emerald[int(card_.card.name) - 1][2] += el.all_wins
+                    emerald[int(card_.card.name) - 1][0] = now_percent
             for el in bronze:
                 if len(el) != 0:
-                    el[0] *= 25
-                    if el[0] > 100:
-                        el[0] = 100
-                    else:
-                        if int(el[0]) % 5 == 0:
-                            el[0] = int(el[0])
-                        else:
-                            t = int(int(el[0]) / 5)
-                            el[0] = t * 5
+                    print('r')
                 else:
                     el.append(0)
                     el.append(0)
@@ -616,15 +646,7 @@ def get_user_in_card(el):
             i = 0
             for el in emerald:
                 if len(el) != 0:
-                    el[0] *= 25
-                    if el[0] > 100:
-                        el[0] = 100
-                    else:
-                        if int(el[0]) % 5 == 0:
-                            el[0] = int(el[0])
-                        else:
-                            t = int(int(el[0]) / 5)
-                            el[0] = t * 5
+                    print('r')
                 else:
                     el.append(0)
                     el.append(0)
@@ -633,15 +655,7 @@ def get_user_in_card(el):
             i = 0
             for el in silver:
                 if len(el) != 0:
-                    el[0] *= 25
-                    if el[0] > 100:
-                        el[0] = 100
-                    else:
-                        if int(el[0]) % 5 == 0:
-                            el[0] = int(el[0])
-                        else:
-                            t = int(int(el[0]) / 5)
-                            el[0] = t * 5
+                    print('r')
                 else:
                     el.append(0)
                     el.append(0)
@@ -650,15 +664,7 @@ def get_user_in_card(el):
             i = 0
             for el in gold:
                 if len(el) != 0:
-                    el[0] *= 25
-                    if el[0] > 100:
-                        el[0] = 100
-                    else:
-                        if int(el[0]) % 5 == 0:
-                            el[0] = int(el[0])
-                        else:
-                            t = int(int(el[0]) / 5)
-                            el[0] = t * 5
+                    print('r')
                 else:
                     el.append(0)
                     el.append(0)
@@ -807,14 +813,14 @@ class BronzeTest(TestCase):
             profile2.user = a
             profile2.save()
         st = 'User_'
-        for el in range(1, 8):
+        for el in range(1, 9):
             User.objects.create(username=st + str(el), password='12345678')
         line_one = None
         utm = None
         utm_temp = utm
-        for el in range(1, 8):
+        for el in range(1, 9):
             user = User.objects.get(username=st + str(el))
-            profile = Profile.objects.create(user=user, money=100000)
+            profile = Profile.objects.create(user=user, money=10)
             utm_temp = profile.referral_link
             if el > 1:
                 main_user = Profile.objects.get(referral_link=utm)
@@ -912,18 +918,14 @@ class BronzeTest(TestCase):
         # cookies_ = Profile.objects.get(user__username=st + str(4)).referral_link
         cookies_ = utm
         i = 0
-        for el in range(0, 7):
-            i += 1
-            referral_system_bronze(a[el], el, admin_)
-            # referral_system_silver(a[el], el, admin_)
-            # referral_system_gold(a[el], el, admin_)
-            # referral_system_emerald(a[el], el, admin_)
+        for el in range(1, 7, 2):
+            referral_system_bronze(a[el], 1, admin_)
         for el in range(0, 7):
             print(a[el].user.username)
-            # # print(get_user_in_card(a[el]))
+            print(get_user_in_card(a[el]))
             # el1 = get_user_in_matrix(a[el])
             # print(el1)
-            print(get_hist_card(a[el]))
+            # print(get_hist_card(a[el]))
             # print(el1['bronze'])
             # for el2 in el1.get('bronze'):
             #     print(el2)
@@ -941,6 +943,8 @@ class BronzeTest(TestCase):
         for el in range(0, 7):
             print(a[el].user.username)
             print(a[el].money)
+        print(admin_.user.username)
+        print(admin_.money)
         # self.assertEqual(a[el].money, 90)
 
         # self.assertEqual(a[el].money, 90)

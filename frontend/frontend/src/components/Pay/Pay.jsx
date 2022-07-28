@@ -40,7 +40,7 @@ const Pay = () => {
     }, [])
     const getTran = async () => {
         try {
-            let response = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/trans_get_input')
+            let response = await axios.get('http://127.0.0.1:8000/api/trans_get_input')
             if (response.data.lenth > 0) {
                 SetTran(response.data);
             }
@@ -67,7 +67,7 @@ const Pay = () => {
     useEffect(() => {
         const getPosts = async () => {
             try {
-                await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user').then((data) => {
+                await axios.get('http://127.0.0.1:8000/api/user').then((data) => {
                     const result = {
                         id: data.data.id,
                         money: data.data.money,
@@ -161,7 +161,7 @@ const Pay = () => {
             alert('Error')
         } else {
             try {
-                axios.post('https://1ba8-176-193-182-242.eu.ngrok.io/api/dis', {
+                axios.post('http://127.0.0.1:8000/api/dis', {
                     wallet_input: data.wallet_input,
                     col: data.col
                 }, {

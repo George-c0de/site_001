@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 INTERNAL_IPS = [
     # ...
-    'https://1ba8-176-193-182-242.eu.ngrok.io/',
+    'http://127.0.0.1:8000/',
     # ...
 ]
 
@@ -159,7 +159,7 @@ LOCALE_PATHS = (
     'locale',
     # os.path.join(PROJECT_DIR, 'locale'),
 )
-TIME_ZONE = 'UTC+03:00'
+TIME_ZONE = 'UTC'
 
 USE_TZ = True
 USE_L10N = True
@@ -190,4 +190,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
-CSRF_TRUSTED_ORIGINS = ['https://1ba8-176-193-182-242.eu.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']

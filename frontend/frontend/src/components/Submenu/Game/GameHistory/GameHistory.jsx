@@ -12,7 +12,7 @@ export const GameHistory = ({history}) => {
         getUsername();
     },[])
     let getUsername = async () => {
-        const res = await axios.get('https://1ba8-176-193-182-242.eu.ngrok.io/api/user')
+        const res = await axios.get('http://127.0.0.1:8000/api/user')
         setData(res.data);
     }
     return (<>
