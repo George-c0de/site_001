@@ -106,7 +106,7 @@ DATABASES = {
 
         'NAME': 'project_site',
 
-        'USER': 'postgres',
+        'USER': 'django',
 
         'PASSWORD': '123',
 
