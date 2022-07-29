@@ -56,11 +56,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-INTERNAL_IPS = [
-    # ...
-    'http://45.85.117.38/',
-    # ...
-]
+# INTERNAL_IPS = [
+#     # ...
+#     'http://45.85.117.38/',
+#     # ...
+# ]
 
 CORS_ALLOW_CREDENTIALS = True
 REACT_ROUTES = [
@@ -80,7 +80,7 @@ ROOT_URLCONF = 'site_001.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'frontend/frontend/build']
+        'DIRS': [BASE_DIR / 'templates/build']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -106,7 +106,7 @@ DATABASES = {
 
         'NAME': 'project_site',
 
-        'USER': 'django',
+        'USER': 'postgres',
 
         'PASSWORD': '123',
 
@@ -170,6 +170,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'templates/build/static'
 ]
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 # SMTP Hostname
