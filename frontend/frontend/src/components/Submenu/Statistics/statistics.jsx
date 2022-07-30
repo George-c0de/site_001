@@ -18,6 +18,7 @@ const Statistics = () => {
 
     //Logout
     const handleLogout = () => {
+        axios.get('/api/logout');
         localStorage.removeItem("token");
         navigate("/login");
     };

@@ -47,6 +47,9 @@ class Profile(models.Model):
 
 class First_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    profit = models.IntegerField(default=0)
+    lost_profit = models.IntegerField(default=0)
+    total_person = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = _("Первая линия")
@@ -54,6 +57,9 @@ class First_Line(models.Model):
 
 class Second_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    profit = models.IntegerField(default=0)
+    lost_profit = models.IntegerField(default=0)
+    total_person = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = _("Вторая линия")
@@ -61,6 +67,9 @@ class Second_Line(models.Model):
 
 class Third_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    profit = models.IntegerField(default=0)
+    lost_profit = models.IntegerField(default=0)
+    total_person = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = _("Третья линия")

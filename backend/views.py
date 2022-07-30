@@ -256,130 +256,64 @@ def get_user_in_card(request):
             for el in profile:
                 card_ = el.card
                 if card_.card.category == 'bronze':
-                    go_percent = all_user_in_matrix.filter(card__card__category='bronze').filter(
-                        card__card__name=card_.card.name).filter(matrix=el.matrix)
-                    all_d = 0
-                    for el_in_d in go_percent:
-                        all_d += el_in_d.d
-                    all = go_percent.count() * 4
-                    if all != 0:
-                        now_percent = (all_d / all) * 100
-                    else:
-                        now_percent = 0
                     if len(bronze[int(card_.card.name) - 1]) == 0:
-                        bronze[int(card_.card.name) - 1].append(el.d)
+                        bronze[int(card_.card.name) - 1].append(el.d * 25)
                         bronze[int(card_.card.name) - 1].append(el.total_wins)
                         bronze[int(card_.card.name) - 1].append(el.all_wins)
                     else:
-                        temp = (bronze[int(card_.card.name) - 1][0] + el.d)
-                        temp = Decimal(temp / 2)
-                        bronze[int(card_.card.name) - 1][0] = temp
+                        bronze[int(card_.card.name) - 1][0] = el.d * 25
                         bronze[int(card_.card.name) - 1][1] += el.total_wins
                         bronze[int(card_.card.name) - 1][2] += el.all_wins
-                    bronze[int(card_.card.name) - 1][0] = now_percent
                 elif card_.card.category == 'silver':
-                    go_percent = all_user_in_matrix.filter(card__card__category='silver').filter(
-                        card__card__name=card_.card.name).filter(matrix=el.matrix)
-                    all_d = 0
-                    for el_in_d in go_percent:
-                        all_d += el_in_d.d
-                    all = go_percent.count() * 4
-                    if all != 0:
-                        now_percent = (all_d / all) * 100
-                    else:
-                        now_percent = 0
                     if len(silver[int(card_.card.name) - 1]) == 0:
-                        silver[int(card_.card.name) - 1].append(el.d)
+                        silver[int(card_.card.name) - 1].append(el.d * 25)
                         silver[int(card_.card.name) - 1].append(el.total_wins)
                         silver[int(card_.card.name) - 1].append(el.all_wins)
                     else:
-                        temp = (silver[int(card_.card.name) - 1][0] + el.d)
-                        temp = Decimal(temp / 2)
-                        silver[int(card_.card.name) - 1][0] = temp
+                        silver[int(card_.card.name) - 1][0] = el.d * 25
                         silver[int(card_.card.name) - 1][1] += el.total_wins
                         silver[int(card_.card.name) - 1][2] += el.all_wins
-                    silver[int(card_.card.name) - 1][0] = now_percent
                 elif card_.card.category == 'gold':
-                    go_percent = all_user_in_matrix.filter(card__card__category='gold').filter(
-                        card__card__name=card_.card.name).filter(matrix=el.matrix)
-                    all_d  = 0
-                    for el_in_d in go_percent:
-                        all_d +=el_in_d.d
-                    all = go_percent.count() * 4
-                    if all != 0:
-                        now_percent = (all_d / all) * 100
-                    else:
-                        now_percent = 0
                     if len(gold[int(card_.card.name) - 1]) == 0:
-                        gold[int(card_.card.name) - 1].append(el.d)
+                        gold[int(card_.card.name) - 1].append(el.d * 25)
                         gold[int(card_.card.name) - 1].append(el.total_wins)
                         gold[int(card_.card.name) - 1].append(el.all_wins)
                     else:
-                        temp = (gold[int(card_.card.name) - 1][0] + el.d)
-                        temp = Decimal(temp / 2)
-                        gold[int(card_.card.name) - 1][0] = temp
+                        gold[int(card_.card.name) - 1][0] = el.d * 25
                         gold[int(card_.card.name) - 1][1] += el.total_wins
                         gold[int(card_.card.name) - 1][2] += el.all_wins
-                    gold[int(card_.card.name) - 1][0] = now_percent
                 else:
-                    go_percent = all_user_in_matrix.filter(card__card__category='emerald').filter(
-                        card__card__name=card_.card.name).filter(matrix=el.matrix)
-                    all_d = 0
-                    for el_in_d in go_percent:
-                        all_d += el_in_d.d
-                    all = go_percent.count() * 4
-                    if all != 0:
-                        now_percent = (all_d / all) * 100
-                    else:
-                        now_percent = 0
                     if len(emerald[int(card_.card.name) - 1]) == 0:
-                        emerald[int(card_.card.name) - 1].append(el.d)
+                        emerald[int(card_.card.name) - 1].append(el.d * 25)
                         emerald[int(card_.card.name) - 1].append(el.total_wins)
                         emerald[int(card_.card.name) - 1].append(el.all_wins)
                     else:
-                        temp = (emerald[int(card_.card.name) - 1][0] + el.d)
-                        temp = Decimal(temp / 2)
-                        emerald[int(card_.card.name) - 1][0] = temp
+                        emerald[int(card_.card.name) - 1][0] = el.d * 25
                         emerald[int(card_.card.name) - 1][1] += el.total_wins
                         emerald[int(card_.card.name) - 1][2] += el.all_wins
-                    emerald[int(card_.card.name) - 1][0] = now_percent
             for el in bronze:
-                if len(el) != 0:
-                    print(1)
-                else:
+                if len(el) == 0:
                     el.append(0)
                     el.append(0)
                     el.append(0)
-            i = 0
             for el in emerald:
-                if len(el) != 0:
-                    print(1)
-                else:
+                if len(el) == 0:
                     el.append(0)
                     el.append(0)
                     el.append(0)
-                i += 1
-            i = 0
             for el in silver:
-                if len(el) != 0:
-                    print(1)
-                else:
+                if len(el) == 0:
                     el.append(0)
                     el.append(0)
                     el.append(0)
-                i += 1
-            i = 0
             for el in gold:
-                if len(el) != 0:
-                    print(1)
-                else:
+                if len(el) == 0:
                     el.append(0)
                     el.append(0)
                     el.append(0)
-                i += 1
             data = {'bronze': bronze, 'silver': silver, 'gold': gold, 'emerald': emerald}
-            return data
-    return 0
+            return Response(data=data)
+    return Response(status=400)
 
 
 @api_view(['GET'])
@@ -424,7 +358,7 @@ def get_user_in_matrix(request):
                             i += 1
                     if i == 0:
                         data['emerald'].append(card_.card.name)
-            return data
+            return Response(data=data)
         else:
             data = {
                 'bronze': [],
@@ -432,9 +366,9 @@ def get_user_in_matrix(request):
                 'gold': [],
                 'emerald': []
             }
-            return data
+            return Response(data=data)
     else:
-        return 0
+        return Response(status=400)
 
 
 @api_view(['GET'])
@@ -471,30 +405,15 @@ def get_link_tg(request):
 
 @api_view(['GET'])
 def get_referrals(request):
+    total_line = 0
     if Profile.objects.filter(user__id=request.user.id).exists():
         profile = Profile.objects.get(user__id=request.user.id)
-        if First_Line.objects.filter(main_user__user_id=profile.id).exists():
-            main_1 = First_Line.objects.get(main_user__user_id=profile.id)
-            line_1 = Profile.objects.filter(line_1=main_1.id)
-        else:
-            line_1 = 0
+        if First_Line.objects.filter(main_user=profile).exists():
+            total_line += First_Line.objects.get(main_user=profile).total_person
         if Second_Line.objects.filter(main_user__user_id=profile.id).exists():
-            main_2 = Second_Line.objects.get(main_user__user_id=profile.id)
-            line_2 = Profile.objects.filter(line_2=main_2.id)
-        else:
-            line_2 = 0
+            total_line += Second_Line.objects.get(main_user=profile).total_person
         if Third_Line.objects.filter(main_user__user_id=profile.id).exists():
-            main_3 = Third_Line.objects.get(main_user__user_id=profile.id)
-            line_3 = Profile.objects.filter(line_3=main_3.id)
-        else:
-            line_3 = 0
-        total_line = 0
-        if line_1 != 0:
-            total_line += line_1.count()
-        if line_2 != 0:
-            total_line += line_2.count()
-        if line_3 != 0:
-            total_line += line_3.count()
+            total_line += Third_Line.objects.get(main_user=profile).total_person
         data = {
             'total_line': total_line,
             'profit': profile.referral_amount,
@@ -586,6 +505,13 @@ def user_get(request):
         return Response(status=400)
 
 
+@api_view(['GET'])
+def go_mess(request):
+    from django.core.mail import send_mail
+    send_mail('Subject here', 'Here is the message.', 'piper.elliottp@gmail.com', ['tering123@yandex.ru'],
+              fail_silently=False)
+
+
 @api_view(['GET', 'POST'])
 def login_page(request):
     if request.user.is_authenticated:
@@ -635,13 +561,13 @@ def utm(request, utm):
 def register_page(request):
     # form = CreateUserForm(request.data)
     data = {
-        'username': request.data['username'],
+        'username': request.data['email'],
         'password1': request.data['password1'],
         'email': request.data['email'],
         'password2': request.data['password2'],
     }
     form = CreateUserForm(data)
-    utm = request.COOKIES.get('utm')
+    utm = request.data.get('utm')
     if utm is None:
         if request.data.get('utm') is not None:
             utm = request.data.get('utm')
@@ -663,12 +589,14 @@ def register_page(request):
                 line_two = Second_Line.objects.get(main_user=main_user_2)
             else:
                 line_two = Second_Line.objects.create(main_user=main_user_2)
+                line_two.save()
             if main_user_2.line_1 is not None:
                 main_user_3 = First_Line.objects.get(id=main_user_2.line_1).main_user
                 if Third_Line.objects.filter(main_user=main_user_3).exists():
                     line_th = Third_Line.objects.get(main_user=main_user_3)
                 else:
                     line_th = Third_Line.objects.create(main_user=main_user_3)
+                    line_th.save()
     else:
         line_one = None
     if form.is_valid():
@@ -795,9 +723,15 @@ def case_3_4_ref(main_user, money_to_card, profile, price):
 
 # Логика реферальной системы
 @api_view(['GET'])
-def referral_system_bronze(request, id_, ):
+def referral_system_bronze(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
+    if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).filter(card__card__category='bronze').filter(
+            card__card__name=id_).exists():
+        us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category='bronze').filter(
+            card__card__name=id_).get(matrix__up=True).d
+        if us_pr < 4:
+            return Response(status=400)
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     if profile.line_1 is not None:
@@ -812,13 +746,13 @@ def referral_system_bronze(request, id_, ):
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category_bronze.card_6_disable is False:
         print('error')
-        return 0
+        return Response(status=400)
     else:
         money_to_card = what_card(card, category_bronze)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
     if profile.money < money_to_card:
         print('error, money')
-        return 0
+        return Response(status=400)
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if main_user is None:
         admin_.money += money_to_card * Decimal('0.15')
@@ -833,21 +767,25 @@ def referral_system_bronze(request, id_, ):
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if not Buy_Card.objects.filter(user=main_user).filter(card__category='bronze').filter(card__name=id_).exists():
-            if First_Line.objects.filter(main_user__id=admin_.id).exists():
-                line_admin = First_Line.objects.get(main_user__id=admin_.id)
-                profile.line_1 = line_admin.id
-                line_admin.save()
-                admin_.money += money_to_card * Decimal('0.1')
-                all_.money += money_to_card
-                profile.money -= money_to_card
-            else:
-                line_admin = First_Line()
-                line_admin.main_user = admin_
-                profile.line_1 = line_admin.id
-                line_admin.save()
-                admin_.money += money_to_card * Decimal('0.1')
-                all_.money += money_to_card
-                profile.money -= money_to_card
+            admin_.money += money_to_card * Decimal('0.1')
+            all_.money += money_to_card
+            profile.money -= money_to_card
+            if main_user.line_1 is not None:
+                sec_main_prof = First_Line.objects.get(id=main_user.line_1).main_user
+                if Buy_Card.objects.filter(user=sec_main_prof).filter(card__category='bronze').filter(
+                        card__name=id_).exists():
+                    sec_main_prof += money_to_card * Decimal('0.04')
+                    sec_main_prof.save()
+                else:
+                    admin_.money += money_to_card * Decimal('0.04')
+                if sec_main_prof.line_1 is not None:
+                    th_main_prof = First_Line.objects.get(id=sec_main_prof.line_1).main_user
+                    if Buy_Card.objects.filter(user=th_main_prof).filter(card__category='bronze').filter(
+                            card__name=id_).exists():
+                        th_main_prof += money_to_card * Decimal('0.01')
+                        th_main_prof.save()
+                    else:
+                        admin_.money += money_to_card * Decimal('0.01')
             save(main_user, all_, profile, admin_, category_bronze)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
@@ -874,7 +812,7 @@ def referral_system_bronze(request, id_, ):
     mes = message_for_bot.a['buy'].format(tokemon.tokemon['bronze'][id_ - 1])
     send_message_tgbot(mes, profile.id)
     logics_matrix(profile, new_money, buy_card)
-    return 1
+    return Response(status=200)
 
 
 # silver
@@ -883,6 +821,10 @@ def referral_system_silver(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
+    if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).exists():
+        us_pr = User_in_Matrix.objects.filter(user=profile).get(matrix__up=True).d
+        if us_pr < 4:
+            return Response(status=400)
     all_ = All.objects.all().first()
     if profile.line_1 is not None:
         main_user = First_Line.objects.get(id=profile.line_1).main_user
@@ -956,12 +898,62 @@ def referral_system_silver(request, id_):
     return 1
 
 
+# Получение линий
+@api_view(['GET'])
+def get_lines(request):
+    data = {
+        'first': {
+            'total': 0,
+            'profit': 0,
+            'lost': 0
+        },
+        'second': {
+            'total': 0,
+            'profit': 0,
+            'lost': 0
+        },
+        'third': {
+            'total': 0,
+            'profit': 0,
+            'lost': 0
+        }
+    }
+    if Profile.objects.filter(user=request.user).exists():
+        profile = Profile.objects.get(user=request.user)
+        if First_Line.objects.filter(main_user=profile).exists():
+            first = First_Line.objects.get(main_user=profile)
+            data['first'] = {
+                'total': first.total_person,
+                'profit': first.profit,
+                'lost': first.lost_profit
+            }
+        if Second_Line.objects.filter(main_user=profile).exists():
+            second = Second_Line.objects.get(main_user=profile)
+            data['second'] = {
+                'total': second.total_person,
+                'profit': second.profit,
+                'lost': second.lost_profit
+            }
+        if Third_Line.objects.filter(main_user=profile).exists():
+            third = Third_Line.objects.get(main_user=profile)
+            data['third'] = {
+                'total': third.total_person,
+                'profit': third.profit,
+                'lost': third.lost_profit
+            }
+    return Response(data=data)
+
+
 # gold
 @api_view(['GET'])
 def referral_system_gold(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
+    if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).exists():
+        us_pr = User_in_Matrix.objects.filter(user=profile).get(matrix__up=True).d
+        if us_pr < 4:
+            return Response(status=400)
     all_ = All.objects.all().first()
     if profile.line_1 is not None:
         main_user = First_Line.objects.get(id=profile.line_1).main_user
@@ -1043,7 +1035,14 @@ def referral_system_gold(request, id_):
 
 @api_view(['GET'])
 def get_hist_card(request):
-    if History_card.objects.filter(user=request.user).exists():
+    if not Profile.objects.filter(user=request.user).exists():
+        data = {
+            'oneq': [0, 0, 0],
+            'two': [0, 0, 0],
+            'the': [0, 0, 0]
+        }
+        return Response(data=data)
+    if History_card.objects.filter(user=Profile.objects.get(user=request.user)).exists():
         buy = History_card.objects.order_by('date')
         if buy.count() >= 3:
             time = buy[0].date
@@ -1087,14 +1086,14 @@ def get_hist_card(request):
                 'two': [0, 0, 0],
                 'the': [0, 0, 0]
             }
-        return data
+        return Response(data=data)
     else:
         data = {
             'oneq': [0, 0, 0],
             'two': [0, 0, 0],
             'the': [0, 0, 0]
         }
-        return data
+        return Response(data=data)
 
 
 # emerald
@@ -1103,6 +1102,10 @@ def referral_system_emerald(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
     card = 'card_' + str(id_)
+    if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).exists():
+        us_pr = User_in_Matrix.objects.filter(user=profile).get(matrix__up=True).d
+        if us_pr < 4:
+            return Response(status=400)
     all_ = All.objects.all().first()
     if profile.line_1 is not None:
         main_user = First_Line.objects.get(id=profile.line_1).main_user
@@ -1423,6 +1426,8 @@ def dis_input(request):
         # s = json.dumps(data, indent=4, sort_keys=True)
         wall = data['wallet']
         col = data['col']
+        if col < 10:
+            return Response(status=400)
         if col is not None:
             if profile.wallet is not None:
                 wall = Wallet.objects.get(pkey=profile.wallet_output)

@@ -74,7 +74,7 @@ export const Lang = ({isActive}) => {
                 })}
             </ul>
             {/* eslint-disable-next-line no-script-url */}
-            <a href="javascript:jivo_api.open()"><img
+            <a><img
                 src={support}
                 className={
                     isActive ? "support-icon-mainpage" : "support-icon-mainpage_active"

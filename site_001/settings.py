@@ -180,14 +180,22 @@ CORS_ALLOW_ALL_ORIGINS = True
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Для проверки писем
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' # сохранять
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
+
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-EMAIL_HOST_USER = 'apikey'
 EMAIL_PORT = 587
+
+
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')
 EMAIL_USE_TLS = True
+
 
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
 CSRF_TRUSTED_ORIGINS = ['http://45.85.117.38/']

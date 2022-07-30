@@ -53,6 +53,7 @@ const Game = () => {
         )
 //Logout
         const handleLogout = () => {
+            axios.get('/api/logout');
             localStorage.removeItem("token");
             navigate("/login");
         };
@@ -115,7 +116,6 @@ const Game = () => {
                         gold: data.data.gold,
                         emerald: data.data.emerald
                     }
-
                     setCard_data(result);
                 })
         }

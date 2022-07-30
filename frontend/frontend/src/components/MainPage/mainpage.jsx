@@ -52,7 +52,7 @@ const Mainpage = () => {
         //const { id } = useParams();
         //Logout
         const handleLogout = () => {
-            let data2 = axios.get('/api/logout');
+            axios.get('/api/logout');
             localStorage.removeItem("token");
             navigate("/login");
         };
