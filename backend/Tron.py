@@ -99,9 +99,9 @@ class TronClient:
         if not config or config == {}:
             self.tron_url = "https://api.nileex.io"
             self.trongrid_url = 'https://nile.trongrid.io'
-            self.usdt_address = "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj"
+            self.usdt_address = "TGqLpL1HyfDkwaCT11haiBUrM27ykodFwy"
             self.fee_limit = 20000000
-            self.api_key = 'f1870c5e-191b-406e-8531-070d9c8ec425'
+            self.api_key = '2f2b558d-51a3-48b9-9c4d-cd5b9c69163b'
 
         else:
             self.tron_url = config['TRON_URL']

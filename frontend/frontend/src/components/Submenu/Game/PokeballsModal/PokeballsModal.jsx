@@ -12,6 +12,8 @@ import './PokeballsModal.css';
 
 const CardOpened = ({image, buyCard, background, card_data, idCard, category}) => {
     const [status, setStatus] = useState(card_data[0]);
+    console.log(status)
+    console.log(card_data[0])
     const handleStatusBalls = (e) => {
         const statusBall = e.target.closest('[data-status]');
         if (statusBall) {
@@ -40,24 +42,24 @@ const CardOpened = ({image, buyCard, background, card_data, idCard, category}) =
                     <span className="card-status-bar-label">{status}%</span>
                 </div>
                 <div className="card-status-balls">
-          <span className={status >= '100' ? 'show' : null}>
+          <span className={Number(status) >= Number(100) ? 'show' : null}>
             <img src={pokeball} alt=''/>
           </span>
-                    <span className={status >= '75' ? 'show' : null}>
+                    <span className={Number(status) >= Number(75) ? 'show' : null}>
             <img src={pokeball} alt=''/>
           </span>
-                    <span className={status >= '50' ? 'show' : null}>
+                    <span className={Number(status) >= Number(50) ? 'show' : null}>
             <img src={pokeball} alt=''/>
           </span>
-                    <span className={status >= '25' ? 'show' : null}>
+                    <span className={Number(status) >= Number(25) ? 'show' : null}>
             <img src={pokeball} alt=''/>
           </span>
                 </div>
             </div>
             <div className='pokeballs-card-info'>
                 <img src={image} alt=''/>
-                <span className="card-info-label">Refelrel Profit: <span>{card_data[1]}$</span></span>
-                <span className="card-info-label">Total Wins: <span>{card_data[2]}$</span></span>
+                <span className="card-info-label">Refelrel Profit: <span>{card_data[2]}$</span></span>
+                <span className="card-info-label">Total Wins: <span>{card_data[1]}$</span></span>
 
                 <span onClick={handleBuyClick} className="card-info-button">Health</span>
             </div>

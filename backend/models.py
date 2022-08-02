@@ -47,8 +47,8 @@ class Profile(models.Model):
 
 class First_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    profit = models.IntegerField(default=0)
-    lost_profit = models.IntegerField(default=0)
+    profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    lost_profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_person = models.IntegerField(default=0)
 
     class Meta:
@@ -57,8 +57,8 @@ class First_Line(models.Model):
 
 class Second_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    profit = models.IntegerField(default=0)
-    lost_profit = models.IntegerField(default=0)
+    profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    lost_profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_person = models.IntegerField(default=0)
 
     class Meta:
@@ -67,8 +67,8 @@ class Second_Line(models.Model):
 
 class Third_Line(models.Model):
     main_user = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    profit = models.IntegerField(default=0)
-    lost_profit = models.IntegerField(default=0)
+    profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    lost_profit = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_person = models.IntegerField(default=0)
 
     class Meta:
@@ -153,7 +153,7 @@ class History_card(models.Model):
     date = models.DateTimeField('Время', default=timezone.now)
     price = models.DecimalField('Кол-во', max_digits=10, decimal_places=2)
     buy = models.BooleanField('Покупка')
-
+    from_person_id = models.CharField(max_length=150, default=0)
 
 # Ввод
 class History_Transactions(models.Model):

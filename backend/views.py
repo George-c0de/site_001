@@ -234,14 +234,6 @@ def create_all_and_admin():
         a.save()
 
 
-def check(name, category):
-    buy = Buy_Card.objects.all()
-    for el in buy:
-        if el.name == name and el.category == category:
-            return el.profit
-    return 0
-
-
 @api_view(['GET'])
 def get_user_in_card(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
@@ -580,22 +572,31 @@ def register_page(request):
         main_user = Profile.objects.get(referral_link=utm)
         if First_Line.objects.filter(main_user=main_user).exists():
             line_one = First_Line.objects.get(main_user=main_user)
+            line_one.total_person += 1
+            line_one.save()
         else:
             line_one = First_Line.objects.create(main_user=main_user)
+            line_one.total_person += 1
             line_one.save()
         if main_user.line_1 is not None:
             main_user_2 = First_Line.objects.get(id=main_user.line_1).main_user
             if Second_Line.objects.filter(main_user=main_user_2).exists():
                 line_two = Second_Line.objects.get(main_user=main_user_2)
+                line_two.total_person += 1
+                line_two.save()
             else:
                 line_two = Second_Line.objects.create(main_user=main_user_2)
+                line_two.total_person += 1
                 line_two.save()
             if main_user_2.line_1 is not None:
                 main_user_3 = First_Line.objects.get(id=main_user_2.line_1).main_user
                 if Third_Line.objects.filter(main_user=main_user_3).exists():
                     line_th = Third_Line.objects.get(main_user=main_user_3)
+                    line_th.total_person += 1
+                    line_th.save()
                 else:
                     line_th = Third_Line.objects.create(main_user=main_user_3)
+                    line_th.total_person += 1
                     line_th.save()
     else:
         line_one = None
@@ -621,7 +622,7 @@ def register_page(request):
         if main_user is not None:
             mes = message_for_bot.a['register'].format(profile.id)
             send_message_tgbot(mes, main_user.id)
-        #messages.success(request, 'Аккаунт создан,' + username)
+        # messages.success(request, 'Аккаунт создан,' + username)
         message = a['bot'].format(request.data['password1'], request.data['username'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
@@ -673,10 +674,6 @@ def case_3_4_ref(main_user, money_to_card, profile, price):
         send_message_tgbot(mes, main_user.id)
         all_.money += money_to_card
         profile.money -= money_to_card
-        if User_in_Matrix.objects.filter(user=main_user).filter(matrix__price=price).exists():
-            sec = User_in_Matrix.objects.filter(matrix__price=price).get(user=main_user)
-            sec.all_wins += money_to_card * Decimal('0.1')
-            sec.save()
     # четвертый случай
     elif not third_line:
         admin_.money += money_to_card * Decimal('0.01')
@@ -718,7 +715,49 @@ def case_3_4_ref(main_user, money_to_card, profile, price):
             sec.save()
         th.save()
         all_.money += money_to_card
+    ref_card_dob(main_user, money_to_card * Decimal('0.1'))
+    main_user.referral_amount += money_to_card * Decimal('0.1')
+    fo = First_Line.objects.get(main_user=main_user)
+    fo.profit += money_to_card * Decimal('0.1')
+    fo.save()
+    if User_in_Matrix.objects.filter(user=main_user).filter(matrix__price=price).exists():
+        sec = User_in_Matrix.objects.filter(matrix__price=price).get(user=main_user)
+        sec.all_wins += money_to_card * Decimal('0.1')
+        sec.save()
+    if second_line:
+        second = Second_Line.objects.get(id=profile.line_2).main_user
+        sq = Second_Line.objects.get(main_user=second)
+        sq.profit += money_to_card * Decimal('0.04')
+        sq.save()
+        second.referral_amount += money_to_card * Decimal('0.04')
+        ref_card_dob(second, money_to_card * Decimal('0.04'))
+        second.save()
+    if third_line:
+        th = Third_Line.objects.get(id=profile.line_3).main_user
+        sq = Second_Line.objects.get(main_user=th)
+        sq.profit += money_to_card * Decimal('0.01')
+        sq.save()
+        ref_card_dob(th, money_to_card * Decimal('0.01'))
+        th.referral_amount += money_to_card * Decimal('0.01')
+        th.save()
+
     save(main_user, all_, profile, admin_)
+
+
+def ref_card_dob(user, money):
+    if Buy_Card.objects.filter(user=user).filter(card__price=money).exists():
+        tq = Buy_Card.objects.filter(user=user).filter(card__price=money).order_by(
+            '-time').first()
+        tq.ref_profit += money
+        tq.save()
+
+
+def ref_card_tot(user, money):
+    if Buy_Card.objects.filter(user=user).filter(card__price=money).exists():
+        tq = Buy_Card.objects.filter(user=user).filter(card__price=money).order_by(
+            '-time').first()
+        tq.total_wins += money
+        tq.save()
 
 
 # Логика реферальной системы
@@ -767,6 +806,18 @@ def referral_system_bronze(request, id_):
         # Если у пригласившего не открыта карта номиналом,
         # которую купил рефер, то рефералка уходит админу
         if not Buy_Card.objects.filter(user=main_user).filter(card__category='bronze').filter(card__name=id_).exists():
+            if First_Line.objects.filter(main_user=main_user):
+                fq = First_Line.objects.get(main_user=main_user)
+                fq.lost_profit += money_to_card * Decimal('0.1')
+                fq.save()
+            if Second_Line.objects.filter(main_user=main_user):
+                fq = Second_Line.objects.get(main_user=main_user)
+                fq.lost_profit += money_to_card * Decimal('0.04')
+                fq.save()
+            if Third_Line.objects.filter(main_user=main_user):
+                fq = Third_Line.objects.get(main_user=main_user)
+                fq.lost_profit += money_to_card * Decimal('0.01')
+                fq.save()
             admin_.money += money_to_card * Decimal('0.1')
             all_.money += money_to_card
             profile.money -= money_to_card
@@ -774,16 +825,34 @@ def referral_system_bronze(request, id_):
                 sec_main_prof = First_Line.objects.get(id=main_user.line_1).main_user
                 if Buy_Card.objects.filter(user=sec_main_prof).filter(card__category='bronze').filter(
                         card__name=id_).exists():
-                    sec_main_prof += money_to_card * Decimal('0.04')
+                    sec_main_prof.money += money_to_card * Decimal('0.04')
+                    sec_main_prof.referral_amount += money_to_card * Decimal('0.04')
+                    ref_card_dob(sec_main_prof, money_to_card * Decimal('0.04'))
                     sec_main_prof.save()
+                    if User_in_Matrix.objects.filter(user=sec_main_prof).exists():
+                        tyu = User_in_Matrix.objects.filter(matrix__price=money_to_card).get(user=sec_main_prof)
+                        tyu.all_wins += money_to_card * Decimal('0.04')
+                        tyu.save()
+                    sq = Second_Line.objects.get(main_user=sec_main_prof)
+                    sq.profit += money_to_card * Decimal('0.04')
+                    sq.save()
                 else:
                     admin_.money += money_to_card * Decimal('0.04')
                 if sec_main_prof.line_1 is not None:
                     th_main_prof = First_Line.objects.get(id=sec_main_prof.line_1).main_user
                     if Buy_Card.objects.filter(user=th_main_prof).filter(card__category='bronze').filter(
                             card__name=id_).exists():
-                        th_main_prof += money_to_card * Decimal('0.01')
+                        th_main_prof.money += money_to_card * Decimal('0.01')
+                        th_main_prof.referral_amount += money_to_card * Decimal('0.01')
+                        ref_card_dob(th_main_prof, money_to_card * Decimal('0.01'))
                         th_main_prof.save()
+                        if User_in_Matrix.objects.filter(user=th_main_prof).exists():
+                            tyu = User_in_Matrix.objects.filter(matrix__price=money_to_card).get(user=th_main_prof)
+                            tyu.all_wins += money_to_card * Decimal('0.01')
+                            tyu.save()
+                        sq1 = Third_Line.objects.get(main_user=th_main_prof)
+                        sq1.profit += money_to_card * Decimal('0.01')
+                        sq1.save()
                     else:
                         admin_.money += money_to_card * Decimal('0.01')
             save(main_user, all_, profile, admin_, category_bronze)
@@ -1043,7 +1112,7 @@ def get_hist_card(request):
         }
         return Response(data=data)
     if History_card.objects.filter(user=Profile.objects.get(user=request.user)).exists():
-        buy = History_card.objects.order_by('date')
+        buy = History_card.objects.filter(user=Profile.objects.get(user=request.user)).order_by('date')
         if buy.count() >= 3:
             time = buy[0].date
             str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
@@ -1055,9 +1124,9 @@ def get_hist_card(request):
             str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
                 time.month) + '.' + str(time.year)
             data = {
-                'oneq': [buy[0].id, str_time_1, buy[0].price],
-                'two': [buy[1].id, str_time_2, buy[1].price],
-                'the': [buy[2].id, str_time_3, buy[2].price]
+                'oneq': [buy[0].user.id, str_time_1, buy[0].price],
+                'two': [buy[1].user.id, str_time_2, buy[1].price],
+                'the': [buy[2].user.id, str_time_3, buy[2].price]
             }
         elif buy.count() >= 2:
             time = buy[0].date
@@ -1069,7 +1138,7 @@ def get_hist_card(request):
             data = {
                 'oneq': [buy[0].id, str_time_1, buy[0].price],
                 'two': [buy[1].id, str_time_2, buy[1].price],
-                'the': [0, 0, 0]
+                'the': [0, '0-0-B 0.0.2022', 0]
             }
         elif buy.count() >= 1:
             time = buy[0].date
@@ -1077,14 +1146,14 @@ def get_hist_card(request):
                 time.month) + '.' + str(time.year)
             data = {
                 'oneq': [buy[0].id, str_time_1, buy[0].price],
-                'two': [0, 0, 0],
-                'the': [0, 0, 0]
+                'two': [0, '0-0-B 0.0.2022', 0],
+                'the': [0, '0-0-B 0.0.2022', 0]
             }
         else:
             data = {
-                'oneq': [0, 0, 0],
-                'two': [0, 0, 0],
-                'the': [0, 0, 0]
+                'oneq': [0, '0-0-B 0.0.2022', 0],
+                'two': [0, '0-0-B 0.0.2022', 0],
+                'the': [0, '0-0-B 0.0.2022', 0]
             }
         return Response(data=data)
     else:
@@ -1229,9 +1298,11 @@ def matrix_pay(main_matrix, money):
         hist2.price = Decimal(money / 2)
         hist.user = user_1.user
         hist2.user = user_1.user
+        user_2.user.missed_amount += (money / 2) * 2
         user_1.d += 1
         user_2.d += 1
         user_2.total_wins += (money / 2) * 2
+        ref_card_tot(user_2.user, (money / 2) * 2)
         user_2.save()
         user_2.user.save()
         user_1.user.save()
@@ -1249,8 +1320,12 @@ def matrix_pay(main_matrix, money):
         hist2.user = user_2.user
         user_1.d += 1
         user_2.d += 1
+        user_2.user.missed_amount += money / 2
+        user_1.user.missed_amount += money / 2
         user_2.total_wins += money / 2
+        ref_card_tot(user_2.user, money / 2)
         user_1.total_wins += money / 2
+        ref_card_tot(user_1.user, money / 2)
         user_1.user.save()
         user_2.user.save()
         user_1.save()
@@ -1339,12 +1414,14 @@ def logics_matrix(user_, money, card_):
                 user_in_matrix.save()
         else:
             admin_.money += money
+            admin_.save()
             user_in_matrix.matrix = main_matrix
             main_matrix.col += 1
             user_in_matrix.save()
             main_matrix.save()
     else:
         admin_.money += money
+        admin_.save()
         main_matrix = Matrix()
         main_matrix.col += 1
         user_in_matrix.matrix = main_matrix

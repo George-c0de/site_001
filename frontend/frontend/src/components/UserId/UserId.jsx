@@ -56,8 +56,8 @@ export const UserId = ({ note }) => {
       <div className='user-info-wrapper'>
         <ul className="user-info">
           <li>{t`Balance`}: { user?.money }</li>
-          <li>{t`Cards profit`}: { user?.money }</li>
-          <li>{t`Referal profit`}: { user?.line_1 + user?.line_2 + user?.line_3 }</li>
+          <li>{t`Cards profit`}: { user?.missed_amount }</li>
+          <li>{t`Referal profit`}: { user?.referral_amount }</li>
           <li>{t`Link for invitation`} </li>
 
           <span className="link-invitation" ref={linkRef}>

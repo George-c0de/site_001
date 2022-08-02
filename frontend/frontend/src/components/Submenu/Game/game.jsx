@@ -124,7 +124,7 @@ const Game = () => {
             navigate("/home");
         };
 
-//Show informations of user
+//Show information of user
         const showUserInfo = () => {
             if (!openDropDown) {
                 setOpenUserInfo(!openUserInfo);
