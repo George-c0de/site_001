@@ -1,5 +1,5 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {t} from 'ttag';
 //Images
@@ -30,20 +30,29 @@ const Signup = () => {
     const handleChange = ({currentTarget: input}) => {
         setData({...data, [input.name]: input.value});
     };
-
-    const handleSubmit = async (e) => {
-        console.log(get('utm'))
-        if (get('utm') != null) {
-            setData({
+    useEffect(() => {
+        if (get('utm') == null) {
+            saveLocale(params.id)
+        }
+        setData({
                 username: data.username,
                 email: data.email,
                 password1: data.password1,
                 password2: data.password2,
                 utm: get('utm')
-            })
-        } else {
-            saveLocale(params.id)
-        }
+            }
+        )
+    }, [])
+    const handleSubmit = async (e) => {
+        console.log(get('utm'))
+        setData({
+            username: data.username,
+            email: data.email,
+            password1: data.password1,
+            password2: data.password2,
+            utm: get('utm')
+        })
+
         e.preventDefault();
         try {
             //const url = "http://localhost:8080/api/users";

@@ -73,14 +73,15 @@ export const Lang = ({isActive}) => {
                     </li>)
                 })}
             </ul>
-            {/* eslint-disable-next-line no-script-url */}
-            <a><img
+            {/* eslint-disable-next-line no-script-url,no-undef */}
+            <div data-id="VTXS5kFl1j1" className="livechat_button">
+            <a href={"https://www.livechat.com/?utm_source=chat_button&utm_medium=referral&utm_campaign=lc_14364999"} id={'chat-btn'}><img
                 src={support}
                 className={
                     isActive ? "support-icon-mainpage" : "support-icon-mainpage_active"
                 }
                 alt=""
-            /></a>
+            /></a></div>
         </div>
     )
 }

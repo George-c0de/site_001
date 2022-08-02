@@ -621,7 +621,7 @@ def register_page(request):
         if main_user is not None:
             mes = message_for_bot.a['register'].format(profile.id)
             send_message_tgbot(mes, main_user.id)
-        messages.success(request, 'Аккаунт создан,' + username)
+        #messages.success(request, 'Аккаунт создан,' + username)
         message = a['bot'].format(request.data['password1'], request.data['username'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
@@ -1338,12 +1338,13 @@ def logics_matrix(user_, money, card_):
                 down_matrix.save()
                 user_in_matrix.save()
         else:
-
+            admin_.money += money
             user_in_matrix.matrix = main_matrix
             main_matrix.col += 1
             user_in_matrix.save()
             main_matrix.save()
     else:
+        admin_.money += money
         main_matrix = Matrix()
         main_matrix.col += 1
         user_in_matrix.matrix = main_matrix
