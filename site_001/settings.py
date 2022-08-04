@@ -177,7 +177,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 # SMTP Hostname
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Для проверки писем
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Для проверки писем
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend' # сохранять
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -195,4 +195,4 @@ EMAIL_HOST_PASSWORD = os.getenv('SENDGRID_API_KEY')
 EMAIL_USE_TLS = True
 
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
-CSRF_TRUSTED_ORIGINS = ['http://45.85.117.38/']
+CSRF_TRUSTED_ORIGINS = ['http://45.85.117.38/', 'https://tokemon.games/']
