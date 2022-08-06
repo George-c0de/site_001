@@ -1375,6 +1375,7 @@ def dis(request):
         # s = json.dumps(data, indent=4, sort_keys=True)
         wall = data['wallet_input']
         col = data['col']
+        col = int(col)
         if col is not None:
             if profile.wallet_input is not None:
                 wall = Wallet.objects.get(address=profile.wallet_input)
@@ -1393,7 +1394,8 @@ def dis(request):
                 col += col * 0.01
             if profile.money < col:
                 return Response(status=400)
-            if send_usdt(wall, col):
+            data = send_usdt(wall, col)
+            if data:
                 profile.money -= col
                 profile.save()
                 all_.all_transactions += 1
@@ -1401,7 +1403,7 @@ def dis(request):
                 all_.save()
                 mes = message_for_bot.a['withdrawal'].format(col)
                 send_message_tgbot(mes, profile.id)
-                return Response(status=200)
+                return Response(data=data, status=200)
             else:
                 return Response(status=400)
     return Response(status=400)
@@ -1418,6 +1420,7 @@ def dis_input(request):
         # s = json.dumps(data, indent=4, sort_keys=True)
         wall = data['wallet']
         col = data['col']
+        col = int(col)
         if col < 10:
             return Response(status=400)
         if col is not None:
@@ -1429,14 +1432,15 @@ def dis_input(request):
                 profile.wallet = w.address
                 w.save()
                 wall = w
-            if collect_usdt(wall, col):
+            data = collect_usdt(wall, col)
+            if data:
                 profile.money += col
                 profile.save()
                 all_.all_transactions += 1
                 all_.save()
                 mes = message_for_bot.a['up ty'].format(col)
                 send_message_tgbot(mes, profile.id)
-                return Response(status=200)
+                return Response(data=data, status=200)
             else:
                 return Response(status=400)
     return Response(status=400)
