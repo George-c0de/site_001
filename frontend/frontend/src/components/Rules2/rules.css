@@ -72,12 +72,12 @@
 	cursor: pointer;
 	position: absolute;
 	top: 50%;
-	right: 0px;
 	transform: translate(-50%);
 	z-index: 9999999;
 	width: 40px;
 	height: 40px;
 	object-fit: cover;
+	right: 0px;
 }
 .gallery-progress-left {
 	left: 40px;
@@ -114,17 +114,6 @@
 	}
 	.rules__block {
 		margin-bottom: 20px;
-	}
-}
-@media screen and (max-width: 700px) {
-	.gallery-img {
-		width: 100%;
-	}
-	.gallery-progress {
-		right: -25px;
-	}
-	.gallery-progress-left {
-		left: 15px;
 	}
 }
 @media screen and (max-width: 700px) {
