@@ -1,11 +1,11 @@
 {
 	"name": "frontend",
 	"proxy": "http://127.0.0.1:8000/",
-	"homepage": "https://HODOR72.github.io/TokeMon",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
 		"@babel/runtime": "^7.18.6",
+		"@fortawesome/fontawesome-svg-core": "^6.1.2",
 		"@fortawesome/free-solid-svg-icons": "^6.1.1",
 		"@fortawesome/react-fontawesome": "^0.2.0",
 		"@testing-library/jest-dom": "^5.16.4",
