@@ -97,8 +97,8 @@ class TronClient:
             config (optional): app config object, defaults to nile testnet
         """
         if not config or config == {}:
-            self.tron_url = "https://api.nileex.io"
-            self.trongrid_url = 'https://nile.trongrid.io'
+            self.tron_url = "https://api.trongrid.io/"
+            self.trongrid_url = 'https://api.trongrid.io'
             self.usdt_address = "TGqLpL1HyfDkwaCT11haiBUrM27ykodFwy"
             self.fee_limit = 20000000
             self.api_key = '2f2b558d-51a3-48b9-9c4d-cd5b9c69163b'
