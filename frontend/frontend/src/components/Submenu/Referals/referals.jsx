@@ -126,8 +126,7 @@ const Referals = () => {
                     {openDropDown ? (
                         <div className="container">
                             <div className="title-referal">{t`Referral link`}</div>
-                            <div className="link-invitation">{posts.link}</div>
-
+                            <div className="link-invitation">https://tokemon.games/signup/{posts.link}</div>
                             <div className="row" id="info-3-col">
                                 <div className="col-sm">
                                     <button onClick={getFirst} className="row">{t`1 line`}</button>
