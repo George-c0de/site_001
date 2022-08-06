@@ -605,6 +605,8 @@ def register_page(request):
         username = form.cleaned_data.get('username')
         user = User.objects.get(username=username)
         profile = Profile.objects.create(user=user)
+        profile.referral_link = profile.id
+        profile.save()
         wallet = tc.create_wallet()
         w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
         profile.wallet = w.address
@@ -1053,7 +1055,7 @@ def all_ref_logic(name, id_, profile):
                         sq1.save()
                     else:
                         tp = Third_Line.objects.get(main_user=th_main_prof)
-                        tp.lost_profit +=money_to_card * Decimal('0.01')
+                        tp.lost_profit += money_to_card * Decimal('0.01')
                         tp.save()
                         admin_.money += money_to_card * Decimal('0.01')
             save(main_user, all_, profile, admin_, category)
