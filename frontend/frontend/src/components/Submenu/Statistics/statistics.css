@@ -1,35 +1,60 @@
 .statistic-info {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 20px 0;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin: 20px 0;
 }
 
 .statistic-info li {
-    display: block;
-    cursor: auto;
-    color: white;
-    list-style-type: none;
-    font-size: 36px;
-    text-shadow: none;
+	display: block;
+	cursor: auto;
+	color: white;
+	list-style-type: none;
+	font-size: 36px;
+	text-shadow: none;
 }
 
 .statistic-info li span {
-    text-align: center;
-    display: block;
-    color: #FFCC00;
-    font-weight: 600;
-    margin: 10px 0;
+	text-align: center;
+	display: block;
+	color: #ffcc00;
+	font-weight: 600;
+	margin: 10px 0;
 }
 
-@media (min-width:0px) and (max-width: 412px){
-    .statistic-info li{
-        font-size: 26px;
-    }
+@media screen and (max-width: 900px) {
+	.statistic-info li {
+		font-size: 30px;
+	}
+	.statistic-info li span {
+		font-size: 36px;
+	}
+}
+@media screen and (max-width: 700px) {
+	.statistic-info li {
+		font-size: 25px;
+	}
+    .statistic-info li span {
+		font-size: 30px;
+	}
 }
 
-@media only screen and (min-width:413px) and (max-width: 600px){
-    .statistic-info li{
-        font-size: 30px;
+@media screen and (max-width: 500px) {
+	.statistic-info li {
+		font-size: 20px;
+	}
+    .statistic-info li span {
+		font-size: 25px;
+	}
+}
+@media screen and (max-width: 420px) {
+	.statistic-info li {
+		font-size: 17px;
+	}
+    .statistic-info li span {
+		font-size: 20px;
+	}
+    .statistic-info{
+        padding-left: 0;
     }
 }

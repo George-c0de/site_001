@@ -1,378 +1,230 @@
 .login_container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    padding: 0 50px;
-    background-image: url('../../Ảnh Pokemon Dự Trù/фон\ общий-min.svg');
-    background-position: 25% 75%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
+	width: 100%;
+	background-image: url('../../assets/CityBg.png');
+	background-position: 25% 75%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+	height: 100vh;
+}
+.header-authorization {
+	background: linear-gradient(87.52deg, #2570b5 21.14%, #67deee 91.14%);
+	width: 100%;
+	height: 135px;
+	box-shadow: 0px 11px 6px rgba(0, 0, 0, 0.47);
+	border-radius: 0px 0px 32px 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.nav__logo {
+	width: 300px;
+	height: 100%;
+	object-fit: cover;
+}
+.authorization__container {
+	max-width: 900px;
+	margin: 0 auto;
+	padding-top: 36px;
+	position: relative;
+	max-height: 800px;
+	height: 100%;
+}
+.authorization__menu {
+	padding: 36px 20px;
+	margin-left: auto;
+	background: #ffffff;
+	border-radius: 21px;
+	max-width: 461px;
+	width: 100%;
+}
+.authorization__nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+}
+.authorization__link {
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 38px;
+	color: #7b7b7b;
+	position: relative;
+	cursor: pointer;
+}
+.authorization__link:nth-child(1)::after {
+	content: '';
+	border: 1.8px solid #000000;
+	background-color: #000000;
+	border-radius: 30px;
+	height: 40px;
+	position: absolute;
+	right: -15px;
+	transform: rotate(20deg);
+	top: -1px;
 }
 
-/*Navbar*/
-
-.navbar-container {
-    height: 120px;
-    width: 100%;
+.authorization__link-active {
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 38px;
+	color: #d11011;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.separator {
+	height: 100%;
+	width: 25px;
+}
+.authorization__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.authorization__input {
+	background: linear-gradient(90deg, #8ae3ff 10.19%, #cdf2fe 91.07%);
+	border-radius: 17px;
+	margin-bottom: 25px;
+	border: none;
+	outline: none;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 28px;
+	width: 100%;
+	height: 74px;
+	padding: 0 17px;
+}
+.authorization__input-invalid {
+	border: 1px solid red;
 }
 
-.logo-tokemon {
-    position: absolute;
-    left: 50%;
-    height: 100%;
-    transform: translateX(-50%);
-    margin-left: 0!important;
+.authorization__input::placeholder {
+	font-size: 22px;
+	color: #000000;
+	opacity: 0.7;
 }
-
-/*Pikachu-Pokeball*/
-.pikachu-pokeball {
-    position: absolute;
-    height: 50%;
-    top: 50%;
-    left: 0;
+.authorization__button {
+	background: linear-gradient(80.86deg, #ffcc06 39.49%, #ffdd4f 66.71%);
+	border: 2px solid #1a255e;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.34);
+	border-radius: 17px;
+	width: 218px;
+	font-weight: 500;
+	font-size: 36px;
+	color: #1a255e;
 }
-
-/*Login Form*/
-.login_form_container {
-    max-width: 1000px;
-    width: 60%;
-    margin-top: 40px;
-    margin-left: 40%;
-    margin-right: 50px;
-    display: flex;
-    border-radius: 15px;
-    position: relative;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+.authorization__pikachu-wrapper {
+	width: 350px;
+	height: 350px;
+	position: absolute;
+	bottom: 100px;
 }
-
-.bubble-speech::after {
-    content: "";
-    display: block;
-    position: absolute;
-
-    left: -55px;
-    bottom: 0px;
-
-    width: 0px;
-    height: 0px;
-    border-top: 30px solid transparent;
-    border-bottom: 0px solid transparent;
-    border-right: 60px solid white;
+.authorization__pikachu-wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
-
-.login_container .left {
-    flex: 2;
-    padding: 20px 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 5px solid #000;
-    border-right: 0;
+.authorization-reset {
+	cursor: pointer;
+	margin-top: -18px;
+	text-align: right;
+	width: 100%;
+	text-decoration: none;
+	margin-bottom: 12px;
+	font-size: 20px;
+	color: #000000;
+	opacity: 0.6;
+	transition: 0.3s all ease;
 }
-
-.form_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.authorization-reset:hover {
+	color: #383838;
+	opacity: 0.8;
 }
-
-.login_container .form_container div {
-    color: #7B7B7B;
-    font-weight: 700;
-    font-size: calc(24px + 16 * ((100vw - 320px) / (1980 - 320)));
-    align-self: center;
-    text-align: center;
+.grecaptcha-badge {
+	display: none;
 }
-
-.input {
-    width: 100%;
-    height: 55px;
-    padding: 15px;
-    margin: 20px 0;
-    border-radius: 15px;
-    color: #000;
-    background: linear-gradient(to right, rgb(87, 170, 222), lightblue);
-    font-size: 24px;
-    outline: none;
-    border: none;
+.input__invalid-text {
+	opacity: 0.7;
+	color: red;
+	margin-top: -15px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	width: 100%;
+	text-align: right;
 }
-
-.input::placeholder {
-    color: #000;
-    font-weight: 700;
+.reset__link {
+	padding-left: 30px;
+	margin-bottom: 10px;
+	position: relative;
+	font-weight: 600;
+	font-size: 28px;
+	color: #d11011;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-.error_msg {
-    width: 370px;
-    padding: 15px;
-    margin: 5px 0;
-    font-size: 14px;
-    background-color: #f34646;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
+.reset-img {
+	cursor: pointer;
+	opacity: 0.7;
+	width: 30px;
+	height: 30px;
 }
-
-.login_container .right {
-    flex: 1;
-    padding: 0 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #3bb19b;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: 5px solid #000;
-    border-left: 0;
+@media screen and (max-width: 900px) {
+	.authorization__pikachu-wrapper {
+		left: 5px;
+	}
 }
-
-.right h1 {
-    margin-top: 0;
-    color: white;
-    font-size: calc(24px + 16 * ((100vw - 320px) / (1980 - 320)));
-    align-self: center;
-    text-align: center;
+@media screen and (max-width: 785px) {
+	.header-authorization {
+		height: 72px;
+	}
+	.nav__logo {
+		width: 200px;
+	}
+	.authorization__container {
+		padding-top: 20px;
+	}
+	.authorization__menu {
+		margin: 0 auto;
+		padding: 20px;
+	}
+	.authorization__pikachu-wrapper {
+		width: 250px;
+		height: 250px;
+	}
+	.authorization__nav {
+		margin-bottom: 10px;
+	}
+	.authorization__input {
+		height: 55px;
+		margin-bottom: 13px;
+	}
+	.authorization-reset {
+		padding-top: 10px;
+	}
+	.authorization__pikachu-wrapper {
+		left: 50%;
+		transform: translate(-50%);
+	}
 }
-
-.green_btn {
-    outline: none;
-    padding: 12px;
-    margin: 5px 0;
-    background-color: #3bb19b;
-    border-radius: 15px;
-    border: 3px solid #000;
-    min-width: 150px;
-    font-weight: bold;
-    font-size: calc(16px + 8 * ((100vw - 320px) / (1980 - 320)));
-    cursor: pointer;
-    transition: all .3s ease-in-out;
+@media screen and (max-width: 550px) {
+	.authorization__container {
+		padding: 26px 10px 0 10px;
+	}
+	.nav__logo {
+		width: 230px;
+	}
+	.authorization__menu {
+		padding: 23px;
+	}
+	.authorization__link {
+		font-size: 28px;
+	}
+	.authorization__pikachu-wrapper {
+		width: 200px;
+		height: 200px;
+		bottom: 75px;
+	}
 }
-
-.green_btn:hover {
-    color: #000;
-    background-color: #FFCC06;
-}
-
-.login_container .right .login-link {
-    width: 100%;
-    text-align: center;
-}
-
-.yellow_btn {
-    border: 3px solid #000;
-    outline: none;
-    padding: 12px;
-    margin: 5px 0;
-    background-color: rgb(211, 211, 103);
-    border-radius: 20px;
-    min-width: 150px;
-    font-weight: bold;
-    font-size: calc(16px + 8 * ((100vw - 320px) / (1980 - 320)));
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-}
-
-.yellow_btn:hover {
-    background-color: #3bb19b;
-    color: #FFF;
-}
-
-
-/*Devices Responsive*/
-/*Mobile*/
-@media (min-width:0px) and (max-width: 412px) {
-    .navbar .logo-tokemon {
-        height:100% !important;
-    }
-
-    .login_form_container {
-        margin-top: -50% !important;
-        margin-left: -20% !important ;
-    }
-
-    /* .login_form_container .left{
-        max-width:400px;
-    } */
-    
-    .login_form_container .left{
-        margin-top: 120%;
-        margin-left:20%;
-        height:350px;
-    }
-
-    .login_form_container .right {
-        margin-top:120%;
-        margin-left:-5%;
-        max-width:120px !important;
-        height:350px !important;
-    }
-
-    .form_container input{
-        width:120%;
-    }
-    
-    .yellow_btn {
-        height:100px; 
-        font-size:calc(30px + 8 * ((100vw - 320px) / (1980 - 320))) !important;
-        transform: scale(0.5) !important;
-    }
-
-    .login_container .bubble-speech::after {
-        margin-left:80% !important;
-        margin-top:-3% !important;
-        transform: rotate(45deg);
-    }
-
-    .pikachu-pokeball {
-        margin-top: 45% !important;
-        height:20% !important;
-    }
-}
-
-@media only screen and (min-width:413px) and (max-width: 600px) {
-    .navbar .logo-tokemon {
-        left:50%;
-        height:100% !important;
-    }
-
-    .login_form_container {
-        margin-top: 20%;
-        margin-left: 5%;
-    }
-
-    .login_container .left {
-        max-width:300px;
-    }
-
-    .input{
-        width:120% !important;
-    }
-
-    .login_container .right {
-        max-width:110px;
-    }
-    
-    .yellow_btn {
-        height:100px !important; 
-        font-size:calc(30px + 8 * ((100vw - 320px) / (1980 - 320))) !important;
-        transform: scale(0.6);
-    }
-
-    .login_container .bubble-speech::after {
-        margin-left:50%;
-        transform: rotate(45deg);
-    }
-
-    .pikachu-pokeball {
-        height: 25%;
-        top:65%;
-    }
-}
-
-/*Small devices: tablets, large phones*/
-@media only screen and (min-width: 600px) and (max-width:767px) {
-    .login_form_container {
-        margin-top: 25%;
-        margin-left: 5%;
-    }
-
-    .login_container .left {
-        max-width:400px;
-    }
-
-    .login_container .right {
-        max-width:150px;
-    }
-    
-    .yellow_btn {
-        height:100px !important; 
-        font-size:calc(30px + 8 * ((100vw - 320px) / (1980 - 320))) !important;
-        transform: scale(0.5);
-    }
-
-    .login_container .bubble-speech::after {
-        margin-left:50%;
-        transform: rotate(45deg);
-    }
-
-    .pikachu-pokeball {
-        height: 40%;
-        top:63%;
-    }
-}
-
-/*Laptop */
-/* For 1024 Resolution */  
-@media only screen and (min-width : 768px) and (max-width : 1024px){
-    .login_form_container {
-        margin-top: 5%;
-        margin-left: 5%;
-    }
-
-    .login_container .right {
-        max-width:300px;
-    }
-
-    .login_container .bubble-speech::after {
-        margin-left:40% !important;
-        transform: rotate(45deg);
-        /* margin-top: 15% !important; */
-    }
-
-    .pikachu-pokeball {
-        height: 30%;
-        top:50%;
-    }
-}
-/* For 1366 Resolution */  
-@media only screen and (min-width: 1025px) and (max-width: 1366px){
-    .login_form_container {
-        margin-top: 10%;
-        margin-left: 5%;
-    }
-
-    .login_container .right {
-        max-width:400px;
-    }
-
-    .pikachu-pokeball {
-        height: 40%;
-        top:63%;
-        left:20%;
-    }
-    .login_container .bubble-speech::after {
-        margin-left:50% !important;
-        transform: rotate(45deg);
-        /* margin-top: 15% !important; */
-    }
-}
-
-/*Desktop*/
-@media only screen and (min-width: 1370px){
-    /*Pikachu-Pokeball*/
-    .pikachu-pokeball {
-        position: absolute;
-        height: 50%;
-        top: 50%;
-        left: 30%;
-    }
-    
-    /*Login Form*/
-    .login_form_container {
-        max-width: 600px !important;
-        width: 100%;
-        margin-top: 30px;
-        margin-left: 50%;
-        margin-right: 50px;
-        display: flex;
-    }
-
-    .login_form_container .bubble-speech::after {
-        margin-left: 1% ;
-    }
+@media screen and (max-width: 440px) {
+	.authorization__link {
+		font-size: 20px;
+	}
 }

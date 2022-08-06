@@ -1,37 +1,40 @@
-import {Route, Routes} from 'react-router-dom';
-import MainPage from './components/MainPage/mainpage';
-import Signup from './components/Signup/signup';
-import Login from './components/Login/login';
-import UpdateUser from './components/UpdateUser/updateuser';
-import StartGame from './components/StartGame/startgame';
-import Statistics from './components/Submenu/Statistics/statistics.jsx';
-import Referals from './components/Submenu/Referals/referals';
-import Game from './components/Submenu/Game/game';
-import Pay from './components/Pay/Pay';
-import Deposit from './components/Deposit/Deposit';
-import Rules from "./pages/Rules.js"
-import Signup2 from './components/Signup2/signup';
+import { Route, Routes } from 'react-router-dom'
+import MainPage from './components/MainPage/mainpage'
+import Signup from './components/Signup/signup'
+import Login from './components/Login/login'
+import UpdateUser from './components/UpdateUser/updateuser'
+import StartGame from './components/StartGame/startgame'
+import Statistics from './components/Submenu/Statistics/statistics.jsx'
+import Referals from './components/Submenu/Referals/referals'
+import Game from './components/Submenu/Game/game'
+import Pay from './components/Pay/Pay'
+import Deposit from './components/Deposit/Deposit'
+import React from 'react'
+import Rules2 from './components/Rules2/Rules2'
 
 function App() {
-    //const user=localStorage.getItem("token");
-    return (
-        <Routes>
-            <Route path="/home" exact element={<MainPage/>}/>
-            <Route path="/home/game" exact element={<Game/>}/>
-            <Route path="/home/statistics" exact element={<Statistics/>}/>
-            <Route path="/home/referals" exact element={<Referals/>}/>
-            <Route path="/home/pay" exact element={<Pay/>}/>
-            <Route path="/home/deposit" exact element={<Deposit/>}/>
-            <Route path="/signup" exact element={<Signup/>}/>
-            <Route path="/signup/:id" exact element={<Signup2/>}/>
-            <Route path="/login" exact element={<Login/>}/>
-            <Route path="/update/:id" exact element={<UpdateUser/>}/>
-            <Route path="/" exact element={<StartGame/>}/>
+	//const user=localStorage.getItem("token");
+	// React.useEffect(() => {
+	// 	loadReCaptcha('6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD')
+	// 		.then(() => {
+	// 			console.log('ReCaptcha loaded')
+	// 		})
+	// 		.catch(e => {
+	// 			console.error('Error when load ReCaptcha', e)
+	// 		})
+	// }, [])
 
-            <Route path="/rules" element={<Rules/>}/>
-
-        </Routes>
-    );
+	return (
+		<Routes>
+			<Route path='/' exact element={<StartGame />} />
+			<Route path='/home' exact element={<Game />} />
+			<Route path='/login' exact element={<Login />} />
+			<Route path='/home/pay' exact element={<Pay />} />
+			<Route path='/home/deposit' exact element={<Deposit />} />
+			<Route path='/' exact element={<Deposit />} />
+			{/* <Route path='/update/:id' exact element={<UpdateUser />} /> */}
+			<Route path='/home/rules' element={<Rules2 />} />
+		</Routes>
+	)
 }
-
-export default App;
+export default App
