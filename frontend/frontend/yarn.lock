@@ -8091,6 +8091,11 @@ recaptcha-v3-react-function-async@^0.0.3:
   version "0.0.3"
   resolved "https://registry.npmjs.org/recaptcha-v3-react-function-async/-/recaptcha-v3-react-function-async-0.0.3.tgz"
   integrity sha512-7TAlXXms1UhQNt2LbzmFt9eYhLsyMLSZS2FjgwuvjhpcJBiecF3rrrI1IdznjCwogxBDQu2jN3sATkRjkgVY1Q==
+
+"recaptcha-v3-react-function-async@^0.0.3":
+  "integrity" "sha512-7TAlXXms1UhQNt2LbzmFt9eYhLsyMLSZS2FjgwuvjhpcJBiecF3rrrI1IdznjCwogxBDQu2jN3sATkRjkgVY1Q=="
+  "resolved" "https://registry.npmmirror.com/recaptcha-v3-react-function-async/-/recaptcha-v3-react-function-async-0.0.3.tgz"
+  "version" "0.0.3"
   dependencies:
     "@babel/plugin-transform-runtime" "^7.17.10"
     axios "^0.24.0"
