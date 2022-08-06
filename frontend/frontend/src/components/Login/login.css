@@ -37,6 +37,7 @@
 	border-radius: 21px;
 	max-width: 461px;
 	width: 100%;
+	margin-right: 10px;
 }
 .authorization__nav {
 	display: flex;
@@ -166,6 +167,14 @@
 	width: 30px;
 	height: 30px;
 }
+.reset__text {
+	font-size: 20px;
+	margin-top: -20px;
+	margin-bottom: 20px;
+}
+.recaptcha {
+	margin-bottom: 20px;
+}
 @media screen and (max-width: 900px) {
 	.authorization__pikachu-wrapper {
 		left: 5px;
@@ -203,6 +212,10 @@
 		left: 50%;
 		transform: translate(-50%);
 	}
+	.reset__text {
+		margin-top: -10px;
+		margin-bottom: 10px;
+	}
 }
 @media screen and (max-width: 550px) {
 	.authorization__container {
@@ -225,6 +238,6 @@
 }
 @media screen and (max-width: 440px) {
 	.authorization__link {
-		font-size: 20px;
+		font-size: 22px;
 	}
 }

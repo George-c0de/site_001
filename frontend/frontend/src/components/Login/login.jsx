@@ -10,8 +10,10 @@ import pikachu_pokeball from '../../Ảnh Pokemon Dự Trù/pikachu-authorizatio
 import { Lang } from '../MainPage/Lang/Lang'
 import Needle from '../../assets/left-needle .svg'
 import { t } from 'ttag'
+import Recaptcha from 'react-grecaptcha'
 
 const Signup = () => {
+	const navigate = useNavigate()
 	const [typeAuthorization, setTypeAuthorization] = useState('sign')
 	const [isActive, setActive] = useState(false)
 	const [invalidPassword, setInvalidPassword] = useState(false)
@@ -20,9 +22,17 @@ const Signup = () => {
 	const [data, setData] = useState({
 		email: '',
 		password: '',
-		password1: '',
+		password2: '',
 	})
-	const navigate = useNavigate()
+	const [emailReset, setEmailReset] = useState('')
+	const [letterSent, setLetterSent] = useState(false)
+
+	const verifyCallback = response => console.log(response)
+
+	const expiredCallback = () => {
+		console.log(123)
+	}
+
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
 	}
@@ -30,7 +40,6 @@ const Signup = () => {
 	const handleSubmit = async e => {
 		e.preventDefault()
 
-		console.log(typeAuthorization)
 		if (typeAuthorization === 'login') {
 			try {
 				let data2 = 200
@@ -76,6 +85,12 @@ const Signup = () => {
 					console.log(error)
 				}
 			}
+		}
+		if (typeAuthorization === 'reset') {
+			setLetterSent(true)
+			setTimeout(() => {
+				window.location.reload()
+			}, 5000)
 		}
 	}
 	return (
@@ -180,6 +195,7 @@ const Signup = () => {
 									<p>You must enter more than 8 characters</p>
 								</div>
 							)}
+							<Recaptcha sitekey='6LeCcVIhAAAAAHTalIl9shY-BF0i7PB-g-6CYmNl' className='recaptcha' />
 							<button className='authorization__button' type='submit'>
 								Further
 							</button>
@@ -197,9 +213,13 @@ const Signup = () => {
 									}`}
 									placeholder='E-mail:'
 									name='email'
-									onChange={handleChange}
-									value={data.email}
+									onChange={event => setEmailReset(event.target.value)}
+									value={emailReset}
 								/>
+								{letterSent && (
+									<p className='reset__text'>Письмо отправлено!</p>
+								)}
+
 								<button className='authorization__button' type='submit'>
 									Further
 								</button>

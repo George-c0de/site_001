@@ -22,9 +22,7 @@ export const GameHistory = ({ history }) => {
 						<span className='history-table-icon'>()</span>
 						<span className='history-table-time'>{history.oneq[1]}</span>
 						<span className='history-table-id'>ID {history.oneq[0]}</span>
-						<span className='history-table-score green'>
-							{history.oneq[2]}
-						</span>
+						<span className='history-table-score green'>{history.oneq[2]}</span>
 					</div>
 					<div className='history-table-row'>
 						<span className='history-table-icon'>()</span>
@@ -38,6 +36,9 @@ export const GameHistory = ({ history }) => {
 						<span className='history-table-id'>ID {history.the[0]}</span>
 						<span className='history-table-score green'>{history.the[2]}</span>
 					</div>
+				</div>
+				<div>
+					<p className='history-table-text'>SHOW MORE</p>
 				</div>
 				<span className='game-history-more'></span>
 			</div>
