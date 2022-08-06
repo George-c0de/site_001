@@ -1,422 +1,316 @@
 {
-  "charset": "utf-8",
-  "headers": {
-    "content-type": "text/plain; charset=utf-8",
-    "plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
-    "language": "it",
-    "mime-version": "1.0",
-    "content-transfer-encoding": "8bit"
-  },
-  "translations": {
-    "": {
-      "": {
-        "msgid": "",
-        "msgstr": [
-          "Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
-        ]
-      },
-      "User Id": {
-        "msgid": "User Id",
-        "msgstr": [
-          "User Id"
-        ]
-      },
-      "Balance": {
-        "msgid": "Balance",
-        "msgstr": [
-          "Saldo"
-        ]
-      },
-      "Cards profit": {
-        "msgid": "Cards profit",
-        "msgstr": [
-          "Carte Profitto"
-        ]
-      },
-      "Referal profit": {
-        "msgid": "Referal profit",
-        "msgstr": [
-          "Referral profitto"
-        ]
-      },
-      "Link for invitation": {
-        "msgid": "Link for invitation",
-        "msgstr": [
-          "Link per invito"
-        ]
-      },
-      "Deposit": {
-        "msgid": "Deposit",
-        "msgstr": [
-          "Ricarica"
-        ]
-      },
-      "Withdraw": {
-        "msgid": "Withdraw",
-        "msgstr": [
-          "Prelievo"
-        ]
-      },
-      "TOTAL USERS": {
-        "msgid": "TOTAL USERS",
-        "msgstr": [
-          "UTENTI TOTALI"
-        ]
-      },
-      "TOTALE TRANSAZIONI": {
-        "msgid": "TOTALE TRANSAZIONI",
-        "msgstr": [
-          ""
-        ]
-      },
-      "TOTAL PAYOUT": {
-        "msgid": "TOTAL PAYOUT",
-        "msgstr": [
-          "PAGAMENTO TOTALE"
-        ]
-      },
-      "Referral link": {
-        "msgid": "Referral link",
-        "msgstr": [
-          "Link per invito"
-        ]
-      },
-      "1 line": {
-        "msgid": "1 line",
-        "msgstr": [
-          "1 linea"
-        ]
-      },
-      "Total person": {
-        "msgid": "Total person",
-        "msgstr": [
-          "Persona totale"
-        ]
-      },
-      "2 line": {
-        "msgid": "2 line",
-        "msgstr": [
-          "2 linea"
-        ]
-      },
-      "Profit received": {
-        "msgid": "Profit received",
-        "msgstr": [
-          "Reddito ricevuto"
-        ]
-      },
-      "3 line": {
-        "msgid": "3 line",
-        "msgstr": [
-          "3 linea"
-        ]
-      },
-      "Lost profits": {
-        "msgid": "Lost profits",
-        "msgstr": [
-          "Guadagno perso"
-        ]
-      },
-      "JOIN THE FIGHT AND WIN": {
-        "msgid": "JOIN THE FIGHT AND WIN",
-        "msgstr": [
-          "UNISCITI ALLA LOTTA E VINCI"
-        ]
-      },
-      "Cards": {
-        "msgid": "Cards",
-        "msgstr": [
-          "CARTE"
-        ]
-      },
-      "BRONZE": {
-        "msgid": "BRONZE",
-        "msgstr": [
-          "BRONZO"
-        ]
-      },
-      "SILVER": {
-        "msgid": "SILVER",
-        "msgstr": [
-          "D'ARGENTO"
-        ]
-      },
-      "GOLD": {
-        "msgid": "GOLD",
-        "msgstr": [
-          "ORO"
-        ]
-      },
-      "EMERALD": {
-        "msgid": "EMERALD",
-        "msgstr": [
-          "SMERALDO"
-        ]
-      },
-      "GAME HISTORY": {
-        "msgid": "GAME HISTORY",
-        "msgstr": [
-          "STORIA DEL GIOCO"
-        ]
-      },
-      "SHOW MORE": {
-        "msgid": "SHOW MORE",
-        "msgstr": [
-          "mostra di più"
-        ]
-      },
-      "start": {
-        "msgid": "start",
-        "msgstr": [
-          "inizio"
-        ]
-      },
-      "Log In": {
-        "msgid": "Log In",
-        "msgstr": [
-          "Login"
-        ]
-      },
-      "Sign Up": {
-        "msgid": "Sign Up",
-        "msgstr": [
-          "Registrati"
-        ]
-      },
-      "Username": {
-        "msgid": "Username",
-        "msgstr": [
-          ""
-        ]
-      },
-      "Email": {
-        "msgid": "Email",
-        "msgstr": [
-          "e-mail"
-        ]
-      },
-      "Password": {
-        "msgid": "Password",
-        "msgstr": [
-          "Password"
-        ]
-      },
-      "Confirm Password": {
-        "msgid": "Confirm Password",
-        "msgstr": [
-          "Conferma la password"
-        ]
-      },
-      "MAIN": {
-        "msgid": "MAIN",
-        "msgstr": [
-          "Pagina principale"
-        ]
-      },
-      "REFFERALS": {
-        "msgid": "REFFERALS",
-        "msgstr": [
-          "Rinvii"
-        ]
-      },
-      "STATISTICS": {
-        "msgid": "STATISTICS",
-        "msgstr": [
-          "Statistiche"
-        ]
-      },
-      "RULES": {
-        "msgid": "RULES",
-        "msgstr": [
-          "Regole"
-        ]
-      },
-      "USE TELEGRAM BOT": {
-        "msgid": "USE TELEGRAM BOT",
-        "msgstr": [
-          "Usa il bot di telegramma"
-        ]
-      },
-      "LOGOUT": {
-        "msgid": "LOGOUT",
-        "msgstr": [
-          "Disconnettersi"
-        ]
-      },
-      "Switch lang": {
-        "msgid": "Switch lang",
-        "msgstr": [
-          ""
-        ]
-      },
-      "New Here": {
-        "msgid": "New Here",
-        "msgstr": [
-          ""
-        ]
-      },
-      "Withdrawal": {
-        "msgid": "Withdrawal",
-        "msgstr": [
-          "Prelievo"
-        ]
-      },
-      "Available for payout": {
-        "msgid": "Available for payout",
-        "msgstr": [
-          "Disponibile per il pagamento"
-        ]
-      },
-      "Withdrawal amount": {
-        "msgid": "Withdrawal amount",
-        "msgstr": [
-          "Importo del pagamento"
-        ]
-      },
-      "PAYOUT": {
-        "msgid": "PAYOUT",
-        "msgstr": [
-          "PAGAMENTO"
-        ]
-      },
-      "TRANSACTION HISTORY": {
-        "msgid": "TRANSACTION HISTORY",
-        "msgstr": [
-          "CRONOLOGIA DELLE TRANSAZIONI"
-        ]
-      },
-      "description": {
-        "msgid": "description",
-        "msgstr": [
-          "descrizione"
-        ]
-      },
-      "Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.": {
-        "msgid": "Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.",
-        "msgstr": [
-          "Tokemon Game è un gioco finanziario sulla rete Tron Chain, che permette ai giocatori passivi e attivi di guadagnare denaro. Per ricevere vincite, i giocatori devono acquistare una carta con un tokemon che partecipare alla battaglia"
-        ]
-      },
-      "The registration is free": {
-        "msgid": "The registration is free",
-        "msgstr": [
-          "La registrazione è gratuita"
-        ]
-      },
-      "To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards": {
-        "msgid": "To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards",
-        "msgstr": [
-          "Per iniziare a giocare e a guadagnare, è necessario ricaricare il proprio saldo in USD TRACK-20 e acquistare l'accesso alle carte."
-        ]
-      },
-      "affiliate program": {
-        "msgid": "affiliate program",
-        "msgstr": [
-          "PROGRAMMA DI AFFILIAZIONE"
-        ]
-      },
-      "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.": {
-        "msgid": "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.",
-        "msgstr": [
-          "I Pokemon partecipano a 4 battaglie. Per ogni battaglia si ottiene il 40% del costo della carta."
-        ]
-      },
-      "After receiving 4 wins, you can feed the Tokémon to continue the battles": {
-        "msgid": "After receiving 4 wins, you can feed the Tokémon to continue the battles",
-        "msgstr": [
-          "Dopo aver ottenuto 4 vittorie, è possibile nutrire i Pokemon per continuare le battaglie."
-        ]
-      },
-      "To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!": {
-        "msgid": "To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!",
-        "msgstr": [
-          "Per ricevere le vincite, è necessario aggiungere al proprio account un indirizzo di portafoglio USD nella rete TRS20. ATTENZIONE! L'indirizzo di prelievo non può essere modificato!"
-        ]
-      },
-      "Balance replenishment and withdrawal – instant.": {
-        "msgid": "Balance replenishment and withdrawal – instant.",
-        "msgstr": [
-          "Ricarica e prelievo del saldo - istantanei."
-        ]
-      },
-      "3 lines = 15%": {
-        "msgid": "3 lines = 15%",
-        "msgstr": [
-          "3 LINEE = 15%."
-        ]
-      },
-      "Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged": {
-        "msgid": "Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged",
-        "msgstr": [
-          "La ricompensa degli affiliati proviene solo dalle carte attive. Se la carta non è non è attiva, il premio di affiliazione non viene addebitato il premio di affiliazione"
-        ]
-      },
-      "You can take part in all cards at the same time.": {
-        "msgid": "You can take part in all cards at the same time.",
-        "msgstr": [
-          "È possibile partecipare a tutte le carte contemporaneamente."
-        ]
-      },
-      "BUDGET ALLOCATION": {
-        "msgid": "BUDGET ALLOCATION",
-        "msgstr": [
-          "ALLOCAZIONE DEL BUDGET"
-        ]
-      },
-      "Battle payment": {
-        "msgid": "Battle payment",
-        "msgstr": [
-          "PAGAMENTO DELLA BATTAGLIA"
-        ]
-      },
-      "Advertising expenses": {
-        "msgid": "Advertising expenses",
-        "msgstr": [
-          "PAGAMENTO DELLA BATTAGLIA"
-        ]
-      },
-      "Affiliate rewards": {
-        "msgid": "Affiliate rewards",
-        "msgstr": [
-          "PAGAMENTO DELLA BATTAGLIA"
-        ]
-      },
-      "Structure of each level": {
-        "msgid": "Structure of each level",
-        "msgstr": [
-          "PAGAMENTO DELLA BATTAGLIA"
-        ]
-      },
-      "In Tokemon Game, each card is a separate structure. All new players are randomly placed in a  single large structure on each card, giving  everyone an equal chance to earn rewards  without having to invite personal partners Everyone chooses any card. By  activating a card, a participant  automatically gets into a line with  available seats. Free seats are allocated  and assigned randomly. A new player always takes the right seat in  the cycle of another random participant When both seats in the cycle are occupied  by players, you move to a new row below -  this is a recycle. Then, this action is  repeated as the activity moves on the  level Each participant can take only one seat  (their own cycle) on the line, after closing  their cycle, the participant moves to the  following lines below\n": {
-        "msgid": "In Tokemon Game, each card is a separate structure. All new players are randomly placed in a  single large structure on each card, giving  everyone an equal chance to earn rewards  without having to invite personal partners Everyone chooses any card. By  activating a card, a participant  automatically gets into a line with  available seats. Free seats are allocated  and assigned randomly. A new player always takes the right seat in  the cycle of another random participant When both seats in the cycle are occupied  by players, you move to a new row below -  this is a recycle. Then, this action is  repeated as the activity moves on the  level Each participant can take only one seat  (their own cycle) on the line, after closing  their cycle, the participant moves to the  following lines below",
-        "msgstr": [
-          "Nel Gioco Tokemon, ogni carta è una struttura separata. Tutti i nuovi giocatori sono collocati in modo casuale in un'unica grande struttura su ogni carta, dando a tutti un'uguale possibilità di guadagnare ricompense senza dover invitare partner personali. Tutti scelgono una carta qualsiasi. Attivando una carta, il partecipante viene automaticamente automaticamente in una fila di posti disponibili. I posti liberi vengono assegnati in modo casuale. Un nuovo giocatore prende sempre il posto giusto nel ciclo di un altro partecipante casuale.Quando entrambi i posti del ciclo sono occupati da giocatori, ci si sposta in una nuova fila sottostante: si tratta di un riciclo. Poi, questa azione viene ripetuta man mano che l'attività si sposta sul livello Ogni partecipante può occupare un solo posto (il proprio ciclo) sulla riga, dopo aver chiuso il proprio ciclo, il Dopo aver chiuso il proprio ciclo, il partecipante si sposta sulle righe successive"
-        ]
-      },
-      "game rules": {
-        "msgid": "game rules",
-        "msgstr": [
-          "REGOLE DI GIOCO"
-        ]
-      },
-      "Cost of cards": {
-        "msgid": "Cost of cards",
-        "msgstr": [
-          "COSTO DELLE CARTE"
-        ]
-      },
-      "line": {
-        "msgid": "LINIEN",
-        "msgstr": [
-          ""
-        ]
-      },
-      "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng": {
-        "msgid": "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng",
-        "msgstr": [
-          "Avete ancora domande? Per le istruzioni complete sul gioco, su come depositare e su come prelevare le vincite, seguite questo link tokemons.info/Ita"
-        ]
-      }
-    }
-  }
+	"charset": "utf-8",
+	"headers": {
+		"content-type": "text/plain; charset=utf-8",
+		"plural-forms": "nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);",
+		"language": "it",
+		"mime-version": "1.0",
+		"content-transfer-encoding": "8bit"
+	},
+	"translations": {
+		"": {
+			"": {
+				"msgid": "",
+				"msgstr": [
+					"Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 3; plural = (n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\nLanguage: ru\nMIME-Version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+				]
+			},
+			"User Id": {
+				"msgid": "User Id",
+				"msgstr": ["User Id"]
+			},
+			"Balance": {
+				"msgid": "Balance",
+				"msgstr": ["Saldo"]
+			},
+			"Cards profit": {
+				"msgid": "Cards profit",
+				"msgstr": ["Carte Profitto"]
+			},
+			"Referal profit": {
+				"msgid": "Referal profit",
+				"msgstr": ["Referral profitto"]
+			},
+			"Link for invitation": {
+				"msgid": "Link for invitation",
+				"msgstr": ["Link per invito"]
+			},
+			"Deposit": {
+				"msgid": "Deposit",
+				"msgstr": ["Ricarica"]
+			},
+			"Withdraw": {
+				"msgid": "Withdraw",
+				"msgstr": ["Prelievo"]
+			},
+			"TOTAL USERS": {
+				"msgid": "TOTAL USERS",
+				"msgstr": ["UTENTI TOTALI"]
+			},
+			"TOTALE TRANSAZIONI": {
+				"msgid": "TOTALE TRANSAZIONI",
+				"msgstr": [""]
+			},
+			"TOTAL PAYOUT": {
+				"msgid": "TOTAL PAYOUT",
+				"msgstr": ["PAGAMENTO TOTALE"]
+			},
+			"Referral link": {
+				"msgid": "Referral link",
+				"msgstr": ["Link per invito"]
+			},
+			"1 line": {
+				"msgid": "1 line",
+				"msgstr": ["1 linea"]
+			},
+			"Total person": {
+				"msgid": "Total person",
+				"msgstr": ["Persona totale"]
+			},
+			"2 line": {
+				"msgid": "2 line",
+				"msgstr": ["2 linea"]
+			},
+			"Profit received": {
+				"msgid": "Profit received",
+				"msgstr": ["Reddito ricevuto"]
+			},
+			"3 line": {
+				"msgid": "3 line",
+				"msgstr": ["3 linea"]
+			},
+			"Lost profits": {
+				"msgid": "Lost profits",
+				"msgstr": ["Guadagno perso"]
+			},
+			"JOIN THE FIGHT AND WIN": {
+				"msgid": "JOIN THE FIGHT AND WIN",
+				"msgstr": ["UNISCITI ALLA LOTTA E VINCI"]
+			},
+			"Cards": {
+				"msgid": "Cards",
+				"msgstr": ["CARTE"]
+			},
+			"BRONZE": {
+				"msgid": "BRONZE",
+				"msgstr": ["BRONZO"]
+			},
+			"SILVER": {
+				"msgid": "SILVER",
+				"msgstr": ["D'ARGENTO"]
+			},
+			"GOLD": {
+				"msgid": "GOLD",
+				"msgstr": ["ORO"]
+			},
+			"EMERALD": {
+				"msgid": "EMERALD",
+				"msgstr": ["SMERALDO"]
+			},
+			"GAME HISTORY": {
+				"msgid": "GAME HISTORY",
+				"msgstr": ["STORIA DEL GIOCO"]
+			},
+			"SHOW MORE": {
+				"msgid": "SHOW MORE",
+				"msgstr": ["mostra di più"]
+			},
+			"start": {
+				"msgid": "start",
+				"msgstr": ["inizio"]
+			},
+			"Log In": {
+				"msgid": "Log In",
+				"msgstr": ["Login"]
+			},
+			"Sign Up": {
+				"msgid": "Sign Up",
+				"msgstr": ["Registrati"]
+			},
+			"Username": {
+				"msgid": "Username",
+				"msgstr": [""]
+			},
+			"Email": {
+				"msgid": "Email",
+				"msgstr": ["e-mail"]
+			},
+			"Password": {
+				"msgid": "Password",
+				"msgstr": ["Password"]
+			},
+			"Confirm Password": {
+				"msgid": "Confirm Password",
+				"msgstr": ["Conferma la password"]
+			},
+			"MAIN": {
+				"msgid": "MAIN",
+				"msgstr": ["Pagina principale"]
+			},
+			"REFFERALS": {
+				"msgid": "REFFERALS",
+				"msgstr": ["Rinvii"]
+			},
+			"STATISTICS": {
+				"msgid": "STATISTICS",
+				"msgstr": ["Statistiche"]
+			},
+			"RULES": {
+				"msgid": "RULES",
+				"msgstr": ["Regole"]
+			},
+			"USE TELEGRAM BOT": {
+				"msgid": "USE TELEGRAM BOT",
+				"msgstr": ["Usa il bot di telegramma"]
+			},
+			"LOGOUT": {
+				"msgid": "LOGOUT",
+				"msgstr": ["Disconnettersi"]
+			},
+			"Switch lang": {
+				"msgid": "Switch lang",
+				"msgstr": [""]
+			},
+			"New Here": {
+				"msgid": "New Here",
+				"msgstr": [""]
+			},
+			"Withdrawal": {
+				"msgid": "Withdrawal",
+				"msgstr": ["Prelievo"]
+			},
+			"Available for payout": {
+				"msgid": "Available for payout",
+				"msgstr": ["Disponibile per il pagamento"]
+			},
+			"Withdrawal amount": {
+				"msgid": "Withdrawal amount",
+				"msgstr": ["Importo del pagamento"]
+			},
+			"PAYOUT": {
+				"msgid": "PAYOUT",
+				"msgstr": ["PAGAMENTO"]
+			},
+			"TRANSACTION HISTORY": {
+				"msgid": "TRANSACTION HISTORY",
+				"msgstr": ["CRONOLOGIA DELLE TRANSAZIONI"]
+			},
+			"description": {
+				"msgid": "description",
+				"msgstr": ["descrizione"]
+			},
+			"Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.": {
+				"msgid": "Tokemon Game is a financial game on Tron Chain network, which allows both passive and active players to make money. To receive winnings, players need to buy a card with a Tokemon that will participate in the battle.",
+				"msgstr": [
+					"Tokemon Game è un gioco finanziario sulla rete Tron Chain, che permette ai giocatori passivi e attivi di guadagnare denaro. Per ricevere vincite, i giocatori devono acquistare una carta con un tokemon che partecipare alla battaglia"
+				]
+			},
+			"The registration is free": {
+				"msgid": "The registration is free",
+				"msgstr": ["La registrazione è gratuita"]
+			},
+			"To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards": {
+				"msgid": "To start playing and earning, you need top up your balance in USDT TRC-20 and buy access to your cards",
+				"msgstr": [
+					"Per iniziare a giocare e a guadagnare, è necessario ricaricare il proprio saldo in USD TRACK-20 e acquistare l'accesso alle carte."
+				]
+			},
+			"affiliate program": {
+				"msgid": "affiliate program",
+				"msgstr": ["PROGRAMMA DI AFFILIAZIONE"]
+			},
+			"Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.": {
+				"msgid": "Pokemon participate in 4 battles. For each battle you get 40% of the cost of the card.",
+				"msgstr": [
+					"I Pokemon partecipano a 4 battaglie. Per ogni battaglia si ottiene il 40% del costo della carta."
+				]
+			},
+			"After receiving 4 wins, you can feed the Tokémon to continue the battles": {
+				"msgid": "After receiving 4 wins, you can feed the Tokémon to continue the battles",
+				"msgstr": [
+					"Dopo aver ottenuto 4 vittorie, è possibile nutrire i Pokemon per continuare le battaglie."
+				]
+			},
+			"To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!": {
+				"msgid": "To receive winnings, you must add a USDT wallet address in the TRC20 network to your account. ATTENTION! Withdrawal address cannot be changed!",
+				"msgstr": [
+					"Per ricevere le vincite, è necessario aggiungere al proprio account un indirizzo di portafoglio USD nella rete TRS20. ATTENZIONE! L'indirizzo di prelievo non può essere modificato!"
+				]
+			},
+			"Balance replenishment and withdrawal – instant.": {
+				"msgid": "Balance replenishment and withdrawal – instant.",
+				"msgstr": ["Ricarica e prelievo del saldo - istantanei."]
+			},
+			"3 lines = 15%": {
+				"msgid": "3 lines = 15%",
+				"msgstr": ["3 LINEE = 15%."]
+			},
+			"Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged": {
+				"msgid": "Affiliate reward comes only from active cards. If your card is not active, then the Affiliate reward is not charged",
+				"msgstr": [
+					"La ricompensa degli affiliati proviene solo dalle carte attive. Se la carta non è non è attiva, il premio di affiliazione non viene addebitato il premio di affiliazione"
+				]
+			},
+			"You can take part in all cards at the same time.": {
+				"msgid": "You can take part in all cards at the same time.",
+				"msgstr": [
+					"È possibile partecipare a tutte le carte contemporaneamente."
+				]
+			},
+			"BUDGET ALLOCATION": {
+				"msgid": "BUDGET ALLOCATION",
+				"msgstr": ["ALLOCAZIONE DEL BUDGET"]
+			},
+			"Battle payment": {
+				"msgid": "Battle payment",
+				"msgstr": ["PAGAMENTO DELLA BATTAGLIA"]
+			},
+			"Advertising expenses": {
+				"msgid": "Advertising expenses",
+				"msgstr": ["PAGAMENTO DELLA BATTAGLIA"]
+			},
+			"Affiliate rewards": {
+				"msgid": "Affiliate rewards",
+				"msgstr": ["PAGAMENTO DELLA BATTAGLIA"]
+			},
+			"Structure of each level": {
+				"msgid": "Structure of each level",
+				"msgstr": ["PAGAMENTO DELLA BATTAGLIA"]
+			},
+			"In Tokemon Game, each card is a separate structure. All new players are randomly placed in a  single large structure on each card, giving  everyone an equal chance to earn rewards  without having to invite personal partners Everyone chooses any card. By  activating a card, a participant  automatically gets into a line with  available seats. Free seats are allocated  and assigned randomly. A new player always takes the right seat in  the cycle of another random participant When both seats in the cycle are occupied  by players, you move to a new row below -  this is a recycle. Then, this action is  repeated as the activity moves on the  level Each participant can take only one seat  (their own cycle) on the line, after closing  their cycle, the participant moves to the  following lines below\n": {
+				"msgid": "In Tokemon Game, each card is a separate structure. All new players are randomly placed in a  single large structure on each card, giving  everyone an equal chance to earn rewards  without having to invite personal partners Everyone chooses any card. By  activating a card, a participant  automatically gets into a line with  available seats. Free seats are allocated  and assigned randomly. A new player always takes the right seat in  the cycle of another random participant When both seats in the cycle are occupied  by players, you move to a new row below -  this is a recycle. Then, this action is  repeated as the activity moves on the  level Each participant can take only one seat  (their own cycle) on the line, after closing  their cycle, the participant moves to the  following lines below",
+				"msgstr": [
+					"Nel Gioco Tokemon, ogni carta è una struttura separata. Tutti i nuovi giocatori sono collocati in modo casuale in un'unica grande struttura su ogni carta, dando a tutti un'uguale possibilità di guadagnare ricompense senza dover invitare partner personali. Tutti scelgono una carta qualsiasi. Attivando una carta, il partecipante viene automaticamente automaticamente in una fila di posti disponibili. I posti liberi vengono assegnati in modo casuale. Un nuovo giocatore prende sempre il posto giusto nel ciclo di un altro partecipante casuale.Quando entrambi i posti del ciclo sono occupati da giocatori, ci si sposta in una nuova fila sottostante: si tratta di un riciclo. Poi, questa azione viene ripetuta man mano che l'attività si sposta sul livello Ogni partecipante può occupare un solo posto (il proprio ciclo) sulla riga, dopo aver chiuso il proprio ciclo, il Dopo aver chiuso il proprio ciclo, il partecipante si sposta sulle righe successive"
+				]
+			},
+			"game rules": {
+				"msgid": "game rules",
+				"msgstr": ["REGOLE DI GIOCO"]
+			},
+			"Cost of cards": {
+				"msgid": "Cost of cards",
+				"msgstr": ["COSTO DELLE CARTE"]
+			},
+			"line": {
+				"msgid": "LINIEN",
+				"msgstr": [""]
+			},
+			"still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng": {
+				"msgid": "still have questions? With full instructions on the game, how to deposit, how to withdraw the winnings, you can read here tokemons.info/Eng",
+				"msgstr": [
+					"Avete ancora domande? Per le istruzioni complete sul gioco, su come depositare e su come prelevare le vincite, seguite questo link tokemons.info/Ita"
+				]
+			},
+			"TRANSACTION NOTICE": {
+				"msgid": "TRANSACTION NOTICE",
+				"msgstr": [
+					"L'importo minimo del deposito è di 10 USD. Le transazioni inferiori a 10 USD andranno perse."
+				]
+			},
+			"TRANSACTION PURSE NOTICE": {
+				"msgid": "TRANSACTION PURSE NOTICE",
+				"msgstr": ["Le portefeuille de retrait ne peut pas être modifié"]
+			}
+		}
+	}
 }

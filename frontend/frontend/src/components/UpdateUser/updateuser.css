@@ -8,12 +8,6 @@
     display: block;
 }
 
-input{
-   box-sizing: border-box;
-   height:40px;
-   width:40%;
-}
-
 #button-update{
     border-radius: 5px solid green;
     background-color: aqua;

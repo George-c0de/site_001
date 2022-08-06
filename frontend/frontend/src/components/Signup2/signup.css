@@ -104,45 +104,6 @@
     font-weight: bold;
 }
 
-.captcha-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.captcha-field {
-    position: relative;
-    width: 45%;
-    height: 55px;
-}
-
-.captcha-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-}
-
-.captcha-data {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.green_btn.captcha-btn {
-    width: 45%;
-    height: 55px;
-    font-size: 16px;
-}
-
-
 .signup_container .left .signup-link {
     width: 100%;
     text-align: center;

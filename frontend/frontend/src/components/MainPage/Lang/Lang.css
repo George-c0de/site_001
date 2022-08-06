@@ -1,53 +1,71 @@
 /*Icon at the right bottom of screen*/
 
-.site-main, .site-main_active {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.site-main,
+.site-main_active {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 9999999;
 }
 
 .lang-list {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin: 0;
 }
 
 .lang-list.hidden {
-    display: none;
+	display: none;
 }
 
 .lang-list li {
-    margin: 5px 0 0 0;
-    height: 45px;
-    font-size: unset;
+	margin: 5px 0 0 0;
+	height: 45px;
+	font-size: unset;
 }
 
-.lang-icon, .lang-icon_active {
-    width: 45px;
-    height: 45px;
+.lang-icon,
+.lang-icon_active {
+	width: 45px;
+	height: 45px;
 }
 
 .lang-icon-preview {
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 45px;
-    height: 45px;
-    display: block;
-    cursor: pointer;
+	z-index: 9999999;
+	position: absolute;
+	top: -50px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 45px;
+	height: 45px;
+	display: block;
+	cursor: pointer;
 }
 
 .lang-icon-preview.hidden {
-    display: none;
+	display: none;
 }
 
-.support-icon-mainpage, .support-icon-mainpage_active {
-    width: 65px;
-    height: 65px;
+.support-icon-mainpage,
+.support-icon-mainpage_active {
+	width: 65px;
+	height: 65px;
 }
-
+@media screen and (max-width: 600px) {
+	.lang-icon_active {
+		width: 35px;
+		height: 35px;
+	}
+	.lang-list li {
+		margin: 3px;
+		height: auto;
+	}
+	.lang-icon {
+		width: 35px;
+		height: 35px;
+	}
+}

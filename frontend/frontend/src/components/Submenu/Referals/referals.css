@@ -1,139 +1,90 @@
-.homepage {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background-image: url('../../../Ảnh Pokemon Dự Trù/фон\ общий-min.svg');
-    background-position: right bottom;
-    background-attachment: fixed;
-    background-size: cover;
-    overflow-x: hidden;
-    overflow-y: auto;
+.referals__container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-bottom: 30px;
 }
-
-/*All infos on menu*/
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+.referals__link {
+	margin-bottom: 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-
-#info-3-col {
-    display: flex;
-    align-items: flex-start;
+.referals__title {
+	font-weight: 400;
+	font-size: 48px;
+	margin-bottom: 8px;
+	color: #ffffff;
 }
-
-#info-3-col .col-sm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    font-size: 32px;
-    color: #FFF;
-    font-weight: 700;
+.referals__info-wrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
-
-#info-3-col .col-sm span {
-    display: block;
-    padding: 10px 0;
+.referals__info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
-
-ul.row {
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    justify-content: center;
+.referals__text {
+	margin-top: 23px;
+	font-weight: 600;
+	font-size: 32px;
+	color: #ffffff;
+	margin-bottom: 13px;
 }
-
-.row li {
-    padding: 0;
-    color: #FFCC00;
-    font-size: 30px;
-    cursor: auto;
-    text-shadow: none;
-    font-weight: 600;
+.referals__count-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-
-.col-sm button {
-    display: block;
-    padding: 5px;
-    background: linear-gradient(230.64deg, #FFDC4E 27.47%, #CCA307 62.2%);
-    border: 2px solid #475176;
-    color: white;
-    border-radius: 42px;
-    width: 160px;
-    font-size: 32px;
-    text-align: center;
-    outline: none;
+.referals__count {
+	font-weight: 500;
+	font-size: 32px;
+	color: #ffcc00;
 }
-
-.container .title-referal {
-    color: white;
-    font-size: 48px;
-    text-align: center;
-}
-
-.container .link-invitation {
-    font-size: 24px;
-    border-radius: 25px;
-    outline: 1px solid white;
-    padding: 5px 20px;
-    color: white;
-    min-height: 55px;
-    width: 500px;
-}
-
-.container .copy-icon{
-	position: relative;
-	margin-left: 100%;
-}
-
-
-@media only screen and (max-width: 412px) {
-    #info-3-col .col-sm{
-		max-width:30% ;
+@media screen and (max-width: 980px) {
+	.referals__info-wrapper .yellow-btn {
+		font-size: 25px;
+		width: 160px;
+		margin-right: 0;
 	}
-
-	#info-3-col{
-		flex-direction: row;
-		margin-left:15px;
+	.referals__text {
+		font-size: 25px;
+		margin-top: 10px;
+		margin-bottom: 5px;
 	}
-
-	#info-3-col .col-sm span {
-		font-size:20px;
-	}
-
-	.col-sm button {
-		width:80px;
-		font-size:20px;
-	}
-
-	.container .link-invitation {
-		width:300px;
+	.referals__title {
+		font-size: 40px;
 	}
 }
-
-@media only screen and (min-width:413px) and (max-width: 600px) {
-	#info-3-col .col-sm{
-		max-width:30% ;
+@media screen and (max-width: 740px) {
+	.main__header {
+		padding: 5px 20px;
 	}
-
-	#info-3-col{
-		flex-direction: row;
-		margin-left:15px;
+	.referals__info-wrapper .yellow-btn {
+		font-size: 20px;
+		max-width: 120px;
 	}
-
-	#info-3-col .col-sm span {
-		font-size:20px;
+	.referals__text {
+		font-size: 16px;
 	}
-
-	.col-sm button {
-		width:110px;
+	.referals__count {
+		font-size: 16px;
 	}
-
-	.container .link-invitation {
-		width:400px;
+}
+@media screen and (max-width: 470px) {
+	.referals__info-wrapper .yellow-btn {
+		font-size: 20px;
+		max-width: 100px;
+	}
+	.referals__text{
+		  font-size: 12px;
+	}
+}
+@media screen and (max-width: 410px) {
+	.referals__info-wrapper .yellow-btn {
+		font-size: 20px;
+		max-width: 100px;
 	}
 }
