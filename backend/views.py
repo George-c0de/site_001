@@ -1421,7 +1421,7 @@ def dis_input(request):
         wall = data['wallet']
         col = data['col']
         col = int(col)
-        if col < 10:
+        if col < 0:
             return Response(status=400)
         if col is not None:
             if profile.wallet is not None:
