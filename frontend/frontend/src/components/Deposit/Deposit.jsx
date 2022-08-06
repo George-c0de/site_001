@@ -94,7 +94,11 @@ const Deposit = () => {
 					console.log('yes')
 					SetState(false)
 				}
-			} catch (e) {}
+			} catch (e) {
+			console.log(e)
+			console.log(data)
+
+			}
 			console.log(user)
 		}
 		getPosts()
