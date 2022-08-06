@@ -39,6 +39,7 @@ export const UserId = ({ note }) => {
 		} catch (e) {}
 	}
 
+
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
 	}

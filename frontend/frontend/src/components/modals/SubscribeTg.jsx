@@ -18,12 +18,15 @@ const SubscribeTg = () => {
 	}
 
 	React.useEffect(() => {
+		localStorage.setItem('subscribe', true)
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
 		}
 	}, [])
 
+	if (localStorage.getItem('subscribe')) return
+	
 	return (
 		<div className={`subscriibe-wrapper ${activeTg ? '' : 'sub-wrapper-hide'}`}>
 			<div className='subscriibe-block' ref={ref}>
