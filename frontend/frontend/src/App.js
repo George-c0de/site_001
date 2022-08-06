@@ -11,6 +11,7 @@ import Pay from './components/Pay/Pay'
 import Deposit from './components/Deposit/Deposit'
 import React from 'react'
 import Rules2 from './components/Rules2/Rules2'
+import Resetpass from './components/ResetPass/Resetpass'
 
 function App() {
 	//const user=localStorage.getItem("token");
@@ -34,6 +35,7 @@ function App() {
 			<Route path='/' exact element={<Deposit />} />
 			{/* <Route path='/update/:id' exact element={<UpdateUser />} /> */}
 			<Route path='/home/rules' element={<Rules2 />} />
+			<Route path='/reset' element={<Resetpass />} />
 		</Routes>
 	)
 }

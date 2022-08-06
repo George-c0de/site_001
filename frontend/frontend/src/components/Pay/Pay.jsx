@@ -59,6 +59,7 @@ const Pay = () => {
 			//console.log(a)
 		} catch (e) {
 			console.log(e)
+			console.log(data)
 		}
 	}
 	useEffect(() => {
