@@ -40,7 +40,7 @@ const Signup = () => {
 					}
 				})
 				if (data2.data === 200) {
-					navigate('/home/game') //after registering navigate to login page
+					navigate('/home') //after registering navigate to login page
 				}
 			} catch (error) {
 				console.log(error)
@@ -70,7 +70,7 @@ const Signup = () => {
 						headers: { 'Content-Type': 'application/json' },
 					})
 					console.log(res.data)
-					navigate('/home/game') //after registering navigate to login page
+					navigate('/home') //after registering navigate to login page
 					console.log(res.message)
 				} catch (error) {
 					console.log(error)
