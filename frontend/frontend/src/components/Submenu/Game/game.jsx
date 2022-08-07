@@ -1,31 +1,13 @@
-//React, React Router, React Hooks
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
-// Pages
-import { Lang } from '../../MainPage/Lang/Lang'
-import { Menu } from '../../MainPage/Menu/Menu'
-import { UserId } from '../../UserId/UserId'
-// import { UserId } from '../../Rules/'
-import Referals from '../Referals/referals'
-import Statistics from '../Statistics/statistics'
-
 import { PokeballsPack } from './PokeballsPack/PokeballsPack'
 import { GameHistory } from './GameHistory/GameHistory'
-//Images
 import { IMAGES } from './PokeballsModal/PokeballsImages'
 import bronze from '../../../assets/backgrounds/бронза фон.svg'
 import silver from '../../../assets/backgrounds/серебро-min.svg'
 import gold from '../../../assets/backgrounds/золото-min.svg'
 import emerald from '../../../assets/backgrounds/изумруд-min.svg'
-import HeaderLogo from '../../../assets/headerLogo.png'
-import HeaderHuman from '../../../assets/HeaderHuman.png'
-import Telegram from '../../../assets/telegram.svg'
-import LogOut from '../../../assets/logout.svg'
-
 import { t } from 'ttag'
 import axios from 'axios'
-import { loadReCaptcha } from 'recaptcha-v3-react-function-async'
 import Header from '../../Header/Header'
 import SubscribeTg from '../../modals/SubscribeTg'
 
@@ -40,8 +22,6 @@ const Game = () => {
 	const [onActive, setActive] = useState(true)
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
 	const [username, setUsername] = useState('')
-
-	const [openBurger, setOpenBurger] = useState(false)
 
 	const [price, setPrice] = useState({
 		bronze: [10, 15, 25, 40, 50, 77],

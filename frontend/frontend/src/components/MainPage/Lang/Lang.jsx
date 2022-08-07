@@ -27,6 +27,7 @@ const languages = {
 	br: brazil,
 	ar: argentina,
 }
+
 const LOCALE_COOKIE = '__locale'
 
 function getLocale() {

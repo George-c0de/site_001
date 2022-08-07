@@ -53,7 +53,7 @@ const Signup = () => {
 
 		e.preventDefault()
 		try {
-			//const url = "http://localhost:8080/api/users";
+			// const url = "http://localhost:8080/api/users";
 			//const {data: res} = await axios.post("/api/register", data);
 			const { data: res } = await axios.post(`/api/register`, data, {
 				headers: { 'Content-Type': 'application/json' },

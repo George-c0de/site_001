@@ -49,6 +49,7 @@ const Mainpage = () => {
 
 	//const { id } = useParams();
 	//Logout
+	
 	const handleLogout = () => {
 		axios.get('/api/logout')
 		localStorage.removeItem('token')
@@ -57,6 +58,7 @@ const Mainpage = () => {
 	useEffect(() => {
 		fetchLink()
 	}, [])
+
 	const [get_link_tg, setget_link_tg] = useState({
 		link_tg: 'https://t.me/Tokemon_game_Bot',
 	})
@@ -161,8 +163,6 @@ const Mainpage = () => {
 					{openUserInfo ? <UserId note={posts} /> : null}
 				</nav>
 			</div>
-			{/* <img  src={pokeball} alt="" className="pokeball"/> */}
-			<Lang isActive={isActive} />
 		</div>
 	)
 }

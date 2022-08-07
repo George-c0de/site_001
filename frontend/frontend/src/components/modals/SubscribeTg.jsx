@@ -18,15 +18,15 @@ const SubscribeTg = () => {
 	}
 
 	React.useEffect(() => {
-		localStorage.setItem('subscribe', true)
+		document.cookie = 'openTg'
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
 		}
 	}, [])
 
-	if (localStorage.getItem('subscribe')) return
-	
+	if (document.cookie.includes('openTg')) return
+
 	return (
 		<div className={`subscriibe-wrapper ${activeTg ? '' : 'sub-wrapper-hide'}`}>
 			<div className='subscriibe-block' ref={ref}>
@@ -37,13 +37,14 @@ const SubscribeTg = () => {
 					onClick={handleClick}
 				/>
 				<p className='subscribe-text'>
-					Подпишитесь на телеграмм чтобы быть в курсе всех новостей
+					Подпишитесь на телеграмм чтобы быть в курсе всех новостей.
 				</p>
 				<a
 					className='authorization__button subscribe-btn'
 					href='https://t.me/Tokemon_game_Bot'
 					target='__blank'
 				>
+					<img src={Telegram} alt='' className='authorization__img' />
 					Подписаться на телеграмм
 				</a>
 			</div>

@@ -7,7 +7,7 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	padding-top: 130px;
+	padding-top: 50px;
 }
 
 .deposit-title-wrapper {
@@ -79,8 +79,14 @@
 .deposit-input-deposit {
 	align-self: auto;
 	max-width: 400px;
+	width: 100%;
 }
-
+.deposit-link {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .deposit-button {
 	padding: 5px 30px;
 	background: #ffcc00;

@@ -28,7 +28,6 @@ p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 80px;
 	height: 80px;
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
@@ -61,10 +60,10 @@ p {
 	background: transparent;
 }
 .menu-btn.open .menu-btn__burger::before {
-	transform: rotate(45deg) translate(25px, -25px);
+	transform: rotate(45deg) translate(35px, -35px);
 }
 .menu-btn.open .menu-btn__burger::after {
-	transform: rotate(-45deg) translate(25px, 25px);
+	transform: rotate(-45deg) translate(35px, 35px);
 }
 
 .main__menu img {
@@ -202,16 +201,13 @@ p {
 		font-size: 30px;
 		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.71);
 	}
-		.main__links {
+	.main__links {
 		padding-top: 30px;
 	}
 }
 @media screen and (max-width: 500px) {
 	.main-logo {
 		width: 180px;
-	}
-	.menu-btn {
-		justify-content: flex-start;
 	}
 }
 @media screen and (max-width: 400px) {
