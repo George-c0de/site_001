@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './subscribe.css'
 import Telegram from '../../assets/tg.svg'
 import Cross from '../../assets/cross-svgrepo-com.svg'
+import { t } from 'ttag'
+
 const SubscribeTg = () => {
 	const [activeTg, setActiveTg] = useState(true)
 
@@ -37,7 +39,7 @@ const SubscribeTg = () => {
 					onClick={handleClick}
 				/>
 				<p className='subscribe-text'>
-					Подпишитесь на телеграмм чтобы быть в курсе всех новостей.
+					{t`Subscribe to us on Telegram to receive information about your winnings`}
 				</p>
 				<a
 					className='authorization__button subscribe-btn'
@@ -45,7 +47,7 @@ const SubscribeTg = () => {
 					target='__blank'
 				>
 					<img src={Telegram} alt='' className='authorization__img' />
-					Подписаться на телеграмм
+					{t`Subscribe to Telegram`}
 				</a>
 			</div>
 		</div>

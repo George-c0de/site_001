@@ -189,7 +189,9 @@ const Pay = () => {
 						</div>
 						<div className='pay-inputs-wrapper'>
 							<div className='pay-input'>
-								<label htmlFor='address-input'>{t`Top - up amount`}:</label>
+								<label htmlFor='address-input'>
+									{t`Enter the amount to withdraw`}:
+								</label>
 								<input
 									onChange={e => hundSum(e, 'col')}
 									value={data.col}
@@ -197,9 +199,6 @@ const Pay = () => {
 									className='pay-sum-inp-pay'
 									name='col'
 								/>
-								<span className='deposit-deposit-info'>
-									{t`TRANSACTION NOTICE`}
-								</span>
 							</div>
 							<div className='pay-input'>
 								<label htmlFor='address-input'>Адрес вывода:</label>
@@ -212,7 +211,7 @@ const Pay = () => {
 									value={data.wallet_input}
 								/>
 								<span className='pay-input-info'>
-									Кошелек для вывода изменить будет нельзя
+									{t`Specify a wallet for funds withdrawal. Specified wallet is not subject to change`}
 								</span>
 							</div>
 						</div>

@@ -15,7 +15,7 @@ export function saveLocale(locale) {
 const locale = getLocale();
 
 if (locale !== 'en') {
-    const translationsObj = require(`../i18n/${locale}.po.json`);
+    const translationsObj = require(`../i18n/${locale}.po.json`)
     addLocale(locale, translationsObj);
     localize(locale);
 }

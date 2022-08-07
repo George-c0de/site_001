@@ -9,7 +9,7 @@ import { reCaptchaExecute } from 'recaptcha-v3-react-function-async'
 
 const Signup = () => {
 	const navigate = useNavigate()
-	const [typeAuthorization, setTypeAuthorization] = useState('sign')
+	const [typeAuthorization, setTypeAuthorization] = useState('login')
 	const [invalidPassword, setInvalidPassword] = useState(false)
 	const [invalidDataLogin, setInvalidDataLogin] = useState(false)
 	const [invalidEmail, setInvalidEmail] = useState(false)
@@ -33,27 +33,29 @@ const Signup = () => {
 				email: data.email,
 				password: data.password,
 			})
-			try {
-				const { data } = axios.post('/api/login', validData, {
-					headers: { 'Content-Type': 'application/json' },
-				})
-				console.log(data)
-			} catch (e) {
-				console.log(e.response)
-			}
 			// try {
-			// 	let data2 = 200
-			// 	data2 = await axios.post('/api/login', data).catch(function (error) {
-			// 		if (error.response) {
-			// 			data2 = error.response.status
-			// 		}
+			// 	const { data } = axios.post('/api/login', validData, {
+			// 		headers: { 'Content-Type': 'application/json' },
 			// 	})
-			// 	if (data2.data === 200) {
-			// 		navigate('/home') //after registering navigate to login page
-			// 	}
-			// } catch (error) {
-			// 	console.log(error)
+			// 	console.log(data)
+			// } catch (e) {
+			// 	console.log(e.response)
 			// }
+			try {
+				let data2 = 200
+				data2 = await axios
+					.post('/api/login', validData)
+					.catch(function (error) {
+						if (error.response) {
+							data2 = error.response.status
+						}
+					})
+				if (data2.data === 200) {
+					navigate('/home') //after registering navigate to login page
+				}
+			} catch (error) {
+				console.log(error)
+			}
 		}
 
 		if (typeAuthorization === 'sign') {
@@ -89,14 +91,25 @@ const Signup = () => {
 					'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
 					'auth'
 				)
+				// try {
+				// 	const response = await axios.post('/api/register', validData, {
+				// 		headers: { 'Content-Type': 'application/json' },
+				// 	})
+				// 	console.log(response)
+				// 	navigate('/home')
+				// } catch (e) {
+				// 	console.log(e.response)
+				// }
+
 				try {
-					const response = await axios.post('/api/register', validData, {
+					const { data: res } = await axios.post('/api/register', data, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-					console.log(response)
+					console.log(res.data)
 					navigate('/home')
-				} catch (e) {
-					console.log(e.response)
+					console.log(res.message)
+				} catch (error) {
+					alert(error.response.data.msg)
 				}
 			}
 		}
@@ -178,10 +191,10 @@ const Signup = () => {
 								className='authorization-reset'
 								onClick={() => setTypeAuthorization('reset')}
 							>
-								Restore password?
+								{t`Forgot your password`}
 							</p>
 							<button className='authorization__button' type='submit'>
-								Further
+								{t`Continue`}
 							</button>
 						</form>
 					)}
@@ -223,31 +236,31 @@ const Signup = () => {
 								</div>
 							)}
 							<button className='authorization__button' type='submit'>
-								Further
+								{t`Continue`}
 							</button>
 						</form>
 					)}
 
 					{typeAuthorization === 'reset' && (
 						<>
-							<p className='reset__link'>Enter your email</p>
+							<p className='reset__link'>{t`Enter your email address to reset your password`}</p>
 							<form className='authorization__form' onSubmit={handleSubmit}>
 								<input
 									type='text'
 									className={`authorization__input ${
 										invalidEmail ? 'authorization__input-invalid' : ''
 									}`}
-									placeholder='E-mail:'
+									placeholder={t`Email`}
 									name='email'
 									onChange={event => setEmailReset(event.target.value)}
 									value={emailReset}
 								/>
 								{letterSent && (
-									<p className='reset__text'>Письмо отправлено!</p>
+									<p className='reset__text'>{t`Password recovery link was sent to the specified email`}</p>
 								)}
 
 								<button className='authorization__button' type='submit'>
-									Further
+									{t`Continue`}
 								</button>
 							</form>
 						</>

@@ -45,7 +45,7 @@ const Resetpass = () => {
 				</nav>
 			</div>
 			<div className='reset__block'>
-				<h1 className='reset__title'>Set a new password!</h1>
+				<h1 className='reset__title'>{t`Enter a new password`}</h1>
 				<form action='#' onSubmit={handleSubmit}>
 					<input
 						className={`authorization__input ${
@@ -73,7 +73,7 @@ const Resetpass = () => {
 						</div>
 					)}
 					<button className='authorization__button' type='submit'>
-						Further
+						{t`Confirm your new password`}
 					</button>
 				</form>
 			</div>

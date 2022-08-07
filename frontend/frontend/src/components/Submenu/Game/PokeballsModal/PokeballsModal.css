@@ -1,306 +1,315 @@
 .pokeballs-modal {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    display: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+	display: none;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
 .pokeballs-container.open .pokeballs-modal {
-    display: flex;
+	display: flex;
 }
 
 .pokeballs-modal .pokeballs-card {
-    width: 220px;
-    height: 220px;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: rgba(79, 79, 79, .7);
-    position: relative;
+	width: 220px;
+	height: 220px;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 15px;
+	background-color: rgba(79, 79, 79, 0.7);
+	position: relative;
 }
 
 .pokeballs-modal .pokeballs-card.inactive::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(79, 79, 79, .7);
-    border-radius: 15px;
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(79, 79, 79, 0.7);
+	border-radius: 15px;
 }
 
 .pokeballs-modal .pokeballs-card.opened {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #6b2e07;
-    gap: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #6b2e07;
+	gap: 10px;
 }
 
 .card-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
 }
 
 .pokeballs-card-info {
-    z-index: 10;
+	z-index: 10;
 }
 .pokeballs-card-label2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70px;
-    padding: 5px;
-    border-radius: 15px;
-    font-size: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: all .3s ease-in-out;
-    cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70%;
+	height: 70px;
+	padding: 5px;
+	border-radius: 15px;
+	font-size: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
 }
 .pokeballs-card-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70px;
-    padding: 5px;
-    border-radius: 15px;
-    background-color: rgba(42, 42, 42, 0.76);
-    font-size: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: all .3s ease-in-out;
-    cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70%;
+	height: 70px;
+	padding: 5px;
+	border-radius: 15px;
+	background-color: rgba(42, 42, 42, 0.76);
+	font-size: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
 }
 
 .pokeballs-card-label:hover {
-    transform: translate(-50%, -60%);
+	transform: translate(-50%, -60%);
 }
 
 .pokeballs-card-label span {
-    display: block;
+	display: block;
 }
 
 .pokeballs-card-label span:last-child {
-    color: #95FF9F;
+	color: #95ff9f;
 }
 
 .pokeballs-card-ball {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
-
 .pokeballs-card.opened .pokeballs-card-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
-    font-size: 11px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	height: 100%;
+	font-size: 11px;
 }
 
 .card-info-label span {
-    color: #FFCC00;
+	color: #ffcc00;
 }
 
 .pokeballs-card.opened .pokeballs-card-info img {
-    width: 90%;
+	width: 90%;
 }
 
 .card-info-button {
-    display: block;
-    width: 100px;
-    padding: 5px 10px;
-    background-color: #0BDC5F;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #000;
-    text-align: center;
-    cursor: pointer;
+	display: block;
+	width: 100px;
+	padding: 5px 10px;
+	background-color: #0bdc5f;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #000;
+	text-align: center;
+	cursor: pointer;
 }
 
 .pokeballs-card-status {
-    display: flex;
+	display: flex;
 }
 
 .card-status-bar {
-    position: relative;
-    width: 30px;
-    height: 100%;
-    background-color: #FFF;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #545454;
-    text-align: center;
-    margin-right: 10px;
+	position: relative;
+	width: 30px;
+	height: 100%;
+	background-color: #fff;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #545454;
+	text-align: center;
+	margin-right: 10px;
 }
 
 .card-status-bar-label {
-    position: absolute;
-    display: block;
-    padding-top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
+	position: absolute;
+	display: block;
+	padding-top: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
 }
 
 .card-status-bar-line {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #0BDC5F;
-    border-radius: 5px;
-    transition: height .5s ease-in-out;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #0bdc5f;
+	border-radius: 5px;
+	transition: height 0.5s ease-in-out;
 }
 
 .card-status-bar[data-status='25'] .card-status-bar-line {
-    height: 25%;
+	height: 25%;
 }
 
 .card-status-bar[data-status='100'] .card-status-bar-line {
-    height: 100%;
+	height: 100%;
 }
 
 .card-status-bar[data-status='75'] .card-status-bar-line {
-    height: 75%;
+	height: 75%;
 }
 
 .card-status-bar[data-status='10'] .card-status-bar-line {
-    height: 10%;
+	height: 10%;
 }
 
 .card-status-bar[data-status='20'] .card-status-bar-line {
-    height: 20%;
+	height: 20%;
 }
 
 .card-status-bar[data-status='30'] .card-status-bar-line {
-    height: 30%;
-
+	height: 30%;
 }
 
 .card-status-bar[data-status='40'] .card-status-bar-line {
-    height: 40%;
+	height: 40%;
 }
 
 .card-status-bar[data-status='50'] .card-status-bar-line {
-    height: 50%;
+	height: 50%;
 }
 
 .card-status-bar[data-status='60'] .card-status-bar-line {
-    height: 60%;
+	height: 60%;
 }
 
 .card-status-bar[data-status='70'] .card-status-bar-line {
-    height: 70%;
+	height: 70%;
 }
 
 .card-status-bar[data-status='80'] .card-status-bar-line {
-    height: 80%;
+	height: 80%;
 }
 
 .card-status-bar[data-status='90'] .card-status-bar-line {
-    height: 90%;
+	height: 90%;
 }
 
 .card-status-balls {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .card-status-balls span {
-    position: relative;
-    display: block;
-    width: 20px;
-    height: 20px;
-    background-color: #D9D9D9;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .7);
-    border-radius: 50%;
-    cursor: pointer;
+	position: relative;
+	display: block;
+	width: 20px;
+	height: 20px;
+	background-color: #d9d9d9;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
+	border-radius: 50%;
+	cursor: pointer;
 }
 
 .card-status-balls span img {
-    visibility: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
+	visibility: hidden;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25px;
+	height: 25px;
+	object-fit: contain;
 }
 
 .card-status-balls span.show img {
-    visibility: visible;
+	visibility: visible;
 }
 
 .status_pending {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px dashed #FFF;
-    animation: circle 7s infinite linear;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 2px dashed #fff;
+	animation: circle 7s infinite linear;
 }
 
 @keyframes circle {
-    100% {
-        transform: rotate(360deg);
-    }
+	100% {
+		transform: rotate(360deg);
+	}
 }
-
-
+@media only screen and (max-width: 420px) {
+	#title-pack-pokeballs span {
+		font-size: 18px !important;
+	}
+}
 @media only screen and (max-width: 412px) {
-    .pokeballs-modal .pokeballs-card {
-        width:150px;
-    }
+	.pokeballs-modal .pokeballs-card {
+		width: 150px;
+	}
 
-    .pokeballs-card-info .card-info-label{
-        font-size:10px !important;
-        margin-left:4px;
-    }
+	.pokeballs-card-info .card-info-label {
+		font-size: 10px !important;
+		margin-left: 4px;
+	}
 
-    .pokeballs-card-info .card-info-button{
-        width:75px;
-        margin-left: 4px;
-    }
+	.pokeballs-card-info .card-info-button {
+		width: 75px;
+		margin-left: 4px;
+	}
 }
 
-@media only screen and (min-width:413px) and (max-width: 600px) {
-    .pokeballs-modal .pokeballs-card {
-        width:175px;
-    }
+@media only screen and (min-width: 413px) and (max-width: 600px) {
+	.pokeballs-modal .pokeballs-card {
+		width: 175px;
+	}
 
-    .pokeballs-card-info .card-info-label{
-        font-size:13px !important;
-        margin-left:4px;
-    }
+	.pokeballs-card-info .card-info-label {
+		font-size: 13px !important;
+		margin-left: 4px;
+	}
 
-    .pokeballs-card-info .card-info-button{
-        width:90px;
-        margin-left: 4px;
-    }
+	.pokeballs-card-info .card-info-button {
+		width: 90px;
+		margin-left: 4px;
+	}
+}
+@media screen and (max-width: 600px) {
+	.pokeballs-card-label{
+		top: 40%;
+	}
+	.pokeballs-card-label2 {
+		top: 40%;
+	}
 }

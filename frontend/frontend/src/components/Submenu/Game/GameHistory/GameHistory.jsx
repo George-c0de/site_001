@@ -38,7 +38,7 @@ export const GameHistory = ({ history }) => {
 					</div>
 				</div>
 				<div>
-					<p className='history-table-text'>SHOW MORE</p>
+					<p className='history-table-text'>{t`Show more`}</p>
 				</div>
 				<span className='game-history-more'></span>
 			</div>

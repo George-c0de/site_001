@@ -306,7 +306,83 @@
 			"TRANSACTION PURSE NOTICE": {
 				"msgid": "RANSACTION PURSE NOTICE",
 				"msgstr": ["Кошелек для вывода изменить будет нельзя."]
-			}
+			},
+			"Forgot your password": {
+				"msgid": "Forgot your password",
+				"msgstr": ["Haben Sie Ihr Passwort vergessen?"]
+			},
+			"Enter your email address to reset your password": {
+				"msgid": "Enter your email address to reset your password",
+				"msgstr": [
+					"Geben Sie Ihre E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen"
+				]
+			},
+			"Password recovery link was sent to the specified email": {
+				"msgid": "Password recovery link was sent to the specified email",
+				"msgstr": [
+					"Der Link zur Wiederherstellung des Passworts wurde an die angegebene E-Mail-Adresse gesendet."
+				]
+			},
+			"Enter a new password": {
+				"msgid": "Enter a new password",
+				"msgstr": ["Geben Sie ein neues Passwort ein"]
+			},
+			"Confirm your new password": {
+				"msgid": "Confirm your new password",
+				"msgstr": ["Bestätigen Sie Ihr neues Passwort"]
+			},
+			"Subscribe to us on Telegram to receive information about your winnings": {
+				"msgid": "Subscribe to us on Telegram to receive information about your winnings",
+				"msgstr": [
+					"Cadastre-se para receber atualizações sobre seus ganhos por telegrama"
+				]
+			},
+			"Subscribe to Telegram": {
+				"msgid": "Subscribe to Telegram",
+				"msgstr": ["Per Telegramm abonnieren"]
+			},
+			"Purchase price 10usd": {
+				"msgid": "Preço de compra 10 usd.",
+				"msgstr": ["Einkaufspreis 10 usd."]
+			},
+			"Would you like to continue?": {
+				"msgid": "Você gostaria de continuar?",
+				"msgstr": ["Möchten Sie fortfahren?"]
+			},
+			"To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.": {
+				"msgid": "To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.",
+				"msgstr": [
+					"Um Ihr Guthaben aufzuladen, senden Sie den gewünschten Betrag an die angegebene trc-20-Geldbörse. Der Betrag wird sofort Ihrem Spielguthaben gutgeschrieben."
+				]
+			},
+			"The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost": {
+				"msgid": "The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost",
+				"msgstr": [
+					"Die minimale Summe der Zahlung ist 10 usdt. Transaktionen mit kleineren Beträgen gehen verloren"
+				]
+			},
+			"Enter the amount to withdraw": {
+				"msgid": "Enter the amount to withdraw",
+				"msgstr": ["Geben Sie den zu entnehmenden Betrag ein"]
+			},
+			"Specify a wallet for funds withdrawal. Specified wallet is not subject to change": {
+				"msgid": "Specify a wallet for funds withdrawal. Specified wallet is not subject to change",
+				"msgstr": [
+					"Geben Sie eine Brieftasche für die Abhebung an. Die von Ihnen angegebene Brieftasche kann nicht geändert werden."
+				]
+			},
+			"Game stats": {
+				"msgid": "Game stats",
+				"msgstr": ["Spiel-Statistiken"]
+			},
+			"Show more": {
+				"msgid": "Show more",
+				"msgstr": ["Mehr anzeigen"]
+				},
+				"Continue": {
+					"msgid": "Continue",
+					"msgstr": ["Weiter"]
+				}
 		}
   }
 }

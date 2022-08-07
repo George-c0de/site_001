@@ -34,34 +34,32 @@ export const PokeballsPack = ({
 	}
 
 	return (
-		<div
-			className='col-sm'
-			id='title-pack-pokeballs'
-			onClick={handlePokeballsPack}
-		>
+		<div className='col-sm' id='title-pack-pokeballs'>
 			<span>Cards</span>
 			<div
 				className={
 					modalOpen ? 'pokeballs-container open' : 'pokeballs-container'
 				}
 			>
-				<div id='pokeballs-detail'>
-					<img src={pokeball} className='small-pokeball' alt='' />
-					<img src={pokeball} className='small-pokeball' alt='' />
-					<img src={pokeball} className='small-pokeball' alt='' />
-					<img src={pokeball} className='small-pokeball' alt='' />
-					<img src={pokeball} className='small-pokeball' alt='' />
-					<img src={pokeball} className='small-pokeball' alt='' />
-				</div>
-				<div
-					className={
-						COLORS_TO_CLASS[title.toLowerCase()] || 'text-pokeball-dedfault'
-					}
-				>
-					{title}
-				</div>
-				<div className='icon-showdown-container'>
-					<FontAwesomeIcon icon={faChevronDown} className='icon-showdown' />
+				<div className='detail-wrapper' onClick={handlePokeballsPack}>
+					<div id='pokeballs-detail'>
+						<img src={pokeball} className='small-pokeball' alt='' />
+						<img src={pokeball} className='small-pokeball' alt='' />
+						<img src={pokeball} className='small-pokeball' alt='' />
+						<img src={pokeball} className='small-pokeball' alt='' />
+						<img src={pokeball} className='small-pokeball' alt='' />
+						<img src={pokeball} className='small-pokeball' alt='' />
+					</div>
+					<div
+						className={
+							COLORS_TO_CLASS[title.toLowerCase()] || 'text-pokeball-dedfault'
+						}
+					>
+						{title}
+					</div>
+					<div className='icon-showdown-container'>
+						<FontAwesomeIcon icon={faChevronDown} className='icon-showdown' />
+					</div>
 				</div>
 
 				<PokeballsModal

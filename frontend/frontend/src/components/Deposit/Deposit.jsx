@@ -10,8 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 
 const Deposit = () => {
-	const [onActive, setActive] = useState(true)
-	const navigate = useNavigate()
 	const [state_input, SetState] = useState(true)
 	const [data, setData] = useState({
 		wallet: '',
@@ -176,14 +174,21 @@ const Deposit = () => {
 								/>
 							</div> */}
 							<div className='deposit-input deposit-input-deposit'>
+								<p>
+									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
+								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
-									1312123123
+									123
 									<FontAwesomeIcon
 										icon={faCopy}
 										className='copy-icon deposit-copy-icon'
 										onClick={handleCopy}
 									/>
 								</span>
+								<p>
+									{t`Минимальная сумма платежа 10 usdt. Транзакции с меньшей суммой
+									будут утеряны`}
+								</p>
 							</div>
 						</div>
 						<button
