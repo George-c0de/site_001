@@ -16,8 +16,8 @@ const Signup = () => {
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [data, setData] = useState({
 		email: '',
-		password: '',
 		password1: '',
+		password2: '',
 	})
 	const [emailReset, setEmailReset] = useState('')
 	const [letterSent, setLetterSent] = useState(false)
@@ -32,7 +32,7 @@ const Signup = () => {
 		if (typeAuthorization === 'login') {
 			let validData = {
 				email: data.email,
-				password: data.password,
+				password1: data.password1,
 			}
 			if (
 				!data.email
@@ -45,7 +45,7 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
-			if (data.password.length < 8) {
+			if (data.password1.length < 8) {
 				setInvalidDataLogin(true)
 			} else {
 				setInvalidDataLogin(false)
@@ -89,16 +89,16 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
-			if (data.password.length < 8 || data.password !== data.password1) {
+			if (data.password1.length < 8 || data.password1 !== data.password2) {
 				setInvalidPassword(true)
 			} else {
 				setInvalidPassword(false)
 			}
-			console.log(invalidPassword, data.password)
+			console.log(invalidPassword, data.password1)
 			if (
 				!invalidPassword &&
 				!invalidEmail &&
-				data.password.length > 0 &&
+				data.password1.length > 0 &&
 				data.email.length > 0
 			) {
 				// let validData = JSON.stringify({
@@ -208,7 +208,7 @@ const Signup = () => {
 									invalidDataLogin ? 'authorization__input-invalid' : ''
 								}`}
 								placeholder={t`Password`}
-								name='password'
+								name='password1'
 								onChange={handleChange}
 								value={data.password}
 							/>
@@ -240,14 +240,14 @@ const Signup = () => {
 									invalidPassword ? 'authorization__input-invalid' : ''
 								}`}
 								placeholder={t`Password`}
-								name='password'
+								name='password1'
 								type='password'
 								onChange={handleChange}
 								value={data.password}
 							/>
 							<input
 								type='password'
-								name='password1'
+								name='password2'
 								className={`authorization__input ${
 									invalidPassword ? 'authorization__input-invalid' : ''
 								}`}
