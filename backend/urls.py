@@ -53,6 +53,6 @@ urlpatterns = [
     path('dis_input', views.dis_input),
     path('six', views.six),
     path('go_mess', views.go_mess),
-    path('get_lines',views.get_lines)
-
+    path('get_lines', views.get_lines),
+    path('prohibitions', views.get_prohibitions),
 ]
