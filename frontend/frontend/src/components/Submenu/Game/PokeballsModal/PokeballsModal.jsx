@@ -142,7 +142,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 							</span>
 						) : (
 							<>
-								<span>ACTIVATE</span>
+								<span>{t`ACTIVATE`}</span>
 								<span className='status-price'>{price} USD</span>
 							</>
 						)}
