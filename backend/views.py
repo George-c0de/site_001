@@ -625,7 +625,7 @@ def register_page(request):
             mes = message_for_bot.a['register'].format(profile.id)
             send_message_tgbot(mes, main_user.id)
         # messages.success(request, 'Аккаунт создан,' + username)
-        message = a['bot'].format(request.data['password1'], request.data['username'])
+        message = a['bot'].format(request.data['password1'], request.data['email'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
         Memcache.objects.create(user=profile.id, memcache=memcache)
