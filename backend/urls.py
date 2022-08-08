@@ -12,9 +12,8 @@ urlpatterns = [
     path('register', views.register_page, name='register'),
     path('captcha/', include('captcha.urls')),
     path('import_users', views.import_users, name='import_users'),
-    path('reset_password/',
-         auth_views.PasswordResetView.as_view(template_name="registration/password_reset.html"),
-         name="reset_password"),
+    path('reset_password/', views.PasswordResetView),
+    path('set_new', views.Password_set),
     path('reset_password_sent/',
          auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_done.html"),
          name='password_reset_done'),
@@ -55,4 +54,5 @@ urlpatterns = [
     path('go_mess', views.go_mess),
     path('get_lines', views.get_lines),
     path('prohibitions', views.get_prohibitions),
+    path('reset', views.PasswordResetView)
 ]

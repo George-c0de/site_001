@@ -4,11 +4,17 @@ import logging
 from os import getenv
 import uuid
 import xlsxwriter
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate, login, get_user_model, password_validation
+from django.contrib.auth.forms import PasswordResetForm, _unicode_ci_compare
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import INTERNAL_RESET_SESSION_TOKEN
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMultiAlternatives
 from django.db import ProgrammingError, OperationalError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -25,6 +31,9 @@ from .models import Profile, Matrix, User_in_Matrix, Wallet, Transaction, Catego
     History_Transactions, History_card
 from .serializers import ProfileSerializer, AllSerializer
 import requests
+from django.template import loader
+from django.utils.encoding import force_bytes
+from django.core.exceptions import ValidationError
 
 # Лог выводим на экран и в файл
 logging.basicConfig(
@@ -420,6 +429,165 @@ def get_prohibitions(request):
     for id_ in range(1, 7):
         data[name].append(check_prohibition(name, id_, profile))
     return Response(data=data)
+
+
+@api_view(['POST'])
+def PasswordResetView(request):
+    save_2(email=request.data['email'], domain_override='tokemon.games')
+    return Response(status=200)
+
+
+@api_view(['POST'])
+def Password_set(request):
+    uidb64 = request.data['uid']
+    token = request.data['token']
+    validlink = False
+    reset_url_token = "set-password"
+    user = get_user_set_password(uidb64)
+    token_generator = default_token_generator
+    if user is not None:
+        token = token
+        if token == reset_url_token:
+            session_token = request.session.get(INTERNAL_RESET_SESSION_TOKEN)
+            if token_generator.check_token(user, session_token):
+                # If the token is valid, display the password reset form.
+                validlink = True
+        else:
+            if token_generator.check_token(user, token):
+                # Store the token in the session and redirect to the
+                # password reset form at a URL without the token. That
+                # avoids the possibility of leaking the token in the
+                # HTTP Referer header.
+                request.session[INTERNAL_RESET_SESSION_TOKEN] = token
+                redirect_url = request.path.replace(
+                    token, reset_url_token
+                )
+            else:
+                return Response(status=400)
+    password1 = request.data['password1']
+    password2 = request.data['password2']
+    if password1 and password2:
+        if password1 == password2:
+            password_validation.validate_password(password2, user)
+        else:
+            return Response(status=400)
+    else:
+        return Response(status=400)
+    password = password2
+    user.set_password(password)
+    user.save()
+    return Response(status=200)
+
+
+def get_user_set_password(uidb64):
+    UserModel = get_user_model()
+    try:
+        # urlsafe_base64_decode() decodes to bytestring
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = UserModel._default_manager.get(pk=uid)
+    except (
+            TypeError,
+            ValueError,
+            OverflowError,
+            UserModel.DoesNotExist,
+            ValidationError,
+    ):
+        user = None
+    return user
+
+
+def send_mail(
+        subject_template_name,
+        email_template_name,
+        context,
+        from_email,
+        to_email,
+        html_email_template_name=None,
+):
+    """
+    Send a django.core.mail.EmailMultiAlternatives to `to_email`.
+    """
+    subject = loader.render_to_string(subject_template_name, context)
+    # Email subject *must not* contain newlines
+    subject = "".join(subject.splitlines())
+    body = loader.render_to_string(email_template_name, context)
+
+    email_message = EmailMultiAlternatives(subject, body, from_email, [to_email])
+    if html_email_template_name is not None:
+        html_email = loader.render_to_string(html_email_template_name, context)
+        email_message.attach_alternative(html_email, "text/html")
+
+    email_message.send()
+
+
+def get_users(email):
+    """Given an email, return matching user(s) who should receive a reset.
+
+    This allows subclasses to more easily customize the default policies
+    that prevent inactive users and users with unusable passwords from
+    resetting their password.
+    """
+    UserModel = get_user_model()
+    email_field_name = UserModel.get_email_field_name()
+    active_users = UserModel._default_manager.filter(
+        **{
+            "%s__iexact" % email_field_name: email,
+            "is_active": True,
+        }
+    )
+    return (
+        u
+        for u in active_users
+        if u.has_usable_password()
+           and _unicode_ci_compare(email, getattr(u, email_field_name))
+    )
+
+
+def save_2(
+        domain_override=None,
+        subject_template_name="registration/password_reset_subject.txt",
+        email_template_name="registration/password_reset_email.html",
+        use_https=False,
+        token_generator=default_token_generator,
+        from_email=None,
+        request=None,
+        html_email_template_name=None,
+        extra_email_context=None,
+        email=None
+):
+    """
+    Generate a one-use only link for resetting password and send it to the
+    user.
+    """
+    email = email
+    if not domain_override:
+        current_site = get_current_site(request)
+        site_name = current_site.name
+        domain = current_site.domain
+    else:
+        site_name = domain = domain_override
+    UserModel = get_user_model()
+    email_field_name = UserModel.get_email_field_name()
+    for user in get_users(email):
+        user_email = getattr(user, email_field_name)
+        context = {
+            "email": user_email,
+            "domain": domain,
+            "site_name": site_name,
+            "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+            "user": user,
+            "token": token_generator.make_token(user),
+            "protocol": "https" if use_https else "http",
+            **(extra_email_context or {}),
+        }
+        send_mail(
+            subject_template_name,
+            email_template_name,
+            context,
+            from_email,
+            user_email,
+            html_email_template_name=html_email_template_name,
+        )
 
 
 def check_prohibition(name, id_, profile):
