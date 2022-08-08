@@ -50,8 +50,9 @@ const Signup = () => {
 		if (typeAuthorization === 'login') {
 			let validData = {
 				email: data.email,
-				password: data.password,
+				password: data.password1,
 			}
+			console.log(validData)
 			if (
 				!data.email
 					.toLowerCase()
