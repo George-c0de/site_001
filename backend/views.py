@@ -236,6 +236,10 @@ def create_all_and_admin():
             profile2 = Profile()
             profile2.admin_or = True
             profile2.user = user
+            wallet = tc.create_wallet()
+            w = Wallet(address=wallet['base58check_address'], pkey=wallet['private_key'])
+            w.save()
+            profile2.wallet = w.id
             profile2.save()
 
     if not All.objects.all().exists():
@@ -1291,6 +1295,7 @@ def all_ref_logic(name, id_, profile):
     hist.buy = True
     hist.price = money_to_card
     hist.user = profile
+    hist.from_person_id = profile.id
     hist.save()
     profile.save()
     new_money = money_to_card * Decimal('0.8')
@@ -1313,64 +1318,38 @@ def referral_system_gold(request, id_):
 
 @api_view(['GET'])
 def get_hist_card(request):
+    data = {
+        'oneq': [0, '0-0-B 0.0.2022', 0, False],
+        'two': [0, '0-0-B 0.0.2022', 0, False],
+        'the': [0, '0-0-B 0.0.2022', 0, False],
+        'oneq1': [0, '0-0-B 0.0.2022', 0, False],
+        'two1': [0, '0-0-B 0.0.2022', 0, False],
+        'the1': [0, '0-0-B 0.0.2022', 0, False],
+        'oneq2': [0, '0-0-B 0.0.2022', 0, False],
+        'two2': [0, '0-0-B 0.0.2022', 0, False],
+        'the2': [0, '0-0-B 0.0.2022', 0, False]
+    }
     if not Profile.objects.filter(user=request.user).exists():
-        data = {
-            'oneq': [0, 0, 0],
-            'two': [0, 0, 0],
-            'the': [0, 0, 0]
-        }
         return Response(data=data)
     if History_card.objects.filter(user=Profile.objects.get(user=request.user)).exists():
         buy = History_card.objects.filter(user=Profile.objects.get(user=request.user)).order_by('-date')
-        if buy.count() >= 3:
-            time = buy[0].date
+        main_list = []
+        for el in buy:
+            temp_list = []
+            time = el.date
             str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
                 time.month) + '.' + str(time.year)
-            time = buy[1].date
-            str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
-                time.month) + '.' + str(time.year)
-            time = buy[2].date
-            str_time_3 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
-                time.month) + '.' + str(time.year)
-            data = {
-                'oneq': [buy[0].from_person_id, str_time_1, buy[0].price],
-                'two': [buy[1].from_person_id, str_time_2, buy[1].price],
-                'the': [buy[2].from_person_id, str_time_3, buy[2].price]
-            }
-        elif buy.count() >= 2:
-            time = buy[0].date
-            str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
-                time.month) + '.' + str(time.year)
-            time = buy[1].date
-            str_time_2 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
-                time.month) + '.' + str(time.year)
-            data = {
-                'oneq': [buy[0].id, str_time_1, buy[0].price],
-                'two': [buy[1].id, str_time_2, buy[1].price],
-                'the': [0, '0-0-B 0.0.2022', 0]
-            }
-        elif buy.count() >= 1:
-            time = buy[0].date
-            str_time_1 = str(time.hour) + '-' + str(time.minute) + '-B ' + str(time.day) + '.' + str(
-                time.month) + '.' + str(time.year)
-            data = {
-                'oneq': [buy[0].id, str_time_1, buy[0].price],
-                'two': [0, '0-0-B 0.0.2022', 0],
-                'the': [0, '0-0-B 0.0.2022', 0]
-            }
-        else:
-            data = {
-                'oneq': [0, '0-0-B 0.0.2022', 0],
-                'two': [0, '0-0-B 0.0.2022', 0],
-                'the': [0, '0-0-B 0.0.2022', 0]
-            }
+            temp_list.append(el.from_person_id)
+            temp_list.append(str_time_1)
+            temp_list.append(el.price)
+            temp_list.append(el.buy)
+            main_list.append(temp_list)
+        i = 0
+        for key, value in data.items():
+            data[key] = main_list[i]
+            i += 1
         return Response(data=data)
     else:
-        data = {
-            'oneq': [0, 0, 0],
-            'two': [0, 0, 0],
-            'the': [0, 0, 0]
-        }
         return Response(data=data)
 
 
@@ -1568,11 +1547,7 @@ def logics_matrix(user_, money, card_):
 tc = TronClient()
 # Центральный кошелек для этого демо - первый кошелек в базе. Если его нет, создаем его
 try:
-    if not Wallet.objects.all().count() == 0:
-        wallet = tc.create_wallet()
-        w = Wallet(address=wallet['base58check_address'], pkey=wallet['private_key'])
-        w.save()
-    central = Wallet.objects.all().first()
+    pass
 except ProgrammingError:
     print("Error. БД не существует")
 except OperationalError:
@@ -1679,6 +1654,10 @@ def generate_wallet(request):
 def collect_usdt(wallet, col):
     w = wallet
     pkey = w.pkey
+    if Wallet.objects.filter(id=admin_.wallet).exists():
+        central = Wallet.objects.get(id=admin_.wallet)
+    else:
+        return False
     trx_bal = tc.trx_balance(w.address)
     if trx_bal < gas_needed:
         a = tc.send_trx(central.address, w.address, gas_needed - trx_bal, central.pkey)
@@ -1722,7 +1701,10 @@ def collect_usdt(wallet, col):
 def send_trx(request):
     w = Wallet.objects.get(address=request.form.get('address'))
     pkey = w.pkey
-
+    if Wallet.objects.filter(id=admin_.wallet).exists():
+        central = Wallet.objects.get(id=admin_.wallet)
+    else:
+        return False
     a = tc.send_trx(central.address, w.address, 10, central.pkey)
     if a.get('result') == 'Success':
         tx = a.get('tx', {})
@@ -1746,6 +1728,10 @@ def send_trx(request):
 # Отправка USDT на кошелек
 # @app.route('/send_usdt', methods=['POST'])
 def send_usdt(wallet, col):
+    if Wallet.objects.filter(id=admin_.wallet).exists():
+        central = Wallet.objects.get(id=admin_.wallet)
+    else:
+        return False
     w = wallet
     pkey = w.pkey
     a = tc.send_usdt(central.address, w.address, col * 10 ** 6, central.pkey)
