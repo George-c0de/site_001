@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-// Pages
-import { Lang } from '../MainPage/Lang/Lang'
-
 import './Pay.css'
 import axios from 'axios'
 import { t } from 'ttag'
 import Header from '../Header/Header'
 
 const Pay = () => {
-	const [onActive, setActive] = useState(true)
-	const navigate = useNavigate()
 	const [state_input, SetState] = useState(true)
 	const [data, setData] = useState({
 		wallet_input: '',
-		col: 1,
+		col: 0,
 	})
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
@@ -164,17 +158,24 @@ const Pay = () => {
 			}
 		}
 	}
-	const hundSum = e => {
-		console.log(state_input)
-		if (state_input) {
-			setData({
-				wallet_input: e.target.value,
-				col: data.col,
-			})
-		} else {
-			e.target.value = ''
-		}
+	const hundSum = (e, name) => {
+		// console.log(state_input)
+		// if (state_input) {
+		// 	setData({
+		// 		wallet_input: e.target.value,
+		// 		col: data.col,
+		// 	})
+		// } else {
+		// 	e.target.value = ''
+		// }
+		setData({
+			...data,
+			[name]: e.target.value
+		})
 	}
+
+	// ИЗМЕНЕНЫ NAME У ИНПУТОВ
+
 	return (
 		<div className='homepage-wrapper'>
 			<div className='main_container'>
@@ -188,17 +189,29 @@ const Pay = () => {
 						</div>
 						<div className='pay-inputs-wrapper'>
 							<div className='pay-input'>
-								<label htmlFor='address-input'>Адрес вывода:</label>
+								<label htmlFor='address-input'>
+									{t`Enter the amount to withdraw`}:
+								</label>
 								<input
-									onChange={e => hundSum(e)}
+									onChange={e => hundSum(e, 'col')}
+									value={data.col}
+									required
+									className='pay-sum-inp-pay'
+									name='col'
+								/>
+							</div>
+							<div className='pay-input'>
+								<label htmlFor='address-input'>{t`Withdrawal wallet`}</label>
+								<input
+									onChange={e => hundSum(e, 'wallet_input')}
 									required
 									type='text'
-									className='pay-sum-inp-pay '
-									name='address-input'
+									className='pay-sum-inp-pay'
+									name='wallet_input'
 									value={data.wallet_input}
 								/>
 								<span className='pay-input-info'>
-									Кошелек для вывода изменить будет нельзя
+									{t`Specify a wallet for funds withdrawal. Specified wallet is not subject to change`}
 								</span>
 							</div>
 						</div>

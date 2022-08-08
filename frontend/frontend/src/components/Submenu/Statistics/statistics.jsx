@@ -17,7 +17,9 @@ const Statistics = () => {
 		try {
 			const response = await axios.get('/api/get_all')
 			setPosts(response.data)
-		} catch (e) {}
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	return (

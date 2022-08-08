@@ -1,11 +1,4 @@
-//React, React Router, React Hooks
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
-//Pages
-import { Menu } from '../../MainPage/Menu/Menu'
-import { Lang } from '../../MainPage/Lang/Lang'
-import { UserId } from '../../UserId/UserId'
 import { t } from 'ttag'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -82,6 +75,7 @@ const Referals = () => {
 		})
 		console.log(posts)
 	}
+	
 	const linkRef = React.useRef()
 
 	const [user, setUser] = useState({

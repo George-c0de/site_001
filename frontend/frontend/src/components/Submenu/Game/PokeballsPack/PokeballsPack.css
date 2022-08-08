@@ -18,6 +18,7 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .pokeballs-container::before {
@@ -51,25 +52,25 @@
 .text-pokeball-1 {
     position: relative;
     color: brown;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .text-pokeball-2 {
     position: relative;
     color: silver;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .text-pokeball-3 {
     position: relative;
     color: gold;
-    font-size: 30px;;
+    font-size: 25px;;
 }
 
 .text-pokeball-4 {
     position: relative;
     color: green;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 /*Icon ShowDown*/
@@ -89,6 +90,13 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.detail-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 @media only screen and (max-width: 412px) {
@@ -123,7 +131,7 @@
     }
 
     .text-pokeball-1, .text-pokeball-2, .text-pokeball-3, .text-pokeball-4{
-        font-size:20px;
+        font-size:18px;
     }
 }
 

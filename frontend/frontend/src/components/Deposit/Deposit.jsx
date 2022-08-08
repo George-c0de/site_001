@@ -6,10 +6,10 @@ import './Deposit.css'
 import axios from 'axios'
 import { t } from 'ttag'
 import Header from '../Header/Header'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
 
 const Deposit = () => {
-	const [onActive, setActive] = useState(true)
-	const navigate = useNavigate()
 	const [state_input, SetState] = useState(true)
 	const [data, setData] = useState({
 		wallet: '',
@@ -95,9 +95,8 @@ const Deposit = () => {
 					SetState(false)
 				}
 			} catch (e) {
-			console.log(e)
-			console.log(data)
-
+				console.log(e)
+				console.log(data)
 			}
 			console.log(user)
 		}
@@ -146,7 +145,10 @@ const Deposit = () => {
 			col: data.col,
 		})
 	}
-
+	const handleCopy = () => {
+		navigator.clipboard.writeText(linkRef.current?.innerText)
+	}
+	const linkRef = React.useRef()
 	return (
 		<div className='homepage-wrapper'>
 			<div className='main_container'>
@@ -161,20 +163,7 @@ const Deposit = () => {
 							<span className='deposit-money'>{user.money}$</span>
 						</div>
 						<div className='deposit-inputs-wrapper deposit-inputs-deposit'>
-							<div className='deposit-input  deposit-input-deposit'>
-								<label htmlFor='sum-input'>{t`Top - up amount`}:</label>
-								<input
-									onChange={e => handleSum(e)}
-									value={data.col}
-									required
-									className='deposit-sum-inp-deposit'
-									name='sum-input'
-								/>
-								<span className='deposit-deposit-info'>
-									{t`TRANSACTION NOTICE`}
-								</span>
-							</div>
-							<div className='deposit-input deposit-input-deposit'>
+							{/* <div className='deposit-input deposit-input-deposit'>
 								<label htmlFor='address-input'>{t`Top up address`}:</label>
 								<input
 									required
@@ -183,9 +172,23 @@ const Deposit = () => {
 									name='sum-input'
 									value={data.wallet}
 								/>
-								<span className='deposit-deposit-info'>
-									Кошелек для вывода изменить будет нельзя
+							</div> */}
+							<div className='deposit-input deposit-input-deposit'>
+								<p className='deposit-text'>
+									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
+								</p>
+								<span className='link-invite deposit-link' ref={linkRef}>
+									123
+									<FontAwesomeIcon
+										icon={faCopy}
+										className='copy-icon deposit-copy-icon'
+										onClick={handleCopy}
+									/>
 								</span>
+								<p className='deposit-description'>
+									{t`Минимальная сумма платежа 10 usdt. Транзакции с меньшей суммой
+									будут утеряны`}
+								</p>
 							</div>
 						</div>
 						<button
@@ -193,7 +196,6 @@ const Deposit = () => {
 							className='deposit-button'
 						>{t`Deposit`}</button>
 					</div>
-
 					<div className='deposit-history-wrapper'>
 						<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>
 						<div className='deposit-history-table'>
@@ -230,5 +232,4 @@ const Deposit = () => {
 		</div>
 	)
 }
-
 export default Deposit

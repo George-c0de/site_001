@@ -21,7 +21,7 @@ export const UserId = ({ note }) => {
 	const [user, setUser] = useState({
 		id: 0,
 		money: '0.00',
-		referral_link: '1000000000000',
+		referral_link: '0',
 		referral_amount: '0.00',
 		missed_amount: '0.00',
 		wallet: null,

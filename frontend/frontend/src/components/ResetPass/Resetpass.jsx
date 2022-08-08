@@ -18,11 +18,13 @@ const Resetpass = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		if (data.password.length < 8 || data.password !== data.password2) {
+		if (data.password.length < 8 || data.password !== data.password1) {
 			setInvalidPassword(true)
-		} else {
+		} else {	
+			navigate('/login')
 			setInvalidPassword(false)
 		}
+	
 		// if (!invalidPassword) {
 		// 	try {
 		// 		const { data: res } = await axios.post('/api/register', data, {
@@ -45,7 +47,7 @@ const Resetpass = () => {
 				</nav>
 			</div>
 			<div className='reset__block'>
-				<h1 className='reset__title'>Set a new password!</h1>
+				<h1 className='reset__title'>{t`Enter a new password`}</h1>
 				<form action='#' onSubmit={handleSubmit}>
 					<input
 						className={`authorization__input ${
@@ -72,8 +74,8 @@ const Resetpass = () => {
 							<p>You must enter more than 8 characters</p>
 						</div>
 					)}
-					<button className='authorization__button' type='submit'>
-						Further
+					<button className='authorization__button reset-btn' type='submit'>
+						{t`Confirm your new password`}
 					</button>
 				</form>
 			</div>

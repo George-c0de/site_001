@@ -1,37 +1,26 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
-import { saveLocale } from '../../i18nInit'
-//Images
 import logo from '../../Ảnh Pokemon Dự Trù/логотип.svg'
 import pikachu_pokeball from '../../Ảnh Pokemon Dự Trù/pikachu-authorization.png'
-// import { reCaptchaExecute } from 'recaptcha-v3-react-function-async'
-// Pages
 import { Lang } from '../MainPage/Lang/Lang'
-import Needle from '../../assets/left-needle .svg'
 import { t } from 'ttag'
-import Recaptcha from 'react-grecaptcha'
+import { reCaptchaExecute } from 'recaptcha-v3-react-function-async'
 
 const Signup = () => {
 	const navigate = useNavigate()
-	const [typeAuthorization, setTypeAuthorization] = useState('sign')
-	const [isActive, setActive] = useState(false)
+	const [typeAuthorization, setTypeAuthorization] = useState('login')
 	const [invalidPassword, setInvalidPassword] = useState(false)
 	const [invalidDataLogin, setInvalidDataLogin] = useState(false)
 	const [invalidEmail, setInvalidEmail] = useState(false)
+	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [data, setData] = useState({
 		email: '',
 		password: '',
-		password2: '',
+		password1: '',
 	})
 	const [emailReset, setEmailReset] = useState('')
 	const [letterSent, setLetterSent] = useState(false)
-
-	const verifyCallback = response => console.log(response)
-
-	const expiredCallback = () => {
-		console.log(123)
-	}
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
@@ -41,13 +30,39 @@ const Signup = () => {
 		e.preventDefault()
 
 		if (typeAuthorization === 'login') {
+			let validData = JSON.stringify({
+				email: data.email,
+				password: data.password,
+			})
+			if (
+				!data.email
+					.toLowerCase()
+					.match(
+						/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+					)
+			) {
+				setInvalidEmail(true)
+			} else {
+				setInvalidEmail(false)
+			}
+
+			// try {
+			// 	const { data } = axios.post('/api/login', validData, {
+			// 		headers: { 'Content-Type': 'application/json' },
+			// 	})
+			// 	console.log(data)
+			// } catch (e) {
+			// 	console.log(e.response)
+			// }
 			try {
 				let data2 = 200
-				data2 = await axios.post('/api/login', data).catch(function (error) {
-					if (error.response) {
-						data2 = error.response.status
-					}
-				})
+				data2 = await axios
+					.post('/api/login', validData)
+					.catch(function (error) {
+						if (error.response) {
+							data2 = error.response.status
+						}
+					})
 				if (data2.data === 200) {
 					navigate('/home') //after registering navigate to login page
 				}
@@ -68,33 +83,85 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
-			if (data.password.length < 8 || data.password !== data.password2) {
+			if (data.password.length < 8 || data.password !== data.password1) {
 				setInvalidPassword(true)
 			} else {
 				setInvalidPassword(false)
 			}
-			if (!invalidPassword && !invalidEmail) {
+			console.log(invalidPassword, data.passsword)
+			if (
+				!invalidPassword &&
+				!invalidEmail &&
+				data.password.length > 0 &&
+				data.email.length > 0
+			) {
+				let validData = JSON.stringify({
+					email: data.email,
+					password: data.password,
+					password1: data.password1,
+				})
+				let gtoken = await reCaptchaExecute(
+					'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
+					'auth'
+				)
+				// try {
+				// 	const response = await axios.post('/api/register', validData, {
+				// 		headers: { 'Content-Type': 'application/json' },
+				// 	})
+				// 	console.log(response)
+				// 	navigate('/home')
+				// } catch (e) {
+				// 	console.log(e.response)
+				// }
+
 				try {
 					const { data: res } = await axios.post('/api/register', data, {
 						headers: { 'Content-Type': 'application/json' },
 					})
 					console.log(res.data)
-					navigate('/home') //after registering navigate to login page
+					navigate('/home')
 					console.log(res.message)
 				} catch (error) {
-					console.log(error)
+					alert(error.response.data.msg)
 				}
 			}
 		}
 		if (typeAuthorization === 'reset') {
-			setLetterSent(true)
-			setTimeout(() => {
-				window.location.reload()
-			}, 5000)
+			let validData = JSON.stringify({
+				email: data.email,
+			})
+			if (
+				!emailReset
+					.toLowerCase()
+					.match(
+						/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+					)
+			) {
+				setInvalidEmailReset(true)
+			} else {
+				setInvalidEmailReset(false)
+				setInvalidEmail(true)
+				setLetterSent(true)
+				setTimeout(() => {
+					window.location.reload()
+				}, 5000)
+			}
+			// try {
+			// 	const { data } = axios.post('/api/login', validData, {
+			// 		headers: { 'Content-Type': 'application/json' },
+			// 	})
+			// 	console.log(data)
+			// } catch (e) {
+			// 	console.log(e.response)
+			// }
 		}
 	}
 	return (
-		<div className='login_container'>
+		<div
+			className={`login_container ${
+				typeAuthorization === 'reset' ? 'login_container-reset' : ''
+			}`}
+		>
 			<div className='header-authorization'>
 				<img src={logo} alt='' className='nav__logo' />
 			</div>
@@ -130,7 +197,7 @@ const Signup = () => {
 							<input
 								type='text'
 								className={`authorization__input ${
-									invalidDataLogin ? 'authorization__input-invalid' : ''
+									invalidEmail ? 'authorization__input-invalid' : ''
 								}`}
 								placeholder={t`Email`}
 								onChange={handleChange}
@@ -151,10 +218,10 @@ const Signup = () => {
 								className='authorization-reset'
 								onClick={() => setTypeAuthorization('reset')}
 							>
-								Restore password?
+								{t`Forgot your password`}
 							</p>
 							<button className='authorization__button' type='submit'>
-								Further
+								{t`Continue`}
 							</button>
 						</form>
 					)}
@@ -182,7 +249,7 @@ const Signup = () => {
 							/>
 							<input
 								type='password'
-								name='password2'
+								name='password1'
 								className={`authorization__input ${
 									invalidPassword ? 'authorization__input-invalid' : ''
 								}`}
@@ -195,33 +262,31 @@ const Signup = () => {
 									<p>You must enter more than 8 characters</p>
 								</div>
 							)}
-							<Recaptcha sitekey='6LeCcVIhAAAAAHTalIl9shY-BF0i7PB-g-6CYmNl' className='recaptcha' />
 							<button className='authorization__button' type='submit'>
-								Further
+								{t`Continue`}
 							</button>
 						</form>
 					)}
-
 					{typeAuthorization === 'reset' && (
 						<>
-							<p className='reset__link'>Enter your email</p>
+							<p className='reset__link'>{t`Enter your email address to reset your password`}</p>
 							<form className='authorization__form' onSubmit={handleSubmit}>
 								<input
 									type='text'
 									className={`authorization__input ${
-										invalidEmail ? 'authorization__input-invalid' : ''
+										invalidEmailReset ? 'authorization__input-invalid' : ''
 									}`}
-									placeholder='E-mail:'
+									placeholder={t`Email`}
 									name='email'
 									onChange={event => setEmailReset(event.target.value)}
 									value={emailReset}
 								/>
 								{letterSent && (
-									<p className='reset__text'>Письмо отправлено!</p>
+									<p className='reset__text'>{t`Password recovery link was sent to the specified email`}</p>
 								)}
 
 								<button className='authorization__button' type='submit'>
-									Further
+									{t`Continue`}
 								</button>
 							</form>
 						</>

@@ -9,12 +9,13 @@
 	height: 200px;
 	text-align: center;
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: auto;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 50px;
 }
 
 .game-history-more {
@@ -53,4 +54,9 @@
 	font-size: 17px;
 	padding-left: 50px;
 	cursor: pointer;
+}
+@media screen and (max-width: 510px) {
+	.site-main-game-wrapper {
+		padding: 0 10px;
+	}
 }

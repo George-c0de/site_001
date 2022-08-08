@@ -1,31 +1,13 @@
-//React, React Router, React Hooks
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
-// Pages
-import { Lang } from '../../MainPage/Lang/Lang'
-import { Menu } from '../../MainPage/Menu/Menu'
-import { UserId } from '../../UserId/UserId'
-// import { UserId } from '../../Rules/'
-import Referals from '../Referals/referals'
-import Statistics from '../Statistics/statistics'
-
 import { PokeballsPack } from './PokeballsPack/PokeballsPack'
 import { GameHistory } from './GameHistory/GameHistory'
-//Images
 import { IMAGES } from './PokeballsModal/PokeballsImages'
 import bronze from '../../../assets/backgrounds/бронза фон.svg'
 import silver from '../../../assets/backgrounds/серебро-min.svg'
 import gold from '../../../assets/backgrounds/золото-min.svg'
 import emerald from '../../../assets/backgrounds/изумруд-min.svg'
-import HeaderLogo from '../../../assets/headerLogo.png'
-import HeaderHuman from '../../../assets/HeaderHuman.png'
-import Telegram from '../../../assets/telegram.svg'
-import LogOut from '../../../assets/logout.svg'
-
 import { t } from 'ttag'
 import axios from 'axios'
-import { loadReCaptcha } from 'recaptcha-v3-react-function-async'
 import Header from '../../Header/Header'
 import SubscribeTg from '../../modals/SubscribeTg'
 
@@ -40,8 +22,6 @@ const Game = () => {
 	const [onActive, setActive] = useState(true)
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
 	const [username, setUsername] = useState('')
-
-	const [openBurger, setOpenBurger] = useState(false)
 
 	const [price, setPrice] = useState({
 		bronze: [10, 15, 25, 40, 50, 77],
@@ -164,10 +144,9 @@ const Game = () => {
 					<div className={onActive ? 'site-main-game' : 'site-main_active'}>
 						<div className='site-main-game-wrapper'>
 							<div className='text-game'>{t`JOIN THE FIGHT AND WIN`}</div>
-
 							<div className='container-pack-pokeballs'>
 								<PokeballsPack
-									title={'BRONZE'}
+									title={t`BRONZE`}
 									amount={cardsAmount.bronze}
 									images={IMAGES.slice(0, 6)}
 									background={bronze}
@@ -176,7 +155,7 @@ const Game = () => {
 									six={six.bronze}
 								/>
 								<PokeballsPack
-									title={'SILVER'}
+									title={t`SILVER`}
 									amount={cardsAmount.silver}
 									images={IMAGES.slice(6, 12)}
 									background={silver}
@@ -185,7 +164,7 @@ const Game = () => {
 									six={six.silver}
 								/>
 								<PokeballsPack
-									title={'GOLD'}
+									title={t`GOLD`}
 									amount={cardsAmount.gold}
 									images={IMAGES.slice(12, 18)}
 									background={gold}
@@ -194,7 +173,7 @@ const Game = () => {
 									six={six.gold}
 								/>
 								<PokeballsPack
-									title={'EMERALD'}
+									title={t`EMERALD`}
 									amount={cardsAmount.emerald}
 									images={IMAGES.slice(18, 24)}
 									background={emerald}

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './subscribe.css'
 import Telegram from '../../assets/tg.svg'
 import Cross from '../../assets/cross-svgrepo-com.svg'
+import { t } from 'ttag'
+
 const SubscribeTg = () => {
 	const [activeTg, setActiveTg] = useState(true)
 
@@ -18,15 +20,15 @@ const SubscribeTg = () => {
 	}
 
 	React.useEffect(() => {
-		localStorage.setItem('subscribe', true)
+		document.cookie = 'openTg'
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
 		}
 	}, [])
 
-	if (localStorage.getItem('subscribe')) return
-	
+	if (document.cookie.includes('openTg')) return
+
 	return (
 		<div className={`subscriibe-wrapper ${activeTg ? '' : 'sub-wrapper-hide'}`}>
 			<div className='subscriibe-block' ref={ref}>
@@ -37,14 +39,15 @@ const SubscribeTg = () => {
 					onClick={handleClick}
 				/>
 				<p className='subscribe-text'>
-					Подпишитесь на телеграмм чтобы быть в курсе всех новостей
+					{t`Subscribe to us on Telegram to receive information about your winnings`}
 				</p>
 				<a
 					className='authorization__button subscribe-btn'
 					href='https://t.me/Tokemon_game_Bot'
 					target='__blank'
 				>
-					Подписаться на телеграмм
+					<img src={Telegram} alt='' className='authorization__img' />
+					{t`Subscribe to Telegram`}
 				</a>
 			</div>
 		</div>

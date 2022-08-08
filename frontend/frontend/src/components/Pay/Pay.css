@@ -38,11 +38,11 @@
 .pay-inputs-wrapper {
 	width: 100%;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: stretch;
 	flex-wrap: wrap;
 	margin-bottom: 71px;
-	max-width: 500px;
+	max-width: 800px;
 }
 
 .pay-input {
@@ -50,12 +50,12 @@
 	flex-direction: column;
 	align-items: flex-start;
 	color: #fff;
-	width: 100%;
+	width: 49%;
 }
 
 .pay-input label {
 	font-weight: 600;
-	font-size: 32px;
+	font-size: 25px;
 	padding-left: 20px;
 }
 
@@ -73,9 +73,10 @@
 }
 
 .pay-input-info {
-	font-size: 20px;
+	font-size: 17px;
 	font-weight: 600;
 	align-self: flex-end;
+	line-height: 1;
 }
 .pay-input-pay {
 	align-self: auto;
@@ -187,6 +188,19 @@
 		align-items: center;
 	}
 }
+@media screen and (max-width: 800px) {
+	.pay-inputs-wrapper {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 30px;
+	}
+	.pay-input {
+		width: 80%;
+		margin-bottom: 10px;
+	}
+}
+
 @media screen and (max-width: 700px) {
 	.pay-history-title {
 		font-size: 18px;
@@ -226,9 +240,18 @@
 	.pay-sum-inp-info {
 		min-width: auto;
 	}
+	.pay-input {
+		width: 95%;
+	}
 }
 @media screen and (max-width: 425px) {
 	.pay-input label {
 		padding-left: 30px;
+	}
+}
+@media screen and (max-width: 400px) {
+	.pay-wrapper {
+		padding: 0;
+		padding-top: 130px;
 	}
 }

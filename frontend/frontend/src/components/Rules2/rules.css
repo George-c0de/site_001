@@ -11,14 +11,16 @@
 }
 .rules__blocks {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	margin-bottom: 40px;
+	flex-wrap: wrap;
 }
 .rules__block {
 	overflow: hidden;
 	position: relative;
 	border-radius: 10px;
 	z-index: 0;
+	margin-bottom: 20px;
 }
 .rules-img {
 	border-radius: 10px;
@@ -56,16 +58,12 @@
 .rules__block {
 	border: 2px solid white;
 }
-.rules__blocks:nth-child(1) .rules__block:nth-child(2) {
-	margin: 0 10px;
-}
 .gallery-img {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 85%;
-	height: 100%;
 	object-fit: contain;
 }
 .gallery-progress {
