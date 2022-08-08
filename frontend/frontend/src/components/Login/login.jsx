@@ -22,6 +22,7 @@ const Signup = () => {
 		email: '',
 		password1: '',
 		password2: '',
+		utm: get('utm'),
 	})
 
 	React.useEffect(() => {
