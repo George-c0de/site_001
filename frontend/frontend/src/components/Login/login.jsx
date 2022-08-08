@@ -221,7 +221,7 @@ const Signup = () => {
 								placeholder={t`Password`}
 								name='password1'
 								onChange={handleChange}
-								value={data.password}
+								value={data.password1}
 							/>
 							<p
 								className='authorization-reset'
@@ -254,7 +254,7 @@ const Signup = () => {
 								name='password1'
 								type='password'
 								onChange={handleChange}
-								value={data.password}
+								value={data.password1}
 							/>
 							<input
 								type='password'
