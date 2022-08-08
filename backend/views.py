@@ -605,6 +605,8 @@ def register_page(request):
         username = form.cleaned_data.get('username')
         user = User.objects.get(username=username)
         profile = Profile.objects.create(user=user)
+        profile.referral_link = profile.id
+        profile.save()
         wallet = tc.create_wallet()
         w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
         profile.wallet = w.address
@@ -623,7 +625,7 @@ def register_page(request):
             mes = message_for_bot.a['register'].format(profile.id)
             send_message_tgbot(mes, main_user.id)
         # messages.success(request, 'Аккаунт создан,' + username)
-        message = a['bot'].format(request.data['password1'], request.data['username'])
+        message = a['bot'].format(request.data['password1'], request.data['email'])
         Event.objects.create(message=message, user_id=profile.id)
         memcache = uuid.uuid4().hex[:6].upper()
         Memcache.objects.create(user=profile.id, memcache=memcache)
@@ -887,7 +889,8 @@ def referral_system_bronze(request, id_):
 
     # silver
     profile = Profile.objects.get(user=request.user)
-    all_ref_logic('bronze', id_, profile)
+    if all_ref_logic('bronze', id_, profile) ==400:
+        return Response(status=400)
     return Response(status=200)
 
 
@@ -895,7 +898,8 @@ def referral_system_bronze(request, id_):
 def referral_system_silver(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
-    all_ref_logic('silver', id_, profile)
+    if all_ref_logic('silver', id_, profile) == 400:
+        return Response(status=400)
     return Response(status=200)
 
 
@@ -952,24 +956,28 @@ def go__category(name, profile):
         else:
             category = Category_Bronze()
             category.user = profile
-    if name == 'silver':
+            category.save()
+    elif name == 'silver':
         if Category_Silver.objects.filter(user__id=profile.id).exists():
             category = Category_Silver.objects.get(user__id=profile.id)
         else:
             category = Category_Silver()
             category.user = profile
-    if name == 'gold':
+            category.save()
+    elif name == 'gold':
         if Category_Gold.objects.filter(user__id=profile.id).exists():
             category = Category_Gold.objects.get(user__id=profile.id)
         else:
             category = Category_Gold()
             category.user = profile
+            category.save()
     else:
         if Category_Emerald.objects.filter(user__id=profile.id).exists():
             category = Category_Emerald.objects.get(user__id=profile.id)
         else:
             category = Category_Emerald()
             category.user = profile
+            category.save()
     return category
 
 
@@ -980,7 +988,7 @@ def all_ref_logic(name, id_, profile):
         us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=name).filter(
             card__card__name=id_).get(matrix__up=True).d
         if us_pr < 4:
-            return Response(status=400)
+            return 400
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
     if profile.line_1 is not None:
@@ -989,12 +997,12 @@ def all_ref_logic(name, id_, profile):
         main_user = None
     # Проверка блокировки карты для пользователя
     if id_ == 6 and category.card_6_disable is False:
-        return Response(status=400)
+        return 400
     else:
         money_to_card = what_card(card, category)
     money_to_card = Decimal(money_to_card)  # Стоимость карты
     if profile.money < money_to_card:
-        return Response(status=400)
+        return 400
     # Второй случай (Если человек заходит без реф. ссылки, то 15% админу.)
     if main_user is None:
         admin_.money += money_to_card * Decimal('0.15')
@@ -1053,7 +1061,7 @@ def all_ref_logic(name, id_, profile):
                         sq1.save()
                     else:
                         tp = Third_Line.objects.get(main_user=th_main_prof)
-                        tp.lost_profit +=money_to_card * Decimal('0.01')
+                        tp.lost_profit += money_to_card * Decimal('0.01')
                         tp.save()
                         admin_.money += money_to_card * Decimal('0.01')
             save(main_user, all_, profile, admin_, category)
@@ -1082,6 +1090,7 @@ def all_ref_logic(name, id_, profile):
     mes = message_for_bot.a['buy'].format(tokemon.tokemon[name][id_ - 1])
     send_message_tgbot(mes, profile.id)
     logics_matrix(profile, new_money, buy_card)
+    return 200
 
 
 # gold
@@ -1089,7 +1098,8 @@ def all_ref_logic(name, id_, profile):
 def referral_system_gold(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
-    all_ref_logic('gold', id_, profile)
+    if all_ref_logic('gold', id_, profile) == 400:
+        return Response(status=400)
     return Response(status=200)
 
 
@@ -1161,7 +1171,8 @@ def get_hist_card(request):
 def referral_system_emerald(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
-    all_ref_logic('emerald', id_, profile)
+    if all_ref_logic('emerald', id_, profile) ==400:
+        return Response(status=400)
     return Response(status=200)
 
 
@@ -1373,6 +1384,7 @@ def dis(request):
         # s = json.dumps(data, indent=4, sort_keys=True)
         wall = data['wallet_input']
         col = data['col']
+        col = int(col)
         if col is not None:
             if profile.wallet_input is not None:
                 wall = Wallet.objects.get(address=profile.wallet_input)
@@ -1391,7 +1403,8 @@ def dis(request):
                 col += col * 0.01
             if profile.money < col:
                 return Response(status=400)
-            if send_usdt(wall, col):
+            data = send_usdt(wall, col)
+            if data:
                 profile.money -= col
                 profile.save()
                 all_.all_transactions += 1
@@ -1399,7 +1412,7 @@ def dis(request):
                 all_.save()
                 mes = message_for_bot.a['withdrawal'].format(col)
                 send_message_tgbot(mes, profile.id)
-                return Response(status=200)
+                return Response(data=data, status=200)
             else:
                 return Response(status=400)
     return Response(status=400)
@@ -1416,7 +1429,8 @@ def dis_input(request):
         # s = json.dumps(data, indent=4, sort_keys=True)
         wall = data['wallet']
         col = data['col']
-        if col < 10:
+        col = int(col)
+        if col < 0:
             return Response(status=400)
         if col is not None:
             if profile.wallet is not None:
@@ -1427,14 +1441,15 @@ def dis_input(request):
                 profile.wallet = w.address
                 w.save()
                 wall = w
-            if collect_usdt(wall, col):
+            data = collect_usdt(wall, col)
+            if data:
                 profile.money += col
                 profile.save()
                 all_.all_transactions += 1
                 all_.save()
                 mes = message_for_bot.a['up ty'].format(col)
                 send_message_tgbot(mes, profile.id)
-                return Response(status=200)
+                return Response(data=data, status=200)
             else:
                 return Response(status=400)
     return Response(status=400)

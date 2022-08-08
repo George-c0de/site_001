@@ -3038,7 +3038,7 @@
 
 "bowser@^1.7.3":
   "integrity" "sha512-9IdMmj2KjigRq6oWhmwv1W36pDuA4STQZ8q6YO9um+x07xgYNCD3Oou+WP/3L1HNz7iqythGet3/p4wvc8AAwQ=="
-  "resolved" "https://registry.npmjs.org/bowser/-/bowser-1.9.4.tgz"
+  "resolved" "https://registry.npmmirror.com/bowser/-/bowser-1.9.4.tgz"
   "version" "1.9.4"
 
 "brace-expansion@^1.1.7":
@@ -3611,7 +3611,7 @@
 
 "css-in-js-utils@^2.0.0":
   "integrity" "sha512-PJF0SpJT+WdbVVt0AOYp9C8GnuruRlL/UFW7932nLWmFLQTaWEzTBQEx7/hn4BuV+WON75iAViSUJLiU3PKbpA=="
-  "resolved" "https://registry.npmjs.org/css-in-js-utils/-/css-in-js-utils-2.0.1.tgz"
+  "resolved" "https://registry.npmmirror.com/css-in-js-utils/-/css-in-js-utils-2.0.1.tgz"
   "version" "2.0.1"
   dependencies:
     "hyphenate-style-name" "^1.0.2"
@@ -4604,7 +4604,7 @@
 
 "exenv@^1.2.1":
   "integrity" "sha512-Z+ktTxTwv9ILfgKCk32OX3n/doe+OcLTRtqK9pcL+JsP3J1/VW8Uvl4ZjLlKqeW4rzK4oesDOGMEMRIZqtP4Iw=="
-  "resolved" "https://registry.npmjs.org/exenv/-/exenv-1.2.2.tgz"
+  "resolved" "https://registry.npmmirror.com/exenv/-/exenv-1.2.2.tgz"
   "version" "1.2.2"
 
 "exit@^0.1.2":
@@ -5212,7 +5212,7 @@
 
 "hoist-non-react-statics@3.3.0":
   "integrity" "sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA=="
-  "resolved" "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz"
+  "resolved" "https://registry.npmmirror.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz"
   "version" "3.3.0"
   dependencies:
     "react-is" "^16.7.0"
@@ -5404,7 +5404,7 @@
 
 "hyphenate-style-name@^1.0.2":
   "integrity" "sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ=="
-  "resolved" "https://registry.npmjs.org/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz"
+  "resolved" "https://registry.npmmirror.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz"
   "version" "1.0.4"
 
 "iconv-lite@^0.6.2", "iconv-lite@^0.6.3":
@@ -5504,7 +5504,7 @@
 
 "inline-style-prefixer@^4.0.0":
   "integrity" "sha512-N8nVhwfYga9MiV9jWlwfdj1UDIaZlBFu4cJSJkIr7tZX7sHpHhGR5su1qdpW+7KPL8ISTvCIkcaFi/JdBknvPg=="
-  "resolved" "https://registry.npmjs.org/inline-style-prefixer/-/inline-style-prefixer-4.0.2.tgz"
+  "resolved" "https://registry.npmmirror.com/inline-style-prefixer/-/inline-style-prefixer-4.0.2.tgz"
   "version" "4.0.2"
   dependencies:
     "bowser" "^1.7.3"
@@ -5726,7 +5726,7 @@
 
 "isobject@^3.0.1":
   "integrity" "sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg=="
-  "resolved" "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz"
+  "resolved" "https://registry.npmmirror.com/isobject/-/isobject-3.0.1.tgz"
   "version" "3.0.1"
 
 "istanbul-lib-coverage@^3.0.0", "istanbul-lib-coverage@^3.2.0":
@@ -8029,7 +8029,7 @@
 
 "radium@^0.26.2":
   "integrity" "sha512-vWwhFZoMk5Rd9obPTa1M7y85tEDohI7+dDlYtwTgS3ubJpzdPL52/AmUcfAj+9phNnH/L0KWFXEgCndAgBus9w=="
-  "resolved" "https://registry.npmjs.org/radium/-/radium-0.26.2.tgz"
+  "resolved" "https://registry.npmmirror.com/radium/-/radium-0.26.2.tgz"
   "version" "0.26.2"
   dependencies:
     "exenv" "^1.2.1"
@@ -8136,7 +8136,7 @@
 
 "react-is@^16.7.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
-  "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
+  "resolved" "https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
 "react-is@^17.0.1":
@@ -8274,7 +8274,7 @@
 
 "recaptcha-v3-react-function-async@^0.0.3":
   "integrity" "sha512-7TAlXXms1UhQNt2LbzmFt9eYhLsyMLSZS2FjgwuvjhpcJBiecF3rrrI1IdznjCwogxBDQu2jN3sATkRjkgVY1Q=="
-  "resolved" "https://registry.npmjs.org/recaptcha-v3-react-function-async/-/recaptcha-v3-react-function-async-0.0.3.tgz"
+  "resolved" "https://registry.npmmirror.com/recaptcha-v3-react-function-async/-/recaptcha-v3-react-function-async-0.0.3.tgz"
   "version" "0.0.3"
   dependencies:
     "@babel/plugin-transform-runtime" "^7.17.10"
