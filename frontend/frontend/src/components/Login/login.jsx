@@ -30,10 +30,10 @@ const Signup = () => {
 		e.preventDefault()
 
 		if (typeAuthorization === 'login') {
-			let validData = JSON.stringify({
+			let validData = {
 				email: data.email,
 				password: data.password,
-			})
+			}
 			if (
 				!data.email
 					.toLowerCase()
@@ -45,6 +45,11 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
+			if (data.password.length < 8) {
+				setInvalidDataLogin(true)
+			} else {
+				setInvalidDataLogin(false)
+			}
 
 			// try {
 			// 	const { data } = axios.post('/api/login', validData, {
@@ -54,6 +59,7 @@ const Signup = () => {
 			// } catch (e) {
 			// 	console.log(e.response)
 			// }
+
 			try {
 				let data2 = 200
 				data2 = await axios
@@ -88,32 +94,22 @@ const Signup = () => {
 			} else {
 				setInvalidPassword(false)
 			}
-			console.log(invalidPassword, data.passsword)
+			console.log(invalidPassword, data.password)
 			if (
 				!invalidPassword &&
 				!invalidEmail &&
 				data.password.length > 0 &&
 				data.email.length > 0
 			) {
-				let validData = JSON.stringify({
-					email: data.email,
-					password: data.password,
-					password1: data.password1,
-				})
-				let gtoken = await reCaptchaExecute(
-					'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
-					'auth'
-				)
-				// try {
-				// 	const response = await axios.post('/api/register', validData, {
-				// 		headers: { 'Content-Type': 'application/json' },
-				// 	})
-				// 	console.log(response)
-				// 	navigate('/home')
-				// } catch (e) {
-				// 	console.log(e.response)
-				// }
-
+				// let validData = JSON.stringify({
+				// 	email: data.email,
+				// 	password: data.password,
+				// 	password1: data.password1,
+				// })
+				// let gtoken = await reCaptchaExecute(
+				// 	'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
+				// 	'auth'
+				// )
 				try {
 					const { data: res } = await axios.post('/api/register', data, {
 						headers: { 'Content-Type': 'application/json' },
@@ -122,6 +118,8 @@ const Signup = () => {
 					navigate('/home')
 					console.log(res.message)
 				} catch (error) {
+					console.log(data)
+					console.log(error.response)
 					alert(error.response.data.msg)
 				}
 			}
