@@ -97,7 +97,7 @@
 			},
 			"SILVER": {
 				"msgid": "SILVER",
-				"msgstr": ["BRONCE"]
+				"msgstr": ["Plata"]
 			},
 			"GOLD": {
 				"msgid": "GOLD",
@@ -260,6 +260,10 @@
 			"Continue": {
 				"msgid": "Continue",
 				"msgstr": ["Continuar"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Monedero de retirada"]
 			}
 		}
 	}

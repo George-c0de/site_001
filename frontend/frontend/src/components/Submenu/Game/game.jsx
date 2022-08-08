@@ -146,7 +146,7 @@ const Game = () => {
 							<div className='text-game'>{t`JOIN THE FIGHT AND WIN`}</div>
 							<div className='container-pack-pokeballs'>
 								<PokeballsPack
-									title={'BRONZE'}
+									title={t`BRONZE`}
 									amount={cardsAmount.bronze}
 									images={IMAGES.slice(0, 6)}
 									background={bronze}
@@ -155,7 +155,7 @@ const Game = () => {
 									six={six.bronze}
 								/>
 								<PokeballsPack
-									title={'SILVER'}
+									title={t`SILVER`}
 									amount={cardsAmount.silver}
 									images={IMAGES.slice(6, 12)}
 									background={silver}
@@ -164,7 +164,7 @@ const Game = () => {
 									six={six.silver}
 								/>
 								<PokeballsPack
-									title={'GOLD'}
+									title={t`GOLD`}
 									amount={cardsAmount.gold}
 									images={IMAGES.slice(12, 18)}
 									background={gold}
@@ -173,7 +173,7 @@ const Game = () => {
 									six={six.gold}
 								/>
 								<PokeballsPack
-									title={'EMERALD'}
+									title={t`EMERALD`}
 									amount={cardsAmount.emerald}
 									images={IMAGES.slice(18, 24)}
 									background={emerald}

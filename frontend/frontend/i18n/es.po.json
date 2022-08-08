@@ -386,6 +386,10 @@
 			"Continue": {
 				"msgid": "Continue",
 				"msgstr": ["Continuar"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Monedero de retirada"]
 			}
 		}
 	}

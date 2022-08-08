@@ -86,6 +86,19 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	background-color: white;
+	color: #000000
+}
+.deposit-text{
+	margin: 10px 0px;
+	font-size: 16px;
+}
+.deposit-description {
+	margin-top: 10px;
+	opacity: .9;
+}
+.deposit-copy-icon{
+	color: #ffcc00;
 }
 .deposit-button {
 	padding: 5px 30px;

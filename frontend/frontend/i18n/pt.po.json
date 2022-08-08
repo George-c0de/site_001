@@ -380,6 +380,10 @@
 			"Continue": {
 				"msgid": "Continue",
 				"msgstr": ["Continuar"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Carteira de retirada"]
 			}
 		}
 	}

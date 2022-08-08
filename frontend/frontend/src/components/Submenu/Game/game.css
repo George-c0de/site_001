@@ -19,7 +19,7 @@ p {
 	box-shadow: 0px 11px 6px rgba(0, 0, 0, 0.47);
 	border-radius: 0px 0px 32px 32px;
 	padding: 5px 35px;
-	position: fixed;
+	position: absolute;
 	width: 100%;
 	z-index: 9999;
 }
@@ -209,6 +209,11 @@ p {
 		width: 180px;
 	}
 }
+@media screen and (max-width: 420px) {
+	.main__text {
+		font-size: 13px;
+	}
+}
 @media screen and (max-width: 400px) {
 	.main__links {
 		margin-bottom: 0;
@@ -223,9 +228,6 @@ p {
 	.main__block:nth-child(2) img {
 		width: 36px;
 		height: 28px;
-	}
-	.main__text {
-		font-size: 13px;
 	}
 }
 @media screen and (max-width: 370px) {

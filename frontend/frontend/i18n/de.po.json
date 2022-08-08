@@ -378,11 +378,15 @@
 			"Show more": {
 				"msgid": "Show more",
 				"msgstr": ["Mehr anzeigen"]
-				},
-				"Continue": {
-					"msgid": "Continue",
-					"msgstr": ["Weiter"]
-				}
+			},
+			"Continue": {
+				"msgid": "Continue",
+				"msgstr": ["Weiter"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Entnahmebrieftasche"]
+			}
 		}
   }
 }

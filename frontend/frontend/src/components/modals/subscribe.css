@@ -27,8 +27,7 @@
 .subscribe-text{
 	text-align: center;
 	margin-bottom: 20px;
-	font-size: 24px;
-	line-height: 1;
+	font-size: 20px;
 }
 .subscribe-btn{
 	cursor: pointer;
@@ -36,6 +35,10 @@
 	padding: 10px;
 	font-size: 20px;
 	width: fit-content;
+	transition: .3s all ease;
+}
+.subscribe-btn:hover{
+	color: white;
 }
 .authorization__img {
 	width: 25px;

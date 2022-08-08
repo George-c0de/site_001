@@ -274,6 +274,10 @@
 			"Continue": {
 				"msgid": "Continue",
 				"msgstr": ["Продолжить"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Кошелек для вывода"]
 			}
 		}
 	}

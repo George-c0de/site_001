@@ -319,7 +319,9 @@
 			},
 			"Enter your email address to reset your password": {
 				"msgid": "Enter your email address to reset your password",
-				"msgstr": ["Entrez votre adresse e-mail pour réinitialiser votre mot de passe"]
+				"msgstr": [
+					"Entrez votre adresse e-mail pour réinitialiser votre mot de passe"
+				]
 			},
 			"Password recovery link was sent to the specified email": {
 				"msgid": "Password recovery link was sent to the specified email",
@@ -386,6 +388,10 @@
 			"Continue": {
 				"msgid": "Continue",
 				"msgstr": ["Continue"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Portefeuille de retrait"]
 			}
 		}
   }

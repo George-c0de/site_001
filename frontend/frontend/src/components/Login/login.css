@@ -110,8 +110,9 @@
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.34);
 	border-radius: 17px;
 	font-weight: 500;
-	font-size: 36px;
+	font-size: 30px;
 	color: #1a255e;
+	padding: 0 10px;
 }
 .authorization__pikachu-wrapper {
 	width: 350px;
@@ -150,13 +151,14 @@
 	text-align: right;
 }
 .reset__link {
-	padding-left: 30px;
+	padding-left: 10px;
 	margin-bottom: 10px;
 	position: relative;
 	font-weight: 600;
-	font-size: 28px;
+	font-size: 18px;
 	color: #d11011;
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	text-align: center;
 }
 .reset-img {
 	cursor: pointer;
@@ -165,9 +167,11 @@
 	height: 30px;
 }
 .reset__text {
-	font-size: 20px;
+	font-size: 16px;
+	opacity: 0.6;
 	margin-top: -20px;
 	margin-bottom: 20px;
+	text-align: center;
 }
 .grecaptcha-badge {
 	display: none !important;
@@ -255,6 +259,12 @@
 	}
 	.authorization__pikachu-wrapper {
 		bottom: 55px;
+	}
+	.login_container-reset .authorization__pikachu-wrapper {
+		bottom: 100px;
+	}
+	.login_container-reset {
+		min-height: 630px;
 	}
 }
 @media screen and (max-height: 420px) and (min-width: 840px) {

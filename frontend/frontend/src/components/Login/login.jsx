@@ -13,6 +13,7 @@ const Signup = () => {
 	const [invalidPassword, setInvalidPassword] = useState(false)
 	const [invalidDataLogin, setInvalidDataLogin] = useState(false)
 	const [invalidEmail, setInvalidEmail] = useState(false)
+	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [data, setData] = useState({
 		email: '',
 		password: '',
@@ -33,6 +34,18 @@ const Signup = () => {
 				email: data.email,
 				password: data.password,
 			})
+			if (
+				!data.email
+					.toLowerCase()
+					.match(
+						/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+					)
+			) {
+				setInvalidEmail(true)
+			} else {
+				setInvalidEmail(false)
+			}
+
 			// try {
 			// 	const { data } = axios.post('/api/login', validData, {
 			// 		headers: { 'Content-Type': 'application/json' },
@@ -114,11 +127,25 @@ const Signup = () => {
 			}
 		}
 		if (typeAuthorization === 'reset') {
-			setLetterSent(true)
-
 			let validData = JSON.stringify({
 				email: data.email,
 			})
+			if (
+				!emailReset
+					.toLowerCase()
+					.match(
+						/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+					)
+			) {
+				setInvalidEmailReset(true)
+			} else {
+				setInvalidEmailReset(false)
+				setInvalidEmail(true)
+				setLetterSent(true)
+				setTimeout(() => {
+					window.location.reload()
+				}, 5000)
+			}
 			// try {
 			// 	const { data } = axios.post('/api/login', validData, {
 			// 		headers: { 'Content-Type': 'application/json' },
@@ -127,14 +154,14 @@ const Signup = () => {
 			// } catch (e) {
 			// 	console.log(e.response)
 			// }
-
-			setTimeout(() => {
-				window.location.reload()
-			}, 5000)
 		}
 	}
 	return (
-		<div className='login_container'>
+		<div
+			className={`login_container ${
+				typeAuthorization === 'reset' ? 'login_container-reset' : ''
+			}`}
+		>
 			<div className='header-authorization'>
 				<img src={logo} alt='' className='nav__logo' />
 			</div>
@@ -170,7 +197,7 @@ const Signup = () => {
 							<input
 								type='text'
 								className={`authorization__input ${
-									invalidDataLogin ? 'authorization__input-invalid' : ''
+									invalidEmail ? 'authorization__input-invalid' : ''
 								}`}
 								placeholder={t`Email`}
 								onChange={handleChange}
@@ -240,7 +267,6 @@ const Signup = () => {
 							</button>
 						</form>
 					)}
-
 					{typeAuthorization === 'reset' && (
 						<>
 							<p className='reset__link'>{t`Enter your email address to reset your password`}</p>
@@ -248,7 +274,7 @@ const Signup = () => {
 								<input
 									type='text'
 									className={`authorization__input ${
-										invalidEmail ? 'authorization__input-invalid' : ''
+										invalidEmailReset ? 'authorization__input-invalid' : ''
 									}`}
 									placeholder={t`Email`}
 									name='email'

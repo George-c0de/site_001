@@ -174,7 +174,7 @@ const Deposit = () => {
 								/>
 							</div> */}
 							<div className='deposit-input deposit-input-deposit'>
-								<p>
+								<p className='deposit-text'>
 									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
 								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
@@ -185,7 +185,7 @@ const Deposit = () => {
 										onClick={handleCopy}
 									/>
 								</span>
-								<p>
+								<p className='deposit-description'>
 									{t`Минимальная сумма платежа 10 usdt. Транзакции с меньшей суммой
 									будут утеряны`}
 								</p>

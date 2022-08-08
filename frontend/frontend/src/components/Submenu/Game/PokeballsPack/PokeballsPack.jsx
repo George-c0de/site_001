@@ -11,13 +11,32 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { PokeballsModal } from '../PokeballsModal/PokeballsModal'
 
 import './PokeballsPack.css'
-
+import { t } from 'ttag'
 const COLORS_TO_CLASS = {
 	bronze: 'text-pokeball-1',
+	bronco: 'text-pokeball-1',
+	bronce: 'text-pokeball-1',
+	бронза: 'text-pokeball-1',
 	silver: 'text-pokeball-2',
+	prata: 'text-pokeball-2',
+	"d'argento": 'text-pokeball-2',
+	argent: 'text-pokeball-2',
+	silber: 'text-pokeball-2',
+	plata: 'text-pokeball-2',
+	серебро: 'text-pokeball-2',
 	gold: 'text-pokeball-3',
+	золото: 'text-pokeball-3',
+	ouro: 'text-pokeball-3',
+	oro: 'text-pokeball-3',
+	or: 'text-pokeball-3',
 	emerald: 'text-pokeball-4',
+	esmeralda: 'text-pokeball-4',
+	smeraldo: 'text-pokeball-4',
+	émeraude: 'text-pokeball-4',
+	smaragd: 'text-pokeball-4',
+	изумруд: 'text-pokeball-4',
 }
+
 
 export const PokeballsPack = ({
 	title,
@@ -35,7 +54,7 @@ export const PokeballsPack = ({
 
 	return (
 		<div className='col-sm' id='title-pack-pokeballs'>
-			<span>Cards</span>
+			<span>{t`Cards`}</span>
 			<div
 				className={
 					modalOpen ? 'pokeballs-container open' : 'pokeballs-container'

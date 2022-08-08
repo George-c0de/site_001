@@ -201,7 +201,7 @@ const Pay = () => {
 								/>
 							</div>
 							<div className='pay-input'>
-								<label htmlFor='address-input'>Адрес вывода:</label>
+								<label htmlFor='address-input'>{t`Withdrawal wallet`}</label>
 								<input
 									onChange={e => hundSum(e, 'wallet_input')}
 									required
