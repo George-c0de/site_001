@@ -170,7 +170,7 @@ const Pay = () => {
 		// }
 		setData({
 			...data,
-			[name]: e.target.value
+			[name]: e.target.value,
 		})
 	}
 

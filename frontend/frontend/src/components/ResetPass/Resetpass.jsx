@@ -3,7 +3,6 @@ import logo from '../../Ảnh Pokemon Dự Trù/логотип.svg'
 import { t } from 'ttag'
 import './reset.css'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { Lang } from '../MainPage/Lang/Lang'
 const Resetpass = () => {
 	const [data, setData] = React.useState({
@@ -20,11 +19,11 @@ const Resetpass = () => {
 		e.preventDefault()
 		if (data.password.length < 8 || data.password !== data.password1) {
 			setInvalidPassword(true)
-		} else {	
+		} else {
 			navigate('/login')
 			setInvalidPassword(false)
 		}
-	
+
 		// if (!invalidPassword) {
 		// 	try {
 		// 		const { data: res } = await axios.post('/api/register', data, {

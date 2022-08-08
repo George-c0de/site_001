@@ -1,17 +1,11 @@
+import './PokeballsPack.css'
 import React, { useState } from 'react'
-
-// Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg'
-
-// Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-
-// Pages
 import { PokeballsModal } from '../PokeballsModal/PokeballsModal'
-
-import './PokeballsPack.css'
 import { t } from 'ttag'
+import PokebolOpened from '../../../../assets/pockebol-opened.png'
 
 const COLORS_TO_CLASS = {
 	bronze: 'text-pokeball-1',
@@ -52,9 +46,29 @@ export const PokeballsPack = ({
 		setModalOpen(!modalOpen)
 	}
 
+	// ПЕРЕНЕСЕНО ИЗ POKEBALLSMODAL
+	const [cards, setCards] = useState([])
+	const buyCard = async id => {
+		const newCards = [...cards]
+		newCards[id - 1] = id
+		setCards(newCards)
+	}
+
+	React.useEffect(() => {
+		const array = [0, 0, 0, 0, 0, 0]
+		if (amount.length > 0) {
+			for (let i = 0; i < amount.length; i++) {
+				array[amount[i] - 1] = amount[i]
+			}
+		}
+
+		setCards(array)
+	}, [amount])
+	///
+
 	return (
 		<div className='col-sm' id='title-pack-pokeballs'>
-			<span>{t`Cards`}</span>
+			<span className='pokebolls-title'>{t`Cards`}</span>
 			<div
 				className={
 					modalOpen ? 'pokeballs-container open' : 'pokeballs-container'
@@ -62,12 +76,19 @@ export const PokeballsPack = ({
 			>
 				<div className='detail-wrapper' onClick={handlePokeballsPack}>
 					<div id='pokeballs-detail'>
-						<img src={pokeball} className='small-pokeball' alt='' />
-						<img src={pokeball} className='small-pokeball' alt='' />
-						<img src={pokeball} className='small-pokeball' alt='' />
-						<img src={pokeball} className='small-pokeball' alt='' />
-						<img src={pokeball} className='small-pokeball' alt='' />
-						<img src={pokeball} className='small-pokeball' alt='' />
+						{cards.map(elem => (
+							<img
+								src={elem !== 1 ? pokeball : PokebolOpened}
+								className='small-pokeball'
+								alt='pokeball'
+							/>
+						))}
+						{/* <img src={cards[0]} className='small-pokeball' alt='pokeball' />
+						<img src={pokeball} className='small-pokeball' alt='pokeball' />
+						<img src={pokeball} className='small-pokeball' alt='pokeball' />
+						<img src={pokeball} className='small-pokeball' alt='pokeball' />
+						<img src={pokeball} className='small-pokeball' alt='pokeball' />
+						<img src={pokeball} className='small-pokeball' alt='pokeball' /> */}
 					</div>
 					<div
 						className={
@@ -82,6 +103,8 @@ export const PokeballsPack = ({
 				</div>
 
 				<PokeballsModal
+					cards={cards}
+					buyCard={buyCard}
 					background={background}
 					amount={amount}
 					images={images}

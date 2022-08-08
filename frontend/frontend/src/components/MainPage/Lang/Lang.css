@@ -45,6 +45,7 @@
 	height: 45px;
 	display: block;
 	cursor: pointer;
+	object-fit: cover;
 }
 
 .lang-icon-preview.hidden {

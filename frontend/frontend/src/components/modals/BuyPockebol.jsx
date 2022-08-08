@@ -1,14 +1,16 @@
 import React from 'react'
 import './buy.css'
 import Cross from '../../assets/cross-svgrepo-com.svg'
+import { t } from 'ttag'
 
 const BuyPockebol = props => {
 	const ref = React.useRef(null)
-	const { hideModal, setHideModal, setPurchaseConfirmation, setAccept } = props
-
+	const { hideModal, setHideModal, setPurchaseConfirmation, setAccept, price } =
+		props
 	const handleClickOutside = event => {
 		if (ref.current && !ref.current.contains(event.target)) {
 			setAccept(false)
+			document.body.style.overflow = 'visible'
 		}
 	}
 
@@ -21,12 +23,14 @@ const BuyPockebol = props => {
 
 	const handleClick = () => {
 		setAccept(false)
+		document.body.style.overflow = 'visible'
 	}
 
 	const confirmPurchase = () => {
 		setPurchaseConfirmation(true)
 		setAccept(false)
 		setHideModal(true)
+		document.body.style.overflow = 'visible'
 	}
 
 	return (
@@ -34,23 +38,35 @@ const BuyPockebol = props => {
 			className={`subscriibe-wrapper buy-wrapper ${
 				hideModal ? 'buy-wrapper-hide' : ''
 			}`}
-			ref={ref}
 		>
-			<div className='subscriibe-block'>
+			<div className='subscriibe-block' ref={ref}>
 				<img
 					src={Cross}
 					alt=''
 					className='subcribe-cross'
 					onClick={handleClick}
 				/>
-				<p className='buy-text'>После подтверждения с вас спишется ...</p>
-				<p
-					onClick={confirmPurchase}
-					className='authorization__button subscribe-btn'
-					target='__blank'
-				>
-					Подтвердить покупку
+				<p className='buy-text'>
+					{t`Purchase price` +
+						' ' +
+						price +
+						'USD. ' +
+						t`Would you like to continue?`}
 				</p>
+				<div className='buy-btns-wrapper'>
+					<button
+						onClick={confirmPurchase}
+						className='authorization__button subscribe-btn buy-btn'
+					>
+						{t`Yes`}
+					</button>
+					<button
+						onClick={handleClick}
+						className='authorization__button subscribe-btn buy-btn'
+					>
+						{t`No`}
+					</button>
+				</div>
 			</div>
 		</div>
 	)

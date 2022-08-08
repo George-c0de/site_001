@@ -41,6 +41,7 @@
 	color: white;
 }
 .authorization__img {
+	padding-bottom: 5px;
 	width: 25px;
 	margin-right: 10px;
 }

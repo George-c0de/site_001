@@ -233,9 +233,9 @@
 				"msgid": "Subscribe to Telegram",
 				"msgstr": ["Подписаться в телеграмм"]
 			},
-			"Purchase price 10usd": {
-				"msgid": "Purchase price 10usd",
-				"msgstr": ["Цена покупки 10"]
+			"Purchase price": {
+				"msgid": "Purchase price",
+				"msgstr": ["Цена покупки"]
 			},
 			"Would you like to continue?": {
 				"msgid": "Would you like to continue?",
@@ -286,6 +286,18 @@
 			"Yes": {
 				"msgid": "Yes",
 				"msgstr": ["Да"]
+			},
+			"ACTIVATE": {
+				"msgid": "ACTIVATE",
+				"msgstr": ["АКТИВИРОВАТЬ"]
+			},
+			"Referrals profit:": {
+				"msgid": "Referrals profit:",
+				"msgstr": ["Доход с рефералов:"]
+			},
+			"Total wins:": {
+				"msgid": "Total wins:",
+				"msgstr": ["Общий выигрыш:"]
 			}
 		}
 	}

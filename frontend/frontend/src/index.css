@@ -1,31 +1,25 @@
 body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
 }
 
 /*Start*/
-@import url("./components/StartGame/startgame.css");
+@import url('./components/StartGame/startgame.css');
 
 /*Log in*/
-@import url("./components/Login/login.css");
-
-/*Sign up*/
-@import url("./components/Signup/signup.css");
+@import url('./components/Login/login.css');
 
 /*Mainpage*/
-@import url("./components/MainPage/mainpage.css");
+@import url('./components/MainPage/mainpage.css');
 
 /*Game*/
-@import url("./components/Submenu/Game/game.css");
+@import url('./components/Submenu/Game/game.css');
 
 /*Referals*/
-@import url("./components/Submenu/Referals/referals.css");
+@import url('./components/Submenu/Referals/referals.css');
 
 /*Statistics*/
-@import url("./components/Submenu/Statistics/statistics.css");
-
-/*Update User*/
-@import url("./components//UpdateUser/updateuser.css");
+@import url('./components/Submenu/Statistics/statistics.css');

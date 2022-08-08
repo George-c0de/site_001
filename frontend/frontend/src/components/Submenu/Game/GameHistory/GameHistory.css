@@ -6,7 +6,6 @@
 	padding: 20px;
 	max-width: 500px;
 	width: 100%;
-	height: 200px;
 	text-align: center;
 	font-weight: bold;
 	margin-top: auto;
@@ -30,11 +29,15 @@
 }
 
 .history-table-row {
+	padding: 5px 27px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	border-top: 1px solid #000;
+}
+.history-table-icon {
+	width: 20px;
 }
 
 .history-table-row:last-child {
@@ -52,11 +55,33 @@
 	color: #1e3371;
 	font-weight: 600;
 	font-size: 17px;
+	padding-top: 5px;
 	padding-left: 50px;
 	cursor: pointer;
+	text-transform: uppercase;
+
+}
+.game-history-title {
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 28px;
+	text-transform: uppercase;
+	color: #000000;
 }
 @media screen and (max-width: 510px) {
 	.site-main-game-wrapper {
 		padding: 0 10px;
 	}
+	.history-table-row{
+		padding: 5px 10px
+	}
 }
+@media screen and (max-width: 400px) {
+	.site-main-game-wrapper {
+		padding: 0 10px;
+	}
+	.history-table-row{
+		padding: 5px 6px
+	}
+}
+

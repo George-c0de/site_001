@@ -339,13 +339,13 @@
 				"msgid": "Subscribe to Telegram",
 				"msgstr": ["Assine por telegrama"]
 			},
-			"Purchase price 10usd": {
-				"msgid": "Preço de compra 10 usd.",
-				"msgstr": ["Цена покупки 10"]
+			"Purchase price": {
+				"msgid": "Purchase price",
+				"msgstr": ["Preço de compra"]
 			},
 			"Would you like to continue?": {
-				"msgid": "Você gostaria de continuar?",
-				"msgstr": ["Желаете Продолжить?"]
+				"msgid": "Would you like to continue?",
+				"msgstr": ["Você gostaria de continuar?"]
 			},
 			"To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.": {
 				"msgid": "To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.",
@@ -390,8 +390,26 @@
 				"msgstr": ["Não"]
 			},
 			"Yes": {
-					"msgid": "Yes",
+				"msgid": "Yes",
 				"msgstr": ["Sim"]
+			},
+			"The password must be at least 8 characters long. Contains letters and symbols": {
+				"msgid": "The password must be at least 8 characters long. Contains letters and symbols",
+				"msgstr": [
+					"A senha deve ter pelo menos 8 caracteres. Contém letras e símbolos"
+				]
+			},
+			"ACTIVATE": {
+				"msgid": "ACTIVATE",
+				"msgstr": ["ACTIVAR"]
+			},
+			"Referrals profit:": {
+				"msgid": "Referrals profit:",
+				"msgstr": ["Referências lucro:"]
+			},
+			"Total wins:": {
+				"msgid": "Total wins:",
+				"msgstr": ["Vitórias totais:"]
 			}
 		}
 	}

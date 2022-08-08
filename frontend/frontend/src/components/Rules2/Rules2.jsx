@@ -1,15 +1,4 @@
 import React, { useState } from 'react'
-import { UserId } from '../UserId/UserId'
-// import { UserId } from '../../Rules/'
-import Referals from '../Submenu/Referals/referals'
-import Statistics from '../Submenu/Statistics/statistics'
-
-//Images
-import HeaderLogo from '../../assets/headerLogo.png'
-import HeaderHuman from '../../assets/HeaderHuman.png'
-import Telegram from '../../assets/telegram.svg'
-import LogOut from '../../assets/logout.svg'
-import axios from 'axios'
 
 import Slide1 from '../../assets/slides/Slide1.png'
 import Slide2 from '../../assets/slides/Slide2.png'
@@ -22,31 +11,26 @@ import Slide2Ge from '../../assets/slides/Slide2-de.png'
 import Slide3Ge from '../../assets/slides/Slide3-de.png'
 import Slide4Ge from '../../assets/slides/Slide4-de.png'
 import Slide5Ge from '../../assets/slides/Slide5-de.png'
-
 import Slide1Po from '../../assets/slides/Slide1-po.png'
 import Slide2Po from '../../assets/slides/Slide2-po.png'
 import Slide3Po from '../../assets/slides/Slide3-po.png'
 import Slide4Po from '../../assets/slides/Slide4-po.png'
 import Slide5Po from '../../assets/slides/Slide5-po.png'
-
 import Slide1It from '../../assets/slides/Slide1-it.png'
 import Slide2It from '../../assets/slides/Slide2-it.png'
 import Slide3It from '../../assets/slides/Slide3-it.png'
 import Slide4It from '../../assets/slides/Slide4-it.png'
 import Slide5It from '../../assets/slides/Slide5-it.png'
-
 import Slide1Sp from '../../assets/slides/Slide1-sp.png'
 import Slide2Sp from '../../assets/slides/Slide2-sp.png'
 import Slide3Sp from '../../assets/slides/Slide3-sp.png'
 import Slide4Sp from '../../assets/slides/Slide4-sp.png'
 import Slide5Sp from '../../assets/slides/Slide5-sp.png'
-
 import Slide1Fr from '../../assets/slides/Slide1-fr.png'
 import Slide2Fr from '../../assets/slides/Slide2-fr.png'
 import Slide3Fr from '../../assets/slides/Slide3-fr.png'
 import Slide4Fr from '../../assets/slides/Slide4-fr.png'
 import Slide5Fr from '../../assets/slides/Slide5-fr.png'
-
 import Slide1Ru from '../../assets/slides/Slide1-ru.png'
 import Slide2Ru from '../../assets/slides/Slide2-ru.png'
 import Slide3Ru from '../../assets/slides/Slide3-ru.png'
@@ -201,6 +185,10 @@ function Rules2() {
 		}
 	}
 
+	function getLocale() {
+		return cookie.get(LOCALE_COOKIE) || 'en'
+	}
+
 	return (
 		<>
 			<div className='homepage-wrapper'>
@@ -222,6 +210,13 @@ function Rules2() {
 										</div>
 									))}
 								</div>
+								<a
+									className='gallery-faq'
+									target='__blank'
+									href={`tokemon.info/${getLocale()}`}
+								>
+									Остались вопросы? Полная инструкция
+								</a>
 							</>
 						)}
 						{activeGallery && (
