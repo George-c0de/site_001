@@ -2,12 +2,16 @@ import React from 'react'
 import logo from '../../Ảnh Pokemon Dự Trù/логотип.svg'
 import { t } from 'ttag'
 import './reset.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Lang } from '../MainPage/Lang/Lang'
+import axios from 'axios'
 const Resetpass = () => {
+	const params = useParams()
 	const [data, setData] = React.useState({
 		password1: '',
 		password2: '',
+		uid: params.uid,
+		token: params.token,
 	})
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
@@ -24,18 +28,18 @@ const Resetpass = () => {
 			setInvalidPassword(false)
 		}
 
-		// if (!invalidPassword) {
-		// 	try {
-		// 		const { data: res } = await axios.post('/api/register', data, {
-		// 			headers: { 'Content-Type': 'application/json' },
-		// 		})
-		// 		console.log(res.data)
-		// 		navigate('/home') //after registering navigate to login page
-		// 		console.log(res.message)
-		// 	} catch (error) {
-		// 		console.log(error)
-		// 	}
-		// }
+		if (!invalidPassword) {
+			try {
+				const { data: res } = await axios.post('api/set_new/', data, {
+					headers: { 'Content-Type': 'application/json' },
+				})
+				console.log(res.data)
+				navigate('/home') //after registering navigate to login page
+				console.log(res.message)
+			} catch (error) {
+				console.log(error)
+			}
+		}
 	}
 
 	return (

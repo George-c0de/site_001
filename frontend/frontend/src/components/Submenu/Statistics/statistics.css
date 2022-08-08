@@ -34,7 +34,7 @@
 	.statistic-info li {
 		font-size: 25px;
 	}
-    .statistic-info li span {
+	.statistic-info li span {
 		font-size: 30px;
 	}
 }
@@ -43,7 +43,7 @@
 	.statistic-info li {
 		font-size: 20px;
 	}
-    .statistic-info li span {
+	.statistic-info li span {
 		font-size: 25px;
 	}
 }
@@ -51,10 +51,10 @@
 	.statistic-info li {
 		font-size: 17px;
 	}
-    .statistic-info li span {
+	.statistic-info li span {
 		font-size: 20px;
 	}
-    .statistic-info{
-        padding-left: 0;
-    }
+	.statistic-info {
+		padding-left: 0;
+	}
 }

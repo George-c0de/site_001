@@ -29,7 +29,7 @@ function App() {
 			<Route path='/home/deposit' exact element={<Deposit />} />
 			<Route path='/' exact element={<Deposit />} />
 			<Route path='/home/rules' element={<Rules2 />} />
-			<Route path='/reset' element={<Resetpass />} />
+			<Route path='/reset/:uid/:token' element={<Resetpass />} />
 		</Routes>
 	)
 }

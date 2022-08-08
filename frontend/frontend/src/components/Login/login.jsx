@@ -148,14 +148,14 @@ const Signup = () => {
 			} else {
 				setInvalidEmailReset(false)
 				setLetterSent(true)
-				// try {
-				// 	const { data } = axios.post('/api/login', validData, {
-				// 		headers: { 'Content-Type': 'application/json' },
-				// 	})
-				// 	console.log(data)
-				// } catch (e) {
-				// 	console.log(e.response)
-				// }
+				try {
+					const { data } = axios.post('/api/reset_password/', validData, {
+						headers: { 'Content-Type': 'application/json' },
+					})
+					console.log(data)
+				} catch (e) {
+					console.log(e.response)
+				}
 				setTimeout(() => {
 					window.location.reload()
 				}, 5000)

@@ -135,6 +135,16 @@ const Referals = () => {
 		link: '',
 	})
 
+	async function fetchPosts() {
+		try {
+			const response = await axios.get('/api/referral')
+			console.log(response.data)
+			setPosts(response.data)
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
 	const getLines = async () => {
 		await axios.get('/api/get_lines').then(data => {
 			const result = {
@@ -178,12 +188,7 @@ const Referals = () => {
 		})
 		console.log(posts)
 	}
-	async function fetchPosts() {
-		try {
-			const response = await axios.get('/api/referral')
-			setPosts(response.data)
-		} catch (e) {}
-	}
+
 	const linkRef = React.useRef()
 
 	const handleCopy = () => {
