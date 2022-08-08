@@ -32,6 +32,7 @@
 .lang-icon_active {
 	width: 45px;
 	height: 45px;
+	object-fit: cover;
 }
 
 .lang-icon-preview {

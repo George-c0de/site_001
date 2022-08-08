@@ -390,6 +390,14 @@
 			"Withdrawal wallet": {
 				"msgid": "Withdrawal wallet",
 				"msgstr": ["Portafoglio di prelievo"]
+			},
+			"no": {
+				"msgid": "no",
+				"msgstr": ["No"]
+			},
+			"Yes": {
+				"msgid": "Yes",
+				"msgstr": ["Sí"]
 			}
 		}
 	}

@@ -384,6 +384,14 @@
 			"Withdrawal wallet": {
 				"msgid": "Withdrawal wallet",
 				"msgstr": ["Carteira de retirada"]
+			},
+			"no": {
+				"msgid": "no",
+				"msgstr": ["Não"]
+			},
+			"Yes": {
+					"msgid": "Yes",
+				"msgstr": ["Sim"]
 			}
 		}
 	}

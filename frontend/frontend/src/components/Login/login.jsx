@@ -70,30 +70,26 @@ const Signup = () => {
 				setInvalidDataLogin(false)
 			}
 
-			// try {
-			// 	const { data } = axios.post('/api/login', validData, {
-			// 		headers: { 'Content-Type': 'application/json' },
-			// 	})
-			// 	console.log(data)
-			// } catch (e) {
-			// 	console.log(e.response)
-			// }
-
-			try {
-				let data2 = 200
-				data2 = await axios
-					.post('/api/login', validData)
-					.catch(function (error) {
+			if (
+				!invalidPassword &&
+				!invalidDataLogin &&
+				data.password1.length > 0 &&
+				data.email.length > 0
+			)
+				try {
+					let data2 = 200
+					data2 = await axios.post('/api/login', validData).catch(function (error) {
 						if (error.response) {
 							data2 = error.response.status
 						}
 					})
-				if (data2.data === 200) {
-					navigate('/home') //after registering navigate to login page
+					if (data2.data === 200) {
+						navigate('/home') //after registering navigate to login page
+					}
+				} catch (error) {
+					//console.log(error.response.data.msg);
+					alert('Wrong email or password!')
 				}
-			} catch (error) {
-				console.log(error)
-			}
 		}
 
 		if (typeAuthorization === 'sign') {

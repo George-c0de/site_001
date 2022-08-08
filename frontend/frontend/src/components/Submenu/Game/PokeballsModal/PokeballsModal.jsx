@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-// Images
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg'
 
-// Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import q from '../../../../Ảnh Pokemon Dự Trù/Знак вопроса.svg'
@@ -22,22 +20,26 @@ const CardOpened = ({
 	const [status, setStatus] = useState(card_data[0])
 	console.log(status)
 	console.log(card_data[0])
-	const handleStatusBalls = e => {
-		const statusBall = e.target.closest('[data-status]')
-		if (statusBall) {
-			statusBall.classList.toggle('show')
-			setStatus(card_data[0])
-		}
-	}
+
+	// const handleStatusBalls = e => {
+	// 	const statusBall = e.target.closest('[data-status]')
+	// 	if (statusBall) {
+	// 		statusBall.classList.toggle('show')
+	// 		setStatus(card_data[0])
+	// 	}
+	// }
+
 	const handleBuyClick = () => {
 		setTimeout(async () => {
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
 				setTimeout(() => {
+					console.log('BUY CARD')
 					buyCard()
 				}, 1000)
 			})
 		}, 3000)
 	}
+
 	return (
 		<>
 			<img src={background} alt='' className='card-background' />
@@ -78,6 +80,14 @@ const CardOpened = ({
 	)
 }
 
+
+
+
+
+
+
+
+
 const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 	const [status, setStatus] = useState()
 	const [accept, setAccept] = useState(false)
@@ -108,6 +118,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 			setFirstRender(true)
 		}
 	}, [purchaseConfirmation])
+
 	return (
 		<div>
 			{six === false && idCard === 6 ? (
@@ -147,6 +158,15 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 		</div>
 	)
 }
+
+
+
+
+
+
+
+
+
 
 export const PokeballsModal = ({
 	amount,

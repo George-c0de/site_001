@@ -278,6 +278,14 @@
 			"Withdrawal wallet": {
 				"msgid": "Withdrawal wallet",
 				"msgstr": ["Кошелек для вывода"]
+			},
+			"no": {
+				"msgid": "no",
+				"msgstr": ["Нет"]
+			},
+			"Yes": {
+				"msgid": "Yes",
+				"msgstr": ["Да"]
 			}
 		}
 	}

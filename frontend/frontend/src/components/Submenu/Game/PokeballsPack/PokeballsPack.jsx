@@ -12,6 +12,7 @@ import { PokeballsModal } from '../PokeballsModal/PokeballsModal'
 
 import './PokeballsPack.css'
 import { t } from 'ttag'
+
 const COLORS_TO_CLASS = {
 	bronze: 'text-pokeball-1',
 	bronco: 'text-pokeball-1',
@@ -36,7 +37,6 @@ const COLORS_TO_CLASS = {
 	smaragd: 'text-pokeball-4',
 	изумруд: 'text-pokeball-4',
 }
-
 
 export const PokeballsPack = ({
 	title,

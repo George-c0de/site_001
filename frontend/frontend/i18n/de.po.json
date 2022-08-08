@@ -386,6 +386,14 @@
 			"Withdrawal wallet": {
 				"msgid": "Withdrawal wallet",
 				"msgstr": ["Entnahmebrieftasche"]
+			},
+			"no": {
+				"msgid": "no",
+				"msgstr": ["keine"]
+			},
+			"Yes": {
+				"msgid": "Yes",
+				"msgstr": ["Ja"]
 			}
 		}
   }
