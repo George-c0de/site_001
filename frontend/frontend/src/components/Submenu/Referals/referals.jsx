@@ -91,6 +91,11 @@ const Referals = () => {
 	// 		setPosts(response.data)
 	// 	} catch (e) {}
 	// }
+	useEffect(() => {
+		fetchPosts()
+		getLines()
+		fetchUser()
+	}, [])
 	const [user, setUser] = useState({
 		id: 0,
 		money: '0.00',
@@ -106,10 +111,7 @@ const Referals = () => {
 		user: 0,
 	})
 
-	useEffect(() => {
-		fetchPosts()
-		getLines()
-	}, [])
+	
 
 	const [lines, setLines] = useState({
 		first: {
@@ -143,6 +145,12 @@ const Referals = () => {
 		} catch (e) {
 			console.log(e)
 		}
+	}
+	async function fetchUser() {
+		try {
+			const response = await axios.get('/api/user')
+			setUser(response.data)
+		} catch (e) {}
 	}
 
 	const getLines = async () => {
