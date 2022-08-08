@@ -75,6 +75,9 @@
 	.history-table-row{
 		padding: 5px 10px
 	}
+	.status-activate {
+		font-size: 14px !important;
+	}
 }
 @media screen and (max-width: 400px) {
 	.site-main-game-wrapper {

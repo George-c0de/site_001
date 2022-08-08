@@ -78,11 +78,13 @@ const Signup = () => {
 			)
 				try {
 					let data2 = 200
-					data2 = await axios.post('/api/login', validData).catch(function (error) {
-						if (error.response) {
-							data2 = error.response.status
-						}
-					})
+					data2 = await axios
+						.post('/api/login', validData)
+						.catch(function (error) {
+							if (error.response) {
+								data2 = error.response.status
+							}
+						})
 					if (data2.data === 200) {
 						navigate('/home') //after registering navigate to login page
 					}
@@ -116,10 +118,10 @@ const Signup = () => {
 				data.password1.length > 0 &&
 				data.email.length > 0
 			) {
-				// let gtoken = await reCaptchaExecute(
-				// 	'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
-				// 	'auth'
-				// )
+				let gtoken = await reCaptchaExecute(
+					'6MM8ECLaq9zC4xgck6QUJACuAxDkZyouDAnYOIb3',
+					'auth'
+				)
 				try {
 					const { data: res } = await axios.post(`/api/register`, data, {
 						headers: { 'Content-Type': 'application/json' },
@@ -145,8 +147,15 @@ const Signup = () => {
 				setInvalidEmailReset(true)
 			} else {
 				setInvalidEmailReset(false)
-				setInvalidEmail(true)
 				setLetterSent(true)
+				// try {
+				// 	const { data } = axios.post('/api/login', validData, {
+				// 		headers: { 'Content-Type': 'application/json' },
+				// 	})
+				// 	console.log(data)
+				// } catch (e) {
+				// 	console.log(e.response)
+				// }
 				setTimeout(() => {
 					window.location.reload()
 				}, 5000)
