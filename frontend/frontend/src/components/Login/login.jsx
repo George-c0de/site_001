@@ -50,8 +50,9 @@ const Signup = () => {
 		if (typeAuthorization === 'login') {
 			let validData = {
 				email: data.email,
-				password: data.password,
+				password: data.password1,
 			}
+			console.log(validData)
 			if (
 				!data.email
 					.toLowerCase()
@@ -220,7 +221,7 @@ const Signup = () => {
 								placeholder={t`Password`}
 								name='password1'
 								onChange={handleChange}
-								value={data.password}
+								value={data.password1}
 							/>
 							<p
 								className='authorization-reset'
@@ -253,7 +254,7 @@ const Signup = () => {
 								name='password1'
 								type='password'
 								onChange={handleChange}
-								value={data.password}
+								value={data.password1}
 							/>
 							<input
 								type='password'
