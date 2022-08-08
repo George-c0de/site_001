@@ -34,11 +34,12 @@
 	margin-bottom: 13px;
 }
 .referals__count-wrapper {
+	padding: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-.referals__count {
+.referals__count-wrapper li {
 	font-weight: 500;
 	font-size: 32px;
 	color: #ffcc00;

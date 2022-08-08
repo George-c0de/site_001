@@ -75,7 +75,7 @@ const Referals = () => {
 		})
 		console.log(posts)
 	}
-	
+
 	const linkRef = React.useRef()
 
 	const [user, setUser] = useState({
@@ -127,19 +127,25 @@ const Referals = () => {
 				<div className='referals__info'>
 					<button className='referals__btn yellow-btn'>{t`1 line`}</button>
 					<p className='referals__text'>{t`Total person`}:</p>
-					<span className='referals__count'>0</span>
+					<ul className='referals__count-wrapper'>
+						<li>{posts.total_line}</li>
+					</ul>
 				</div>
 				<div className='referals__info'>
 					<button className='referals__btn yellow-btn'>{t`2 line`}</button>
 					<p className='referals__text'>{t`Profit received`}:</p>
-					<span className='referals__count'>0$</span>
+					<ul className='referals__count-wrapper'>
+						<li>{posts.profit}$</li>
+					</ul>
 				</div>
 				<div className='referals__info'>
 					<button className='referals__btn yellow-btn yellow-btn-last'>
 						{t`3 line`}
 					</button>
 					<p className='referals__text'>{t`Lost profits`}:</p>
-					<span className='referals__count'>0$</span>
+					<ul className='referals__count-wrapper'>
+						<li>{posts.lost}$</li>
+					</ul>
 				</div>
 			</div>
 		</div>
