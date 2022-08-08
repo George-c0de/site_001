@@ -396,6 +396,46 @@ def get_link_tg(request):
 
 
 @api_view(['GET'])
+def get_prohibitions(request):
+    data = {
+        'bronze': [],
+        'silver': [],
+        'gold': [],
+        'emerald': []
+    }
+    if Profile.objects.filter(user=request.user).exists():
+        profile = Profile.objects.get(user=request.user)
+    else:
+        return Response(status=400)
+    name = 'bronze'
+    for id_ in range(1, 7):
+        data[name].append(check_prohibition(name, id_, profile))
+    name = 'silver'
+    for id_ in range(1, 7):
+        data[name].append(check_prohibition(name, id_, profile))
+    name = 'gold'
+    for id_ in range(1, 7):
+        data[name].append(check_prohibition(name, id_, profile))
+    name = 'emerald'
+    for id_ in range(1, 7):
+        data[name].append(check_prohibition(name, id_, profile))
+    return Response(data=data)
+
+
+def check_prohibition(name, id_, profile):
+    if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).filter(
+            card__card__category=name).filter(card__card__name=id_).exists():
+        us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=name).filter(
+            card__card__name=id_).get(matrix__up=True).d
+        if us_pr < 4:
+            return False
+        else:
+            return True
+    else:
+        return True
+
+
+@api_view(['GET'])
 def get_referrals(request):
     total_line = 0
     if Profile.objects.filter(user__id=request.user.id).exists():
@@ -889,7 +929,7 @@ def referral_system_bronze(request, id_):
 
     # silver
     profile = Profile.objects.get(user=request.user)
-    if all_ref_logic('bronze', id_, profile) ==400:
+    if all_ref_logic('bronze', id_, profile) == 400:
         return Response(status=400)
     return Response(status=200)
 
@@ -1171,7 +1211,7 @@ def get_hist_card(request):
 def referral_system_emerald(request, id_):
     # Сбор данных
     profile = Profile.objects.get(user=request.user)
-    if all_ref_logic('emerald', id_, profile) ==400:
+    if all_ref_logic('emerald', id_, profile) == 400:
         return Response(status=400)
     return Response(status=200)
 
