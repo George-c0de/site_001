@@ -6,9 +6,13 @@ import pikachu_pokeball from '../../Ảnh Pokemon Dự Trù/pikachu-authorizatio
 import { Lang } from '../MainPage/Lang/Lang'
 import { t } from 'ttag'
 import { reCaptchaExecute } from 'recaptcha-v3-react-function-async'
+import { get } from '../../cookie'
+import { saveLocale } from '../../utm'
+import { useParams } from 'react-router-dom'
 
 const Signup = () => {
 	const navigate = useNavigate()
+	const params = useParams()
 	const [typeAuthorization, setTypeAuthorization] = useState('login')
 	const [invalidPassword, setInvalidPassword] = useState(false)
 	const [invalidDataLogin, setInvalidDataLogin] = useState(false)
@@ -19,6 +23,19 @@ const Signup = () => {
 		password1: '',
 		password2: '',
 	})
+
+	React.useEffect(() => {
+		if (get('utm') == null) {
+			saveLocale(params.id)
+		}
+		setData({
+			email: data.email,
+			password1: data.password1,
+			password2: data.password2,
+			utm: get('utm'),
+		})
+	}, [])
+
 	const [emailReset, setEmailReset] = useState('')
 	const [letterSent, setLetterSent] = useState(false)
 
@@ -32,7 +49,7 @@ const Signup = () => {
 		if (typeAuthorization === 'login') {
 			let validData = {
 				email: data.email,
-				password1: data.password1,
+				password: data.password,
 			}
 			if (
 				!data.email
@@ -101,25 +118,17 @@ const Signup = () => {
 				data.password1.length > 0 &&
 				data.email.length > 0
 			) {
-				// let validData = JSON.stringify({
-				// 	email: data.email,
-				// 	password: data.password,
-				// 	password1: data.password1,
-				// })
 				// let gtoken = await reCaptchaExecute(
 				// 	'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
 				// 	'auth'
 				// )
 				try {
-					const { data: res } = await axios.post('/api/register', data, {
+					const { data: res } = await axios.post(`/api/register`, data, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-					console.log(res.data)
-					navigate('/home')
-					console.log(res.message)
+					navigate('/home') //after registering navigate to login page
 				} catch (error) {
 					console.log(data)
-					console.log(error.response)
 					alert(error.response.data.msg)
 				}
 			}
