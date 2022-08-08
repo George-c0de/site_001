@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { Lang } from '../MainPage/Lang/Lang'
 const Resetpass = () => {
 	const [data, setData] = React.useState({
-		password: '',
 		password1: '',
+		password2: '',
 	})
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
@@ -17,7 +17,7 @@ const Resetpass = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		if (data.password.length < 8 || data.password !== data.password1) {
+		if (data.password.length < 8 || data.password1 !== data.password2) {
 			setInvalidPassword(true)
 		} else {
 			navigate('/login')

@@ -134,9 +134,9 @@ const Signup = () => {
 			}
 		}
 		if (typeAuthorization === 'reset') {
-			let validData = JSON.stringify({
+			let validData = {
 				email: data.email,
-			})
+			}
 			if (
 				!emailReset
 					.toLowerCase()
@@ -160,14 +160,6 @@ const Signup = () => {
 					window.location.reload()
 				}, 5000)
 			}
-			// try {
-			// 	const { data } = axios.post('/api/login', validData, {
-			// 		headers: { 'Content-Type': 'application/json' },
-			// 	})
-			// 	console.log(data)
-			// } catch (e) {
-			// 	console.log(e.response)
-			// }
 		}
 	}
 	return (
