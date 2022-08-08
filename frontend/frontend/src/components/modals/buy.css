@@ -1,10 +1,22 @@
 .buy-wrapper {
-	/* background-color */
-	background-color: rgb(98, 97, 97, 0.3) !important;
+	background-color: rgb(98, 97, 97, 0.5) !important;
 }
 .buy-wrapper-hide {
 	display: none
 }
 .buy-text{
-	color: #000000
+	color: #000000;
+	font-size: 20px;
+	line-height: 1.3;
+	margin-bottom: 10px;
+}
+.buy-btns-wrapper{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 180px;
+	width: 100%;
+}
+.buy-btn{
+	width: 80px !important;
 }

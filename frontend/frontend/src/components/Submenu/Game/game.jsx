@@ -33,7 +33,14 @@ const Game = () => {
 		oneq: [0, 0, 0],
 		two: [0, 0, 0],
 		the: [0, 0, 0],
+		oneq1: [0, 0, 0],
+		two1: [0, 0, 0],
+		the1: [0, 0, 0],
+		oneq2: [0, 0, 0],
+		two2: [0, 0, 0],
+		the2: [0, 0, 0],
 	})
+	console.log(history)
 
 	const [card_data, setCard_data] = useState({
 		bronze: [
@@ -115,10 +122,17 @@ const Game = () => {
 	}
 	let getHist = async () => {
 		await axios.get('/api/get_hist_card').then(data => {
+			console.log(data)
 			const result = {
 				oneq: data.data.oneq,
 				two: data.data.two,
 				the: data.data.the,
+				oneq1: data.data.oneq1,
+				two1: data.data.two1,
+				the1: data.data.the1,
+				oneq2: data.data.oneq2,
+				two2: data.data.two2,
+				the2: data.data.the2,
 			}
 			setHistory(result)
 		})
@@ -139,7 +153,6 @@ const Game = () => {
 		<>
 			<div className='main_container'>
 				<Header />
-				{/*<h1>{ username }</h1>*/}
 				<div className='homepage-wrapper'>
 					<div className={onActive ? 'site-main-game' : 'site-main_active'}>
 						<div className='site-main-game-wrapper'>

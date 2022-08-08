@@ -218,6 +218,9 @@
 		margin-top: -10px;
 		margin-bottom: 10px;
 	}
+	.input__invalid-text{
+		margin-top: 0;
+	}
 }
 @media screen and (max-width: 550px) {
 	.authorization__container {

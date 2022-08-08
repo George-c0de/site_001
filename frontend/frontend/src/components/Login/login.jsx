@@ -264,7 +264,7 @@ const Signup = () => {
 							/>
 							{invalidPassword && (
 								<div className='input__invalid-text'>
-									<p>You must enter more than 8 characters</p>
+									<p>{t`The password must be at least 8 characters long. Contains letters and symbols`}</p>
 								</div>
 							)}
 							<button className='authorization__button' type='submit'>
@@ -289,7 +289,6 @@ const Signup = () => {
 								{letterSent && (
 									<p className='reset__text'>{t`Password recovery link was sent to the specified email`}</p>
 								)}
-
 								<button className='authorization__button' type='submit'>
 									{t`Continue`}
 								</button>

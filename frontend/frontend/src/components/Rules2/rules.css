@@ -87,13 +87,26 @@
 	position: absolute;
 	opacity: 0.6;
 	top: 40px;
-	left: 30px;
+	right: 30px;
 	transition: all 0.5s ease;
 	cursor: pointer;
 	z-index: 9999999;
 }
 .gallery-cross:hover {
 	opacity: 1;
+}
+.gallery-faq{
+	display: block;
+	margin: 0 auto;
+	width: fit-content;
+	font-size: 25px;
+	color: white;
+	transition: .3s all ease;
+	text-align: center;
+	margin-bottom: 70px;
+}
+.gallery-faq:hover{
+	color: #FFCC00;
 }
 @media screen and (max-width: 900px) {
 	.rules__container {

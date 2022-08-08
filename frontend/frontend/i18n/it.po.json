@@ -345,9 +345,9 @@
 				"msgid": "Subscribe to Telegram",
 				"msgstr": ["Iscriviti per telegramma"]
 			},
-			"Purchase price 10usd": {
-				"msgid": "Purchase price 10usd",
-				"msgstr": ["Prezzo di acquisto 10 usd."]
+			"Purchase price": {
+				"msgid": "Purchase price",
+				"msgstr": ["Prezzo di acquisto"]
 			},
 			"Would you like to continue?": {
 				"msgid": "Would you like to continue?",
@@ -398,6 +398,24 @@
 			"Yes": {
 				"msgid": "Yes",
 				"msgstr": ["Sí"]
+			},
+			"The password must be at least 8 characters long. Contains letters and symbols": {
+				"msgid": "The password must be at least 8 characters long. Contains letters and symbols",
+				"msgstr": [
+					"La password deve essere lunga almeno 8 caratteri. Contiene lettere e simboli"
+				]
+			},
+			"ACTIVATE": {
+				"msgid": "ACTIVATE",
+				"msgstr": ["ATTIVARE"]
+			},
+			"Referrals profit:": {
+				"msgid": "Referrals profit:",
+				"msgstr": ["Referral profitto:"]
+			},
+			"Total wins:": {
+				"msgid": "Total wins:",
+				"msgstr": ["Vittorie totali:"]
 			}
 		}
 	}

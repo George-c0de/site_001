@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-
-// Images
 import satoshi from '../../Ảnh Pokemon Dự Trù/123133.svg'
-
-// Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
-
 import './UserId.css'
 import { t } from 'ttag'
 import { useNavigate } from 'react-router-dom'
@@ -39,7 +34,6 @@ export const UserId = ({ note }) => {
 		} catch (e) {}
 	}
 
-
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
 	}
@@ -68,7 +62,7 @@ export const UserId = ({ note }) => {
 					<li>{t`Link for invitation`} </li>
 
 					<span className='link-invite' ref={linkRef}>
-						https://domain.com/{user?.referral_link}
+						https://tokemon.games/{user?.referral_link}
 						<FontAwesomeIcon
 							icon={faCopy}
 							className='copy-icon'
