@@ -6,9 +6,13 @@ import pikachu_pokeball from '../../Ảnh Pokemon Dự Trù/pikachu-authorizatio
 import { Lang } from '../MainPage/Lang/Lang'
 import { t } from 'ttag'
 import { reCaptchaExecute } from 'recaptcha-v3-react-function-async'
+import { get } from '../../cookie'
+import { saveLocale } from '../../utm'
+import { useParams } from 'react-router-dom'
 
 const Signup = () => {
 	const navigate = useNavigate()
+	const params = useParams()
 	const [typeAuthorization, setTypeAuthorization] = useState('login')
 	const [invalidPassword, setInvalidPassword] = useState(false)
 	const [invalidDataLogin, setInvalidDataLogin] = useState(false)
@@ -16,9 +20,22 @@ const Signup = () => {
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [data, setData] = useState({
 		email: '',
-		password: '',
 		password1: '',
+		password2: '',
 	})
+
+	React.useEffect(() => {
+		if (get('utm') == null) {
+			saveLocale(params.id)
+		}
+		setData({
+			email: data.email,
+			password1: data.password1,
+			password2: data.password2,
+			utm: get('utm'),
+		})
+	}, [])
+
 	const [emailReset, setEmailReset] = useState('')
 	const [letterSent, setLetterSent] = useState(false)
 
@@ -30,10 +47,10 @@ const Signup = () => {
 		e.preventDefault()
 
 		if (typeAuthorization === 'login') {
-			let validData = JSON.stringify({
+			let validData = {
 				email: data.email,
 				password: data.password,
-			})
+			}
 			if (
 				!data.email
 					.toLowerCase()
@@ -45,6 +62,11 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
+			if (data.password1.length < 8) {
+				setInvalidDataLogin(true)
+			} else {
+				setInvalidDataLogin(false)
+			}
 
 			// try {
 			// 	const { data } = axios.post('/api/login', validData, {
@@ -54,6 +76,7 @@ const Signup = () => {
 			// } catch (e) {
 			// 	console.log(e.response)
 			// }
+
 			try {
 				let data2 = 200
 				data2 = await axios
@@ -83,45 +106,29 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
-			if (data.password.length < 8 || data.password !== data.password1) {
+			if (data.password1.length < 8 || data.password1 !== data.password2) {
 				setInvalidPassword(true)
 			} else {
 				setInvalidPassword(false)
 			}
-			console.log(invalidPassword, data.passsword)
+			console.log(invalidPassword, data.password1)
 			if (
 				!invalidPassword &&
 				!invalidEmail &&
-				data.password.length > 0 &&
+				data.password1.length > 0 &&
 				data.email.length > 0
 			) {
-				let validData = JSON.stringify({
-					email: data.email,
-					password: data.password,
-					password1: data.password1,
-				})
-				let gtoken = await reCaptchaExecute(
-					'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
-					'auth'
-				)
-				// try {
-				// 	const response = await axios.post('/api/register', validData, {
-				// 		headers: { 'Content-Type': 'application/json' },
-				// 	})
-				// 	console.log(response)
-				// 	navigate('/home')
-				// } catch (e) {
-				// 	console.log(e.response)
-				// }
-
+				// let gtoken = await reCaptchaExecute(
+				// 	'6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD',
+				// 	'auth'
+				// )
 				try {
-					const { data: res } = await axios.post('/api/register', data, {
+					const { data: res } = await axios.post(`/api/register`, data, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-					console.log(res.data)
-					navigate('/home')
-					console.log(res.message)
+					navigate('/home') //after registering navigate to login page
 				} catch (error) {
+					console.log(data)
 					alert(error.response.data.msg)
 				}
 			}
@@ -210,7 +217,7 @@ const Signup = () => {
 									invalidDataLogin ? 'authorization__input-invalid' : ''
 								}`}
 								placeholder={t`Password`}
-								name='password'
+								name='password1'
 								onChange={handleChange}
 								value={data.password}
 							/>
@@ -242,14 +249,14 @@ const Signup = () => {
 									invalidPassword ? 'authorization__input-invalid' : ''
 								}`}
 								placeholder={t`Password`}
-								name='password'
+								name='password1'
 								type='password'
 								onChange={handleChange}
 								value={data.password}
 							/>
 							<input
 								type='password'
-								name='password1'
+								name='password2'
 								className={`authorization__input ${
 									invalidPassword ? 'authorization__input-invalid' : ''
 								}`}
