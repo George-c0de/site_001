@@ -10,10 +10,8 @@ p {
 	background-image: url('../../../assets/MainBackground.jpg');
 	background-attachment: fixed;
 	background-repeat: auto;
-	
 	background-position: bottom;
 	overflow-x: hidden;
-	overflow-y: auto;
 }
 .main__header {
 	background: linear-gradient(87.52deg, #2570b5 21.14%, #67deee 91.14%);

@@ -25,7 +25,9 @@ body::-webkit-scrollbar-thumb {
 	background-color: #52525e;
 	border-radius: 20px;
 }
-
+_::-webkit-full-page-media, _:future, :root .panel {
+	background-color:#67deee
+}
 @import url('./components/StartGame/startgame.css');
 
 @import url('./components/Login/login.css');
