@@ -29,11 +29,12 @@ const Resetpass = () => {
 			setInvalidPassword(false)
 		}
 
-		if (!invalidPassword) {
+		if (!invalidPassword && data.password1 > 0) {
 			try {
 				const { data: res } = await axios.post('api/set_new/', data, {
 					headers: { 'Content-Type': 'application/json' },
 				})
+				console.log(data)
 				console.log(res.data)
 				navigate('/home') //after registering navigate to login page
 				console.log(res.message)
@@ -58,10 +59,10 @@ const Resetpass = () => {
 							invalidPassword ? 'authorization__input-invalid' : ''
 						}`}
 						placeholder={t`Password`}
-						name='password'
+						name='password1'
 						type='password'
 						onChange={handleChange}
-						value={data.password}
+						value={data.password1}
 					/>
 					<input
 						type='password'

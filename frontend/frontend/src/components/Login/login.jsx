@@ -90,8 +90,8 @@ const Signup = () => {
 						navigate('/home') //after registering navigate to login page
 					}
 				} catch (error) {
-					//console.log(error.response.data.msg);
-					alert('Wrong email or password!')
+					setInvalidDataLogin(true)
+					setInvalidEmail(true)
 				}
 		}
 
