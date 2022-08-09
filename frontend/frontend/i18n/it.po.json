@@ -425,8 +425,8 @@
 				"msgid": "Complete instructions",
 				"msgstr": ["Istruzioni complete"]
 			},
-			"Tinsufficient funds to purchase the card": {
-				"msgid": "Tinsufficient funds to purchase the card",
+			"Insufficient funds to purchase the card": {
+				"msgid": "Insufficient funds to purchase the card",
 				"msgstr": ["fondi insufficienti per l'acquisto della carta"]
 			}
 		}
