@@ -66,6 +66,11 @@
 	color: #0bdc5f;
 }
 
+@media (hover: none) {
+	.copy-icon:hover {
+		color: inherit;
+	}
+}
 .user-info-buttons {
 	display: flex;
 	flex-direction: row;

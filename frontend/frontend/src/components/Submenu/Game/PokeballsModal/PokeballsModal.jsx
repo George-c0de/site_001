@@ -55,7 +55,6 @@ const CardOpened = ({
 		setTimeout(async () => {
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
 				setTimeout(() => {
-					console.log('BUY CARD')
 					buyCard()
 				}, 1000)
 			})
@@ -139,6 +138,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 			setFirstRender(true)
 		}
 	}, [purchaseConfirmation])
+	
 
 	return (
 		<div>

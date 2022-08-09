@@ -67,11 +67,26 @@ export const PokeballsPack = ({
 		setCards(array)
 	}, [amount])
 	///
+	const ref = React.useRef(null)
+
+	const handleClickOutside = event => {
+		if (ref.current && !ref.current.contains(event.target)) {
+			setModalOpen(false)
+		}
+	}
+
+	React.useEffect(() => {
+		document.addEventListener('click', handleClickOutside, true)
+		return () => {
+			document.removeEventListener('click', handleClickOutside, true)
+		}
+	}, [])
 
 	return (
 		<div className='col-sm' id='title-pack-pokeballs'>
 			<span className='pokebolls-title'>{t`Cards`}</span>
 			<div
+				ref={ref}
 				className={
 					modalOpen ? 'pokeballs-container open' : 'pokeballs-container'
 				}
