@@ -31,7 +31,7 @@ const Resetpass = () => {
 
 		if (!invalidPassword && data.password1 > 0) {
 			try {
-				const { data: res } = await axios.post('api/set_new/', data, {
+				const { data: res } = await axios.post('/api/set_new/', data, {
 					headers: { 'Content-Type': 'application/json' },
 				})
 				console.log(data)
