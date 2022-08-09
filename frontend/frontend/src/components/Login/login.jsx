@@ -125,23 +125,21 @@ const Signup = () => {
 						'auth'
 					)
 					console.log(gtoken)
-					const { data: res } = await axios.post(
-						`/api/register`,
-						{
-							email: data.email,
-							password1: data.password1,
-							password2: data.password2,
-							utm: get('utm'),
-							gtoken: gtoken,
-						},
-						{
+					let validObj = {
+						email: data.email,
+						password1: data.password1,
+						password2: data.password2,
+						utm: data.utm,
+						gtoken: gtoken,
+					}
+					console.log(validObj)
+					const { data: res } = await axios.post(`/api/register`,validObj,{
 							headers: { 'Content-Type': 'application/json' },
 						}
 					)
-					console.log(res)
+					console.log(data)
 					navigate('/home') //after registering navigate to login page
 				} catch (error) {
-					console.log(data)
 					alert(error.response.data.msg)
 				}
 			}

@@ -226,7 +226,6 @@ p {
 	z-index: 100;
 }
 
-/*Pokemon banner*/
 .pokemon-banner {
 	position: absolute;
 	width: 250px;
@@ -245,7 +244,6 @@ p {
 	transform: translateX(-50%);
 }
 
-/*List of menu options*/
 .menu-info {
 	width: 100%;
 	display: flex;
@@ -269,9 +267,6 @@ ul li {
 	color: aqua;
 }
 
-/*Main Content*/
-
-/*Telegram option*/
 .menu-info-icons {
 	width: 100%;
 	margin-top: 20px;
@@ -303,7 +298,6 @@ ul li {
 	cursor: pointer;
 	color: aqua;
 }
-
 @media (min-width: 0px) and (max-width: 412px) {
 	.menu-info {
 		margin-left: -35%;
