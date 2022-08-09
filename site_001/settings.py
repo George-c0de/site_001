@@ -66,15 +66,12 @@ CORS_ALLOW_CREDENTIALS = True
 REACT_ROUTES = [
     'login',
     'home',
-    'rules',
+    'home/rules',
     'signup',
-    'home/game',
-    'home/referals',
-    'home/statistics',
     'home/deposit',
     'home/pay',
-    'signup/<str:id>',
-    'reset/<str:uid>/<str:token>'
+    'reset/<str:uid>/<str:token>',
+    '<str:utm>',
 ]
 
 ROOT_URLCONF = 'site_001.urls'
@@ -197,3 +194,4 @@ EMAIL_USE_TLS = True
 
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
 CSRF_TRUSTED_ORIGINS = ['http://45.85.117.38/', 'https://tokemon.games/']
+KEY_SITE = env('KEY_SITE_GOOGLE')

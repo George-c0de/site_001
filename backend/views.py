@@ -20,6 +20,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from decimal import *
+
+from site_001.settings import KEY_SITE
 from tgbot import message_for_bot
 from tgbot.message_for_bot import a
 from tgbot.models import Event, Memcache, User_Bot
@@ -770,6 +772,8 @@ def register_page(request):
         'email': request.data['email'],
         'password2': request.data['password2'],
     }
+    if data['gtoken'] != KEY_SITE:
+        return Response(status=400)
     form = CreateUserForm(data)
     utm = request.data.get('utm')
     if utm is None:
@@ -1342,7 +1346,8 @@ def get_hist_card(request):
             temp_list.append(el.from_person_id)
             temp_list.append(str_time_1)
             temp_list.append(el.price)
-            temp_list.append(el.buy)
+            if el.buy:
+                temp_list[2] = - el.price
             main_list.append(temp_list)
         i = 0
         for key, value in data.items():
