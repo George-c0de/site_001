@@ -1,5 +1,3 @@
-/*Icon at the right bottom of screen*/
-
 .site-main,
 .site-main_active {
 	position: fixed;
@@ -54,8 +52,8 @@
 
 .support-icon-mainpage,
 .support-icon-mainpage_active {
-	width: 65px;
-	height: 65px;
+	width: 55px;
+	height: 55px;
 }
 @media screen and (max-width: 600px) {
 	.lang-icon_active {

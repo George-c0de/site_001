@@ -3,24 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { UserId } from '../UserId/UserId'
 import Referals from '../Submenu/Referals/referals'
 import Statistics from '../Submenu/Statistics/statistics'
-import HeaderLogo from '../../assets/header/logo.png'
+import HeaderLogo from '../../assets/header/logo.svg'
 import HeaderHuman from '../../assets/HeaderHuman.png'
 import Telegram from '../../assets/telegram.svg'
 import LogOut from '../../assets/logout.svg'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 import { t } from 'ttag'
-import { Lang } from '../MainPage/Lang/Lang'
+import { Lang } from '../Lang/Lang'
 
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
-	const [openRules, setOpenRules] = React.useState(false)
-	const params = useParams()
-	const [onActive, setActive] = React.useState(true)
 	const navigate = useNavigate()
-	const [username, setUsername] = React.useState('')
 
 	const [openBurger, setOpenBurger] = React.useState(false)
 	const showUserInfo = () => {

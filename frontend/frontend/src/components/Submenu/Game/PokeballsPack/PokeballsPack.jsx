@@ -1,11 +1,12 @@
 import './PokeballsPack.css'
 import React, { useState } from 'react'
 import pokeball from '../../../../Ảnh Pokemon Dự Trù/пакебол(1)-min.svg'
+import PokebolOpened from '../../../../assets/Открытый пакебол-min.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { PokeballsModal } from '../PokeballsModal/PokeballsModal'
 import { t } from 'ttag'
-import PokebolOpened from '../../../../assets/pockebol-opened.png'
+
 const COLORS_TO_CLASS = {
 	bronze: 'text-pokeball-1',
 	bronco: 'text-pokeball-1',
@@ -39,7 +40,7 @@ export const PokeballsPack = ({
 	card_data,
 	price,
 	six,
-	money
+	money,
 }) => {
 	const [modalOpen, setModalOpen] = useState(false)
 	const handlePokeballsPack = () => {

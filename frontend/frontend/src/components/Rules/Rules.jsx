@@ -138,6 +138,7 @@ function Rules2() {
 			}
 		}
 		document.addEventListener('click', handleClick)
+		document.addEventListener('touchend', handleClick)
 	}, [])
 
 	let [activeGallery, setActiveGallery] = useState(false)
@@ -211,7 +212,7 @@ function Rules2() {
 								<a
 									className='gallery-faq'
 									target='__blank'
-									href={`tokemon.info/${getLocale()}`}
+									href={`https://tokemon.info/${getLocale()}`}
 								>
 									{t`Still have questions?`} <br /> {t`Complete instructions`}
 								</a>

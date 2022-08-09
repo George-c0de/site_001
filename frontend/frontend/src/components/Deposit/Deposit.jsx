@@ -1,7 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Lang } from '../MainPage/Lang/Lang'
-
+import React, { useEffect, useState } from 'react'
 import './Deposit.css'
 import axios from 'axios'
 import { t } from 'ttag'

@@ -1,10 +1,11 @@
 import React from 'react'
-import logo from '../../assets/pokemon-logo.svg'
+import logo from '../../assets/header/logo.svg'
 import { t } from 'ttag'
-import './reset.css'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Lang } from '../MainPage/Lang/Lang'
+import { Lang } from '../Lang/Lang'
 import axios from 'axios'
+import './reset.css'
+
 const Resetpass = () => {
 	const params = useParams()
 	const [data, setData] = React.useState({

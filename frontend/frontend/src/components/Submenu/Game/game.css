@@ -23,6 +23,10 @@ p {
 	width: 100%;
 	z-index: 9999;
 }
+.main-logo{
+	width: 237px;
+	object-fit: cover;
+}
 .menu-btn {
 	position: relative;
 	display: flex;

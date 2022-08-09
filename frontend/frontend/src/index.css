@@ -5,12 +5,22 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	box-sizing: border-box;
 }
+body::-webkit-scrollbar {
+	width: 13px;
+}
+
+body::-webkit-scrollbar-track {
+	background: #15141a;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #52525e;
+	border-radius: 20px;
+}
 
 @import url('./components/StartGame/startgame.css');
 
 @import url('./components/Login/login.css');
-
-/* @import url('./components/MainPage/mainpage.css'); */
 
 @import url('./components/Submenu/Game/game.css');
 

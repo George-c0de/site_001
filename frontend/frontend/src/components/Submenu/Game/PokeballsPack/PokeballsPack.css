@@ -29,6 +29,7 @@
 	width: 60%;
 	background-color: #c0e4ea;
 	border-radius: 0 30px 30px 0;
+	cursor: pointer;
 }
 
 .pokeballs-container.open {
@@ -96,6 +97,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 510px) {

@@ -1,11 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { t } from 'ttag'
-// Images
-import Logo from '../../assets/pokemon-logo.svg'
+import Logo from '../../assets/header/logo.svg'
 import axios from 'axios'
 import MainBg from '../../assets/MainBg.jpg'
-import { Lang } from '../MainPage/Lang/Lang'
+import { Lang } from '../Lang/Lang'
 let data2
 try {
 	axios.get('/api/login').catch(function (error) {

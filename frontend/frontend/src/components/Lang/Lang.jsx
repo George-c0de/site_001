@@ -1,20 +1,19 @@
 import React, { useState, useContext } from 'react'
-import * as cookie from '../../../cookie'
-// Images
-import britain from '../../../assets/languages/en.png'
-import russia from '../../../assets/languages/russia.png'
-import france from '../../../assets/languages/france.png'
-import germany from '../../../assets/languages/germany.png'
-import italy from '../../../assets/languages/italy.png'
-import portugal from '../../../assets/languages/portugal.png'
-import spain from '../../../assets/languages/spain.png'
-import brazil from '../../../assets/languages/brazil.png'
-import argentina from '../../../assets/languages/argentina.png'
-import support from '../../../Ảnh Pokemon Dự Trù/супорт.svg'
+import * as cookie from '../../cookie'
+import britain from '../../assets/languages/en.png'
+import russia from '../../assets/languages/russia.png'
+import france from '../../assets/languages/france.png'
+import germany from '../../assets/languages/germany.png'
+import italy from '../../assets/languages/italy.png'
+import portugal from '../../assets/languages/portugal.png'
+import spain from '../../assets/languages/spain.png'
+import brazil from '../../assets/languages/brazil.png'
+import argentina from '../../assets/languages/argentina.png'
+import support from '../../Ảnh Pokemon Dự Trù/супорт.svg'
 
 import './Lang.css'
-import { LangContext } from '../../../context/LangContext'
-import { saveLocale } from '../../../i18nInit'
+import { LangContext } from '../../context/LangContext'
+import { saveLocale } from '../../i18nInit'
 
 const languages = {
 	en: britain,
