@@ -7,7 +7,7 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	padding-top: 130px;
+	padding-top: 200px;
 }
 
 .pay-title-wrapper {
@@ -17,20 +17,21 @@
 }
 
 .pay-title {
-	font-size: 48px;
+	font-size: 44px;
 	text-shadow: 0 5px 5px #000;
 }
 
 .pay-subtitle {
-	font-size: 36px;
+	font-size: 34px;
 	line-height: 42px;
 	text-shadow: 0px 3px 1px rgba(0, 0, 0, 0.5);
 }
 
 .pay-money {
 	color: #ffcc00;
-	font-size: 36px;
+	font-size: 34px;
 	font-weight: 600;
+	margin-bottom: 20px;
 }
 
 /*INPUTS*/
@@ -63,7 +64,7 @@
 	width: 100%;
 	height: 52px;
 	background-color: #fff;
-	border-radius: 25px;
+	border-radius: 17px;
 	border: 3px solid #c0e4ea;
 	padding: 15px 20px;
 	font-size: 24px;
@@ -88,17 +89,12 @@
 	background: #ffcc00;
 	border: 3px solid #475176;
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 53px;
-	color: #475176;
-	font-size: 32px;
+	border-radius: 17px;
+	color: #1a255e;
+	font-size: 28px;
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
 	margin-bottom: 59px;
-}
-
-.pay-button:hover {
-	background-color: #475176;
-	color: #fff;
 }
 
 /*pay HISTORY*/

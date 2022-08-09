@@ -31,6 +31,7 @@ const Deposit = () => {
 	useEffect(() => {
 		getTran()
 	}, [])
+
 	const getTran = async () => {
 		try {
 			let response = await axios.get('/api/trans_get_output')

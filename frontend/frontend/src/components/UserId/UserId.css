@@ -8,7 +8,7 @@
 .user-id {
 	display: block;
 	font-weight: 600;
-	font-size: 48px;
+	font-size: 44px;
 	text-shadow: -3px 5px 4px #164268;
 	margin-bottom: 20px;
 	color: #ffffff;
@@ -24,7 +24,7 @@
 	position: absolute;
 	margin-left: 31%;
 	color: white;
-	font-size: 40px;
+	font-size: 36px;
 	margin-top: -1.5%;
 	font-weight: bold;
 }
@@ -34,7 +34,7 @@
 	cursor: auto;
 	color: white;
 	list-style-type: none;
-	font-size: 32px;
+	font-size: 30px;
 	margin-left: 0;
 	text-shadow: none;
 	margin-bottom: 5px;
@@ -45,11 +45,10 @@
 
 .link-invite {
 	position: relative;
-	border-radius: 25px;
-	outline: 1px solid white;
+	border-radius: 17px;
 	color: white;
 	min-height: 50px;
-	font-size: 32px;
+	font-size: 30px;
 	font-weight: 300;
 	padding: 8px 30px;
 }
@@ -79,9 +78,9 @@
 	background: linear-gradient(230.64deg, #ffdc4e 27.47%, #cca307 62.2%);
 	border: 2px solid #475176;
 	color: white;
-	border-radius: 42px;
+	border-radius: 17px;
 	width: 203px;
-	font-size: 32px;
+	font-size: 30px;
 	text-align: center;
 	outline: none;
 	margin-right: 20px;
@@ -101,42 +100,37 @@
 	}
 }
 
-@media screen and (max-width: 880px) {
-	.satoshi {
-		width: 150px;
-		height: 200px;
-		top: -40px;
-	}
-}
 @media screen and (max-width: 715px) {
 	.link-invite {
 		display: inline-block;
 		margin-top: 5px;
-		font-size: 25px;
+		font-size: 23px;
+	}
+	.satoshi {
+		width: 190px;
+		height: 250px;
+		top: -40px;
 	}
 	.user-info li {
-		font-size: 25px;
+		font-size: 23px;
 	}
 	.user-info li span {
-		font-size: 25px;
+		font-size: 23px;
 	}
 }
 @media screen and (max-width: 590px) {
 	.satoshi {
-		width: 134px;
-		height: 134px;
-		top: -30px;
 		right: -30px;
-		object-fit: contain;
 	}
 	.link-invite {
-		font-size: 20px;
+		font-size: 18px;
+		padding: 8 13px;
 	}
 	.user-info li {
-		font-size: 20px;
+		font-size: 18px;
 	}
 	.user-info li span {
-		font-size: 20px;
+		font-size: 18px;
 	}
 }
 @media screen and (max-width: 510px) {
@@ -150,16 +144,19 @@
 		margin-left: 10px;
 	}
 	.yellow-btn {
-		font-size: 18px;
+		font-size: 24px;
 	}
 }
 @media screen and (max-width: 440px) {
 	.user-id {
-		font-size: 32px;
+		font-size: 30px;
 	}
 	.link-invite {
 		font-size: 4.1vw;
 		line-height: 2;
+	}
+	.satoshi {
+		right: -50px;
 	}
 }
 @media screen and (max-width: 400px) {

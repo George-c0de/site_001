@@ -11,7 +11,7 @@
 }
 .referals__title {
 	font-weight: 400;
-	font-size: 48px;
+	font-size: 44px;
 	margin-bottom: 8px;
 	color: #ffffff;
 }
@@ -29,7 +29,7 @@
 .referals__text {
 	margin-top: 23px;
 	font-weight: 600;
-	font-size: 32px;
+	font-size: 28px;
 	color: #ffffff;
 	margin-bottom: 13px;
 }
@@ -41,22 +41,25 @@
 }
 .referals__count-wrapper li {
 	font-weight: 500;
-	font-size: 32px;
+	font-size: 28px;
 	color: #ffcc00;
+}
+.referals-link {
+	border: 1px solid white;
 }
 @media screen and (max-width: 980px) {
 	.referals__info-wrapper .yellow-btn {
-		font-size: 25px;
+		font-size: 23px;
 		width: 160px;
 		margin-right: 0;
 	}
 	.referals__text {
-		font-size: 25px;
+		font-size: 23px;
 		margin-top: 10px;
 		margin-bottom: 5px;
 	}
 	.referals__title {
-		font-size: 40px;
+		font-size: 36px;
 	}
 }
 @media screen and (max-width: 740px) {

@@ -1,7 +1,7 @@
 #title-pack-pokeballs {
 	color: white;
 	font-weight: 600;
-	font-size: 32px;
+	font-size: 30px;
 	flex: none;
 	margin: 0 10px;
 }
@@ -52,25 +52,25 @@
 .text-pokeball-1 {
 	position: relative;
 	color: brown;
-	font-size: 25px;
+	font-size: 23px;
 }
 
 .text-pokeball-2 {
 	position: relative;
 	color: silver;
-	font-size: 25px;
+	font-size: 23px;
 }
 
 .text-pokeball-3 {
 	position: relative;
 	color: gold;
-	font-size: 25px;
+	font-size: 23px;
 }
 
 .text-pokeball-4 {
 	position: relative;
 	color: green;
-	font-size: 25px;
+	font-size: 23px;
 }
 
 /*Icon ShowDown*/

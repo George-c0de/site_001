@@ -118,14 +118,26 @@ const Signup = () => {
 				data.password1.length > 0 &&
 				data.email.length > 0
 			) {
-				let gtoken = await reCaptchaExecute(
-					'6MM8ECLaq9zC4xgck6QUJACuAxDkZyouDAnYOIb3',
-					'auth'
-				)
 				try {
-					const { data: res } = await axios.post(`/api/register`, data, {
-						headers: { 'Content-Type': 'application/json' },
-					})
+					let gtoken = await reCaptchaExecute(
+						'6MM8ECLaq9zC4xgck6QUJACuAxDkZyouDAnYOIb3',
+						'auth'
+					)
+					console.log(gtoken)
+					const { data: res } = await axios.post(
+						`/api/register`,
+						{
+							email: data.email,
+							password1: data.password1,
+							password2: data.password2,
+							utm: get('utm'),
+							gtoken: gtoken,
+						},
+						{
+							headers: { 'Content-Type': 'application/json' },
+						}
+					)
+					console.log(res)
 					navigate('/home') //after registering navigate to login page
 				} catch (error) {
 					console.log(data)

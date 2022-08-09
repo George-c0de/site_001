@@ -8,8 +8,9 @@ import Deposit from './components/Deposit/Deposit'
 import Rules from './components/Rules/Rules'
 import Resetpass from './components/ResetPass/Resetpass'
 import { loadReCaptcha } from 'recaptcha-v3-react-function-async'
-
+import { get } from './cookie'
 function App() {
+	console.log(get('utm'))
 	React.useEffect(() => {
 		loadReCaptcha('6LfvLEkhAAAAAHfamR736TVtumYAmll0Kiy1iqmD')
 			.then(() => {
@@ -27,7 +28,6 @@ function App() {
 			<Route path='/login' exact element={<Login />} />
 			<Route path='/home/pay' exact element={<Pay />} />
 			<Route path='/home/deposit' exact element={<Deposit />} />
-			<Route path='/' exact element={<Deposit />} />
 			<Route path='/home/rules' element={<Rules />} />
 			<Route path='/reset/:uid/:token' element={<Resetpass />} />
 		</Routes>

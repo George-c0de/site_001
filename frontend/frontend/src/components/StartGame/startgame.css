@@ -32,7 +32,7 @@
 	color: #000000;
 	transition: all 0.3s ease;
 	cursor: pointer;
-	font-size: 36px;
+	font-size: 34px;
 }
 .start-game:hover {
 	color: #fc0;

@@ -61,7 +61,7 @@ export const UserId = ({ note }) => {
 					</li>
 					<li>{t`Link for invitation`} </li>
 
-					<span className='link-invite' ref={linkRef}>
+					<span className='link-invite referals-link' ref={linkRef}>
 						https://tokemon.games/{user?.referral_link}
 						<FontAwesomeIcon
 							icon={faCopy}

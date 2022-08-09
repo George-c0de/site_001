@@ -204,7 +204,7 @@ const Referals = () => {
 		<div className='referals__container'>
 			<div className='referals__link'>
 				<h3 className='referals__title'>{t`Referral link`}</h3>
-				<span className='link-invite' ref={linkRef}>
+				<span className='link-invite referals-link' ref={linkRef}>
 					https://tokemon.games/{user?.referral_link}
 					<FontAwesomeIcon
 						icon={faCopy}
