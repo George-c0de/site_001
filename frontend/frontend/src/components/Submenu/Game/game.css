@@ -411,9 +411,6 @@ ul li {
 	.menu-btn {
 		height: 70px;
 	}
-	.homepage-wrapper {
-		background-size: 1300px;
-	}
 }
 @media screen and (max-width: 420px) {
 	.main__text {
