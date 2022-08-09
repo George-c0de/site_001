@@ -91,11 +91,12 @@
 }
 .deposit-text{
 	margin: 10px 0px;
-	font-size: 14px;
+	font-size: 16px;
 }
 .deposit-description {
 	margin-top: 10px;
 	opacity: .9;
+	font-size: 18px;
 }
 .deposit-copy-icon{
 	color: #ffcc00;

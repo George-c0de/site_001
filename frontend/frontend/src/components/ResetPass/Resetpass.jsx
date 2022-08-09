@@ -33,7 +33,7 @@ const Resetpass = () => {
 					})
 					console.log(data)
 					console.log(res.data)
-					// navigate('/home') //after registering navigate to login page
+					navigate('/login') //after registering navigate to login page
 					console.log(res.message)
 				} catch (error) {
 					console.log(error)
@@ -75,7 +75,7 @@ const Resetpass = () => {
 					/>
 					{invalidPassword && (
 						<div className='input__invalid-text'>
-							<p>You must enter more than 8 characters</p>
+							<p>{t`The password must be at least 8 characters long. Contains letters and symbols`}</p>
 						</div>
 					)}
 					<button className='authorization__button reset-btn' type='submit'>

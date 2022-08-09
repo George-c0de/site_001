@@ -412,11 +412,7 @@ ul li {
 		height: 70px;
 	}
 	.homepage-wrapper {
-		background-image: url('../../../assets/MainBackground.jpg');
-		background-attachment: fixed;
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: bottom;
+		background-size: 1300px;
 	}
 }
 @media screen and (max-width: 420px) {

@@ -176,7 +176,7 @@ const Deposit = () => {
 									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
 								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
-									123
+									{`${user.wallet}${data.col}`}
 									<FontAwesomeIcon
 										icon={faCopy}
 										className='copy-icon deposit-copy-icon'
@@ -184,8 +184,7 @@ const Deposit = () => {
 									/>
 								</span>
 								<p className='deposit-description'>
-									{t`Минимальная сумма платежа 10 usdt. Транзакции с меньшей суммой
-									будут утеряны`}
+									{t`The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost`}
 								</p>
 							</div>
 						</div>

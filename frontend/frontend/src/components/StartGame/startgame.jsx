@@ -25,11 +25,7 @@ const Startgame = () => {
 	const [onActive, setActive] = React.useState(true)
 	return (
 		<div className='background-start'>
-			<img src={Logo} className='logo-tokemon' alt='' />
 			<img src={MainBg} alt='' className='main-bg' />
-			<p className='start-game' onClick={startGame}>
-				{t`start`}
-			</p>
 			<Lang isActive={onActive} />
 		</div>
 	)

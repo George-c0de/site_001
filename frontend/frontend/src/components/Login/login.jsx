@@ -5,7 +5,6 @@ import logo from '../../assets/header/logo.svg'
 import pikachu_pokeball from '../../Ảnh Pokemon Dự Trù/pikachu-authorization.png'
 import { Lang } from '../Lang/Lang'
 import { t } from 'ttag'
-import { reCaptchaExecute } from 'recaptcha-v3-react-function-async'
 import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
@@ -120,17 +119,11 @@ const Signup = () => {
 				data.email.length > 0
 			) {
 				try {
-					let gtoken = await reCaptchaExecute(
-						'6MM8ECLaq9zC4xgck6QUJACuAxDkZyouDAnYOIb3',
-						'auth'
-					)
-					console.log(gtoken)
 					let validObj = {
 						email: data.email,
 						password1: data.password1,
 						password2: data.password2,
 						utm: data.utm,
-						gtoken: gtoken,
 					}
 					console.log(validObj)
 					const { data: res } = await axios.post(`/api/register`, validObj, {
