@@ -395,6 +395,7 @@ ul li {
 	.main__list {
 		text-align: center;
 		flex-direction: column;
+		margin-bottom: 10px;
 	}
 	.main__item {
 		margin-bottom: 12px;
