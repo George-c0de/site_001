@@ -133,10 +133,9 @@ const Signup = () => {
 						gtoken: gtoken,
 					}
 					console.log(validObj)
-					const { data: res } = await axios.post(`/api/register`,validObj,{
-							headers: { 'Content-Type': 'application/json' },
-						}
-					)
+					const { data: res } = await axios.post(`/api/register`, validObj, {
+						headers: { 'Content-Type': 'application/json' },
+					})
 					console.log(data)
 					navigate('/home') //after registering navigate to login page
 				} catch (error) {
@@ -146,7 +145,7 @@ const Signup = () => {
 		}
 		if (typeAuthorization === 'reset') {
 			let validData = {
-				email: data.email,
+				email: emailReset,
 			}
 			if (
 				!emailReset
@@ -163,6 +162,7 @@ const Signup = () => {
 					const { data } = axios.post('/api/reset_password/', validData, {
 						headers: { 'Content-Type': 'application/json' },
 					})
+					console.log(validData)
 					console.log(data)
 				} catch (e) {
 					console.log(e.response)
