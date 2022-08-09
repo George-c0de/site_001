@@ -47,6 +47,9 @@
 .referals-link {
 	border: 1px solid white;
 }
+a:hover {
+	color: white;
+}
 @media screen and (max-width: 980px) {
 	.referals__info-wrapper .yellow-btn {
 		font-size: 23px;
