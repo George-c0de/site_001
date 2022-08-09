@@ -9,7 +9,8 @@ p {
 	min-height: 100vh;
 	background-image: url('../../../assets/MainBackground.jpg');
 	background-attachment: fixed;
-	background-size: cover;
+	background-repeat: auto;
+	
 	background-position: bottom;
 	overflow-x: hidden;
 	overflow-y: auto;

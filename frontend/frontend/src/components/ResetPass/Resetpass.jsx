@@ -8,6 +8,7 @@ import './reset.css'
 
 const Resetpass = () => {
 	const params = useParams()
+	console.log(params)
 	const [data, setData] = React.useState({
 		password1: '',
 		password2: '',
@@ -36,7 +37,7 @@ const Resetpass = () => {
 				})
 				console.log(data)
 				console.log(res.data)
-				navigate('/home') //after registering navigate to login page
+				// navigate('/home') //after registering navigate to login page
 				console.log(res.message)
 			} catch (error) {
 				console.log(error)

@@ -28,19 +28,19 @@ const CardOpened = ({
 			let data = res.data
 			switch (category) {
 				case 'bronze': {
-					setDisabledBtn(data.bronze[idCard - 1])
+					setDisabledBtn(data.bronze[idCard + 1])
 					break
 				}
 				case 'silber': {
-					setDisabledBtn(data.silver[idCard - 1])
+					setDisabledBtn(data.silver[idCard + 1])
 					break
 				}
 				case 'gold': {
-					setDisabledBtn(data.gold[idCard - 1])
+					setDisabledBtn(data.gold[idCard + 1])
 					break
 				}
 				case 'smaragd': {
-					setDisabledBtn(data.emerald[idCard - 1])
+					setDisabledBtn(data.emerald[idCard + 1])
 					break
 				}
 			}
@@ -98,6 +98,7 @@ const CardOpened = ({
 					className={`card-info-button ${
 						disabledBtn ? 'card-info-disabled' : ''
 					}`}
+					disabled={disabledBtn ? true : false}
 				>
 					{t`ACTIVATE`}
 				</span>
@@ -138,7 +139,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 			setFirstRender(true)
 		}
 	}, [purchaseConfirmation])
-	
 
 	return (
 		<div>
