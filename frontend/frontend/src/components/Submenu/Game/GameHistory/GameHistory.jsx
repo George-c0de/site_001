@@ -36,7 +36,7 @@ export const GameHistory = ({ history }) => {
 								history.oneq[2] > 0 ? 'green' : 'red'
 							}`}
 						>
-							{history.two[2] > 0 ? `+${history.two[2]}` : `-${history.two[2]}`}
+							{history.two[2] > 0 ? `${history.two[2]}` : `${history.two[2]}`}
 						</span>
 					</div>
 					<div className='history-table-row'>
@@ -54,7 +54,7 @@ export const GameHistory = ({ history }) => {
 								history.two[2] > 0 ? 'green' : 'red'
 							}`}
 						>
-							{history.two[2] > 0 ? `+${history.two[2]}` : `-${history.two[2]}`}
+							{history.two[2] > 0 ? `${history.two[2]}` : `${history.two[2]}`}
 						</span>
 					</div>
 					<div className='history-table-row'>
@@ -72,7 +72,7 @@ export const GameHistory = ({ history }) => {
 								history.the[2] > 0 ? 'green' : 'red'
 							}`}
 						>
-							{history.the[2] > 0 ? `+${history.the[2]}` : `-${history.the[2]}`}
+							{history.the[2] > 0 ? `${history.the[2]}` : `${history.the[2]}`}
 						</span>
 					</div>
 					{showMore && (
@@ -93,8 +93,8 @@ export const GameHistory = ({ history }) => {
 									}`}
 								>
 									{history.oneq1[2] > 0
-										? `+${history.oneq1[2]}`
-										: `-${history.oneq1[2]}`}
+										? `${history.oneq1[2]}`
+										: `${history.oneq1[2]}`}
 								</span>
 							</div>
 							<div className='history-table-row'>
@@ -113,8 +113,8 @@ export const GameHistory = ({ history }) => {
 									}`}
 								>
 									{history.two1[2] > 0
-										? `+${history.two1[2]}`
-										: `-${history.two1[2]}`}
+										? `${history.two1[2]}`
+										: `${history.two1[2]}`}
 								</span>
 							</div>
 							<div className='history-table-row'>
@@ -133,8 +133,8 @@ export const GameHistory = ({ history }) => {
 									}`}
 								>
 									{history.the1[2] > 0
-										? `+${history.the1[2]}`
-										: `-${history.the1[2]}`}
+										? `${history.the1[2]}`
+										: `${history.the1[2]}`}
 								</span>
 							</div>
 							<div className='history-table-row'>
@@ -153,8 +153,8 @@ export const GameHistory = ({ history }) => {
 									}`}
 								>
 									{history.oneq2[2] > 0
-										? `+${history.oneq2[2]}`
-										: `-${history.oneq2[2]}`}
+										? `${history.oneq2[2]}`
+										: `${history.oneq2[2]}`}
 								</span>
 							</div>
 							<div className='history-table-row'>
@@ -173,8 +173,8 @@ export const GameHistory = ({ history }) => {
 									}`}
 								>
 									{history.two2[2] > 0
-										? `+${history.two2[2]}`
-										: `-${history.two2[2]}`}
+										? `${history.two2[2]}`
+										: `${history.two2[2]}`}
 								</span>
 							</div>
 							<div className='history-table-row'>
@@ -193,8 +193,8 @@ export const GameHistory = ({ history }) => {
 									}`}
 								>
 									{history.the2[2] > 0
-										? `+${history.the2[2]}`
-										: `-${history.the2[2]}`}
+										? `${history.the2[2]}`
+										: `${history.the2[2]}`}
 								</span>
 							</div>
 						</>
