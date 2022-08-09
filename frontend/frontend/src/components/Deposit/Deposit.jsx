@@ -176,7 +176,7 @@ const Deposit = () => {
 									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
 								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
-									{`${user.wallet}${data.col}`}
+									{user.wallet === null ? '' : `${user.wallet}${data.col}`}
 									<FontAwesomeIcon
 										icon={faCopy}
 										className='copy-icon deposit-copy-icon'
