@@ -9,7 +9,8 @@ p {
 	min-height: 100vh;
 	background-image: url('../../../assets/MainBackground.jpg');
 	background-attachment: fixed;
-	background-repeat: auto;
+	background-size: cover;
+	background-repeat: no-repeat;
 	background-position: bottom;
 	overflow-x: hidden;
 }
@@ -175,17 +176,6 @@ p {
 	max-width: 1200px;
 	padding: 0 20px;
 	padding-top: 25px;
-}
-.homepage {
-	position: relative;
-	width: 100%;
-	min-height: 100vh;
-	/* background-image: url('../../assets/MainBackground.png'); */
-	background-position: right bottom;
-	background-attachment: fixed;
-	background-size: cover;
-	overflow-x: hidden;
-	overflow-y: auto;
 }
 
 .main_container {
@@ -420,6 +410,13 @@ ul li {
 	}
 	.menu-btn {
 		height: 70px;
+	}
+	.homepage-wrapper {
+		background-image: url('../../../assets/MainBackground.jpg');
+		background-attachment: fixed;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: bottom;
 	}
 }
 @media screen and (max-width: 420px) {

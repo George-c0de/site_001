@@ -26,22 +26,20 @@ const Resetpass = () => {
 		if (data.password1.length < 8 || data.password1 !== data.password2) {
 			setInvalidPassword(true)
 		} else {
-			navigate('/login')
-			setInvalidPassword(false)
-		}
-
-		if (!invalidPassword && data.password1 > 0) {
-			try {
-				const { data: res } = await axios.post('/api/set_new/', data, {
-					headers: { 'Content-Type': 'application/json' },
-				})
-				console.log(data)
-				console.log(res.data)
-				// navigate('/home') //after registering navigate to login page
-				console.log(res.message)
-			} catch (error) {
-				console.log(error)
+			if (!invalidPassword && data.password1.length > 0) {
+				try {
+					const { data: res } = await axios.post('/api/set_new/', data, {
+						headers: { 'Content-Type': 'application/json' },
+					})
+					console.log(data)
+					console.log(res.data)
+					// navigate('/home') //after registering navigate to login page
+					console.log(res.message)
+				} catch (error) {
+					console.log(error)
+				}
 			}
+			setInvalidPassword(false)
 		}
 	}
 
