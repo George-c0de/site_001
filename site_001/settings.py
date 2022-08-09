@@ -71,7 +71,7 @@ REACT_ROUTES = [
     'home/deposit',
     'home/pay',
     'reset/<str:uid>/<str:token>',
-    '<str:utm>',
+    'login/<str:utm>',
 ]
 
 ROOT_URLCONF = 'site_001.urls'
