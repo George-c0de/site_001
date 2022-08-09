@@ -23,11 +23,12 @@ function App() {
 
 	return (
 		<Routes>
-			<Route path='/' exact element={<StartGame />} />
-			<Route path='/home' exact element={<Game />} />
-			<Route path='/login' exact element={<Login />} />
-			<Route path='/home/pay' exact element={<Pay />} />
-			<Route path='/home/deposit' exact element={<Deposit />} />
+			<Route path='/' element={<StartGame />} />
+			<Route path='/home' element={<Game />} />
+			<Route path='/login/:utm' element={<Login />} />
+			<Route path='/login' element={<Login />} />
+			<Route path='/home/pay' element={<Pay />} />
+			<Route path='/home/deposit' element={<Deposit />} />
 			<Route path='/home/rules' element={<Rules />} />
 			<Route path='/reset/:uid/:token' element={<Resetpass />} />
 		</Routes>

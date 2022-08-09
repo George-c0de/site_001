@@ -26,6 +26,7 @@ const Signup = () => {
 	})
 
 	React.useEffect(() => {
+		console.log(params)
 		if (get('utm') == null) {
 			saveLocale(params.id)
 		}
