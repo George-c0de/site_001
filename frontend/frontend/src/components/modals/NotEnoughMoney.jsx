@@ -3,7 +3,7 @@ import './modals.css'
 import Cross from '../../assets/cross-svgrepo-com.svg'
 import { t } from 'ttag'
 
-const BuyPockebol = props => {
+const NotEnoughMoney = props => {
 	const ref = React.useRef(null)
 	const { hideModal, setHideModal, setPurchaseConfirmation, setAccept, price } =
 		props
@@ -47,24 +47,14 @@ const BuyPockebol = props => {
 					onClick={handleClick}
 				/>
 				<p className='buy-text'>
-					{t`Purchase price` +
-						' ' +
-						price +
-						'USD. ' +
-						t`Would you like to continue?`}
+					{t`Tinsufficient funds to purchase the card`}
 				</p>
 				<div className='buy-btns-wrapper'>
 					<button
-						onClick={confirmPurchase}
-						className='authorization__button subscribe-btn buy-btn'
-					>
-						{t`Yes`}
-					</button>
-					<button
 						onClick={handleClick}
-						className='authorization__button subscribe-btn buy-btn'
+						className='authorization__button subscribe-btn money-btn'
 					>
-						{t`No`}
+						{t`Continue`}
 					</button>
 				</div>
 			</div>
@@ -72,4 +62,4 @@ const BuyPockebol = props => {
 	)
 }
 
-export default BuyPockebol
+export default NotEnoughMoney

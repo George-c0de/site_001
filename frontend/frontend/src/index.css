@@ -6,20 +6,14 @@ body {
 	box-sizing: border-box;
 }
 
-/*Start*/
 @import url('./components/StartGame/startgame.css');
 
-/*Log in*/
 @import url('./components/Login/login.css');
 
-/*Mainpage*/
-@import url('./components/MainPage/mainpage.css');
+/* @import url('./components/MainPage/mainpage.css'); */
 
-/*Game*/
 @import url('./components/Submenu/Game/game.css');
 
-/*Referals*/
 @import url('./components/Submenu/Referals/referals.css');
 
-/*Statistics*/
 @import url('./components/Submenu/Statistics/statistics.css');

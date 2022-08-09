@@ -159,15 +159,6 @@ const Pay = () => {
 		}
 	}
 	const hundSum = (e, name) => {
-		// console.log(state_input)
-		// if (state_input) {
-		// 	setData({
-		// 		wallet_input: e.target.value,
-		// 		col: data.col,
-		// 	})
-		// } else {
-		// 	e.target.value = ''
-		// }
 		setData({
 			...data,
 			[name]: e.target.value,

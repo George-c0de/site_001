@@ -412,6 +412,18 @@
 			"Total wins:": {
 				"msgid": "Total wins:",
 				"msgstr": ["Gesamtgewinne:"]
+			},
+			"Still have questions?": {
+				"msgid": "Still have questions?",
+				"msgstr": ["Haben Sie noch Fragen?"]
+			},
+			"Complete instructions": {
+				"msgid": "Complete instructions",
+				"msgstr": ["Vollständige Anweisungen"]
+			},
+			"Tinsufficient funds to purchase the card": {
+				"msgid": "Tinsufficient funds to purchase the card",
+				"msgstr": ["Unzureichende Mittel für den Kauf der Karte"]
 			}
 		}
   }

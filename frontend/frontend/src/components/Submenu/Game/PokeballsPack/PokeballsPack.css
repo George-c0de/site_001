@@ -13,7 +13,6 @@
 	padding: 5px 50px 5px 20px;
 	width: 500px;
 	height: 50px;
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -147,7 +146,7 @@
 	.card-info-button {
 		font-weight: 400;
 		font-size: 12px !important;
-		width: 67px !important;
+		width: 78px !important;
 		height: 20px !important;
 		padding: 0 !important;
 	}

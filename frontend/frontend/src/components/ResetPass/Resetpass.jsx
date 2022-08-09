@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../Ảnh Pokemon Dự Trù/логотип.svg'
+import logo from '../../assets/pokemon-logo.svg'
 import { t } from 'ttag'
 import './reset.css'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -21,7 +21,7 @@ const Resetpass = () => {
 
 	const handleSubmit = async e => {
 		e.preventDefault()
-		if (data.password.length < 8 || data.password1 !== data.password2) {
+		if (data.password1.length < 8 || data.password1 !== data.password2) {
 			setInvalidPassword(true)
 		} else {
 			navigate('/login')

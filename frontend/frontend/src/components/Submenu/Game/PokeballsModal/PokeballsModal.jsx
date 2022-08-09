@@ -9,6 +9,8 @@ import q from '../../../../Ảnh Pokemon Dự Trù/Знак вопроса.svg'
 import './PokeballsModal.css'
 import BuyPockebol from '../../../modals/BuyPockebol'
 import { t } from 'ttag'
+import { noAuto } from '@fortawesome/fontawesome-svg-core'
+import NotEnoughMoney from '../../../modals/NotEnoughMoney'
 
 const CardOpened = ({
 	image,
@@ -18,14 +20,36 @@ const CardOpened = ({
 	idCard,
 	category,
 }) => {
-	const [status, setStatus] = useState(card_data[0])
-	// const handleStatusBalls = e => {
-	// 	const statusBall = e.target.closest('[data-status]')
-	// 	if (statusBall) {
-	// 		statusBall.classList.toggle('show')
-	// 		setStatus(card_data[0])
-	// 	}
-	// }
+	let status = card_data[0]
+	const [disabledBtn, setDisabledBtn] = useState(false)
+	const handleButton = async () => {
+		await axios.get(`/api/prohibitions`).then(res => {
+			console.log(res.data)
+			let data = res.data
+			switch (category) {
+				case 'bronze': {
+					setDisabledBtn(data.bronze[idCard - 1])
+					break
+				}
+				case 'silber': {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+				case 'gold': {
+					setDisabledBtn(data.gold[idCard - 1])
+					break
+				}
+				case 'smaragd': {
+					setDisabledBtn(data.emerald[idCard - 1])
+					break
+				}
+			}
+		})
+	}
+
+	useEffect(() => {
+		handleButton()
+	}, [])
 
 	const handleBuyClick = () => {
 		setTimeout(async () => {
@@ -70,7 +94,12 @@ const CardOpened = ({
 					{t`Total Wins:`} <span>{card_data[1]}$</span>
 				</span>
 
-				<span onClick={handleBuyClick} className='card-info-button'>
+				<span
+					onClick={handleBuyClick}
+					className={`card-info-button ${
+						disabledBtn ? 'card-info-disabled' : ''
+					}`}
+				>
 					{t`ACTIVATE`}
 				</span>
 			</div>
@@ -78,7 +107,7 @@ const CardOpened = ({
 	)
 }
 
-const CardClosed = ({ price, buyCard, idCard, category, six }) => {
+const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 	const [status, setStatus] = useState()
 	const [accept, setAccept] = useState()
 	const [purchaseConfirmation, setPurchaseConfirmation] = useState()
@@ -101,17 +130,11 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 			}, 1500)
 	}
 
-	const handleButton = async () => {
-		await axios.get(`/api/prohibitions`).then(res => {
-			console.log(res)
-			console.log(res.data)
-		})
-	}
+	console.log(category, idCard)
 
 	React.useEffect(() => {
 		if (firstRender) {
 			handleBuyClick()
-			handleButton()
 		} else {
 			setFirstRender(true)
 		}
@@ -151,15 +174,24 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 				</>
 			)}
 			<img src={pokeball} className='pokeballs-card-ball' alt='' />
-			{accept && (
-				<BuyPockebol
-					price={price}
-					setPurchaseConfirmation={setPurchaseConfirmation}
-					hideModal={hideModal}
-					setHideModal={setHideModal}
-					setAccept={setAccept}
-				/>
-			)}
+			{accept &&
+				(money > price ? (
+					<BuyPockebol
+						price={price}
+						setPurchaseConfirmation={setPurchaseConfirmation}
+						hideModal={hideModal}
+						setHideModal={setHideModal}
+						setAccept={setAccept}
+					/>
+				) : (
+					<NotEnoughMoney
+						price={price}
+						setPurchaseConfirmation={setPurchaseConfirmation}
+						hideModal={hideModal}
+						setHideModal={setHideModal}
+						setAccept={setAccept}
+					/>
+				))}
 		</div>
 	)
 }
@@ -174,6 +206,7 @@ export const PokeballsModal = ({
 	card_data,
 	price,
 	six,
+	money,
 }) => {
 	return (
 		<div className='pokeballs-modal'>
@@ -201,6 +234,7 @@ export const PokeballsModal = ({
 								category={category}
 								six={six}
 								key={id}
+								money={money}
 							/>
 						)}
 					</div>

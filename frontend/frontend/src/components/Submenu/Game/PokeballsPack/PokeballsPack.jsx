@@ -6,7 +6,6 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { PokeballsModal } from '../PokeballsModal/PokeballsModal'
 import { t } from 'ttag'
 import PokebolOpened from '../../../../assets/pockebol-opened.png'
-
 const COLORS_TO_CLASS = {
 	bronze: 'text-pokeball-1',
 	bronco: 'text-pokeball-1',
@@ -40,6 +39,7 @@ export const PokeballsPack = ({
 	card_data,
 	price,
 	six,
+	money
 }) => {
 	const [modalOpen, setModalOpen] = useState(false)
 	const handlePokeballsPack = () => {
@@ -48,6 +48,7 @@ export const PokeballsPack = ({
 
 	// ПЕРЕНЕСЕНО ИЗ POKEBALLSMODAL
 	const [cards, setCards] = useState([])
+	console.log(cards)
 	const buyCard = async id => {
 		const newCards = [...cards]
 		newCards[id - 1] = id
@@ -76,19 +77,43 @@ export const PokeballsPack = ({
 			>
 				<div className='detail-wrapper' onClick={handlePokeballsPack}>
 					<div id='pokeballs-detail'>
-						{cards.map(elem => (
+						{/* {cards.map(elem => (
 							<img
 								src={elem !== 1 ? pokeball : PokebolOpened}
 								className='small-pokeball'
 								alt='pokeball'
 							/>
-						))}
-						{/* <img src={cards[0]} className='small-pokeball' alt='pokeball' />
-						<img src={pokeball} className='small-pokeball' alt='pokeball' />
-						<img src={pokeball} className='small-pokeball' alt='pokeball' />
-						<img src={pokeball} className='small-pokeball' alt='pokeball' />
-						<img src={pokeball} className='small-pokeball' alt='pokeball' />
-						<img src={pokeball} className='small-pokeball' alt='pokeball' /> */}
+						))} */}
+						<img
+							src={cards[0] <= 0 ? pokeball : PokebolOpened}
+							alt='pokeball'
+							className='small-pokeball'
+						/>
+						<img
+							src={cards[1] <= 0 ? pokeball : PokebolOpened}
+							className='small-pokeball'
+							alt='pokeball'
+						/>
+						<img
+							src={cards[2] <= 0 ? pokeball : PokebolOpened}
+							className='small-pokeball'
+							alt='pokeball'
+						/>
+						<img
+							src={cards[3] <= 0 ? pokeball : PokebolOpened}
+							className='small-pokeball'
+							alt='pokeball'
+						/>
+						<img
+							src={cards[4] <= 0 ? pokeball : PokebolOpened}
+							className='small-pokeball'
+							alt='pokeball'
+						/>
+						<img
+							src={cards[5] <= 0 ? pokeball : PokebolOpened}
+							className='small-pokeball'
+							alt='pokeball'
+						/>
 					</div>
 					<div
 						className={
@@ -112,6 +137,7 @@ export const PokeballsPack = ({
 					card_data={card_data}
 					price={price}
 					six={six}
+					money={money}
 				/>
 			</div>
 		</div>

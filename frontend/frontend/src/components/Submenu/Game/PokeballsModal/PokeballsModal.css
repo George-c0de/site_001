@@ -275,7 +275,9 @@
 	left: 50%;
 	transform: translateX(-50%);
 }
-
+.card-info-disabled {
+	opacity: 0.75;
+}
 @keyframes circle {
 	100% {
 		transform: rotate(360deg);

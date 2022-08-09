@@ -1,11 +1,11 @@
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Login from './components/Login/login'
 import StartGame from './components/StartGame/startgame'
 import Game from './components/Submenu/Game/game'
 import Pay from './components/Pay/Pay'
 import Deposit from './components/Deposit/Deposit'
-import React from 'react'
-import Rules2 from './components/Rules2/Rules2'
+import Rules from './components/Rules/Rules'
 import Resetpass from './components/ResetPass/Resetpass'
 import { loadReCaptcha } from 'recaptcha-v3-react-function-async'
 
@@ -28,7 +28,7 @@ function App() {
 			<Route path='/home/pay' exact element={<Pay />} />
 			<Route path='/home/deposit' exact element={<Deposit />} />
 			<Route path='/' exact element={<Deposit />} />
-			<Route path='/home/rules' element={<Rules2 />} />
+			<Route path='/home/rules' element={<Rules />} />
 			<Route path='/reset/:uid/:token' element={<Resetpass />} />
 		</Routes>
 	)

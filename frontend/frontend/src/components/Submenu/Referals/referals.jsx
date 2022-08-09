@@ -94,7 +94,7 @@ const Referals = () => {
 	useEffect(() => {
 		fetchPosts()
 		getLines()
-		fetchUser()
+		getUsername()
 	}, [])
 	const [user, setUser] = useState({
 		id: 0,
@@ -110,8 +110,6 @@ const Referals = () => {
 		admin_or: false,
 		user: 0,
 	})
-
-	
 
 	const [lines, setLines] = useState({
 		first: {
@@ -146,11 +144,10 @@ const Referals = () => {
 			console.log(e)
 		}
 	}
-	async function fetchUser() {
-		try {
-			const response = await axios.get('/api/user')
-			setUser(response.data)
-		} catch (e) {}
+
+	let getUsername = async () => {
+		const res = await axios.get('/api/user')
+		setUser(res.data)
 	}
 
 	const getLines = async () => {
@@ -208,7 +205,7 @@ const Referals = () => {
 			<div className='referals__link'>
 				<h3 className='referals__title'>{t`Referral link`}</h3>
 				<span className='link-invite' ref={linkRef}>
-					tokemon.games/{user?.referral_link}
+					https://tokemon.games/{user?.referral_link}
 					<FontAwesomeIcon
 						icon={faCopy}
 						className='copy-icon'

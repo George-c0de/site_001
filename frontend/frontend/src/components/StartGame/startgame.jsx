@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { t } from 'ttag'
 // Images
-import Logo from '../../Ảnh Pokemon Dự Trù/логотип.svg'
+import Logo from '../../assets/pokemon-logo.svg'
 import axios from 'axios'
 import MainBg from '../../assets/MainBg.jpg'
 import { Lang } from '../MainPage/Lang/Lang'

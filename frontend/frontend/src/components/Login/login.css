@@ -1,6 +1,6 @@
 .login_container {
 	width: 100%;
-	background-image: url('../../assets/CityBg.png');
+	background-image: url('../../assets/MainBackground.png');
 	background-position: 25% 75%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -21,7 +21,6 @@
 .nav__logo {
 	width: 300px;
 	height: 100%;
-	object-fit: cover;
 }
 .authorization__container {
 	max-width: 900px;

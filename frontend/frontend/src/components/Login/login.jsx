@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
-import logo from '../../Ảnh Pokemon Dự Trù/логотип.svg'
+import logo from '../../assets/header/logo.svg'
 import pikachu_pokeball from '../../Ảnh Pokemon Dự Trù/pikachu-authorization.png'
 import { Lang } from '../MainPage/Lang/Lang'
 import { t } from 'ttag'

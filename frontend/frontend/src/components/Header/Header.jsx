@@ -1,14 +1,9 @@
 import React from 'react'
-//React, React Router, React Hooks
 import { useNavigate } from 'react-router-dom'
-
-// Pages
 import { UserId } from '../UserId/UserId'
-// import { UserId } from '../../Rules/'
 import Referals from '../Submenu/Referals/referals'
 import Statistics from '../Submenu/Statistics/statistics'
-
-import HeaderLogo from '../../assets/headerLogo.png'
+import HeaderLogo from '../../assets/header/logo.png'
 import HeaderHuman from '../../assets/HeaderHuman.png'
 import Telegram from '../../assets/telegram.svg'
 import LogOut from '../../assets/logout.svg'

@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-
+import './rules.css'
+import Header from '../Header/Header'
 import Slide1 from '../../assets/slides/Slide1.png'
 import Slide2 from '../../assets/slides/Slide2.png'
 import Slide3 from '../../assets/slides/Slide3.png'
 import Slide4 from '../../assets/slides/Slide4.png'
 import Slide5 from '../../assets/slides/Slide5.png'
-
 import Slide1Ge from '../../assets/slides/Slide1-de.png'
 import Slide2Ge from '../../assets/slides/Slide2-de.png'
 import Slide3Ge from '../../assets/slides/Slide3-de.png'
@@ -36,12 +35,11 @@ import Slide2Ru from '../../assets/slides/Slide2-ru.png'
 import Slide3Ru from '../../assets/slides/Slide3-ru.png'
 import Slide4Ru from '../../assets/slides/Slide4-ru.png'
 import Slide5Ru from '../../assets/slides/Slide5-ru.png'
-
 import Progress from '../../assets/rules-progress.svg'
 import Cross from '../../assets/cross-svgrepo-com.svg'
-import './rules.css'
-import Header from '../Header/Header'
 import * as cookie from '../../cookie'
+import React, { useState } from 'react'
+import { t } from 'ttag'
 
 function Rules2() {
 	const LOCALE_COOKIE = '__locale'
@@ -215,7 +213,7 @@ function Rules2() {
 									target='__blank'
 									href={`tokemon.info/${getLocale()}`}
 								>
-									Остались вопросы? Полная инструкция
+									{t`Still have questions?`} <br /> {t`Complete instructions`}
 								</a>
 							</>
 						)}

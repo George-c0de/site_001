@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './subscribe.css'
+import './modals.css'
 import Telegram from '../../assets/tg.svg'
 import Cross from '../../assets/cross-svgrepo-com.svg'
 import { t } from 'ttag'
@@ -20,8 +20,8 @@ const SubscribeTg = () => {
 	}
 
 	React.useEffect(() => {
-		document.cookie = 'openTg'
 		document.addEventListener('click', handleClickOutside, true)
+		document.cookie = 'openTg'
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
 		}

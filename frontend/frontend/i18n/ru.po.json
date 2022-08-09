@@ -298,6 +298,26 @@
 			"Total wins:": {
 				"msgid": "Total wins:",
 				"msgstr": ["Общий выигрыш:"]
+			},
+			"Still have questions?": {
+				"msgid": "Still have questions?",
+				"msgstr": ["Остались вопросы?"]
+			},
+			"Complete instructions": {
+				"msgid": "Complete instructions",
+				"msgstr": ["Полная инструкция"]
+			},
+			"The password must be at least 8 characters long. Contains letters and symbols": {
+				"msgid": "The password must be at least 8 characters long. Contains letters and symbols",
+				"msgstr": [
+					"Пароль должен быть не менее 8 символов. Содержит буквы и символы"
+				]
+			},
+			"Tinsufficient funds to purchase the card": {
+				"msgid": "Tinsufficient funds to purchase the card",
+				"msgstr": [
+					"Недостаточное количество средств для приобретения карты"
+				]
 			}
 		}
 	}
