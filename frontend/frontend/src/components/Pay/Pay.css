@@ -61,7 +61,7 @@
 
 .pay-input label {
 	font-weight: 600;
-	font-size: 25px;
+	font-size: 18px;
 	padding-left: 20px;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .pay-input-info {
-	font-size: 17px;
+	font-size: 15px;
 	font-weight: 600;
 	align-self: flex-end;
 	line-height: 1;
