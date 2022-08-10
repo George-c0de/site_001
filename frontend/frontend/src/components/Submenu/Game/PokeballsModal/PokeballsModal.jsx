@@ -21,7 +21,7 @@ const CardOpened = ({
 	category,
 }) => {
 	let status = card_data[0]
-	const [disabledBtn, setDisabledBtn] = useState(false)
+	const [disabledBtn, setDisabledBtn] = useState()
 	const handleButton = async () => {
 		await axios.get(`/api/prohibitions`).then(res => {
 			console.log(res.data)
@@ -133,13 +133,15 @@ const CardOpened = ({
 	}, [])
 
 	const handleBuyClick = () => {
-		setTimeout(async () => {
-			await axios.get(`/api/${category}/${idCard}`).then(res => {
-				setTimeout(() => {
-					buyCard()
-				}, 1000)
-			})
-		}, 3000)
+		if (disabledBtn) {
+			setTimeout(async () => {
+				await axios.get(`/api/${category}/${idCard}`).then(res => {
+					setTimeout(() => {
+						buyCard()
+					}, 1000)
+				})
+			}, 3000)
+		}
 	}
 
 	return (
