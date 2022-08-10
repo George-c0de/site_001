@@ -41,7 +41,7 @@
 	justify-content: space-evenly;
 	align-items: stretch;
 	flex-wrap: wrap;
-	margin-bottom:50px;
+	margin-bottom: 50px;
 }
 
 .deposit-input {
@@ -87,18 +87,19 @@
 	justify-content: space-between;
 	align-items: center;
 	background-color: white;
-	color: #000000
+	color: #000000;
+	font-size: 16px;
 }
-.deposit-text{
+.deposit-text {
 	margin: 10px 0px;
 	font-size: 16px;
 }
 .deposit-description {
 	margin-top: 10px;
-	opacity: .9;
+	opacity: 0.9;
 	font-size: 18px;
 }
-.deposit-copy-icon{
+.deposit-copy-icon {
 	color: #ffcc00;
 }
 .deposit-button {
@@ -168,6 +169,9 @@
 }
 .history-table-column-mobile {
 	display: none;
+}
+.deposit-copy-icon:hover {
+	color: #0bdc5f;
 }
 @media (max-width: 1050px) {
 	.deposit-history-table {

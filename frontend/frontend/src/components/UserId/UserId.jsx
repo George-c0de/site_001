@@ -9,6 +9,7 @@ import axios from 'axios'
 
 export const UserId = ({ note }) => {
 	const linkRef = useRef()
+	const copyRef = useRef()
 	const navigate = useNavigate()
 	useEffect(() => {
 		fetchPosts()
@@ -36,6 +37,20 @@ export const UserId = ({ note }) => {
 
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
+		document.addEventListener(
+			'touchstart',
+			function () {
+				copyRef.current.style.color = '#ffcc00'
+			},
+			true
+		)
+		document.addEventListener(
+			'touchend',
+			function () {
+				copyRef.current.style.color = '#ffffff'
+			},
+			true
+		)
 	}
 	const Deposit = () => {
 		navigate('/home/deposit')
@@ -64,6 +79,7 @@ export const UserId = ({ note }) => {
 					<span className='link-invite referals-link' ref={linkRef}>
 						https://tokemon.games/{user?.referral_link}
 						<FontAwesomeIcon
+							ref={copyRef}
 							icon={faCopy}
 							className='copy-icon'
 							onClick={handleCopy}

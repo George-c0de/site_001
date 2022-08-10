@@ -11,8 +11,9 @@ p {
 	background-attachment: fixed;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: bottom;
+	/* background-position: bottom; */
 	overflow-x: hidden;
+	height: 100%;
 }
 .main__header {
 	background: linear-gradient(87.52deg, #2570b5 21.14%, #67deee 91.14%);

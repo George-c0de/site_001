@@ -159,7 +159,7 @@
 		align-items: start !important;
 	}
 	.pokeballs-container {
-		width: 370px;
+		max-width: 370px;
 		padding: 5px 50px 5px 5px;
 	}
 	.container-pack-pokeballs {
@@ -185,5 +185,29 @@
 		padding-left: 5px;
 		left: 0px;
 		top: 2.5px;
+	}
+}
+@media screen and (max-width: 374px) {
+	.pokeballs-container {
+		max-width: 350px;
+		padding: 3px 50px 5px 3px;
+	}
+	.pokeballs-modal .pokeballs-card {
+		width: 162px !important;
+	}
+}
+@media screen and (max-width: 350px) {
+	.pokeballs-container {
+		max-width: 340px;
+		padding: 3px 50px 3px 3px;
+	}
+	.pokeballs-modal .pokeballs-card {
+		width: 156px !important;
+	}
+	.site-main-game-wrapper {
+		padding: 0 !important;
+	}
+	.detail-wrapper {
+		padding-left: 0px;
 	}
 }

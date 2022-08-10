@@ -195,9 +195,23 @@ const Referals = () => {
 	}
 
 	const linkRef = React.useRef()
-
+	const copyRef = React.useRef()
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
+		document.addEventListener(
+			'touchstart',
+			function () {
+				copyRef.current.style.color = '#ffcc00'
+			},
+			true
+		)
+		document.addEventListener(
+			'touchend',
+			function () {
+				copyRef.current.style.color = '#ffffff'
+			},
+			true
+		)
 	}
 
 	return (
@@ -208,9 +222,9 @@ const Referals = () => {
 					https://tokemon.games/{user?.referral_link}
 					<FontAwesomeIcon
 						icon={faCopy}
+						ref={copyRef}
 						className='copy-icon'
 						onClick={handleCopy}
-						aria-haspopup="true"
 					/>
 				</a>
 			</div>

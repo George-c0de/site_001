@@ -65,12 +65,6 @@
 .copy-icon:active {
 	color: #0bdc5f;
 }
-
-/* @media (hover: none) {
-	.copy-icon:hover {
-		color: inherit;
-	}
-} */
 .user-info-buttons {
 	display: flex;
 	flex-direction: row;
@@ -122,6 +116,13 @@
 	.user-info li span {
 		font-size: 23px;
 	}
+	.copy-icon:hover {
+		color: inherit;
+	}
+
+	.copy-icon:active {
+		color: #0bdc5f;
+	}
 }
 @media screen and (max-width: 590px) {
 	.satoshi {
@@ -167,5 +168,20 @@
 @media screen and (max-width: 400px) {
 	.satoshi {
 		top: -58px;
+		width: 170px;
+		height: 230px;
+	}
+}
+@media screen and (max-width: 374px) {
+	.satoshi {
+		width: 130px;
+		height: 180px;
+	}
+}
+@media screen and (max-width: 343px) {
+	.satoshi {
+		top: -60px;
+		width: 100px;
+		height: 150px;
 	}
 }

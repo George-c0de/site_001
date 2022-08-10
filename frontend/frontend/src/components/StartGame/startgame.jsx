@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import MainBg from '../../assets/MainBg.png'
 import { Lang } from '../Lang/Lang'
+import Logo from '../../assets/header/logo.svg'
 let data2
 try {
 	axios.get('/api/login').catch(function (error) {
@@ -24,8 +25,8 @@ const Startgame = () => {
 	const [onActive, setActive] = React.useState(true)
 	return (
 		<div className='background-start'>
-			<p href="##" onClick={startGame} className='start-link'>
-			</p>
+			<img src={Logo} className='logo-tokemon' alt='' />
+			<p href='##' onClick={startGame} className='start-link'></p>
 			<img src={MainBg} alt='' className='main-bg' />
 			<Lang isActive={onActive} />
 		</div>
