@@ -310,7 +310,7 @@
 			"The password must be at least 8 characters long. Contains letters and symbols": {
 				"msgid": "The password must be at least 8 characters long. Contains letters and symbols",
 				"msgstr": [
-					"Пароль должен быть не менее 8 символов. Содержит буквы и символы"
+					"пароль должен состоять минимум из 8 символов. Содержать буквы и символы"
 				]
 			},
 			"Insufficient funds to purchase the card": {

@@ -54,12 +54,10 @@ const Resetpass = () => {
 						}`}
 						placeholder={t`Password`}
 						name='password1'
-						type='password'
 						onChange={handleChange}
 						value={data.password1}
 					/>
 					<input
-						type='password'
 						name='password2'
 						className={`authorization__input ${
 							invalidPassword ? 'authorization__input-invalid' : ''

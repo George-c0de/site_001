@@ -164,6 +164,11 @@
 	.satoshi {
 		right: -50px;
 	}
+	.satoshi {
+		top: -58px;
+		width: 170px;
+		height: 230px;
+	}
 }
 @media screen and (max-width: 400px) {
 	.satoshi {

@@ -18,6 +18,7 @@ const Signup = () => {
 	const [invalidEmail, setInvalidEmail] = useState(false)
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [activeCaptcha, setActiveCaptcha] = useState(false)
+	const [firstRender, setFirstRender] = useState(true)
 
 	const [data, setData] = useState({
 		email: '',
@@ -27,6 +28,10 @@ const Signup = () => {
 	})
 
 	React.useEffect(() => {
+		if (firstRender && params.utm) {
+			setTypeAuthorization('sign')
+			setFirstRender(false)
+		}
 		if (get('utm') == null) {
 			saveLocale(params.utm)
 		}
@@ -118,8 +123,6 @@ const Signup = () => {
 				data.email.length > 0 &&
 				activeCaptcha
 			) {
-
-
 				setData({
 					username: data.username,
 					email: data.email,
@@ -152,8 +155,7 @@ const Signup = () => {
 					if (data2.data === 200) {
 						navigate('/home') //after registering navigate to login page
 					}
-				} catch (error) {
-				}
+				} catch (error) {}
 			}
 		}
 		if (typeAuthorization === 'reset') {
@@ -175,8 +177,7 @@ const Signup = () => {
 					const { data } = axios.post('/api/reset_password/', validData, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-				} catch (e) {
-				}
+				} catch (e) {}
 				setTimeout(() => {
 					window.location.reload()
 				}, 5000)
