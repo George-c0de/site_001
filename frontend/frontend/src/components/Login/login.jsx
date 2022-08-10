@@ -8,7 +8,15 @@ import { t } from 'ttag'
 import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
+let data2
 
+try {
+	axios.get('/api/login').catch(function (error) {
+		if (error.response) {
+			data2 = error.response.status
+		}
+	})
+} catch (error) {}
 const Signup = () => {
 	const navigate = useNavigate()
 	const params = useParams()
@@ -28,6 +36,7 @@ const Signup = () => {
 	})
 
 	React.useEffect(() => {
+		if(data2 === 501) navigate('/home')
 		if (firstRender && params.utm) {
 			setTypeAuthorization('sign')
 			setFirstRender(false)
