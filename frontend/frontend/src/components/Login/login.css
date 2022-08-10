@@ -186,18 +186,8 @@
 }
 
 @media screen and (max-width: 500px) {
-	.captcha {
-		flex-direction: column;
-	}
 	.text {
-		margin: 0.5em !important;
-		text-align: center;
-	}
-	.logo {
-		align-self: center !important;
-	}
-	.spinner {
-		margin: 2em 0.5em 0.5em 0.5em !important;
+		font-size: 15px !important;
 	}
 }
 
@@ -431,7 +421,6 @@ input[type='checkbox'] + .checkmark span {
 	.authorization__pikachu-wrapper {
 		width: 200px;
 		height: 200px;
-		bottom: 75px;
 	}
 }
 @media screen and (max-width: 440px) {
@@ -454,7 +443,7 @@ input[type='checkbox'] + .checkmark span {
 		min-height: 830px;
 	}
 	.authorization__pikachu-wrapper {
-		bottom: 55px;
+		/* bottom: 25px; */
 	}
 	.login_container-reset .authorization__pikachu-wrapper {
 		bottom: 100px;

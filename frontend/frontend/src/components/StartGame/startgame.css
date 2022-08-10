@@ -28,7 +28,7 @@
 	left: 52%;
 	transform: translate(-50%, -50%);
 	width: 200px;
-	height: 200px
+	height: 200px;
 }
 .start-game {
 	top: 48.5%;
@@ -45,26 +45,17 @@
 .start-game:hover {
 	color: #fc0;
 }
-
-@media screen and (max-width: 1500px) {
-	.start-game {
-		font-size: 30px;
-	}
-}
-
-@media screen and (max-width: 1000px) {
-	.start-game {
-		left: 51.5%;
-		top: 49.3%;
-		font-size: 25px;
-	}
+.logo-pokebol {
+	width: 500px;
+	height: 450px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 @media screen and (max-width: 650px) {
 	.logo-tokemon {
 		height: 35%;
-	}
-	.start-game {
-		left: 52.5%;
 	}
 }
 @media screen and (max-width: 580px) {
@@ -72,17 +63,24 @@
 		top: 0px;
 		height: 30%;
 	}
-	.start-game {
-		left: 52.3%;
+}
+@media screen and (max-width: 500px) {
+	.logo-tokemon {
+		top: 100px;
+		height: 25%;
+	}
+	.logo-pokebol {
+		width: 400px;
+		height: 350px;
 	}
 }
-@media screen and (max-width: 480px) {
-	.start-game {
-		left: 53.5%;
+@media screen and (max-width: 410px) {
+	.logo-tokemon {
+		top: 130px;
+		height: 20%;
 	}
-}
-@media screen and (max-height: 700px) {
-	.start-game {
-		top: 47.3%;
+	.logo-pokebol {
+		width: 400px;
+		height: 350px;
 	}
 }

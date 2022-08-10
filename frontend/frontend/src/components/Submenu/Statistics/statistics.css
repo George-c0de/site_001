@@ -37,23 +37,23 @@
 	.statistic-info li span {
 		font-size: 30px;
 	}
+	.statistic-info {
+		margin: 0;
+	}
 }
 
 @media screen and (max-width: 500px) {
-	.statistic-info li {
-		font-size: 20px;
-	}
-	.statistic-info li span {
-		font-size: 25px;
-	}
-}
-@media screen and (max-width: 420px) {
 	.statistic-info li {
 		font-size: 17px;
 	}
 	.statistic-info li span {
 		font-size: 20px;
 	}
+	.statistic-info li span {
+		margin: 5px 0;
+	}
+}
+@media screen and (max-width: 420px) {
 	.statistic-info {
 		padding-left: 0;
 	}

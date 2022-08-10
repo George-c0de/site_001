@@ -412,6 +412,9 @@ ul li {
 	.menu-btn {
 		height: 70px;
 	}
+	.main__text{
+		font-size: 16px;
+	}
 }
 @media screen and (max-width: 420px) {
 	.main__text {
