@@ -45,7 +45,7 @@ logging.basicConfig(
     ]
 )
 
-
+tc = TronClient()
 def send_message_tgbot(message, id):
     token = getenv('TELEGRAM_TOKEN')
     if User_Bot.objects.filter(profile__id=id).exists():
@@ -253,6 +253,11 @@ def create_all_and_admin():
             profile2 = Profile()
             profile2.user = user
             profile2.admin_or = True
+            wallet = tc.create_wallet()
+            w = Wallet(address=wallet['base58check_address'], pkey=wallet['private_key'])
+            w.save()
+            profile2.wallet = w.id
+            print("central_wallet_create. id={}".format(w.address))
             profile2.save()
         else:
             user = User.objects.create_superuser('admin', '', 'admin')
@@ -268,6 +273,7 @@ def create_all_and_admin():
             w = Wallet(address=wallet['base58check_address'], pkey=wallet['private_key'])
             w.save()
             profile2.wallet = w.id
+            print("central_wallet_create. id={}".format(w.address))
             profile2.save()
 
     if not All.objects.all().exists():
@@ -1573,7 +1579,7 @@ def logics_matrix(user_, money, card_):
 # Модуль оплаты
 
 # Оплата
-tc = TronClient()
+
 # Центральный кошелек для этого демо - первый кошелек в базе. Если его нет, создаем его
 try:
     pass
