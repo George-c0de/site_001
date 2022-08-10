@@ -36,6 +36,11 @@
 
 /*INPUTS*/
 
+.history-table-text-intable {
+	font-size: 15px !important;
+	text-align: start !important;
+	padding-left: 5px !important;
+}
 .pay-inputs-wrapper {
 	width: 100%;
 	display: flex;
@@ -211,6 +216,11 @@
 				auto
 			);
 	}
+	.history-table-text-intable {
+		font-size: 13.5px !important;
+		text-align: start !important;
+		padding-left: 5px !important;
+	}
 }
 @media screen and (max-width: 500px) {
 	.pay-history-title {
@@ -243,6 +253,11 @@
 @media screen and (max-width: 425px) {
 	.pay-input label {
 		padding-left: 30px;
+	}
+	.history-table-text-intable {
+		font-size: 12px !important;
+		text-align: start !important;
+		padding-left: 5px !important;
 	}
 }
 @media screen and (max-width: 400px) {

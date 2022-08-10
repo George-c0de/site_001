@@ -33,7 +33,7 @@ const Pay = () => {
 	const getTran = async () => {
 		try {
 			let response = await axios.get('/api/trans_get_input')
-			if (response.data.lenth > 0) {
+			if (response.data.length > 0) {
 				SetTran(response.data)
 			} else {
 				SetTran([0])
@@ -219,7 +219,11 @@ const Pay = () => {
 								<div className='history-table-column'>
 									<span className='history-table-title'>{t`Date`}</span>
 									{tran.map(trans => {
-										return <h3>{trans.data}</h3>
+										return (
+											<h3 className='history-table-text-intable'>
+												{trans.data}
+											</h3>
+										)
 									})}
 								</div>
 								<div className='history-table-column history-table-column-desc'>
@@ -227,19 +231,31 @@ const Pay = () => {
 										Txid {t`TRANSACTION`}
 									</span>
 									{tran.map(trans => {
-										return <h3>{trans.txid}</h3>
+										return (
+											<h3 className='history-table-text-intable'>
+												{trans.txid}
+											</h3>
+										)
 									})}
 								</div>
 								<div className='history-table-column history-table-column-mobile'>
 									<span className='history-table-title'>Txid</span>
 									{tran.map(trans => {
-										return <h3>{trans.txid}</h3>
+										return (
+											<h3 className='history-table-text-intable'>
+												{trans.txid}
+											</h3>
+										)
 									})}
 								</div>
 								<div className='history-table-column'>
 									<span className='history-table-title sum'>{`Sum`}</span>
 									{tran.map(trans => {
-										return <h3>{trans.quantity}</h3>
+										return (
+											<h3 className='history-table-text-intable'>
+												{trans.quantity}
+											</h3>
+										)
 									})}
 								</div>
 							</div>
