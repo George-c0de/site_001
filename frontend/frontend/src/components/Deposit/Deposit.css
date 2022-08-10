@@ -136,10 +136,7 @@
 
 .deposit-history-table {
 	display: grid;
-	grid-template-columns: minmax(200px, auto) minmax(200px, auto) 1fr minmax(
-			200px,
-			auto
-		);
+	grid-template-columns: 100px 100px 5fr 100px;
 	color: #475176;
 }
 
@@ -174,12 +171,9 @@
 .deposit-copy-icon:hover {
 	color: #0bdc5f;
 }
-@media (max-width: 1050px) {
-	.deposit-history-table {
-		grid-template-columns: minmax(150px, auto) minmax(150px, auto) 1fr minmax(
-				150px,
-				auto
-			);
+@media (max-width: 1000px) {
+	.history-table-text-intable {
+		font-size: 13px !important;
 	}
 }
 @media (max-width: 980px) {
@@ -219,12 +213,6 @@
 	}
 	.history-table-title {
 		font-size: 12px;
-	}
-	.deposit-history-table {
-		grid-template-columns: minmax(90px, auto) minmax(120px, auto) 1fr minmax(
-				80px,
-				auto
-			);
 	}
 }
 @media screen and (max-width: 500px) {

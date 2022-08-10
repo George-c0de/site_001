@@ -26,21 +26,102 @@ const CardOpened = ({
 		await axios.get(`/api/prohibitions`).then(res => {
 			console.log(res.data)
 			let data = res.data
+
 			switch (category) {
 				case 'bronze': {
-					setDisabledBtn(data.bronze[idCard + 1])
+					setDisabledBtn(data.bronze[idCard - 1])
+
+					break
+				}
+				case 'бронза': {
+					setDisabledBtn(data.bronze[idCard - 1])
+
+					break
+				}
+
+				case 'bronzo': {
+					setDisabledBtn(data.bronze[idCard - 1])
+
+					break
+				}
+				case 'bronce': {
+					setDisabledBtn(data.bronze[idCard - 1])
+
+					break
+				}
+				case 'bronco': {
+					setDisabledBtn(data.bronze[idCard - 1])
+
+					break
+				}
+
+				case 'prata': {
+					setDisabledBtn(data.silver[idCard - 1])
+
 					break
 				}
 				case 'silber': {
-					setDisabledBtn(data.silver[idCard + 1])
+					setDisabledBtn(data.silver[idCard - 1])
 					break
 				}
+				case 'серебро': {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+				case "d'argento": {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+				case 'silber': {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+				case 'argent': {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+				case 'prata': {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+				case 'plata': {
+					setDisabledBtn(data.silver[idCard - 1])
+					break
+				}
+
 				case 'gold': {
-					setDisabledBtn(data.gold[idCard + 1])
+					setDisabledBtn(data.gold[idCard - 1])
 					break
 				}
+				case 'золото': {
+					setDisabledBtn(data.gold[idCard - 1])
+					break
+				}
+				case 'ouro': {
+					setDisabledBtn(data.gold[idCard - 1])
+					break
+				}
+				case 'or': {
+					setDisabledBtn(data.gold[idCard - 1])
+					break
+				}
+
 				case 'smaragd': {
-					setDisabledBtn(data.emerald[idCard + 1])
+					setDisabledBtn(data.emerald[idCard - 1])
+					break
+				}
+				case 'esmeralda': {
+					setDisabledBtn(data.emerald[idCard - 1])
+					break
+				}
+				case 'изумруд': {
+					setDisabledBtn(data.emerald[idCard - 1])
+
+					break
+				}
+				case 'smeraldo': {
+					setDisabledBtn(data.emerald[idCard - 1])
+
 					break
 				}
 			}
@@ -96,9 +177,9 @@ const CardOpened = ({
 				<span
 					onClick={handleBuyClick}
 					className={`card-info-button ${
-						disabledBtn ? 'card-info-disabled' : ''
+						disabledBtn ? '' : 'card-info-disabled'
 					}`}
-					disabled={disabledBtn ? true : false}
+					disabled={disabledBtn ? false : true}
 				>
 					{t`ACTIVATE`}
 				</span>
