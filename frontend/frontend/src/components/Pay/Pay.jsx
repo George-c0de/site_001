@@ -222,10 +222,16 @@ const Pay = () => {
 										return <h3>{trans.data}</h3>
 									})}
 								</div>
-								<div className='history-table-column'>
+								<div className='history-table-column history-table-column-desc'>
 									<span className='history-table-title'>
 										Txid {t`TRANSACTION`}
 									</span>
+									{tran.map(trans => {
+										return <h3>{trans.txid}</h3>
+									})}
+								</div>
+								<div className='history-table-column history-table-column-mobile'>
+									<span className='history-table-title'>Txid</span>
 									{tran.map(trans => {
 										return <h3>{trans.txid}</h3>
 									})}

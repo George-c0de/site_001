@@ -17,6 +17,8 @@ const Signup = () => {
 	const [invalidDataLogin, setInvalidDataLogin] = useState(false)
 	const [invalidEmail, setInvalidEmail] = useState(false)
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
+	const [activeCaptcha, setActiveCaptcha] = useState(false)
+
 	const [data, setData] = useState({
 		email: '',
 		password1: '',
@@ -111,12 +113,12 @@ const Signup = () => {
 			} else {
 				setInvalidPassword(false)
 			}
-			console.log(invalidPassword, data.password1)
 			if (
 				!invalidPassword &&
 				!invalidEmail &&
 				data.password1.length > 0 &&
-				data.email.length > 0
+				data.email.length > 0 &&
+				activeCaptcha
 			) {
 				try {
 					let validObj = {
@@ -132,7 +134,6 @@ const Signup = () => {
 					console.log(data)
 					navigate('/home') //after registering navigate to login page
 				} catch (error) {
-					alert(error.response.data.msg)
 				}
 			}
 		}
@@ -166,6 +167,7 @@ const Signup = () => {
 			}
 		}
 	}
+	console.log(activeCaptcha)
 	return (
 		<div
 			className={`login_container ${
@@ -272,6 +274,25 @@ const Signup = () => {
 									<p>{t`The password must be at least 8 characters long. Contains letters and symbols`}</p>
 								</div>
 							)}
+							<div className='captcha'>
+								<div className='spinner' onClick={() => setActiveCaptcha(true)}>
+									<label>
+										<input
+											type='checkbox'
+											className={activeCaptcha ? `captcha-checkbox` : ''}
+										/>
+										<span className='checkmark'>
+											<span>&nbsp;</span>
+										</span>
+									</label>
+								</div>
+								<div className='text'>I'm not a robot</div>
+								<div className='logo'>
+									<img src='https://forum.nox.tv/core/index.php?media/9-recaptcha-png/' />
+									<p>reCAPTCHA</p>
+									<small>Privacy - Terms</small>
+								</div>
+							</div>
 							<button className='authorization__button' type='submit'>
 								{t`Continue`}
 							</button>

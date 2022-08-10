@@ -1,9 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { t } from 'ttag'
-import Logo from '../../assets/header/logo.svg'
 import axios from 'axios'
-import MainBg from '../../assets/MainBg.jpg'
+import MainBg from '../../assets/MainBg.png'
 import { Lang } from '../Lang/Lang'
 let data2
 try {
@@ -16,6 +14,7 @@ try {
 const Startgame = () => {
 	const navigate = useNavigate()
 	const startGame = () => {
+		console.log(1)
 		if (data2 === 501) {
 			navigate('/home')
 		} else {
@@ -25,6 +24,8 @@ const Startgame = () => {
 	const [onActive, setActive] = React.useState(true)
 	return (
 		<div className='background-start'>
+			<p href="##" onClick={startGame} className='start-link'>
+			</p>
 			<img src={MainBg} alt='' className='main-bg' />
 			<Lang isActive={onActive} />
 		</div>

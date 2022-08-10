@@ -47,7 +47,7 @@ const NotEnoughMoney = props => {
 					onClick={handleClick}
 				/>
 				<p className='buy-text'>
-					{t`Tinsufficient funds to purchase the card`}
+					{t`Insufficient funds to purchase the card`}
 				</p>
 				<div className='buy-btns-wrapper'>
 					<button

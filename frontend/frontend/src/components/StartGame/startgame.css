@@ -22,6 +22,14 @@
 	height: 100%;
 	object-fit: cover;
 }
+.start-link {
+	position: absolute;
+	top: 50%;
+	left: 52%;
+	transform: translate(-50%, -50%);
+	width: 200px;
+	height: 200px
+}
 .start-game {
 	top: 48.5%;
 	left: 51%;

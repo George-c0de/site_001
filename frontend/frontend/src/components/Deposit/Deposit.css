@@ -166,6 +166,9 @@
 	font-weight: 600;
 	font-size: 18px;
 }
+.history-table-column-mobile {
+	display: none;
+}
 @media (max-width: 1050px) {
 	.deposit-history-table {
 		grid-template-columns: minmax(150px, auto) minmax(150px, auto) 1fr minmax(
@@ -250,5 +253,11 @@
 @media screen and (max-width: 425px) {
 	.deposit-input label {
 		padding-left: 30px;
+	}
+	.history-table-column-desc {
+		display: none;
+	}
+	.history-table-column-mobile {
+		display: block;
 	}
 }

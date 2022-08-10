@@ -210,6 +210,7 @@ const Referals = () => {
 						icon={faCopy}
 						className='copy-icon'
 						onClick={handleCopy}
+						aria-haspopup="true"
 					/>
 				</a>
 			</div>
