@@ -29,7 +29,7 @@ const Signup = () => {
 	React.useEffect(() => {
 		console.log(params)
 		if (get('utm') == null) {
-			saveLocale(params.id)
+			saveLocale(params.utm)
 		}
 		setData({
 			email: data.email,
@@ -120,6 +120,16 @@ const Signup = () => {
 				data.email.length > 0 &&
 				activeCaptcha
 			) {
+
+
+				console.log(get('utm'))
+				setData({
+					username: data.username,
+					email: data.email,
+					password1: data.password1,
+					password2: data.password2,
+					utm: get('utm'),
+				})
 				try {
 					let validObj = {
 						email: data.email,
