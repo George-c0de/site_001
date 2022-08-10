@@ -6,10 +6,15 @@ body {
 	box-sizing: border-box;
 }
 body {
-	background: #67deee;
+	background-color: rgba(103, 222, 238, 1) !important;
 	background-attachment: fixed;
 }
-body, html {
+#safari {
+	background-color: #fff;
+	opacity: 0.5;
+}
+body,
+html {
 	width: 100%;
 	height: 100%;
 }
@@ -25,8 +30,10 @@ body::-webkit-scrollbar-thumb {
 	background-color: #52525e;
 	border-radius: 20px;
 }
-_::-webkit-full-page-media, _:future, :root .panel {
-	background-color:#67deee
+_::-webkit-full-page-media,
+_:future,
+:root .panel {
+	background-color: #67deee;
 }
 @import url('./components/StartGame/startgame.css');
 
