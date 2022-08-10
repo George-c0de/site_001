@@ -89,10 +89,18 @@ a:hover {
 	.referals__text {
 		font-size: 12px;
 	}
+	.referals__count-wrapper li {
+		font-size: 20px;
+	}
 }
 @media screen and (max-width: 410px) {
 	.referals__info-wrapper .yellow-btn {
 		font-size: 20px;
 		max-width: 100px;
+	}
+}
+@media screen and (max-width: 350px) {
+	.referals__info-wrapper .yellow-btn {
+		max-width: 80px;
 	}
 }
