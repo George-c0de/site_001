@@ -93,7 +93,9 @@
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
 	width: 100%;
+	margin: 0 auto;
 }
 .btn-modal {
 	max-width: 100%;
+	justify-content: center !important;
 }
