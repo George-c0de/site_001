@@ -11,6 +11,15 @@ import axios from 'axios'
 import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
 import Authorization from '../modals/Authorization'
+let data2
+
+try {
+	axios.get('/api/login').catch(function (error) {
+		if (error.response) {
+			data2 = error.response.status
+		}
+	})
+} catch (error) {}
 
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
@@ -60,7 +69,6 @@ const Header = () => {
 
 	React.useEffect(() => {
 		fetchLink()
-		getLogin()
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
@@ -82,19 +90,6 @@ const Header = () => {
 			}
 		}
 	}
-	const getLogin = async () => {
-		try {
-			await axios.get('/api/login').catch(function (error) {
-				if (error.response) {
-					console.log(error.response)
-					setStatus(error.response.status)
-				}
-			})
-		} catch (error) {
-			console.log(error)
-		}
-	}
-	console.log(status)
 	return (
 		<>
 			<div className='main__header' ref={ref}>
@@ -161,7 +156,7 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
-			{/* {status !== 501 && <Authorization />} */}
+			{data2 !== 501 && <Authorization />}
 			<Lang
 				setOpenBurger={setOpenBurger}
 				setOpenUserInfo={setOpenUserInfo}

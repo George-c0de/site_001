@@ -6,13 +6,11 @@ const Authorization = () => {
 	return (
 		<div className={`subscriibe-wrapper buy-wrapper`}>
 			<div className='subscriibe-block'>
-				<p className='buy-text'>{t`Insufficient funds to purchase the card`}</p>
-				<div className='buy-btns-wrapper'>
-					<Link
-						to='/login'
-						className='authorization__button subscribe-btn authorization-modal-text'
-					>
-						{t`log in to continue`}
+				<div className='buy-btns-wrapper btn-modal'>
+					<Link to='/login'>
+						<p className='authorization-modal-text'>
+							{t`Log in to continue`}
+						</p>
 					</Link>
 				</div>
 			</div>
