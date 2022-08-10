@@ -156,16 +156,6 @@ const Deposit = () => {
 							<span className='deposit-money'>{user.money}$</span>
 						</div>
 						<div className='deposit-inputs-wrapper deposit-inputs-deposit'>
-							{/* <div className='deposit-input deposit-input-deposit'>
-								<label htmlFor='address-input'>{t`Top up address`}:</label>
-								<input
-									required
-									type='text'
-									className='deposit-sum-inp-deposit'
-									name='sum-input'
-									value={data.wallet}
-								/>
-							</div> */}
 							<div className='deposit-input deposit-input-deposit'>
 								<p className='deposit-text'>
 									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
