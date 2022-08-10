@@ -157,7 +157,7 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
-			{/* {data2 !== 501 && <Authorization />} */}
+			{data2 !== 501 && <Authorization />}
 			<Lang
 				setOpenBurger={setOpenBurger}
 				setOpenUserInfo={setOpenUserInfo}

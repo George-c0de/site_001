@@ -8,7 +8,8 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 
 const Pay = () => {
 	const [state_input, SetState] = useState(true)
-	const [firstRender, setFirstRender] = useState(false)
+	const [invalidAmount, setInvalidAmount] = useState(false)
+	const [invalidWallet, setInvalidWallet] = useState(false)
 	const [data, setData] = useState({
 		wallet_input: '',
 		col: '',
@@ -44,7 +45,6 @@ const Pay = () => {
 		} catch (e) {}
 	}
 	useEffect(() => {
-		setFirstRender(true)
 		const getPosts = async () => {
 			try {
 				await axios.get('/api/user').then(data => {
@@ -84,30 +84,7 @@ const Pay = () => {
 		getPosts()
 	}, [user.id])
 
-	const handleSum = e => {
-		setData({
-			wallet_input: data.wallet_input,
-			col: e.target.value,
-		})
-		if (Number(data.col) > Number(user.money)) {
-			e.target.value = Number(user.money)
-			setData({
-				wallet_input: data.wallet_input,
-				col: Number(user.money),
-			})
-		} else if (Number(data.col) < 1) {
-			e.target.value = 1
-			setData({
-				wallet_input: data.wallet_input,
-				col: 1,
-			})
-		} else {
-			setData({
-				wallet_input: data.wallet_input,
-				col: e.target.value,
-			})
-		}
-	}
+	console.log(data)
 
 	const handleCopyInTable = id => {
 		navigator.clipboard.writeText(tran[id].txid)
@@ -116,9 +93,9 @@ const Pay = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		if (data.col < 1 || data.col > user.money) {
-			console.log('Error')
+			setInvalidAmount(true)
 		} else if (data.wallet_input === '') {
-			console.log('Error')
+			setInvalidWallet(true)
 		} else {
 			try {
 				axios
@@ -134,10 +111,11 @@ const Pay = () => {
 					)
 					.then(function (response) {})
 					.catch(function (error) {})
+				setInvalidWallet(false)
+				setInvalidAmount(false)
 			} catch (e) {
 				if (e.response.status === 200) {
 					data.col = 1
-					console.log('Ok')
 				} else {
 					console.log('Error')
 				}
@@ -151,8 +129,6 @@ const Pay = () => {
 			[name]: e.target.value,
 		})
 	}
-
-	// ИЗМЕНЕНЫ NAME У ИНПУТОВ
 
 	return (
 		<div className='homepage-wrapper'>
@@ -173,8 +149,9 @@ const Pay = () => {
 								<input
 									onChange={e => hundSum(e, 'col')}
 									value={data.col}
-									required
-									className='pay-sum-inp-pay'
+									className={`pay-sum-inp-pay ${
+										invalidAmount ? 'authorization__input-invalid' : ''
+									}`}
 									name='col'
 								/>
 							</div>
@@ -182,9 +159,10 @@ const Pay = () => {
 								<label htmlFor='address-input'>{t`Withdrawal wallet`}</label>
 								<input
 									onChange={e => hundSum(e, 'wallet_input')}
-									required
 									type='text'
-									className='pay-sum-inp-pay'
+									className={`pay-sum-inp-pay ${
+										invalidWallet ? 'authorization__input-invalid' : ''
+									}`}
 									name='wallet_input'
 									value={data.wallet_input}
 									disabled={user.wallet_input !== null}
