@@ -298,7 +298,7 @@ const Signup = () => {
 										</span>
 									</label>
 								</div>
-								<div className='text'>I'm not a robot</div>
+								<div className='text'>{t`I'm not a robot`}</div>
 								<div className='logo'>
 									<img src='https://forum.nox.tv/core/index.php?media/9-recaptcha-png/' />
 									<p>reCAPTCHA</p>

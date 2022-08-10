@@ -315,9 +315,11 @@
 			},
 			"Tinsufficient funds to purchase the card": {
 				"msgid": "Tinsufficient funds to purchase the card",
-				"msgstr": [
-					"Недостаточное количество средств для приобретения карты"
-				]
+				"msgstr": ["Недостаточное количество средств для приобретения карты"]
+			},
+			"I'm not a robot": {
+				"msgid": "I'm not a robot",
+				"msgstr": ["Я не робот"]
 			}
 		}
 	}

@@ -294,6 +294,10 @@
 			"Insufficient funds to purchase the card": {
 				"msgid": "Insufficient funds to purchase the card",
 				"msgstr": ["Insuficiencia de fondos para adquirir la tarjeta"]
+			},
+			"I'm not a robot": {
+				"msgid": "I'm not a robot",
+				"msgstr": ["No soy un robot"]
 			}
 		}
 	}
