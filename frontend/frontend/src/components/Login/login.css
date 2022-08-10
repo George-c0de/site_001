@@ -460,7 +460,8 @@ input[type='checkbox'] + .checkmark span {
 		padding: 14px;
 	}
 }
-@media screen and (max-width: 320px) and (max-height: 660px) { //GALAXY S9
+@media screen and (max-width: 320px) and (max-height: 660px) {
+	//GALAXY S9
 	.authorization__container {
 		padding: 30px 10px 0 10px;
 	}
@@ -468,7 +469,8 @@ input[type='checkbox'] + .checkmark span {
 		bottom: -133px;
 	}
 }
-@media screen and (max-width: 380px) and (max-height: 668px) { //SE
+@media screen and (max-width: 380px) and (max-height: 668px) {
+	//SE
 	.authorization__pikachu-wrapper {
 		bottom: 33px;
 	}
@@ -503,5 +505,17 @@ input[type='checkbox'] + .checkmark span {
 @media screen and (min-height: 600px) and (min-width: 1024px) {
 	.authorization__pikachu-wrapper {
 		bottom: 280px;
+	}
+}
+
+@media screen and (max-width: 376px) and (max-height: 670px) {
+	.login_container {
+		min-height: auto;
+	}
+	.authorization__pikachu-wrapper {
+		bottom: -25px;
+	}
+	.authorization__container {
+		padding: 50px 10px 0 10px;
 	}
 }
