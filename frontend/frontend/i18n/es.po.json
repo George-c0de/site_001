@@ -432,6 +432,10 @@
 			"I'm not a robot": {
 				"msgid": "I'm not a robot",
 				"msgstr": ["No soy un robot"]
+			},
+			"Log in to continue": {
+				"msgid": "Log in to continue",
+				"msgstr": ["Inicie sesión para continuar"]
 			}
 		}
 	}

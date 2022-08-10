@@ -313,13 +313,17 @@
 					"Пароль должен быть не менее 8 символов. Содержит буквы и символы"
 				]
 			},
-			"Tinsufficient funds to purchase the card": {
-				"msgid": "Tinsufficient funds to purchase the card",
+			"Insufficient funds to purchase the card": {
+				"msgid": "Insufficient funds to purchase the card",
 				"msgstr": ["Недостаточное количество средств для приобретения карты"]
 			},
 			"I'm not a robot": {
 				"msgid": "I'm not a robot",
 				"msgstr": ["Я не робот"]
+			},
+			"Log in to continue": {
+				"msgid": "Log in to continue",
+				"msgstr": ["Для продолжения необходимо авторизоваться"]
 			}
 		}
 	}

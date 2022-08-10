@@ -8,67 +8,13 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 
 const Pay = () => {
 	const [state_input, SetState] = useState(true)
+	const [firstRender, setFirstRender] = useState(false)
 	const [data, setData] = useState({
 		wallet_input: '',
-		col: 0,
+		col: '',
 	})
 	const [maxi, setMax] = useState(1)
-	let [tran, SetTran] = useState([
-		{
-			quantity: 0,
-			data: '2022.12:9',
-			time: '8:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 1,
-			data: '2022.12:10',
-			time: '9:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 2,
-			data: '2022.12:11',
-			time: '10:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 3,
-			data: '2022.12:12',
-			time: '11:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 4,
-			data: '2022.12:13',
-			time: '12:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 5,
-			data: '2022.12:14',
-			time: '13:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 6,
-			data: '2022.12:15',
-			time: '14:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 7,
-			data: '2022.12:16',
-			time: '15:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-		{
-			quantity: 8,
-			data: '2022.12:17',
-			time: '16:30:31',
-			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-		},
-	])
+	let [tran, SetTran] = useState([])
 	let [user, setUser] = useState({
 		id: 0,
 		money: 0,
@@ -95,10 +41,10 @@ const Pay = () => {
 			} else {
 				SetTran([0])
 			}
-		} catch (e) {
-		}
+		} catch (e) {}
 	}
 	useEffect(() => {
+		setFirstRender(true)
 		const getPosts = async () => {
 			try {
 				await axios.get('/api/user').then(data => {
@@ -199,6 +145,7 @@ const Pay = () => {
 		}
 	}
 	const hundSum = (e, name) => {
+		e.target.value = e.target.value.replace(/[^\d.]/g, '')
 		setData({
 			...data,
 			[name]: e.target.value,
@@ -240,10 +187,13 @@ const Pay = () => {
 									className='pay-sum-inp-pay'
 									name='wallet_input'
 									value={data.wallet_input}
+									disabled={user.wallet_input !== null}
 								/>
-								<span className='pay-input-info'>
-									{t`Specify a wallet for funds withdrawal. Specified wallet is not subject to change`}
-								</span>
+								{user.wallet_input == null && (
+									<span className='pay-input-info'>
+										{t`Specify a wallet for funds withdrawal. Specified wallet is not subject to change`}
+									</span>
+								)}
 							</div>
 						</div>
 						<button type={'submit'} className='pay-button'>{t`PAYOUT`}</button>

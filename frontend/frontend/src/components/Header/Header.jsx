@@ -10,6 +10,7 @@ import LogOut from '../../assets/logout.svg'
 import axios from 'axios'
 import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
+import Authorization from '../modals/Authorization'
 
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
@@ -80,6 +81,16 @@ const Header = () => {
 		}
 	}
 
+	let data2
+
+	try {
+		axios.get('/api/login').catch(function (error) {
+			if (error.response) {
+				data2 = error.response.status
+			}
+		})
+	} catch (error) {}
+
 	return (
 		<>
 			<div className='main__header' ref={ref}>
@@ -146,6 +157,7 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
+			{/* {data2 !== 501 && <Authorization />} */}
 			<Lang
 				setOpenBurger={setOpenBurger}
 				setOpenUserInfo={setOpenUserInfo}
