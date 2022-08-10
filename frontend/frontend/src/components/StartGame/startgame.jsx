@@ -27,7 +27,6 @@ const Startgame = () => {
 	const [activeImg, setActiveImg] = React.useState()
 	const navigate = useNavigate()
 	const startGame = () => {
-		console.log(1)
 		if (data2 === 501) {
 			navigate('/home')
 		} else {
@@ -136,7 +135,6 @@ const Startgame = () => {
 			}
 		}
 	}, [])
-	console.log(activeImg)
 	const [onActive, setActive] = React.useState(true)
 	return (
 		<div className='background-start'>

@@ -52,10 +52,8 @@ const Referals = () => {
 	async function fetchPosts() {
 		try {
 			const response = await axios.get('/api/referral')
-			console.log(response.data)
 			setPosts(response.data)
 		} catch (e) {
-			console.log(e)
 		}
 	}
 
@@ -72,10 +70,6 @@ const Referals = () => {
 				third: data.data.third,
 			}
 
-			console.log('resulet')
-			console.log(result)
-			console.log('data')
-			console.log(data.data)
 			setLines(result)
 		})
 	}
@@ -86,7 +80,6 @@ const Referals = () => {
 			lost: lines.first.lost,
 			link: posts.link,
 		})
-		console.log(posts)
 	}
 	const get_second = async () => {
 		setPosts({
@@ -95,7 +88,6 @@ const Referals = () => {
 			lost: lines.second.lost,
 			link: posts.link,
 		})
-		console.log(posts)
 	}
 
 	const get_third = async () => {
@@ -105,7 +97,6 @@ const Referals = () => {
 			lost: lines.third.lost,
 			link: posts.link,
 		})
-		console.log(posts)
 	}
 
 	const linkRef = React.useRef()

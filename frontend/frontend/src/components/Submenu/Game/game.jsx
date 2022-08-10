@@ -40,7 +40,6 @@ const Game = () => {
 		two2: [0, 0, 0],
 		the2: [0, 0, 0],
 	})
-	console.log(history)
 
 	const [card_data, setCard_data] = useState({
 		bronze: [
@@ -122,7 +121,6 @@ const Game = () => {
 	}
 	let getHist = async () => {
 		await axios.get('/api/get_hist_card').then(data => {
-			console.log(data)
 			const result = {
 				oneq: data.data.oneq,
 				two: data.data.two,

@@ -24,40 +24,32 @@ const CardOpened = ({
 	const [disabledBtn, setDisabledBtn] = useState()
 	const handleButton = async () => {
 		await axios.get(`/api/prohibitions`).then(res => {
-			console.log(res.data)
 			let data = res.data
 
 			switch (category) {
 				case 'bronze': {
 					setDisabledBtn(data.bronze[idCard - 1])
-
 					break
 				}
 				case 'бронза': {
 					setDisabledBtn(data.bronze[idCard - 1])
-
 					break
 				}
 
 				case 'bronzo': {
 					setDisabledBtn(data.bronze[idCard - 1])
-
 					break
 				}
 				case 'bronce': {
 					setDisabledBtn(data.bronze[idCard - 1])
-
 					break
 				}
 				case 'bronco': {
 					setDisabledBtn(data.bronze[idCard - 1])
-
 					break
 				}
-
 				case 'prata': {
 					setDisabledBtn(data.silver[idCard - 1])
-
 					break
 				}
 				case 'silber': {
@@ -88,7 +80,6 @@ const CardOpened = ({
 					setDisabledBtn(data.silver[idCard - 1])
 					break
 				}
-
 				case 'gold': {
 					setDisabledBtn(data.gold[idCard - 1])
 					break
@@ -105,7 +96,6 @@ const CardOpened = ({
 					setDisabledBtn(data.gold[idCard - 1])
 					break
 				}
-
 				case 'smaragd': {
 					setDisabledBtn(data.emerald[idCard - 1])
 					break
@@ -116,12 +106,10 @@ const CardOpened = ({
 				}
 				case 'изумруд': {
 					setDisabledBtn(data.emerald[idCard - 1])
-
 					break
 				}
 				case 'smeraldo': {
 					setDisabledBtn(data.emerald[idCard - 1])
-
 					break
 				}
 			}
@@ -213,7 +201,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 			}, 1500)
 	}
 
-	console.log(category, idCard)
 
 	React.useEffect(() => {
 		if (firstRender) {

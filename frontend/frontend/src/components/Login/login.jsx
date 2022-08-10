@@ -27,7 +27,6 @@ const Signup = () => {
 	})
 
 	React.useEffect(() => {
-		console.log(params)
 		if (get('utm') == null) {
 			saveLocale(params.utm)
 		}
@@ -54,7 +53,6 @@ const Signup = () => {
 				email: data.email,
 				password: data.password1,
 			}
-			console.log(validData)
 			if (
 				!data.email
 					.toLowerCase()
@@ -122,7 +120,6 @@ const Signup = () => {
 			) {
 
 
-				console.log(get('utm'))
 				setData({
 					username: data.username,
 					email: data.email,
@@ -178,10 +175,7 @@ const Signup = () => {
 					const { data } = axios.post('/api/reset_password/', validData, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-					console.log(validData)
-					console.log(data)
 				} catch (e) {
-					console.log(e.response)
 				}
 				setTimeout(() => {
 					window.location.reload()
@@ -189,7 +183,6 @@ const Signup = () => {
 			}
 		}
 	}
-	console.log(activeCaptcha)
 	return (
 		<div
 			className={`login_container ${

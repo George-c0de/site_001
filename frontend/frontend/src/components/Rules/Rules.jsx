@@ -43,7 +43,6 @@ import { t } from 'ttag'
 
 function Rules2() {
 	const LOCALE_COOKIE = '__locale'
-	console.log(cookie.get(LOCALE_COOKIE) || 'en')
 	const [galleryImgList, setActiveGalleryImgList] = React.useState([])
 	React.useEffect(() => {
 		switch (cookie.get(LOCALE_COOKIE) || 'en') {
@@ -163,7 +162,6 @@ function Rules2() {
 
 	const scrollImg = side => {
 		if (side === 'left') {
-			console.log(activeGalleryImg.props.id)
 			if (activeGalleryImg.props.id === '1') {
 				setActiveGalleryImg(galleryImgList[galleryImgList.length - 1])
 			} else {

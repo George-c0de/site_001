@@ -49,7 +49,6 @@ export const PokeballsPack = ({
 
 	// ПЕРЕНЕСЕНО ИЗ POKEBALLSMODAL
 	const [cards, setCards] = useState([])
-	console.log(cards)
 	const buyCard = async id => {
 		const newCards = [...cards]
 		newCards[id - 1] = id

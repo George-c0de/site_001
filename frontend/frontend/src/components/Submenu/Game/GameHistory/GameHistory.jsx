@@ -15,7 +15,6 @@ export const GameHistory = ({ history }) => {
 		const res = await axios.get('/api/user')
 		setData(res.data)
 	}
-	console.log(data)
 	return (
 		<>
 			<div className='game-history'>

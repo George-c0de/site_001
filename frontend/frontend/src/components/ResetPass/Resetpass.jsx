@@ -31,13 +31,8 @@ const Resetpass = () => {
 					const { data: res } = await axios.post('/api/set_new/', data, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-					console.log(data)
-					console.log(res.data)
 					navigate('/login') //after registering navigate to login page
-					console.log(res.message)
-				} catch (error) {
-					console.log(error)
-				}
+				} catch (error) {}
 			}
 			setInvalidPassword(false)
 		}

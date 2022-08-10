@@ -95,22 +95,7 @@ const Pay = () => {
 			} else {
 				SetTran([0])
 			}
-
-			// let a =
-			//     [{
-			//         'quantity': '10.00',
-			//         'data': '2022, 7, 18',
-			//         'time': '13:58:12',
-			//         'txid': 'sfsfgsfjshkfjs'
-			//     }, {'quantity': '465.00', 'data': '2022, 7, 18', 'time': '13:58:12', 'txid': 'asf4gsgs'}]
-
-			//let data = await response.data
-
-			//SetTran(a)
-			//console.log(a)
 		} catch (e) {
-			console.log(e)
-			console.log(data)
 		}
 	}
 	useEffect(() => {
@@ -132,7 +117,6 @@ const Pay = () => {
 						user: data.data.user,
 					}
 					setUser(result)
-					console.log(result.wallet_input)
 					setMax(result.money)
 					setWallet(result.wallet_input)
 				})
@@ -141,14 +125,12 @@ const Pay = () => {
 						wallet_input: user.wallet_input,
 						col: 1,
 					})
-					console.log(user.wallet_input)
 					SetState(false)
 				} else {
 					setData({
 						wallet_input: '',
 						col: 1,
 					})
-					console.log('yes')
 					SetState(true)
 				}
 			} catch (e) {}
@@ -188,12 +170,9 @@ const Pay = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		if (data.col < 1 || data.col > user.money) {
-			console.log(data.col)
-			console.log(user.money)
-			alert('Error')
+			console.log('Error')
 		} else if (data.wallet_input === '') {
-			console.log(data.wallet_input)
-			alert('Error')
+			console.log('Error')
 		} else {
 			try {
 				axios
@@ -212,9 +191,9 @@ const Pay = () => {
 			} catch (e) {
 				if (e.response.status === 200) {
 					data.col = 1
-					alert('Ok')
+					console.log('Ok')
 				} else {
-					alert('Error')
+					console.log('Error')
 				}
 			}
 		}
