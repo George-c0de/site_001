@@ -16,6 +16,7 @@ const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
+	const [status, setStatus] = React.useState()
 	const navigate = useNavigate()
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -56,9 +57,19 @@ const Header = () => {
 			setOpenStatistics(false)
 		}
 	}
-	
+
 	React.useEffect(() => {
 		fetchLink()
+		try {
+			axios.get('/api/login').catch(function (error) {
+				if (error.response) {
+					console.log(error.response)
+					setStatus(error.response.status)
+				}
+			})
+		} catch (error) {
+			console.log(error)
+		}
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
@@ -80,17 +91,7 @@ const Header = () => {
 			}
 		}
 	}
-
-	let data2
-
-	try {
-		axios.get('/api/login').catch(function (error) {
-			if (error.response) {
-				data2 = error.response.status
-			}
-		})
-	} catch (error) {}
-
+	console.log(status)
 	return (
 		<>
 			<div className='main__header' ref={ref}>
@@ -157,7 +158,7 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
-			{data2 === 501 && <Authorization />}
+			{status !== 501 && <Authorization />}
 			<Lang
 				setOpenBurger={setOpenBurger}
 				setOpenUserInfo={setOpenUserInfo}
