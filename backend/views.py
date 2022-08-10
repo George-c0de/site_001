@@ -157,6 +157,20 @@ def getRoutes(request):
 
 @api_view(['GET'])
 def trans_get_output(request):
+    time = '{}:30:31'
+    date = '2022.12:{}'
+    main = []
+    for el in range(0, 9):
+        m = time.format(el + 8)
+        t = date.format(el + 9)
+        date = {
+            'quantity': el,
+            'data': t,
+            'time': m,
+            'txid': '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+        }
+        main.append(date)
+    return main
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
         if History_Transactions.objects.filter(user_id=profile.id).exists():
