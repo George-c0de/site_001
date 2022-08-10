@@ -127,12 +127,24 @@ const Signup = () => {
 						password2: data.password2,
 						utm: data.utm,
 					}
-					console.log(validObj)
+					let validData = {
+						email: data.email,
+						password: data.password1,
+					}
 					const { data: res } = await axios.post(`/api/register`, validObj, {
 						headers: { 'Content-Type': 'application/json' },
 					})
-					console.log(data)
-					navigate('/home') //after registering navigate to login page
+					let data2 = 200
+					data2 = await axios
+						.post('/api/login', validData)
+						.catch(function (error) {
+							if (error.response) {
+								data2 = error.response.status
+							}
+						})
+					if (data2.data === 200) {
+						navigate('/home') //after registering navigate to login page
+					}
 				} catch (error) {
 				}
 			}

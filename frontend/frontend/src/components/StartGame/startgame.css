@@ -72,6 +72,7 @@
 	.logo-pokebol {
 		width: 400px;
 		height: 350px;
+		transform: translate(-50%, -55%);
 	}
 }
 @media screen and (max-width: 410px) {
