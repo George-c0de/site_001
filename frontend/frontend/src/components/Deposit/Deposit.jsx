@@ -35,7 +35,7 @@ const Deposit = () => {
 	const getTran = async () => {
 		try {
 			let response = await axios.get('/api/trans_get_output')
-
+			console.log(response.data)
 			if (response.data.lenth > 0) {
 				SetTran(response.data)
 			} else {
