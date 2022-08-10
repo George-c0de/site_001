@@ -14,6 +14,7 @@ const Deposit = () => {
 	})
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
+	// убрать комменты снизу
 	let [user, setUser] = useState({
 		id: 0,
 		money: 0,
@@ -41,18 +42,6 @@ const Deposit = () => {
 			} else {
 				SetTran([0])
 			}
-			// let a =
-			//     [{
-			//         'quantity': '10.00',
-			//         'data': '2022, 7, 18',
-			//         'time': '13:58:12',
-			//         'txid': 'sfsfgsfjshkfjs'
-			//     }, {'quantity': '465.00', 'data': '2022, 7, 18', 'time': '13:58:12', 'txid': 'asf4gsgs'}]
-
-			//let data = await response.data
-
-			//SetTran(a)
-			//console.log(a)
 		} catch (e) {}
 	}
 	useEffect(() => {
@@ -147,6 +136,11 @@ const Deposit = () => {
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
 	}
+
+	const handleCopyInTable = id => {
+		navigator.clipboard.writeText(tran[id].txid)
+	}
+
 	const linkRef = React.useRef()
 	return (
 		<div className='homepage-wrapper'>
@@ -201,9 +195,7 @@ const Deposit = () => {
 								<span className='history-table-title'>{t`Time`}</span>
 								{tran.map(trans => {
 									return (
-										<h3 className='history-table-text-intable'>
-											{trans.time}
-										</h3>
+										<h3 className='history-table-text-intable'>{trans.time}</h3>
 									)
 								})}
 							</div>
@@ -227,9 +219,31 @@ const Deposit = () => {
 							</div>
 							<div className='history-table-column history-table-column-mobile'>
 								<span className='history-table-title'>Txid</span>
-								{tran.map(trans => {
+								{tran.map((trans, id) => {
 									return (
-										<h3 className='history-table-text-intable'>{trans.txid}</h3>
+										<h3 className='history-table-text-intable'>
+											{trans.txid.slice(0, 20)}
+											<FontAwesomeIcon
+												icon={faCopy}
+												className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+												onClick={() => handleCopyInTable(id)}
+											/>
+										</h3>
+									)
+								})}
+							</div>
+							<div className='history-table-column history-table-column-mobile-small'>
+								<span className='history-table-title'>Txid</span>
+								{tran.map((trans, id) => {
+									return (
+										<h3 className='history-table-text-intable'>
+											{trans.txid.slice(0, 10)}
+											<FontAwesomeIcon
+												icon={faCopy}
+												className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+												onClick={() => handleCopyInTable(id)}
+											/>
+										</h3>
 									)
 								})}
 							</div>

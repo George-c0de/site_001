@@ -3,6 +3,8 @@ import './Pay.css'
 import axios from 'axios'
 import { t } from 'ttag'
 import Header from '../Header/Header'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
 
 const Pay = () => {
 	const [state_input, SetState] = useState(true)
@@ -11,7 +13,62 @@ const Pay = () => {
 		col: 0,
 	})
 	const [maxi, setMax] = useState(1)
-	let [tran, SetTran] = useState([])
+	let [tran, SetTran] = useState([
+		{
+			quantity: 0,
+			data: '2022.12:9',
+			time: '8:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 1,
+			data: '2022.12:10',
+			time: '9:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 2,
+			data: '2022.12:11',
+			time: '10:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 3,
+			data: '2022.12:12',
+			time: '11:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 4,
+			data: '2022.12:13',
+			time: '12:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 5,
+			data: '2022.12:14',
+			time: '13:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 6,
+			data: '2022.12:15',
+			time: '14:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 7,
+			data: '2022.12:16',
+			time: '15:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+		{
+			quantity: 8,
+			data: '2022.12:17',
+			time: '16:30:31',
+			txid: '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
+		},
+	])
 	let [user, setUser] = useState({
 		id: 0,
 		money: 0,
@@ -124,6 +181,10 @@ const Pay = () => {
 		}
 	}
 
+	const handleCopyInTable = id => {
+		navigator.clipboard.writeText(tran[id].txid)
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
 		if (data.col < 1 || data.col > user.money) {
@@ -207,13 +268,17 @@ const Pay = () => {
 							</div>
 						</div>
 						<button type={'submit'} className='pay-button'>{t`PAYOUT`}</button>
-						<div className='pay-history-wrapper'>
-							<span className='pay-history-title'>{t`TRANSACTION HISTORY`}</span>
-							<div className='pay-history-table'>
+						<div className='deposit-history-wrapper'>
+							<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>
+							<div className='deposit-history-table'>
 								<div className='history-table-column'>
 									<span className='history-table-title'>{t`Time`}</span>
 									{tran.map(trans => {
-										return <h3>{trans.time}</h3>
+										return (
+											<h3 className='history-table-text-intable'>
+												{trans.time}
+											</h3>
+										)
 									})}
 								</div>
 								<div className='history-table-column'>
@@ -240,10 +305,30 @@ const Pay = () => {
 								</div>
 								<div className='history-table-column history-table-column-mobile'>
 									<span className='history-table-title'>Txid</span>
-									{tran.map(trans => {
+									{tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable'>
-												{trans.txid}
+												{trans.txid.slice(0, 20)}
+												<FontAwesomeIcon
+													icon={faCopy}
+													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+													onClick={() => handleCopyInTable(id)}
+												/>
+											</h3>
+										)
+									})}
+								</div>
+								<div className='history-table-column history-table-column-mobile-small'>
+									<span className='history-table-title'>Txid</span>
+									{tran.map((trans, id) => {
+										return (
+											<h3 className='history-table-text-intable'>
+												{trans.txid.slice(0, 10)}
+												<FontAwesomeIcon
+													icon={faCopy}
+													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+													onClick={() => handleCopyInTable(id)}
+												/>
 											</h3>
 										)
 									})}

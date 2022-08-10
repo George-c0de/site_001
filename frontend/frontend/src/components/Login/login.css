@@ -428,6 +428,31 @@ input[type='checkbox'] + .checkmark span {
 		font-size: 22px;
 	}
 }
+@media screen and (max-width: 370px) {
+	.authorization__link {
+		font-size: 20px;
+	}
+}
+@media screen and (max-width: 340px) {
+	.authorization__link {
+		font-size: 19px;
+	}
+	.authorization__menu{
+		padding: 18px;
+	}
+	.authorization__input::placeholder {
+		font-size: 16px;
+	}
+}
+@media screen and (max-width: 320px) {
+	.authorization__link {
+		font-size: 17px;
+	}
+	.authorization__menu{
+		padding: 18px;
+	}
+
+}
 @media screen and (max-height: 800px) {
 	.login_container {
 		min-height: 980px;

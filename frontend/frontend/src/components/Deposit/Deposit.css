@@ -171,6 +171,12 @@
 .deposit-copy-icon:hover {
 	color: #0bdc5f;
 }
+.deposit-copy-icon-table {
+	font-size: 18px;
+}
+.history-table-column-mobile-small {
+	display: none;
+}	
 @media (max-width: 1000px) {
 	.history-table-text-intable {
 		font-size: 13px !important;
@@ -179,6 +185,25 @@
 @media (max-width: 980px) {
 	.history-table-title {
 		font-size: 16px;
+	}
+	.history-table-column-desc {
+		display: none;
+	}
+	.history-table-column-mobile {
+		display: block;
+	}
+	.history-table-text-intable {
+		font-size: 18px !important;
+	}
+	.deposit-history-table {
+		grid-template-columns: 1fr 1fr 3fr 1fr;
+	}
+	.history-table-text-intable {
+		padding-left: 0 !important;
+		text-align: center !important;
+	}
+	.deposit-copy-icon-table {
+		font-size: 16px
 	}
 }
 @media (max-width: 790px) {
@@ -203,6 +228,16 @@
 		align-items: center;
 	}
 }
+@media screen and (max-width: 740px) {
+	@media (max-width: 980px) {
+	.history-table-text-intable {
+		font-size: 15px !important;
+	}
+	.deposit-history-table {
+		grid-template-columns: 1fr 1fr 3fr 1fr;
+	}
+}
+}
 @media screen and (max-width: 700px) {
 	.deposit-wrapper {
 		padding: 5px;
@@ -213,6 +248,17 @@
 	}
 	.history-table-title {
 		font-size: 12px;
+	}
+}
+@media screen and (max-width: 550px) {
+	.history-table-text-intable {
+		font-size: 13px !important;
+	}
+	.deposit-history-table {
+		grid-template-columns: 85px 100px 3fr 60px;
+	}
+	.deposit-copy-icon-table {
+		font-size: 13px
 	}
 }
 @media screen and (max-width: 500px) {
@@ -226,12 +272,6 @@
 	.history-table-title {
 		font-size: 12px;
 	}
-	.deposit-history-table {
-		grid-template-columns: minmax(60px, auto) minmax(70px, auto) 1fr minmax(
-				70px,
-				auto
-			);
-	}
 	.deposit-inputs-wrapper {
 		margin-bottom: 50px;
 	}
@@ -242,15 +282,43 @@
 	.deposit-sum-inp-info {
 		min-width: auto;
 	}
+	.history-table-column-mobile{
+		display: none;
+	}
+	.history-table-column-mobile-small{
+		display: block;
+	}
+
 }
 @media screen and (max-width: 425px) {
 	.deposit-input label {
 		padding-left: 30px;
 	}
-	.history-table-column-desc {
-		display: none;
+	.deposit-history-wrapper{
+		padding: 20px 10px;
 	}
-	.history-table-column-mobile {
-		display: block;
+	.history-table-text-intable {
+		font-size: 12px !important;
+	}
+	.deposit-copy-icon-table {
+		font-size: 12px
 	}
 }
+@media screen and (max-width: 372px) {
+	.deposit-input label {
+		padding-left: 30px;
+	}
+	.deposit-history-wrapper{
+		padding: 20px 0px;
+	}
+	.history-table-text-intable {
+		font-size: 12px !important;
+	}
+	.deposit-copy-icon-table {
+		font-size: 12px
+	}
+	.deposit-history-table {
+		grid-template-columns: 70px 80px 3fr 70px;
+	}
+}
+

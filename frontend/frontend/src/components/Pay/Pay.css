@@ -37,9 +37,9 @@
 /*INPUTS*/
 
 .history-table-text-intable {
-	font-size: 15px !important;
-	text-align: start !important;
-	padding-left: 5px !important;
+	font-size: 15px;
+	text-align: start;
+	padding-left: 5px;
 }
 .pay-inputs-wrapper {
 	width: 100%;
@@ -174,12 +174,6 @@
 	.history-table-title {
 		font-size: 14px;
 	}
-	.pay-history-table {
-		grid-template-columns: minmax(150px, auto) minmax(150px, auto) 1fr minmax(
-				100px,
-				auto
-			);
-	}
 	.pay-pay-info {
 		font-size: 16px;
 		padding-left: 10px;
@@ -210,17 +204,6 @@
 	.history-table-title {
 		font-size: 12px;
 	}
-	.pay-history-table {
-		grid-template-columns: minmax(90px, auto) minmax(120px, auto) 1fr minmax(
-				80px,
-				auto
-			);
-	}
-	.history-table-text-intable {
-		font-size: 13.5px !important;
-		text-align: start !important;
-		padding-left: 5px !important;
-	}
 }
 @media screen and (max-width: 500px) {
 	.pay-history-title {
@@ -229,12 +212,6 @@
 	}
 	.history-table-title {
 		font-size: 12px;
-	}
-	.pay-history-table {
-		grid-template-columns: minmax(60px, auto) minmax(70px, auto) 1fr minmax(
-				70px,
-				auto
-			);
 	}
 	.pay-inputs-wrapper {
 		margin-bottom: 50px;
