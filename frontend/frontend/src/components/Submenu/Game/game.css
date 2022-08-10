@@ -19,14 +19,19 @@ p {
 	background: linear-gradient(87.52deg, #2570b5 21.14%, #67deee 91.14%);
 	box-shadow: 0px 11px 6px rgba(0, 0, 0, 0.47);
 	border-radius: 0px 0px 32px 32px;
-	padding: 5px 35px;
+	padding: 0px 35px;
 	position: absolute;
 	width: 100%;
 	z-index: 9999;
 	overflow-x: hidden;
 }
 .main-logo {
-	width: 210px;
+	width: 190px;
+	object-fit: cover;
+}
+.main-img{
+	width: 45px;
+	height: 49px;
 	object-fit: cover;
 }
 .menu-btn {
@@ -34,7 +39,7 @@ p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 70px;
+	height: 40px;
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
 }
@@ -78,7 +83,6 @@ p {
 	object-fit: cover;
 }
 .main__nav {
-	padding-top: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

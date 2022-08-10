@@ -36,7 +36,7 @@ const Deposit = () => {
 		try {
 			let response = await axios.get('/api/trans_get_output')
 			console.log(response.data)
-			if (response.data.lenth > 0) {
+			if (response.data.length > 0) {
 				SetTran(response.data)
 			} else {
 				SetTran([0])
@@ -143,6 +143,7 @@ const Deposit = () => {
 			col: data.col,
 		})
 	}
+	
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
 	}
