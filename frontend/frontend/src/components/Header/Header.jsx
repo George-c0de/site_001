@@ -16,7 +16,7 @@ const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
-	const [status, setStatus] = React.useState()
+	const [status, setStatus] = React.useState(501)
 	const navigate = useNavigate()
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -60,16 +60,7 @@ const Header = () => {
 
 	React.useEffect(() => {
 		fetchLink()
-		try {
-			axios.get('/api/login').catch(function (error) {
-				if (error.response) {
-					console.log(error.response)
-					setStatus(error.response.status)
-				}
-			})
-		} catch (error) {
-			console.log(error)
-		}
+		getLogin()
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
@@ -89,6 +80,18 @@ const Header = () => {
 				let data_ = 'https://t.me/Tokemon_game_Bot'
 				setget_link_tg(data_)
 			}
+		}
+	}
+	const getLogin = async () => {
+		try {
+			await axios.get('/api/login').catch(function (error) {
+				if (error.response) {
+					console.log(error.response)
+					setStatus(error.response.status)
+				}
+			})
+		} catch (error) {
+			console.log(error)
 		}
 	}
 	console.log(status)
