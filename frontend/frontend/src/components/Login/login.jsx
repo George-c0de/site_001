@@ -9,7 +9,7 @@ import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
 
-let data2 = 501
+let data2
 
 try {
 	axios.get('/api/login').catch(function (error) {

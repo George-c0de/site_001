@@ -44,11 +44,11 @@ export function saveLocale(locale) {
 let locale = getLocale()
 
 if (locale !== 'en') {
-	console.log('yes')
 	if (locale == 'undefined') {
-		console.log('locale===undefined')
+		setCookie('__locale', 'en', 30)
 	}
 	const translationsObj = require(`../i18n/${locale}.po.json`)
+	// const translationsObj = require(`../i18n/en.po.json`)
 	addLocale(locale, translationsObj)
 	localize(locale)
 }

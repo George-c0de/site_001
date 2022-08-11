@@ -1,9 +1,8 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
-"Plural-Forms: nplurals = 3; plural = (n % 10 == 1 && n % 100 != 11 ? 0 : n "
-"% 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2);\n"
-"Language: uk\n"
+"Plural-Forms: nplurals = 2; plural = (n != 1);\n"
+"Language: en\n"
 "mime-version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -11,7 +10,7 @@ msgstr ""
 msgid "User Id"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:187
+#: src\components\Deposit\Deposit.jsx:168
 #: src\components\UserId\UserId.jsx:69
 msgid "Balance"
 msgstr ""
@@ -28,7 +27,7 @@ msgstr ""
 msgid "Link for invitation"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:186
+#: src\components\Deposit\Deposit.jsx:167
 #: src\components\UserId\UserId.jsx:93
 msgid "Deposit"
 msgstr ""
@@ -134,18 +133,18 @@ msgstr ""
 msgid "Enter a new password"
 msgstr ""
 
-#: src\components\Login\login.jsx:250
-#: src\components\Login\login.jsx:282
+#: src\components\Login\login.jsx:258
+#: src\components\Login\login.jsx:290
 #: src\components\ResetPass\Resetpass.jsx:55
 msgid "Password"
 msgstr ""
 
-#: src\components\Login\login.jsx:294
+#: src\components\Login\login.jsx:302
 #: src\components\ResetPass\Resetpass.jsx:65
 msgid "Confirm Password"
 msgstr ""
 
-#: src\components\Login\login.jsx:300
+#: src\components\Login\login.jsx:308
 #: src\components\ResetPass\Resetpass.jsx:71
 msgid ""
 "The password must be at least 8 characters long. Contains letters and "
@@ -182,22 +181,22 @@ msgstr ""
 msgid "PAYOUT"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:214
+#: src\components\Deposit\Deposit.jsx:195
 #: src\components\Pay\Pay.jsx:179
 msgid "TRANSACTION HISTORY"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:217
+#: src\components\Deposit\Deposit.jsx:198
 #: src\components\Pay\Pay.jsx:182
 msgid "Time"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:225
+#: src\components\Deposit\Deposit.jsx:206
 #: src\components\Pay\Pay.jsx:192
 msgid "Date"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:234
+#: src\components\Deposit\Deposit.jsx:215
 #: src\components\Pay\Pay.jsx:203
 msgid "TRANSACTION"
 msgstr ""
@@ -226,9 +225,9 @@ msgstr ""
 msgid "Insufficient funds to purchase the card"
 msgstr ""
 
-#: src\components\Login\login.jsx:262
-#: src\components\Login\login.jsx:323
-#: src\components\Login\login.jsx:345
+#: src\components\Login\login.jsx:270
+#: src\components\Login\login.jsx:331
+#: src\components\Login\login.jsx:353
 #: src\components\modals\NotEnoughMoney.jsx:57
 msgid "Continue"
 msgstr ""
@@ -241,67 +240,67 @@ msgstr ""
 msgid "Subscribe to Telegram"
 msgstr ""
 
-#: src\components\Login\login.jsx:218
+#: src\components\Login\login.jsx:226
 msgid "Log In"
 msgstr ""
 
-#: src\components\Login\login.jsx:229
+#: src\components\Login\login.jsx:237
 msgid "Sign Up"
 msgstr ""
 
-#: src\components\Login\login.jsx:240
-#: src\components\Login\login.jsx:273
-#: src\components\Login\login.jsx:336
+#: src\components\Login\login.jsx:248
+#: src\components\Login\login.jsx:281
+#: src\components\Login\login.jsx:344
 msgid "Email"
 msgstr ""
 
-#: src\components\Login\login.jsx:259
+#: src\components\Login\login.jsx:267
 msgid "Forgot your password"
 msgstr ""
 
-#: src\components\Login\login.jsx:315
+#: src\components\Login\login.jsx:323
 msgid "I'm not a robot"
 msgstr ""
 
-#: src\components\Login\login.jsx:329
+#: src\components\Login\login.jsx:337
 msgid "Enter your email address to reset your password"
 msgstr ""
 
-#: src\components\Login\login.jsx:342
+#: src\components\Login\login.jsx:350
 msgid "Password recovery link was sent to the specified email"
 msgstr ""
 
-#: src\components\Header\Header.jsx:127
+#: src\components\Header\Header.jsx:138
 msgid "MAIN"
 msgstr ""
 
-#: src\components\Header\Header.jsx:132
+#: src\components\Header\Header.jsx:143
 msgid "REFFERALS"
 msgstr ""
 
-#: src\components\Header\Header.jsx:137
+#: src\components\Header\Header.jsx:148
 msgid "STATISTICS"
 msgstr ""
 
-#: src\components\Header\Header.jsx:146
+#: src\components\Header\Header.jsx:157
 msgid "RULES"
 msgstr ""
 
-#: src\components\Header\Header.jsx:153
+#: src\components\Header\Header.jsx:164
 msgid "USE TELEGRAM BOT"
 msgstr ""
 
-#: src\components\Header\Header.jsx:157
+#: src\components\Header\Header.jsx:168
 msgid "LOGOUT"
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:193
+#: src\components\Deposit\Deposit.jsx:174
 msgid ""
 "To top up your balance, send the required amount to the specified purse "
 "trc-20. The amount will be immediately credited to your game balance."
 msgstr ""
 
-#: src\components\Deposit\Deposit.jsx:204
+#: src\components\Deposit\Deposit.jsx:185
 msgid ""
 "The minimum amount to be paid is 10 usdt. Transactions for a smaller amount "
 "will be lost"

@@ -10,7 +10,7 @@ root.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<LangProvider>
-				<App />
+					<App />
 			</LangProvider>
 		</BrowserRouter>
 	</React.StrictMode>

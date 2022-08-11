@@ -1,0 +1,192 @@
+{
+	"charset": "utf-8",
+	"headers": {
+		"content-type": "text/plain; charset=utf-8",
+		"plural-forms": "nplurals = 2; plural = (n != 1);",
+		"language": "en",
+		"mime-version": "1.0",
+		"content-transfer-encoding": "8bit"
+	},
+	"translations": {
+		"": {
+			"": {
+				"msgid": "",
+				"msgstr": [
+					"Content-Type: text/plain; charset=utf-8\nPlural-Forms: nplurals = 2; plural = (n != 1);\nLanguage: en\nmime-version: 1.0\nContent-Transfer-Encoding: 8bit\n"
+				]
+			},
+			"User Id": { "msgid": "User Id", "msgstr": ["User Id"] },
+			"Balance": { "msgid": "Balance", "msgstr": ["Balance"] },
+			"Cards profit": { "msgid": "Cards profit", "msgstr": ["Cards profit"] },
+			"Referal profit": {
+				"msgid": "Referal profit",
+				"msgstr": ["Referal profit"]
+			},
+			"Link for invitation": {
+				"msgid": "Link for invitation",
+				"msgstr": ["Link for invitation"]
+			},
+			"Deposit": { "msgid": "Deposit", "msgstr": ["Deposit"] },
+			"Withdraw": { "msgid": "Withdraw", "msgstr": ["Withdraw"] },
+			"TOTAL USERS": { "msgid": "TOTAL USERS", "msgstr": ["TOTAL USERS"] },
+			"TOTAL  TRANSACTIONS": {
+				"msgid": "TOTAL  TRANSACTIONS",
+				"msgstr": ["TOTAL  TRANSACTIONS"]
+			},
+			"TOTAL PAYOUT": { "msgid": "TOTAL PAYOUT", "msgstr": ["TOTAL PAYOUT"] },
+			"Referral link": {
+				"msgid": "Referral link",
+				"msgstr": ["Referral link"]
+			},
+			"1 line": { "msgid": "1 line", "msgstr": ["1 line"] },
+			"Total person": { "msgid": "Total person", "msgstr": ["Total person"] },
+			"2 line": { "msgid": "2 line", "msgstr": ["2 line"] },
+			"Profit received": {
+				"msgid": "Profit received",
+				"msgstr": ["Profit received"]
+			},
+			"3 line": { "msgid": "3 line", "msgstr": ["3 line"] },
+			"Lost profits": { "msgid": "Lost profits", "msgstr": ["Lost profits"] },
+			"JOIN THE FIGHT AND WIN": {
+				"msgid": "JOIN THE FIGHT AND WIN",
+				"msgstr": ["JOIN THE FIGHT AND WIN"]
+			},
+			"BRONZE": { "msgid": "BRONZE", "msgstr": ["BRONZE"] },
+			"SILVER": { "msgid": "SILVER", "msgstr": ["SILVER"] },
+			"GOLD": { "msgid": "GOLD", "msgstr": ["GOLD"] },
+			"EMERALD": { "msgid": "EMERALD", "msgstr": ["EMERALD"] },
+			"Cards": { "msgid": "Cards", "msgstr": ["Cards"] },
+			"Referrals profit:": {
+				"msgid": "Referrals profit:",
+				"msgstr": ["Referrals profit:"]
+			},
+			"Total Wins:": { "msgid": "Total Wins:", "msgstr": ["Total Wins:"] },
+			"ACTIVATE": { "msgid": "ACTIVATE", "msgstr": ["ACTIVATE"] },
+			"GAME HISTORY": { "msgid": "GAME HISTORY", "msgstr": ["GAME HISTORY"] },
+			"Show more": { "msgid": "Show more", "msgstr": ["Show more"] },
+			"Still have questions?": {
+				"msgid": "Still have questions?",
+				"msgstr": ["Still have questions?"]
+			},
+			"Complete instructions": {
+				"msgid": "Complete instructions",
+				"msgstr": ["Complete instructions"]
+			},
+			"Enter a new password": {
+				"msgid": "Enter a new password",
+				"msgstr": ["Enter a new password"]
+			},
+			"Password": { "msgid": "Password", "msgstr": ["Password"] },
+			"Confirm Password": {
+				"msgid": "Confirm Password",
+				"msgstr": ["Confirm Password"]
+			},
+			"The password must be at least 8 characters long. Contains letters and symbols": {
+				"msgid": "The password must be at least 8 characters long. Contains letters and symbols",
+				"msgstr": [
+					"The password must be at least 8 characters long. Contains letters and symbols"
+				]
+			},
+			"Confirm your new password": {
+				"msgid": "Confirm your new password",
+				"msgstr": ["Confirm your new password"]
+			},
+			"Withdrawal": { "msgid": "Withdrawal", "msgstr": ["Withdrawal"] },
+			"Available for payout": {
+				"msgid": "Available for payout",
+				"msgstr": ["Available for payout"]
+			},
+			"Enter the amount to withdraw": {
+				"msgid": "Enter the amount to withdraw",
+				"msgstr": ["Enter the amount to withdraw"]
+			},
+			"Withdrawal wallet": {
+				"msgid": "Withdrawal wallet",
+				"msgstr": ["Withdrawal wallet"]
+			},
+			"Specify a wallet for funds withdrawal. Specified wallet is not subject to change": {
+				"msgid": "Specify a wallet for funds withdrawal. Specified wallet is not subject to change",
+				"msgstr": [
+					"Specify a wallet for funds withdrawal. Specified wallet is not subject to change"
+				]
+			},
+			"PAYOUT": { "msgid": "PAYOUT", "msgstr": ["PAYOUT"] },
+			"TRANSACTION HISTORY": {
+				"msgid": "TRANSACTION HISTORY",
+				"msgstr": ["TRANSACTION HISTORY"]
+			},
+			"Time": { "msgid": "Time", "msgstr": ["Time"] },
+			"Date": { "msgid": "Date", "msgstr": ["Date"] },
+			"TRANSACTION": { "msgid": "TRANSACTION", "msgstr": ["TRANSACTION"] },
+			"Log in to continue": {
+				"msgid": "Log in to continue",
+				"msgstr": ["Log in to continue"]
+			},
+			"Purchase price": {
+				"msgid": "Purchase price",
+				"msgstr": ["Purchase price"]
+			},
+			"Would you like to continue?": {
+				"msgid": "Would you like to continue?",
+				"msgstr": ["Would you like to continue?"]
+			},
+			"Yes": { "msgid": "Yes", "msgstr": ["Yes"] },
+			"No": { "msgid": "No", "msgstr": ["No"] },
+			"Insufficient funds to purchase the card": {
+				"msgid": "Insufficient funds to purchase the card",
+				"msgstr": ["Insufficient funds to purchase the card"]
+			},
+			"Continue": { "msgid": "Continue", "msgstr": ["Continue"] },
+			"Subscribe to us on Telegram to receive information about your winnings": {
+				"msgid": "Subscribe to us on Telegram to receive information about your winnings",
+				"msgstr": [
+					"Subscribe to us on Telegram to receive information about your winnings"
+				]
+			},
+			"Subscribe to Telegram": {
+				"msgid": "Subscribe to Telegram",
+				"msgstr": ["Subscribe to Telegram"]
+			},
+			"Log In": { "msgid": "Log In", "msgstr": ["Log In"] },
+			"Sign Up": { "msgid": "Sign Up", "msgstr": ["Sign Up"] },
+			"Email": { "msgid": "Email", "msgstr": ["Email"] },
+			"Forgot your password": {
+				"msgid": "Forgot your password",
+				"msgstr": ["Forgot your password"]
+			},
+			"I'm not a robot": {
+				"msgid": "I'm not a robot",
+				"msgstr": ["I'm not a robot"]
+			},
+			"Enter your email address to reset your password": {
+				"msgid": "Enter your email address to reset your password",
+				"msgstr": ["Enter your email address to reset your password"]
+			},
+			"Password recovery link was sent to the specified email": {
+				"msgid": "Password recovery link was sent to the specified email",
+				"msgstr": ["Password recovery link was sent to the specified email"]
+			},
+			"MAIN": { "msgid": "MAIN", "msgstr": ["MAIN"] },
+			"REFFERALS": { "msgid": "REFFERALS", "msgstr": ["REFFERALS"] },
+			"STATISTICS": { "msgid": "STATISTICS", "msgstr": ["STATISTICS"] },
+			"RULES": { "msgid": "RULES", "msgstr": ["RULES"] },
+			"USE TELEGRAM BOT": {
+				"msgid": "USE TELEGRAM BOT",
+				"msgstr": ["USE TELEGRAM BOT"]
+			},
+			"LOGOUT": { "msgid": "LOGOUT", "msgstr": ["LOGOUT"] },
+			"To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.": {
+				"msgid": "To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.",
+				"msgstr": [
+					"To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance."
+				]
+			},
+			"The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost": {
+				"msgid": "The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost",
+				"msgstr": [
+					"The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost"
+				]
+			}
+		}
+	}
+}
