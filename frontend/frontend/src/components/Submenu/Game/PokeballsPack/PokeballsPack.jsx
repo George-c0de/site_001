@@ -11,6 +11,7 @@ const COLORS_TO_CLASS = {
 	bronze: 'text-pokeball-1',
 	bronco: 'text-pokeball-1',
 	bronce: 'text-pokeball-1',
+	bronzo: 'text-pokeball-1',
 	бронза: 'text-pokeball-1',
 	silver: 'text-pokeball-2',
 	prata: 'text-pokeball-2',
@@ -92,13 +93,6 @@ export const PokeballsPack = ({
 			>
 				<div className='detail-wrapper' onClick={handlePokeballsPack}>
 					<div id='pokeballs-detail'>
-						{/* {cards.map(elem => (
-							<img
-								src={elem !== 1 ? pokeball : PokebolOpened}
-								className='small-pokeball'
-								alt='pokeball'
-							/>
-						))} */}
 						<img
 							src={cards[0] <= 0 ? pokeball : PokebolOpened}
 							alt='pokeball'

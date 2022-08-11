@@ -11,6 +11,7 @@ import BuyPockebol from '../../../modals/BuyPockebol'
 import { t } from 'ttag'
 import { noAuto } from '@fortawesome/fontawesome-svg-core'
 import NotEnoughMoney from '../../../modals/NotEnoughMoney'
+import BuyPockebolInner from '../../../modals/buyPockebolInner'
 
 const CardOpened = ({
 	image,
@@ -19,7 +20,10 @@ const CardOpened = ({
 	card_data,
 	idCard,
 	category,
+	price,
+	money,
 }) => {
+	console.log(price)
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState()
 	const handleButton = async () => {
@@ -120,15 +124,22 @@ const CardOpened = ({
 		handleButton()
 	}, [])
 
+	const [openMenu, setOpenMenu] = useState(false)
+	const [answer, setAnswer] = useState(false)
+
 	const handleBuyClick = () => {
-		if (disabledBtn) {
+		if (disabledBtn && answer) {
 			setTimeout(async () => {
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
 					setTimeout(() => {
 						buyCard()
 					}, 1000)
 				})
+				setAnswer(false)
 			}, 3000)
+		}
+		if (disabledBtn) {
+			setOpenMenu(true)
 		}
 	}
 
@@ -169,11 +180,19 @@ const CardOpened = ({
 					className={`card-info-button ${
 						disabledBtn ? '' : 'card-info-disabled'
 					}`}
-					disabled={disabledBtn ? false : true}
+					disabled={disabledBtn && money <= price ? false : true}
 				>
-					{t`ACTIVATE`}
+					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>
 			</div>
+			{openMenu && (
+				<BuyPockebolInner
+					openMenu={openMenu}
+					setOpenMenu={setOpenMenu}
+					price={price}
+					setAnswer={setAnswer}
+				/>
+			)}
 		</>
 	)
 }
@@ -200,7 +219,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 				})
 			}, 1500)
 	}
-
 
 	React.useEffect(() => {
 		if (firstRender) {
@@ -295,6 +313,8 @@ export const PokeballsModal = ({
 								buyCard={() => buyCard(i + 1)}
 								category={category}
 								idCard={i + 1}
+								price={price[i]}
+								money={money}
 							/>
 						) : (
 							<CardClosed
