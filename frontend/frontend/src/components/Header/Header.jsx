@@ -27,13 +27,21 @@ const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
+	const [reloadMap, setReloadMap] = React.useState(false)
 	const navigate = useNavigate()
 
 	const startGame = () => {
 		if (data2 !== 501) {
-			navigate('/login')
+			if (!reloadMap) {
+				setReloadMap(true)
+				document.Location.reload()
+			} else {
+				navigate('/login')
+			}
 		}
 	}
+	if(reloadMap) startGame()
+
 
 	const [openBurger, setOpenBurger] = React.useState(false)
 	const showUserInfo = () => {

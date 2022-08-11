@@ -8,15 +8,7 @@ import { t } from 'ttag'
 import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
-let data2
 
-try {
-	axios.get('/api/login').catch(function (error) {
-		if (error.response) {
-			data2 = error.response.status
-		}
-	})
-} catch (error) {}
 const Signup = () => {
 	const navigate = useNavigate()
 	const params = useParams()
@@ -34,8 +26,6 @@ const Signup = () => {
 		password2: '',
 		utm: get('utm'),
 	})
-
-	if (data2 == 501) navigate('/home')
 
 	React.useEffect(() => {
 		if (firstRender && params.utm) {
@@ -165,7 +155,10 @@ const Signup = () => {
 					if (data2.data === 200) {
 						navigate('/home') //after registering navigate to login page
 					}
-				} catch (error) {}
+				} catch (error) {
+					setInvalidEmail(true)
+					setInvalidPassword(true)
+				}
 			}
 		}
 		if (typeAuthorization === 'reset') {
