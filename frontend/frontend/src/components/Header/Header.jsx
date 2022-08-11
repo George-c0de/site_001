@@ -182,7 +182,7 @@ const Header = () => {
 				/>
 			</div>
 			{/* {status && <Authorization />} */}
-			{/* {data2 === 501 && <SubscribeTg />} */}
+			{data2 === 501 && <SubscribeTg />}
 		</>
 	)
 }

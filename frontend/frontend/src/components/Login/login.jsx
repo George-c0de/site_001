@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
 import logo from '../../assets/header/logo.svg'
@@ -8,6 +8,17 @@ import { t } from 'ttag'
 import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
+
+let data2 = 501
+
+try {
+	axios.get('/api/login').catch(function (error) {
+		if (error.response) {
+			data2 = error.response.status
+		}
+	})
+} catch (error) {}
+
 const Signup = () => {
 	const navigate = useNavigate()
 	const params = useParams()
@@ -18,7 +29,11 @@ const Signup = () => {
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [activeCaptcha, setActiveCaptcha] = useState(false)
 	const [firstRender, setFirstRender] = useState(true)
-
+	setTimeout(() => {
+		if (data2 === 501) {
+			navigate('/home')
+		}
+	}, 1000)
 	const [data, setData] = useState({
 		email: '',
 		password1: '',
@@ -153,9 +168,7 @@ const Signup = () => {
 						})
 					if (data2.data === 200) {
 						// navigate('/home') //after registering navigate to login page
-						window.location.assign(
-							'https://tokemon.games/home'
-						)
+						window.location.assign('https://tokemon.games/home')
 					}
 				} catch (error) {
 					setInvalidEmail(true)
