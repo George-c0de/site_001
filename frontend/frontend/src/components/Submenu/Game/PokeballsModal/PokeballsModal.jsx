@@ -221,8 +221,8 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 
 	const handleBuyClick = () => {
 		setAccept(true)
-		document.body.style.overflow =
-			'hidden'(purchaseConfirmation && money >= price) &&
+		document.body.style.overflow ='hidden'
+		(purchaseConfirmation && money >= price) &&
 			setTimeout(async () => {
 				document.body.style.overflow = 'visible'
 				setStatus('pending')
