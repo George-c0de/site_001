@@ -128,6 +128,7 @@ const CardOpened = ({
 	const [answer, setAnswer] = useState(false)
 
 	const handleBuyClick = () => {
+		console.log(disabledBtn, answer, openMenu)
 		if (disabledBtn && answer) {
 			setTimeout(async () => {
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
@@ -137,8 +138,7 @@ const CardOpened = ({
 				})
 				setAnswer(false)
 			}, 3000)
-		}
-		if (!disabledBtn) {
+		} else {
 			setOpenMenu(true)
 		}
 	}
