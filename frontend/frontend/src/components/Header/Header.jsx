@@ -30,9 +30,9 @@ const Header = () => {
 	const navigate = useNavigate()
 
 	const startGame = () => {
-		if (data2 !== 501) {
-			navigate('/login')
-		}
+		// if (data2 !== 501) {
+		// 	navigate('/login')
+		// }
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -62,11 +62,6 @@ const Header = () => {
 		setOpenStatistics(false)
 		startGame()
 	}
-
-	// React.useEffect(() => {
-	// 	console.log(data2)
-	// 	if (data2 !== undefined && data2 !== 501) navigate('/login')
-	// }, [data2])
 
 	const handleLogout = () => {
 		axios.get('/api/logout')
