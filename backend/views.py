@@ -1637,7 +1637,7 @@ def dis(request):
 
 
 # Ввод
-@csrf_exempt
+@api_view(['GET'])
 def dis_input(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
