@@ -49,7 +49,6 @@ if (locale !== 'en') {
 		setCookie('__locale', '', {
 			expires: -1,
 		})
-		window.location.reload()
 	}
 	const translationsObj = require(`../i18n/${locale}.po.json`)
 	addLocale(locale, translationsObj)
