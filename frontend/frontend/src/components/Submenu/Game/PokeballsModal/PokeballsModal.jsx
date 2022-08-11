@@ -132,7 +132,7 @@ const CardOpened = ({
 	const [hideModal2, setHideModal2] = React.useState(false)
 
 	const handleBuyClick2 = (props, props2) => {
-		if (!props2 && !disabledBtn) {
+		if (!props2 && disabledBtn) {
 			setAccept2(true)
 		}
 		console.log(purchaseConfirmation2, disabledBtn)
