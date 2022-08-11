@@ -93,19 +93,19 @@
 			},
 			"BRONZE": {
 				"msgid": "BRONZE",
-				"msgstr": ["BRONZE"]
+				"msgstr": ["BRONCE"]
 			},
 			"SILVER": {
 				"msgid": "SILVER",
-				"msgstr": ["SILVER"]
+				"msgstr": ["PAGO DE LA BATALLA"]
 			},
 			"GOLD": {
 				"msgid": "GOLD",
-				"msgstr": ["GOLD"]
+				"msgstr": ["ORO"]
 			},
 			"EMERALD": {
 				"msgid": "EMERALD",
-				"msgstr": ["EMERALD"]
+				"msgstr": ["ESMERALDA"]
 			},
 			"GAME HISTORY": {
 				"msgid": "GAME HISTORY",

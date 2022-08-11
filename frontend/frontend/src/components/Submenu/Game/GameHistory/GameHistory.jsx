@@ -8,13 +8,16 @@ import Lightning from '../../../../assets/lightning.svg'
 export const GameHistory = ({ history }) => {
 	const [data, setData] = useState({})
 	const [showMore, setShowMore] = useState(false)
+
 	useEffect(() => {
 		getUsername()
 	}, [])
+
 	let getUsername = async () => {
 		const res = await axios.get('/api/user')
 		setData(res.data)
 	}
+
 	return (
 		<>
 			<div className='game-history'>
