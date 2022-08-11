@@ -63,10 +63,10 @@ const Header = () => {
 		startGame()
 	}
 
-	React.useEffect(() => {
-		console.log(data2)
-		if (data2 !== undefined && data2 !== 501) navigate('/login')
-	}, [data2])
+	// React.useEffect(() => {
+	// 	console.log(data2)
+	// 	if (data2 !== undefined && data2 !== 501) navigate('/login')
+	// }, [data2])
 
 	const handleLogout = () => {
 		axios.get('/api/logout')
