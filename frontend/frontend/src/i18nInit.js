@@ -52,4 +52,5 @@ if (locale !== 'en') {
 	// const translationsObj = require(`../i18n/en.po.json`)
 	addLocale(locale, translationsObj)
 	localize(locale)
+	// document.location.reload()
 }

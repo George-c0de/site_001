@@ -95,11 +95,16 @@ a:hover {
 		font-size: 16px;
 		max-width: 90px;
 	}
+	.referals__text {
+		font-size: 10px;
+	}
 }
 @media screen and (max-width: 350px) {
 	.referals__info-wrapper .yellow-btn {
-		font-size: 14px !important;
-		max-width: 85px;
-		padding: 5px 6px;
+		font-size: 14px;
+		max-width: 73px;
+	}
+	.referals__text {
+		font-size: 8px;
 	}
 }
