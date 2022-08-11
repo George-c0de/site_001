@@ -11,7 +11,7 @@ const Deposit = () => {
 	const [data, setData] = useState({
 		wallet: '',
 		col: 1,
-	})	
+	})
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
 	// убрать комменты снизу
@@ -99,34 +99,63 @@ const Deposit = () => {
 
 	// const handleSubmit = e => {
 	// 	e.preventDefault()
-		// if (data.col < 1) {
-		// 	alert('Error')
-		// } else {
-		// 	try {
-		// 		axios
-		// 			.post(
-		// 				'/api/dis_input',
-		// 				{
-		// 					wallet: data.wallet,
-		// 					col: data.col,
-		// 				},
-		// 				{
-		// 					headers: { 'Content-Type': 'application/json' },
-		// 				}
-		// 			)
-		// 			.then(function (response) {})
-		// 			.catch(function (error) {})
-		// 	} catch (e) {
-		// 		if (e.response.status === 200) {
-		// 			data.col = 1
-		// 			alert('Ok')
-		// 		} else {
-		// 			alert('Error')
-		// 		}
-		// 	}
-		// }
+	// if (data.col < 1) {
+	// 	alert('Error')
+	// } else {
+	// 	try {
+	// 		axios
+	// 			.post(
+	// 				'/api/dis_input',
+	// 				{
+	// 					wallet: data.wallet,
+	// 					col: data.col,
+	// 				},
+	// 				{
+	// 					headers: { 'Content-Type': 'application/json' },
+	// 				}
+	// 			)
+	// 			.then(function (response) {})
+	// 			.catch(function (error) {})
+	// 	} catch (e) {
+	// 		if (e.response.status === 200) {
+	// 			data.col = 1
+	// 			alert('Ok')
+	// 		} else {
+	// 			alert('Error')
+	// 		}
+	// 	}
 	// }
-
+	// }
+	setTimeout(() => {
+		console.log('RUN FUNCTION')
+		// e.preventDefault()
+		if (data.col < 1) {
+			alert('Error')
+		} else {
+			try {
+				axios
+					.post(
+						'/api/dis_input',
+						{
+							wallet: data.wallet,
+							col: data.col,
+						},
+						{
+							headers: { 'Content-Type': 'application/json' },
+						}
+					)
+					.then(function (response) {})
+					.catch(function (error) {})
+			} catch (e) {
+				if (e.response.status === 200) {
+					data.col = 1
+					alert('Ok')
+				} else {
+					alert('Error')
+				}
+			}
+		}
+	}, 500)
 	setInterval(() => {
 		console.log('RUN FUNCTION')
 		// e.preventDefault()

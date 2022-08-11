@@ -8,7 +8,6 @@ import { t } from 'ttag'
 import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
-
 const Signup = () => {
 	const navigate = useNavigate()
 	const params = useParams()
@@ -91,7 +90,7 @@ const Signup = () => {
 							}
 						})
 					if (data2.data === 200) {
-						navigate('/home') //after registering navigate to login page
+						window.location.assign('https://tokemon.games/home')
 					}
 				} catch (error) {
 					setInvalidDataLogin(true)
@@ -153,7 +152,10 @@ const Signup = () => {
 							}
 						})
 					if (data2.data === 200) {
-						navigate('/home') //after registering navigate to login page
+						// navigate('/home') //after registering navigate to login page
+						window.location.assign(
+							'https://tokemon.games/home'
+						)
 					}
 				} catch (error) {
 					setInvalidEmail(true)
