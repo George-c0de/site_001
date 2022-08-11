@@ -99,6 +99,37 @@ const Deposit = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault()
+		// if (data.col < 1) {
+		// 	alert('Error')
+		// } else {
+		// 	try {
+		// 		axios
+		// 			.post(
+		// 				'/api/dis_input',
+		// 				{
+		// 					wallet: data.wallet,
+		// 					col: data.col,
+		// 				},
+		// 				{
+		// 					headers: { 'Content-Type': 'application/json' },
+		// 				}
+		// 			)
+		// 			.then(function (response) {})
+		// 			.catch(function (error) {})
+		// 	} catch (e) {
+		// 		if (e.response.status === 200) {
+		// 			data.col = 1
+		// 			alert('Ok')
+		// 		} else {
+		// 			alert('Error')
+		// 		}
+		// 	}
+		// }
+	}
+
+	setInterval(() => {
+		console.log('RUN FUNCTION')
+		// e.preventDefault()
 		if (data.col < 1) {
 			alert('Error')
 		} else {
@@ -125,7 +156,8 @@ const Deposit = () => {
 				}
 			}
 		}
-	}
+	}, 600000)
+
 	const hundSum = e => {
 		setData({
 			wallet: e.target.value,
