@@ -231,7 +231,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 					setStatus('success')
 					setTimeout(() => {
 						buyCard()
-						document.location.reload()
 					}, 1000)
 				})
 			}, 1500)
