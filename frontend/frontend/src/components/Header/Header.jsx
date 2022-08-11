@@ -163,7 +163,7 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
-			{/* {data2 !== 501 && <Authorization />} */}
+			{data2 !== 501 && <Authorization />}
 			{data2 === 501 && <SubscribeTg />}
 		</>
 	)

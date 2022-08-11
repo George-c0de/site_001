@@ -107,6 +107,35 @@
 .gallery-faq:hover {
 	color: #ffcc00;
 }
+@media screen and (max-width: 1400px) {
+	.rules__block {
+		max-width: 400px;
+	}
+}
+
+@media screen and (max-width: 1250px) {
+	.rules__block {
+		max-width: 350px;
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.rules__block {
+		max-width: 300px;
+	}
+}
+@media screen and (max-width: 950px) {
+	.rules__blocks {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.rules__block {
+		max-width: 450px;
+	}
+}
+
+
 @media screen and (max-width: 900px) {
 	.rules__container {
 		padding-top: 150px;
