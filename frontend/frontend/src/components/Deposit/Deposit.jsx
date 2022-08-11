@@ -127,64 +127,16 @@ const Deposit = () => {
 	// }
 	// }
 	setTimeout(() => {
-		console.log('RUN FUNCTION')
-		// e.preventDefault()
-		if (data.col < 1) {
-			alert('Error')
-		} else {
-			try {
-				axios
-					.post(
-						'/api/dis_input',
-						{
-							wallet: data.wallet,
-							col: data.col,
-						},
-						{
-							headers: { 'Content-Type': 'application/json' },
-						}
-					)
-					.then(function (response) {})
-					.catch(function (error) {})
-			} catch (e) {
-				if (e.response.status === 200) {
-					data.col = 1
-					alert('Ok')
-				} else {
-					alert('Error')
-				}
-			}
-		}
+		axios.get('/api/dis_input').then(data => {
+			console.log(data)
+			console.log(data.response)
+		})
 	}, 500)
 	setInterval(() => {
-		console.log('RUN FUNCTION')
-		// e.preventDefault()
-		if (data.col < 1) {
-			alert('Error')
-		} else {
-			try {
-				axios
-					.post(
-						'/api/dis_input',
-						{
-							wallet: data.wallet,
-							col: data.col,
-						},
-						{
-							headers: { 'Content-Type': 'application/json' },
-						}
-					)
-					.then(function (response) {})
-					.catch(function (error) {})
-			} catch (e) {
-				if (e.response.status === 200) {
-					data.col = 1
-					alert('Ok')
-				} else {
-					alert('Error')
-				}
-			}
-		}
+		axios.get('/api/dis_input').then(data => {
+			console.log(data)
+			console.log(data.response)
+		})
 	}, 600000)
 
 	const hundSum = e => {
