@@ -6,7 +6,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	z-index: 9999999;
+	z-index: 9999;
 }
 
 .lang-list {
@@ -34,7 +34,7 @@
 }
 
 .lang-icon-preview {
-	z-index: 9999999;
+	z-index: 9999;
 	position: absolute;
 	top: -50px;
 	left: 50%;
@@ -44,7 +44,6 @@
 	display: block;
 	cursor: pointer;
 	object-fit: cover;
-	overflow:hidden
 }
 
 .lang-icon-preview.hidden {
@@ -56,7 +55,7 @@
 	width: 55px;
 	height: 55px;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 670px) {
 	.lang-icon_active {
 		width: 35px;
 		height: 35px;
@@ -68,5 +67,66 @@
 	.lang-icon {
 		width: 35px;
 		height: 35px;
+	}
+}
+@media screen and (max-width: 700px) and (max-height: 560px) {
+	.lang-icon {
+		width: 35px;
+		height: 35px;
+	}
+	.lang-list li {
+		margin: 5px 0 0 0;
+		height: 35px;
+		font-size: unset;
+	}
+	.lang-icon-preview {
+		width: 35px;
+		height: 35px;
+	}
+	.livechat_button img {
+		width: 45px;
+		width: 45px;
+	}
+	.site-main,
+	.site-main_active {
+		bottom: 5px;
+		right: 5px;
+	}
+}
+@media screen and (max-height: 420px) {
+	.lang-icon {
+		width: 30px;
+		height: 30px;
+	}
+	.lang-list li {
+		margin: 5px 0 0 0;
+		height: 30px;
+		font-size: unset;
+	}
+	.lang-icon-preview {
+		width: 30px;
+		height: 30px;
+	}
+	.livechat_button img {
+		width: 40px;
+		width: 40px;
+	}
+	.lang-icon-preview {
+		top: -35px;
+	}
+}
+@media screen and (max-height: 380px) {
+	.site-main {
+		flex-direction: row;
+		align-items: flex-end;
+	}
+	.lang-icon-preview {
+		top: 5px;
+	}
+	.lang-icon-preview {
+		left: -30%;
+	}
+	.lang-list {
+		margin-bottom: 5px;
 	}
 }
