@@ -12,24 +12,28 @@ import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
 import Authorization from '../modals/Authorization'
 import SubscribeTg from '../modals/SubscribeTg'
+
 let data2
-const check = async () => {
-	try {
-		await axios.get('/api/login').catch(function (error) {
-			if (error.response) {
-				data2 = error.response.status
-			}
-		})
-	} catch (error) {}
-}
-check()
+
+try {
+	axios.get('/api/login').catch(function (error) {
+		if (error.response) {
+			data2 = error.response.status
+		}
+	})
+} catch (error) {}
 
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
-	const [status, setSatus] = React.useState(false)
 	const navigate = useNavigate()
+
+	const startGame = () => {
+		if (data2 !== 501) {
+			navigate('/login')
+		}
+	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
 	const showUserInfo = () => {
@@ -37,28 +41,32 @@ const Header = () => {
 		setOpenBurger(false)
 		setOpenReferals(false)
 		setOpenStatistics(false)
+		startGame()
 	}
 	const showReferals = () => {
 		setOpenReferals(true)
 		setOpenBurger(false)
 		setOpenStatistics(false)
+		startGame()
 	}
 	const showStatistics = () => {
 		setOpenStatistics(true)
 		setOpenBurger(false)
 		setOpenReferals(false)
+		startGame()
 	}
 	const OpenMenu = () => {
 		setOpenBurger(!openBurger)
 		setOpenUserInfo(false)
 		setOpenReferals(false)
 		setOpenStatistics(false)
+		startGame()
 	}
 
-	React.useEffect(() => {
-		console.log(data2)
-		if (data2 !== undefined && data2 !== 501) navigate('/login')
-	}, [data2])
+	// React.useEffect(() => {
+	// 	console.log(data2)
+	// 	if (data2 !== undefined && data2 !== 501) navigate('/login')
+	// }, [data2])
 
 	const handleLogout = () => {
 		axios.get('/api/logout')
@@ -99,6 +107,7 @@ const Header = () => {
 			}
 		}
 	}
+
 	return (
 		<>
 			<div className='main__header' ref={ref}>
