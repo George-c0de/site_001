@@ -92,6 +92,12 @@ const Header = () => {
 	}
 	return (
 		<>
+			<Lang
+				setOpenBurger={setOpenBurger}
+				setOpenUserInfo={setOpenUserInfo}
+				setOpenReferals={setOpenReferals}
+				setOpenStatistics={setOpenStatistics}
+			/>
 			<div className='main__header' ref={ref}>
 				<nav className='main__nav'>
 					<div
@@ -156,13 +162,7 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
-			{/* {data2 !== 501 && <Authorization />} */}
-			<Lang
-				setOpenBurger={setOpenBurger}
-				setOpenUserInfo={setOpenUserInfo}
-				setOpenReferals={setOpenReferals}
-				setOpenStatistics={setOpenStatistics}
-			/>
+			{data2 !== 501 && <Authorization />}
 		</>
 	)
 }

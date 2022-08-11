@@ -1,3 +1,4 @@
+import { saveLocale } from '../../i18nInit'
 import React, { useState, useContext } from 'react'
 import * as cookie from '../../cookie'
 import britain from '../../assets/languages/en.png'
@@ -13,7 +14,7 @@ import support from '../../Ảnh Pokemon Dự Trù/супорт.svg'
 
 import './Lang.css'
 import { LangContext } from '../../context/LangContext'
-import { saveLocale } from '../../i18nInit'
+
 
 const languages = {
 	en: britain,
@@ -26,6 +27,7 @@ const languages = {
 	br: brazil,
 	ar: argentina,
 }
+
 
 const LOCALE_COOKIE = '__locale'
 

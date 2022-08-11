@@ -3,6 +3,35 @@ import * as cookie from './cookie'
 
 const LOCALE_COOKIE = '__locale'
 
+function setCookie(name, value, options) {
+	options = options || {}
+
+	var expires = options.expires
+
+	if (typeof expires == 'number' && expires) {
+		var d = new Date()
+		d.setTime(d.getTime() + expires * 1000)
+		expires = options.expires = d
+	}
+	if (expires && expires.toUTCString) {
+		options.expires = expires.toUTCString()
+	}
+
+	value = encodeURIComponent(value)
+
+	var updatedCookie = name + '=' + value
+
+	for (var propName in options) {
+		updatedCookie += '; ' + propName
+		var propValue = options[propName]
+		if (propValue !== true) {
+			updatedCookie += '=' + propValue
+		}
+	}
+
+	document.cookie = updatedCookie
+}
+
 function getLocale() {
 	return cookie.get(LOCALE_COOKIE) || 'en'
 }
@@ -15,7 +44,13 @@ export function saveLocale(locale) {
 let locale = getLocale()
 
 if (locale !== 'en') {
-	if (locale == 'undefined') locale = 'ru'
+	console.log('yes')
+	if (locale == 'undefined') {
+		setCookie('__locale', '', {
+			expires: -1,
+		})
+		window.location.reload()
+	}
 	const translationsObj = require(`../i18n/${locale}.po.json`)
 	addLocale(locale, translationsObj)
 	localize(locale)
