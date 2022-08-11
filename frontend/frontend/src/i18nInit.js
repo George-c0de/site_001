@@ -46,7 +46,7 @@ let locale = getLocale()
 if (locale !== 'en') {
 	console.log('yes')
 	if (locale == 'undefined') {
-		locale = 'en'
+		console.log('locale===undefined')
 	}
 	const translationsObj = require(`../i18n/${locale}.po.json`)
 	addLocale(locale, translationsObj)

@@ -18,13 +18,11 @@ const check = async () => {
 		await axios.get('/api/login').catch(function (error) {
 			if (error.response) {
 				data2 = error.response.status
-				console.log(data2)
 			}
 		})
 	} catch (error) {}
 }
 check()
-console.log(data2)
 
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
@@ -58,7 +56,8 @@ const Header = () => {
 	}
 
 	React.useEffect(() => {
-		if (data2 !== 501) setSatus(true)
+		console.log(data2)
+		if (data2 !== undefined && data2 !== 501) navigate('/login')
 	}, [data2])
 
 	const handleLogout = () => {
@@ -173,8 +172,7 @@ const Header = () => {
 					setOpenStatistics={setOpenStatistics}
 				/>
 			</div>
-			{status && <Authorization />}
-			{data2 !== 501 && <Authorization />}
+			{/* {status && <Authorization />} */}
 			{/* {data2 === 501 && <SubscribeTg />} */}
 		</>
 	)
