@@ -146,7 +146,7 @@
 }
 @media screen and (max-width: 530px) {
 	.satoshi {
-		right: -60px;
+		right: -80px;
 	}
 }
 @media screen and (max-width: 510px) {
@@ -174,13 +174,6 @@
 	.satoshi {
 		right: -50px;
 	}
-	.satoshi {
-		top: -58px;
-		width: 170px;
-		height: 230px;
-	}
-}
-@media screen and (max-width: 420px) {
 	.satoshi {
 		top: -58px;
 		width: 156px;
