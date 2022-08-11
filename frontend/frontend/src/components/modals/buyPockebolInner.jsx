@@ -3,12 +3,13 @@ import './modals.css'
 import Cross from '../../assets/cross-svgrepo-com.svg'
 import { t } from 'ttag'
 
-const BuyPockebolInner = props => {
+const BuyPockebol = props => {
 	const ref = React.useRef(null)
-	const { openMenu, setOpenMenu, price, setAnswer } = props
+	const { hideModal, setHideModal, setPurchaseConfirmation, setAccept, price } =
+		props
 	const handleClickOutside = event => {
 		if (ref.current && !ref.current.contains(event.target)) {
-			 setOpenMenu(false)
+			setAccept(false)
 			document.body.style.overflow = 'visible'
 		}
 	}
@@ -21,21 +22,20 @@ const BuyPockebolInner = props => {
 	}, [])
 
 	const handleClick = () => {
-		 setOpenMenu(false)
+		setAccept(false)
 		document.body.style.overflow = 'visible'
 	}
 
 	const confirmPurchase = () => {
-		 setOpenMenu(false)
-		 setAnswer(true)
+		setPurchaseConfirmation(true)
+		setAccept(false)
+		setHideModal(true)
 		document.body.style.overflow = 'visible'
 	}
 
 	return (
 		<div
-			className={`subscriibe-wrapper buy-wrapper ${
-				openMenu ? 'buy-wrapper-hide' : ''
-			}`}
+			className={`subscriibe-wrapper buy-wrapper`}
 		>
 			<div className='subscriibe-block' ref={ref}>
 				<img
@@ -70,4 +70,4 @@ const BuyPockebolInner = props => {
 	)
 }
 
-export default BuyPockebolInner
+export default BuyPockebol
