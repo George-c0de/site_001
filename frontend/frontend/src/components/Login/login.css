@@ -114,6 +114,11 @@
 	font-size: 26px;
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
+	opacity: .8;
+	transition: .3s all ease;
+}
+.authorization__button:hover {
+	opacity: 1;
 }
 .authorization__pikachu-wrapper {
 	width: 274px;
