@@ -71,7 +71,7 @@ const Header = () => {
 	const handleLogout = () => {
 		axios.get('/api/logout')
 		localStorage.removeItem('token')
-		navigate('/login')
+		window.location.assign('https://tokemon.games/login')
 	}
 	const ref = React.useRef(null)
 

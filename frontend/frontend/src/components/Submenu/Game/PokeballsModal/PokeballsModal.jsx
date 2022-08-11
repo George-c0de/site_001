@@ -245,7 +245,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 			)}
 			<img src={pokeball} className='pokeballs-card-ball' alt='' />
 			{accept &&
-				(money > price ? (
+				(money >= price ? (
 					<BuyPockebol
 						price={price}
 						setPurchaseConfirmation={setPurchaseConfirmation}
