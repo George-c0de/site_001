@@ -31,6 +31,7 @@ const Header = () => {
 
 	const startGame = () => {
 		if (data2 !== 501) {
+			navigate('/login')
 		}
 	}
 
