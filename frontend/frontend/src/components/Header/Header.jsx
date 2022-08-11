@@ -30,9 +30,9 @@ const Header = () => {
 	const navigate = useNavigate()
 
 	const startGame = () => {
-		// if (data2 !== 501) {
-		// 	navigate('/login')
-		// }
+		if (data2 !== 501) {
+			navigate('/login')
+		}
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
