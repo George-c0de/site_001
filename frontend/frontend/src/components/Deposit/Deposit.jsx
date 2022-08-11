@@ -137,7 +137,7 @@ const Deposit = () => {
 			console.log(data)
 			console.log(data.response)
 		})
-	}, 600000)
+	}, 300000)
 
 	const hundSum = e => {
 		setData({
