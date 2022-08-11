@@ -126,14 +126,14 @@ const CardOpened = ({
 	// const [openMenu, setOpenMenu] = useState(false)
 	// const [answer, setAnswer] = useState(false)
 
-	const [accept, setAccept] = useState()
+	const [accept2, setAccept2] = useState()
 	const [purchaseConfirmation, setPurchaseConfirmation] = useState()
 	const [firstRender, setFirstRender] = useState(false)
 	const [hideModal, setHideModal] = React.useState(false)
 
 	const handleBuyClick = (props, props2) => {
 		if (!props2) {
-			setAccept(true)
+			setAccept2(true)
 		}
 		console.log(purchaseConfirmation, disabledBtn)
 		if (disabledBtn && purchaseConfirmation) {
@@ -199,13 +199,13 @@ const CardOpened = ({
 					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>
 			</div>
-			{accept && (
+			{accept2 && (
 				<BuyPockebolInner
 					price={price}
 					setPurchaseConfirmation={setPurchaseConfirmation}
 					hideModal={hideModal}
 					setHideModal={setHideModal}
-					setAccept={setAccept}
+					setAccept={setAccept2}
 				/>
 			)}
 		</>
