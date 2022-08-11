@@ -46,6 +46,7 @@ let locale = getLocale()
 if (locale !== 'en') {
 	if (locale == 'undefined') {
 		setCookie('__locale', 'en', 30)
+		document.location.reload()
 	}
 	const translationsObj = require(`../i18n/${locale}.po.json`)
 	// const translationsObj = require(`../i18n/en.po.json`)

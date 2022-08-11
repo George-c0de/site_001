@@ -15,7 +15,7 @@ export const UserId = ({ note }) => {
 		fetchPosts()
 	}, [])
 	const [user, setUser] = useState({
-		id: 0,
+		id: '',
 		money: '0.00',
 		referral_link: '0',
 		referral_amount: '0.00',
