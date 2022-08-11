@@ -10,9 +10,34 @@ class HistoryTransactionsProfileAdmin(admin.TabularInline):
     model = History_Transactions
 
 
+@admin.register(Buy_Card)
+class History_card_Admin(admin.ModelAdmin):
+    fields = ('user', 'card')
+    list_display = ('user', 'card')
+
+
+@admin.register(Card)
+class History_card_Admin2(admin.ModelAdmin):
+    fields = ('id', 'name', 'category', 'price')
+    list_display = ('id', 'name', 'category', 'price')
+
+
 @admin.register(Admin)
 class ProfileAdminAdmin(admin.ModelAdmin):
-    fields = ('user', 'money', 'wallet')
+    fields = ('user', 'up', 'max_users')
+    list_display = ('user', 'up', 'max_users')
+
+
+@admin.register(Matrix)
+class ProfileAdminAdmin(admin.ModelAdmin):
+    fields = ('price', 'up', 'max_users', 'col')
+    list_display = ('price', 'up', 'max_users', 'col')
+
+
+@admin.register(User_in_Matrix)
+class User_in_matr(admin.ModelAdmin):
+    list_display = ('matrix', 'user', 'card')
+    fields = ('matrix', 'user', 'card')
 
 
 @admin.register(First_Line)
