@@ -33,8 +33,9 @@ const Header = () => {
 	const startGame = () => {
 		if (data2 !== 501) {
 			if (!reloadMap) {
+				console.log(1)
 				setReloadMap(true)
-				document.Location.reload()
+				document.location.reload()
 			} else {
 				navigate('/login')
 			}
