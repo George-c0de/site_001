@@ -138,7 +138,7 @@ const CardOpened = ({
 				setAnswer(false)
 			}, 3000)
 		}
-		if (disabledBtn) {
+		if (!disabledBtn) {
 			setOpenMenu(true)
 		}
 	}
@@ -206,8 +206,8 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 
 	const handleBuyClick = () => {
 		setAccept(true)
-		document.body.style.overflow = 'hidden'
-		purchaseConfirmation &&
+		document.body.style.overflow =
+			'hidden'(purchaseConfirmation && money >= price) &&
 			setTimeout(async () => {
 				document.body.style.overflow = 'visible'
 				setStatus('pending')
