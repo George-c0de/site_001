@@ -635,7 +635,7 @@ def check_prohibition(name, id_, profile):
             card__card__category=name).filter(card__card__name=id_).exists():
         us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=name).filter(
             card__card__name=id_).get(matrix__up=True).d
-        if us_pr < 4:
+        if us_pr <= 4:
             return False
         else:
             return True
@@ -1235,7 +1235,7 @@ def all_ref_logic(name, id_, profile):
             card__card__category=name).filter(card__card__name=id_).exists():
         us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=name).filter(
             card__card__name=id_).get(matrix__up=True).d
-        if us_pr < 4:
+        if us_pr <= 4:
             return 400
     card = 'card_' + str(id_)
     all_ = All.objects.all().first()
@@ -1281,9 +1281,9 @@ def all_ref_logic(name, id_, profile):
                     ref_card_dob(sec_main_prof, money_to_card * Decimal('0.04'))
                     sec_main_prof.save()
                     if User_in_Matrix.objects.filter(user=sec_main_prof).exists():
-                        tyu = User_in_Matrix.objects.filter(matrix__price=money_to_card).get(user=sec_main_prof)
-                        tyu.all_wins += money_to_card * Decimal('0.04')
-                        tyu.save()
+                        for el in User_in_Matrix.objects.filter(matrix__price=money_to_card).filter(user=sec_main_prof).filter(card__card__category=category):
+                            el.all_wins += money_to_card * Decimal('0.04')
+                            el.save()
                     sq = Second_Line.objects.get(main_user=sec_main_prof)
                     sq.profit += money_to_card * Decimal('0.04')
                     sq.save()
@@ -1301,9 +1301,9 @@ def all_ref_logic(name, id_, profile):
                         ref_card_dob(th_main_prof, money_to_card * Decimal('0.01'))
                         th_main_prof.save()
                         if User_in_Matrix.objects.filter(user=th_main_prof).exists():
-                            tyu = User_in_Matrix.objects.filter(matrix__price=money_to_card).get(user=th_main_prof)
-                            tyu.all_wins += money_to_card * Decimal('0.01')
-                            tyu.save()
+                            for el in User_in_Matrix.objects.filter(matrix__price=money_to_card).filter(card__card__category=category):
+                                el.all_wins += money_to_card * Decimal('0.01')
+                                el.save()
                         sq1 = Third_Line.objects.get(main_user=th_main_prof)
                         sq1.profit += money_to_card * Decimal('0.01')
                         sq1.save()
@@ -1383,7 +1383,7 @@ def get_hist_card(request):
             main_list.append(temp_list)
         i = 0
         for key, value in data.items():
-            if len(main_list)-1 < i:
+            if len(main_list) - 1 < i:
                 print(data)
                 return Response(data=data)
             data[key] = main_list[i]
@@ -1394,7 +1394,6 @@ def get_hist_card(request):
     else:
         print(data)
         return Response(data=data)
-
 
 
 # emerald
