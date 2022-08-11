@@ -67,9 +67,6 @@ a:hover {
 	}
 }
 @media screen and (max-width: 740px) {
-	.main__header {
-		padding: 5px 20px;
-	}
 	.referals__info-wrapper .yellow-btn {
 		font-size: 20px;
 		max-width: 120px;

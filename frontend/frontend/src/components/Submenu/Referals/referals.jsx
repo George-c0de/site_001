@@ -53,8 +53,7 @@ const Referals = () => {
 		try {
 			const response = await axios.get('/api/referral')
 			setPosts(response.data)
-		} catch (e) {
-		}
+		} catch (e) {}
 	}
 
 	let getUsername = async () => {

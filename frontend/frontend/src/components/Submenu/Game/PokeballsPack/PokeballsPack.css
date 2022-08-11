@@ -112,7 +112,7 @@
 	.main__link {
 		font-size: 20px;
 	}
-	.game-history-title{
+	.game-history-title {
 		font-size: 18px !important;
 	}
 }
@@ -131,8 +131,8 @@
 		margin: 5px !important;
 	}
 	.pokeballs-card.opened .pokeballs-card-info img {
-		width: 82px !important;
-		height: 82px;
+		width: 72px !important;
+		height: 72px;
 		object-fit: cover;
 	}
 	.card-status-bar {
@@ -163,10 +163,9 @@
 	}
 	.card-info-button {
 		font-weight: 400;
-		font-size: 12px !important;
-		width: 78px !important;
-		height: 20px !important;
-		padding: 0 !important;
+		font-size: 9px !important;
+		width: 100% !important;
+		padding: 5px !important;
 	}
 	.pokeballs-card.opened .pokeballs-card-info {
 		align-items: start !important;
@@ -207,6 +206,7 @@
 	}
 	.pokeballs-modal .pokeballs-card {
 		width: 162px !important;
+		height: 162px !important;
 	}
 }
 @media screen and (max-width: 350px) {
@@ -216,11 +216,34 @@
 	}
 	.pokeballs-modal .pokeballs-card {
 		width: 156px !important;
+		height: 156px !important;
 	}
 	.site-main-game-wrapper {
 		padding: 0 !important;
 	}
 	.detail-wrapper {
 		padding-left: 0px;
+	}
+	.card-info-label {
+		font-size: 7px;
+	}
+	.pokeballs-container.open {
+		height: 565px;
+	}
+}
+@media screen and (max-width: 330px) {
+	.card-status-bar {
+		width: 20px !important;
+		margin-right: 7px !important;
+	}
+	.pokeballs-container {
+		max-width: 315px;
+	}
+	.pokeballs-modal .pokeballs-card {
+		width: 144px !important;
+		height: 144px !important;
+	}
+	.pokeballs-container.open {
+		height: 530px;
 	}
 }

@@ -23,3 +23,8 @@
 	font-size: 20px;
 	padding: 10px;
 }
+@media screen and (max-width: 340px) {
+	.reset__link {
+    font-size: 14px;
+}
+}

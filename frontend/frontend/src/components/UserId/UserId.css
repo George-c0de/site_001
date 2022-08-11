@@ -99,17 +99,20 @@
 	}
 }
 
+@media screen and (max-width: 765px) {
+	.satoshi {
+		width: 190px;
+		height: 250px;
+		top: -40px;
+	}
+}
 @media screen and (max-width: 715px) {
 	.link-invite {
 		display: inline-block;
 		margin-top: 5px;
 		font-size: 23px;
 	}
-	.satoshi {
-		width: 190px;
-		height: 250px;
-		top: -40px;
-	}
+
 	.user-info li {
 		font-size: 23px;
 	}
@@ -124,10 +127,12 @@
 		color: #0bdc5f;
 	}
 }
-@media screen and (max-width: 590px) {
+@media screen and (max-width: 620px) {
 	.satoshi {
-		right: -30px;
+		right: -50px;
 	}
+}
+@media screen and (max-width: 590px) {
 	.link-invite {
 		font-size: 18px;
 		padding: 8 13px;
@@ -137,6 +142,11 @@
 	}
 	.user-info li span {
 		font-size: 18px;
+	}
+}
+@media screen and (max-width: 530px) {
+	.satoshi {
+		right: -60px;
 	}
 }
 @media screen and (max-width: 510px) {
@@ -170,11 +180,11 @@
 		height: 230px;
 	}
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 420px) {
 	.satoshi {
 		top: -58px;
 		width: 170px;
-		height: 230px;
+		height: 205px;
 	}
 }
 @media screen and (max-width: 374px) {

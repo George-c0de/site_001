@@ -22,7 +22,6 @@ try {
 } catch (error) {}
 const LOCALE_COOKIE = '__locale'
 
-
 const Startgame = () => {
 	const [activeImg, setActiveImg] = React.useState()
 	const navigate = useNavigate()
@@ -130,7 +129,7 @@ const Startgame = () => {
 						src={Pokebol}
 						alt=''
 						className='logo-pokebol'
-					/>,
+					/>
 				)
 			}
 		}

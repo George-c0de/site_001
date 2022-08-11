@@ -83,6 +83,7 @@
 	font-weight: 600;
 	align-self: flex-end;
 	line-height: 1;
+	padding-top: 5px;
 }
 .pay-input-pay {
 	align-self: auto;

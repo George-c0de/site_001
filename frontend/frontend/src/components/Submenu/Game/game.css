@@ -408,7 +408,7 @@ ul li {
 }
 @media screen and (max-width: 500px) {
 	.main-logo {
-		width: 150px;
+		width: 150px !important;
 	}
 	.main-img {
 		width: 40px;
@@ -425,7 +425,7 @@ ul li {
 		font-size: 13px;
 	}
 	.main__nav {
-		padding-top: 10px;
+		padding-top: 5px;
 	}
 }
 @media screen and (max-width: 400px) {
@@ -444,15 +444,6 @@ ul li {
 		height: 28px;
 	}
 }
-@media screen and (max-width: 370px) {
-	.main__header {
-		padding: 5px 25px;
-	}
-	.main-img {
-		width: 50px;
-		height: 50px;
-	}
-}
 
 @media only screen and (max-width: 412px) {
 	.text-game {
@@ -464,6 +455,51 @@ ul li {
 	}
 }
 
+@media screen and (max-width: 370px) {
+	.main-img {
+		width: 40px;
+		height: 48px;
+	}
+	.referals__btn{
+		font-size: 15px !important;
+	}
+	.referals__title{
+		font-size: 20px !important;
+	}
+	.main-logo {
+		width: 145px !important;
+	}
+}
+
+@media screen and (max-width: 340px) {
+	.text-game {
+		font-size: 20px;
+	}
+	.pokebolls-title {
+		font-size: 20px !important;
+	}
+	.text-pokeball-1 {
+		font-size: 18px !important;
+	}
+	.text-pokeball-2 {
+		font-size: 18px !important;
+	}
+	.text-pokeball-3 {
+		font-size: 18px !important;
+	}
+	.text-pokeball-4 {
+		font-size: 18px !important;
+	}
+	.detail-wrapper { 
+		top: 5px !important;
+	}
+	.small-pokeball {
+		width: 23px !important;
+	}
+	.icon-showdown-container {
+    top: 8px;
+}
+}
 @media only screen and (min-width: 413px) and (max-width: 600px) {
 	.text-game {
 		font-size: 25px;

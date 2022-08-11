@@ -9,7 +9,6 @@ import emerald from '../../../assets/backgrounds/изумруд-min.svg'
 import { t } from 'ttag'
 import axios from 'axios'
 import Header from '../../Header/Header'
-import SubscribeTg from '../../modals/SubscribeTg'
 
 const initialCardsAmount = {
 	bronze: [0],
@@ -202,7 +201,6 @@ const Game = () => {
 					</div>
 				</div>
 			</div>
-			<SubscribeTg />
 		</>
 	)
 }

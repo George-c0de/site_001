@@ -11,6 +11,7 @@ import axios from 'axios'
 import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
 import Authorization from '../modals/Authorization'
+import SubscribeTg from '../modals/SubscribeTg'
 let data2
 
 try {
@@ -162,7 +163,8 @@ const Header = () => {
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
 			</div>
-			{data2 !== 501 && <Authorization />}
+			{/* {data2 !== 501 && <Authorization />} */}
+			{data2 === 501 && <SubscribeTg />}
 		</>
 	)
 }

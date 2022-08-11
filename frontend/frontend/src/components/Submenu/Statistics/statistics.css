@@ -58,3 +58,12 @@
 		padding-left: 0;
 	}
 }
+@media screen and (max-width: 320px) {
+	.statistic-info li {
+		font-size: 15px;
+	}
+	.referals__container{
+		padding-bottom: 20px;
+	}
+}
+
