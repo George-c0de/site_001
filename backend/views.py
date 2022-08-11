@@ -1641,24 +1641,18 @@ def dis(request):
 def dis_input(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
-        col = request.body
-        col = col.decode('utf8').replace("'", '"')
-        data = json.loads(col)
-        # s = json.dumps(data, indent=4, sort_keys=True)
-        wall = data['wallet']
-        col = data['col']
-        col = int(col)
+        if profile.wallet is not None:
+            wall = Wallet.objects.get(pkey=profile.wallet_output)
+        else:
+            wallet = tc.create_wallet()
+            w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
+            profile.wallet = w.address
+            w.save()
+            wall = w
+        col = get_usdt_balance(wall.address)
         if col < 0:
             return Response(status=400)
         if col is not None:
-            if profile.wallet is not None:
-                wall = Wallet.objects.get(pkey=profile.wallet_output)
-            else:
-                wallet = tc.create_wallet()
-                w = Wallet.objects.create(address=wallet['base58check_address'], pkey=wallet['private_key'])
-                profile.wallet = w.address
-                w.save()
-                wall = w
             data = collect_usdt(wall, col)
             if data:
                 profile.money += col
