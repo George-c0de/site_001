@@ -127,17 +127,17 @@ const CardOpened = ({
 	// const [answer, setAnswer] = useState(false)
 
 	const [accept2, setAccept2] = useState()
-	const [purchaseConfirmation, setPurchaseConfirmation] = useState()
-	const [firstRender, setFirstRender] = useState(false)
-	const [hideModal, setHideModal] = React.useState(false)
+	const [purchaseConfirmation2, setPurchaseConfirmation2] = useState()
+	const [firstRender2, setFirstRender2] = useState(false)
+	const [hideModal2, setHideModal2] = React.useState(false)
 
-	const handleBuyClick = (props, props2) => {
+	const handleBuyClick2 = (props, props2) => {
 		if (!props2) {
 			setAccept2(true)
 		}
-		console.log(purchaseConfirmation, disabledBtn)
-		if (disabledBtn && purchaseConfirmation) {
-			setPurchaseConfirmation(false)
+		console.log(purchaseConfirmation2, disabledBtn)
+		if (disabledBtn && purchaseConfirmation2) {
+			setPurchaseConfirmation2(false)
 			console.log('BUY')
 			setTimeout(async () => {
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
@@ -150,12 +150,12 @@ const CardOpened = ({
 	}
 
 	React.useEffect(() => {
-		if (firstRender) {
-			handleBuyClick('_', true)
+		if (firstRender2) {
+			handleBuyClick2('_', true)
 		} else {
-			setFirstRender(true)
+			setFirstRender2(true)
 		}
-	}, [purchaseConfirmation])
+	}, [purchaseConfirmation2])
 
 	return (
 		<>
@@ -190,7 +190,7 @@ const CardOpened = ({
 				</span>
 
 				<span
-					onClick={handleBuyClick}
+					onClick={handleBuyClick2}
 					className={`card-info-button ${
 						disabledBtn ? '' : 'card-info-disabled'
 					}`}
@@ -202,9 +202,9 @@ const CardOpened = ({
 			{accept2 && (
 				<BuyPockebolInner
 					price={price}
-					setPurchaseConfirmation={setPurchaseConfirmation}
-					hideModal={hideModal}
-					setHideModal={setHideModal}
+					setPurchaseConfirmation={setPurchaseConfirmation2}
+					hideModal={hideModal2}
+					setHideModal={setHideModal2}
 					setAccept={setAccept2}
 				/>
 			)}
@@ -221,8 +221,19 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 
 	const handleBuyClick = () => {
 		setAccept(true)
-		// document.body.style.overflow ='hidden'
-		(purchaseConfirmation && money >= price) &&
+		document.body.style.overflow = 'hidden'
+		// (purchaseConfirmation && money >= price) &&
+		// 	setTimeout(async () => {
+		// 		document.body.style.overflow = 'visible'
+		// 		setStatus('pending')
+		// 		await axios.get(`/api/${category}/${idCard}`).then(res => {
+		// 			setStatus('success')
+		// 			setTimeout(() => {
+		// 				buyCard()
+		// 			}, 1000)
+		// 		})
+		// 	}, 1500)
+		if (purchaseConfirmation && money >= price) {
 			setTimeout(async () => {
 				document.body.style.overflow = 'visible'
 				setStatus('pending')
@@ -233,6 +244,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 					}, 1000)
 				})
 			}, 1500)
+		}
 	}
 
 	React.useEffect(() => {
