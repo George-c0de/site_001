@@ -35,8 +35,9 @@ const Signup = () => {
 		utm: get('utm'),
 	})
 
+	if (data2 == 501) navigate('/home')
+
 	React.useEffect(() => {
-		if(data2 === 501) navigate('/home')
 		if (firstRender && params.utm) {
 			setTypeAuthorization('sign')
 			setFirstRender(false)
