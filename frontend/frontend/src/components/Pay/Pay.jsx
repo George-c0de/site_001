@@ -69,13 +69,13 @@ const Pay = () => {
 				if (user.wallet_input !== null) {
 					setData({
 						wallet_input: user.wallet_input,
-						col: 1,
+						col: '',
 					})
 					SetState(false)
 				} else {
 					setData({
 						wallet_input: '',
-						col: 1,
+						col: '',
 					})
 					SetState(true)
 				}
