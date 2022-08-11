@@ -46,6 +46,8 @@ logging.basicConfig(
 )
 
 tc = TronClient()
+
+
 def send_message_tgbot(message, id):
     token = getenv('TELEGRAM_TOKEN')
     if User_Bot.objects.filter(profile__id=id).exists():
@@ -1381,11 +1383,18 @@ def get_hist_card(request):
             main_list.append(temp_list)
         i = 0
         for key, value in data.items():
+            if len(main_list)-1 < i:
+                print(data)
+                return Response(data=data)
             data[key] = main_list[i]
             i += 1
+        print(data)
         return Response(data=data)
+
     else:
+        print(data)
         return Response(data=data)
+
 
 
 # emerald
