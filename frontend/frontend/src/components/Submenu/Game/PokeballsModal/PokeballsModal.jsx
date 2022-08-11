@@ -23,9 +23,8 @@ const CardOpened = ({
 	price,
 	money,
 }) => {
-	console.log(price)
 	let status = card_data[0]
-	const [disabledBtn, setDisabledBtn] = useState()
+	const [disabledBtn, setDisabledBtn] = useState(true)
 	const handleButton = async () => {
 		await axios.get(`/api/prohibitions`).then(res => {
 			let data = res.data
@@ -124,24 +123,37 @@ const CardOpened = ({
 		handleButton()
 	}, [])
 
-	const [openMenu, setOpenMenu] = useState(false)
-	const [answer, setAnswer] = useState(false)
+	// const [openMenu, setOpenMenu] = useState(false)
+	// const [answer, setAnswer] = useState(false)
 
-	const handleBuyClick = () => {
-		console.log(disabledBtn, answer, openMenu)
-		if (disabledBtn && answer) {
+	const [accept, setAccept] = useState()
+	const [purchaseConfirmation, setPurchaseConfirmation] = useState()
+	const [firstRender, setFirstRender] = useState(false)
+	const [hideModal, setHideModal] = React.useState(false)
+
+	const handleBuyClick = (props, props2) => {
+		if (!props2) {
+			setAccept(true)
+		}
+		if (disabledBtn && purchaseConfirmation) {
+			setPurchaseConfirmation(false)
 			setTimeout(async () => {
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
 					setTimeout(() => {
 						buyCard()
 					}, 1000)
 				})
-				setAnswer(false)
 			}, 3000)
-		} else {
-			setOpenMenu(true)
 		}
 	}
+
+	React.useEffect(() => {
+		if (firstRender) {
+			handleBuyClick('_', true)
+		} else {
+			setFirstRender(true)
+		}
+	}, [purchaseConfirmation])
 
 	return (
 		<>
@@ -185,12 +197,13 @@ const CardOpened = ({
 					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>
 			</div>
-			{openMenu && (
+			{accept && (
 				<BuyPockebolInner
-					openMenu={openMenu}
-					setOpenMenu={setOpenMenu}
 					price={price}
-					setAnswer={setAnswer}
+					setPurchaseConfirmation={setPurchaseConfirmation}
+					hideModal={hideModal}
+					setHideModal={setHideModal}
+					setAccept={setAccept}
 				/>
 			)}
 		</>
