@@ -7,189 +7,302 @@ msgstr ""
 "mime-version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src\components\UserId\UserId.jsx:7
+#: src\components\UserId\UserId.jsx:64
 msgid "User Id"
 msgstr "User Id"
 
-#: src\components\UserId\UserId.jsx:10
+#: src\components\Deposit\Deposit.jsx:187
+#: src\components\UserId\UserId.jsx:69
 msgid "Balance"
 msgstr "Saldo"
 
-#: src\components\UserId\UserId.jsx:11
+#: src\components\UserId\UserId.jsx:72
 msgid "Cards profit"
 msgstr "Carte Profitto"
 
-#: src\components\UserId\UserId.jsx:12
+#: src\components\UserId\UserId.jsx:75
 msgid "Referal profit"
 msgstr "Referral profitto"
 
-#: src\components\UserId\UserId.jsx:13
+#: src\components\UserId\UserId.jsx:77
 msgid "Link for invitation"
 msgstr "Link per invito"
 
-#: src\components\UserId\UserId.jsx:16
+#: src\components\Deposit\Deposit.jsx:186
+#: src\components\UserId\UserId.jsx:93
 msgid "Deposit"
 msgstr "Ricarica"
 
-#: src\components\UserId\UserId.jsx:17
+#: src\components\UserId\UserId.jsx:97
 msgid "Withdraw"
 msgstr "Prelievo"
 
-#: src\components\Submenu\Statistics\statistics.jsx:44
+#: src\components\Submenu\Statistics\statistics.jsx:29
 msgid "TOTAL USERS"
 msgstr "UTENTI TOTALI"
 
-#: src\components\Submenu\Statistics\statistics.jsx:45
-msgid "TOTALE TRANSAZIONI"
-msgstr ""
-
-#: src\components\Submenu\Statistics\statistics.jsx:46
+#: src\components\Submenu\Statistics\statistics.jsx:35
 msgid "TOTAL PAYOUT"
 msgstr "PAGAMENTO TOTALE"
 
-#: src\components\Submenu\Referals\referals.jsx:43
+#: src\components\Submenu\Referals\referals.jsx:124
 msgid "Referral link"
 msgstr "Link per invito"
 
-#: src\components\Submenu\Referals\referals.jsx:48
+#: src\components\Submenu\Referals\referals.jsx:140
 msgid "1 line"
 msgstr "1 linea"
 
-#: src\components\Submenu\Referals\referals.jsx:49
+#: src\components\Submenu\Referals\referals.jsx:141
 msgid "Total person"
 msgstr "Persona totale"
 
-#: src\components\Submenu\Referals\referals.jsx:57
+#: src\components\Submenu\Referals\referals.jsx:150
 msgid "2 line"
 msgstr "2 linea"
 
-#: src\components\Submenu\Referals\referals.jsx:58
+#: src\components\Submenu\Referals\referals.jsx:151
 msgid "Profit received"
 msgstr "Reddito ricevuto"
 
-#: src\components\Submenu\Referals\referals.jsx:66
+#: src\components\Submenu\Referals\referals.jsx:161
 msgid "3 line"
 msgstr "3 linea"
 
-#: src\components\Submenu\Referals\referals.jsx:67
+#: src\components\Submenu\Referals\referals.jsx:163
 msgid "Lost profits"
 msgstr "Guadagno perso"
 
-#: src\components\Submenu\Game\game.jsx:66
-msgid "УЧАСТВУЙ В БИТВАХ И ПОЛУЧАЙ ПРИЗЫ"
-msgstr "UNISCITI ALLA LOTTA E VINCI"
-
-#: src\components\Submenu\Game\game.jsx:70
+#: src\components\Submenu\Game\PokeballsPack\PokeballsPack.jsx:86
 msgid "Cards"
 msgstr "CARTE"
 
-#: src\components\Submenu\Game\game.jsx:80
+#: src\components\Submenu\Game\game.jsx:159
 msgid "BRONZE"
 msgstr "BRONZO"
 
-#: src\components\Submenu\Game\game.jsx:98
+#: src\components\Submenu\Game\game.jsx:169
 msgid "SILVER"
 msgstr "D'ARGENTO"
 
-#: src\components\Submenu\Game\game.jsx:116
+#: src\components\Submenu\Game\game.jsx:179
 msgid "GOLD"
 msgstr "ORO"
 
-#: src\components\Submenu\Game\game.jsx:134
+#: src\components\Submenu\Game\game.jsx:189
 msgid "EMERALD"
 msgstr "SMERALDO"
 
-#: src\components\Submenu\Game\game.jsx:144
+#: src\components\Submenu\Game\GameHistory\GameHistory.jsx:21
 msgid "GAME HISTORY"
 msgstr "STORIA DEL GIOCO"
 
-#: src\components\Submenu\Game\game.jsx:165
-msgid "SHOW MORE"
-msgstr "mostra di più"
-
-#: src\components\StartGame\startgame.jsx:44
-msgid "start"
-msgstr "inizio"
-
-#: src\components\Login\login.jsx:65
-#: src\components\Signup\signup.jsx:73
-#: src\components\Signup\signup.jsx:76
+#: src\components\Login\login.jsx:218
 msgid "Log In"
 msgstr "Login"
 
-#: src\components\Login\login.jsx:87
-#: src\components\Login\login.jsx:96
-#: src\components\Signup\signup.jsx:84
-#: src\components\Signup\signup.jsx:128
+#: src\components\Login\login.jsx:229
 msgid "Sign Up"
 msgstr "Registrati"
 
-#: src\components\Signup\signup.jsx:87
-msgid "Username"
-msgstr ""
-
-#: src\components\Login\login.jsx:68
-#: src\components\Signup\signup.jsx:96
+#: src\components\Login\login.jsx:240
+#: src\components\Login\login.jsx:273
+#: src\components\Login\login.jsx:336
 msgid "Email"
 msgstr "e-mail"
 
-#: src\components\Login\login.jsx:78
-#: src\components\Signup\signup.jsx:106
+#: src\components\Login\login.jsx:250
+#: src\components\Login\login.jsx:282
+#: src\components\ResetPass\Resetpass.jsx:55
 msgid "Password"
 msgstr "Password"
 
-#: src\components\Signup\signup.jsx:116
+#: src\components\Login\login.jsx:294
+#: src\components\ResetPass\Resetpass.jsx:65
 msgid "Confirm Password"
 msgstr "Conferma la password"
 
-#: src\components\MainPage\mainpage.jsx:87
-#. useEffect(async() => {
-#. const res= await axios.get('/api/user');
-#. console.log(res)
-#. },[]);
+#: src\components\Header\Header.jsx:127
 msgid "MAIN"
 msgstr "Pagina principale"
 
-#: src\components\MainPage\mainpage.jsx:88
-#. useEffect(async() => {
-#. const res= await axios.get('/api/user');
-#. console.log(res)
-#. },[]);
+#: src\components\Header\Header.jsx:132
 msgid "REFFERALS"
 msgstr "Rinvii"
 
-#: src\components\MainPage\mainpage.jsx:89
-#. useEffect(async() => {
-#. const res= await axios.get('/api/user');
-#. console.log(res)
-#. },[]);
+#: src\components\Header\Header.jsx:137
 msgid "STATISTICS"
 msgstr "Statistiche"
 
-#: src\components\MainPage\mainpage.jsx:90
-#. useEffect(async() => {
-#. const res= await axios.get('/api/user');
-#. console.log(res)
-#. },[]);
+#: src\components\Header\Header.jsx:146
 msgid "RULES"
 msgstr "Regole"
 
-#: src\components\MainPage\mainpage.jsx:95
-#. useEffect(async() => {
-#. const res= await axios.get('/api/user');
-#. console.log(res)
-#. },[]);
+#: src\components\Header\Header.jsx:153
 msgid "USE TELEGRAM BOT"
 msgstr "Usa il bot di telegramma"
 
-#: src\components\MainPage\Menu\Menu.jsx:31
+#: src\components\Header\Header.jsx:157
 msgid "LOGOUT"
 msgstr "Disconnettersi"
 
-#: src\components\Login\login.jsx:20
-msgid "Switch lang"
+#: src\components\Submenu\Statistics\statistics.jsx:32
+msgid "TOTAL  TRANSACTIONS"
 msgstr ""
 
-#: src\components\Login\login.jsx:93
-msgid "New Here"
+#: src\components\Submenu\Game\game.jsx:156
+msgid "JOIN THE FIGHT AND WIN"
+msgstr ""
+
+#: src\components\Submenu\Game\PokeballsModal\PokeballsModal.jsx:161
+msgid "Referrals profit:"
+msgstr ""
+
+#: src\components\Submenu\Game\PokeballsModal\PokeballsModal.jsx:164
+msgid "Total Wins:"
+msgstr ""
+
+#: src\components\Submenu\Game\PokeballsModal\PokeballsModal.jsx:174
+#: src\components\Submenu\Game\PokeballsModal\PokeballsModal.jsx:238
+msgid "ACTIVATE"
+msgstr ""
+
+#: src\components\Submenu\Game\GameHistory\GameHistory.jsx:207
+msgid "Show more"
+msgstr ""
+
+#: src\components\Rules\Rules.jsx:215
+msgid "Still have questions?"
+msgstr ""
+
+#: src\components\Rules\Rules.jsx:215
+msgid "Complete instructions"
+msgstr ""
+
+#: src\components\ResetPass\Resetpass.jsx:49
+msgid "Enter a new password"
+msgstr ""
+
+#: src\components\Login\login.jsx:300
+#: src\components\ResetPass\Resetpass.jsx:71
+msgid ""
+"The password must be at least 8 characters long. Contains letters and "
+"symbols"
+msgstr ""
+
+#: src\components\ResetPass\Resetpass.jsx:75
+msgid "Confirm your new password"
+msgstr ""
+
+#: src\components\Pay\Pay.jsx:140
+msgid "Withdrawal"
+msgstr ""
+
+#: src\components\Pay\Pay.jsx:141
+msgid "Available for payout"
+msgstr ""
+
+#: src\components\Pay\Pay.jsx:147
+msgid "Enter the amount to withdraw"
+msgstr ""
+
+#: src\components\Pay\Pay.jsx:159
+msgid "Withdrawal wallet"
+msgstr ""
+
+#: src\components\Pay\Pay.jsx:172
+msgid ""
+"Specify a wallet for funds withdrawal. Specified wallet is not subject to "
+"change"
+msgstr ""
+
+#: src\components\Pay\Pay.jsx:177
+msgid "PAYOUT"
+msgstr ""
+
+#: src\components\Deposit\Deposit.jsx:214
+#: src\components\Pay\Pay.jsx:179
+msgid "TRANSACTION HISTORY"
+msgstr ""
+
+#: src\components\Deposit\Deposit.jsx:217
+#: src\components\Pay\Pay.jsx:182
+msgid "Time"
+msgstr ""
+
+#: src\components\Deposit\Deposit.jsx:225
+#: src\components\Pay\Pay.jsx:192
+msgid "Date"
+msgstr ""
+
+#: src\components\Deposit\Deposit.jsx:234
+#: src\components\Pay\Pay.jsx:203
+msgid "TRANSACTION"
+msgstr ""
+
+#: src\components\modals\Authorization.jsx:12
+msgid "Log in to continue"
+msgstr ""
+
+#: src\components\modals\BuyPockebol.jsx:50
+msgid "Purchase price"
+msgstr ""
+
+#: src\components\modals\BuyPockebol.jsx:54
+msgid "Would you like to continue?"
+msgstr ""
+
+#: src\components\modals\BuyPockebol.jsx:61
+msgid "Yes"
+msgstr ""
+
+#: src\components\modals\BuyPockebol.jsx:67
+msgid "No"
+msgstr ""
+
+#: src\components\modals\NotEnoughMoney.jsx:50
+msgid "Insufficient funds to purchase the card"
+msgstr ""
+
+#: src\components\Login\login.jsx:262
+#: src\components\Login\login.jsx:323
+#: src\components\Login\login.jsx:345
+#: src\components\modals\NotEnoughMoney.jsx:57
+msgid "Continue"
+msgstr ""
+
+#: src\components\modals\SubscribeTg.jsx:42
+msgid "Subscribe to us on Telegram to receive information about your winnings"
+msgstr ""
+
+#: src\components\modals\SubscribeTg.jsx:50
+msgid "Subscribe to Telegram"
+msgstr ""
+
+#: src\components\Login\login.jsx:259
+msgid "Forgot your password"
+msgstr ""
+
+#: src\components\Login\login.jsx:315
+msgid "I'm not a robot"
+msgstr ""
+
+#: src\components\Login\login.jsx:329
+msgid "Enter your email address to reset your password"
+msgstr ""
+
+#: src\components\Login\login.jsx:342
+msgid "Password recovery link was sent to the specified email"
+msgstr ""
+
+#: src\components\Deposit\Deposit.jsx:193
+msgid ""
+"To top up your balance, send the required amount to the specified purse "
+"trc-20. The amount will be immediately credited to your game balance."
+msgstr ""
+
+#: src\components\Deposit\Deposit.jsx:204
+msgid ""
+"The minimum amount to be paid is 10 usdt. Transactions for a smaller amount "
+"will be lost"
 msgstr ""

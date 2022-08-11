@@ -13,20 +13,24 @@ import { Lang } from '../Lang/Lang'
 import Authorization from '../modals/Authorization'
 import SubscribeTg from '../modals/SubscribeTg'
 let data2
-
-try {
-	axios.get('/api/login').catch(function (error) {
-		if (error.response) {
-			data2 = error.response.status
-		}
-	})
-} catch (error) {}
+const check = async () => {
+	try {
+		await axios.get('/api/login').catch(function (error) {
+			if (error.response) {
+				data2 = error.response.status
+				console.log(data2)
+			}
+		})
+	} catch (error) {}
+}
+check()
+console.log(data2)
 
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
-	const [status, setStatus] = React.useState(501)
+	const [status, setSatus] = React.useState(false)
 	const navigate = useNavigate()
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -52,6 +56,11 @@ const Header = () => {
 		setOpenReferals(false)
 		setOpenStatistics(false)
 	}
+
+	React.useEffect(() => {
+		if (data2 !== 501) setSatus(true)
+	}, [data2])
+
 	const handleLogout = () => {
 		axios.get('/api/logout')
 		localStorage.removeItem('token')
@@ -93,12 +102,6 @@ const Header = () => {
 	}
 	return (
 		<>
-			<Lang
-				setOpenBurger={setOpenBurger}
-				setOpenUserInfo={setOpenUserInfo}
-				setOpenReferals={setOpenReferals}
-				setOpenStatistics={setOpenStatistics}
-			/>
 			<div className='main__header' ref={ref}>
 				<nav className='main__nav'>
 					<div
@@ -159,12 +162,20 @@ const Header = () => {
 						</div>
 					</div>
 				)}
+
 				{openUserInfo && <UserId />}
 				{openReferals && <Referals />}
 				{openStatistics && <Statistics />}
+				<Lang
+					setOpenBurger={setOpenBurger}
+					setOpenUserInfo={setOpenUserInfo}
+					setOpenReferals={setOpenReferals}
+					setOpenStatistics={setOpenStatistics}
+				/>
 			</div>
+			{status && <Authorization />}
 			{data2 !== 501 && <Authorization />}
-			{data2 === 501 && <SubscribeTg />}
+			{/* {data2 === 501 && <SubscribeTg />} */}
 		</>
 	)
 }

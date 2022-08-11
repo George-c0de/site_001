@@ -11,7 +11,7 @@ const Deposit = () => {
 	const [data, setData] = useState({
 		wallet: '',
 		col: 1,
-	})
+	})	
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
 	// убрать комменты снизу
@@ -90,15 +90,15 @@ const Deposit = () => {
 		getPosts()
 	}, [user.id])
 
-	const handleSum = e => {
-		setData({
-			wallet: data.wallet,
-			col: e.target.value,
-		})
-	}
+	// const handleSum = e => {
+	// 	setData({
+	// 		wallet: data.wallet,
+	// 		col: e.target.value,
+	// 	})
+	// }
 
-	const handleSubmit = e => {
-		e.preventDefault()
+	// const handleSubmit = e => {
+	// 	e.preventDefault()
 		// if (data.col < 1) {
 		// 	alert('Error')
 		// } else {
@@ -125,7 +125,7 @@ const Deposit = () => {
 		// 		}
 		// 	}
 		// }
-	}
+	// }
 
 	setInterval(() => {
 		console.log('RUN FUNCTION')
@@ -179,7 +179,7 @@ const Deposit = () => {
 			<div className='main_container'>
 				<Header />
 			</div>
-			<form onSubmit={handleSubmit}>
+			<form>
 				<div className='deposit-wrapper'>
 					<div className='deposit-wrapper-form'>
 						<div className='deposit-title-wrapper'>
@@ -205,10 +205,10 @@ const Deposit = () => {
 								</p>
 							</div>
 						</div>
-						<button
+						{/* <button
 							type={'submit'}
 							className='deposit-button'
-						>{t`Deposit`}</button>
+						>{t`Deposit`}</button> */}
 					</div>
 					<div className='deposit-history-wrapper'>
 						<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>
