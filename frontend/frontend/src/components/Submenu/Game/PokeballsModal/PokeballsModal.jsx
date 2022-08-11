@@ -133,6 +133,7 @@ const CardOpened = ({
 
 	const handleBuyClick2 = (props, props2) => {
 		if (!props2 && disabledBtn) {
+			console.log(disabledBtn)
 			setAccept2(true)
 		}
 		console.log(purchaseConfirmation2, disabledBtn)
@@ -230,6 +231,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 					setStatus('success')
 					setTimeout(() => {
 						buyCard()
+						document.location.reload()
 					}, 1000)
 				})
 			}, 1500)
