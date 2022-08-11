@@ -124,8 +124,8 @@ const Pay = () => {
 	}
 	const hundSum = (e, name) => {
 		if (name == 'col') e.target.value = e.target.value.replace(/[^\d.]/g, '')
-		if (name == 'wallet_input')
-			e.target.value = e.target.value.replace(/[0-9A-Za-z]/g, '')
+		if (name == 'wallet_input') e.target.value = e.target.value.replace(/[0-9A-Za-z]/g, '')
+
 		setData({
 			...data,
 			[name]: e.target.value,
