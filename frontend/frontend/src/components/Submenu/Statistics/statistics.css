@@ -3,6 +3,7 @@
 	align-items: center;
 	text-align: center;
 	margin: 20px 0;
+	padding-left: 0 !important;
 }
 
 .statistic-info li {
@@ -37,9 +38,6 @@
 	.statistic-info li span {
 		font-size: 30px;
 	}
-	.statistic-info {
-		margin: 0;
-	}
 }
 
 @media screen and (max-width: 500px) {
@@ -51,11 +49,6 @@
 	}
 	.statistic-info li span {
 		margin: 5px 0;
-	}
-}
-@media screen and (max-width: 420px) {
-	.statistic-info {
-		padding-left: 0;
 	}
 }
 @media screen and (max-width: 320px) {
