@@ -135,8 +135,10 @@ const CardOpened = ({
 		if (!props2) {
 			setAccept(true)
 		}
+		console.log(purchaseConfirmation, disabledBtn)
 		if (disabledBtn && purchaseConfirmation) {
 			setPurchaseConfirmation(false)
+			console.log('BUY')
 			setTimeout(async () => {
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
 					setTimeout(() => {
@@ -190,9 +192,9 @@ const CardOpened = ({
 				<span
 					onClick={handleBuyClick}
 					className={`card-info-button ${
-						disabledBtn && money >= price ? '' : 'card-info-disabled'
+						disabledBtn ? '' : 'card-info-disabled'
 					}`}
-					disabled={disabledBtn && money >= price ? false : true}
+					disabled={disabledBtn ? false : true}
 				>
 					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>
