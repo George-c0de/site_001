@@ -28,7 +28,7 @@ const CardOpened = ({
 	const handleButton = async () => {
 		await axios.get(`/api/prohibitions`).then(res => {
 			let data = res.data
-
+			console.log(data)
 			switch (category) {
 				case 'bronze': {
 					setDisabledBtn(data.bronze[idCard - 1])
@@ -132,7 +132,7 @@ const CardOpened = ({
 	const [hideModal2, setHideModal2] = React.useState(false)
 
 	const handleBuyClick2 = (props, props2) => {
-		if (!props2) {
+		if (!props2 && !disabledBtn) {
 			setAccept2(true)
 		}
 		console.log(purchaseConfirmation2, disabledBtn)
@@ -222,17 +222,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 	const handleBuyClick = () => {
 		setAccept(true)
 		document.body.style.overflow = 'hidden'
-		// (purchaseConfirmation && money >= price) &&
-		// 	setTimeout(async () => {
-		// 		document.body.style.overflow = 'visible'
-		// 		setStatus('pending')
-		// 		await axios.get(`/api/${category}/${idCard}`).then(res => {
-		// 			setStatus('success')
-		// 			setTimeout(() => {
-		// 				buyCard()
-		// 			}, 1000)
-		// 		})
-		// 	}, 1500)
 		if (purchaseConfirmation && money >= price) {
 			setTimeout(async () => {
 				document.body.style.overflow = 'visible'
