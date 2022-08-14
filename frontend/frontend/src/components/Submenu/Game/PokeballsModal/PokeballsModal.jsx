@@ -132,9 +132,8 @@ const CardOpened = ({
 	const [hideModal2, setHideModal2] = React.useState(false)
 
 	const handleBuyClick2 = (props, props2) => {
-		if (!props2 && !disabledBtn) {
-			console.log(disabledBtn)
-			setAccept2(true)
+		if (!props2 && disabledBtn) {
+			 setAccept2(true)
 		}
 		console.log(purchaseConfirmation2, disabledBtn)
 		if (disabledBtn && purchaseConfirmation2) {
@@ -195,7 +194,7 @@ const CardOpened = ({
 					className={`card-info-button ${
 						disabledBtn && money <= price ? '' : 'card-info-disabled'
 					}`}
-					disabled={disabledBtn && money <= price ? false : true}
+					disabled={disabledBtn ? false : true}
 				>
 					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>

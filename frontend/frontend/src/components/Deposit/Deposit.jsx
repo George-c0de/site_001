@@ -89,43 +89,7 @@ const Deposit = () => {
 		}
 		getPosts()
 	}, [user.id])
-
-	// const handleSum = e => {
-	// 	setData({
-	// 		wallet: data.wallet,
-	// 		col: e.target.value,
-	// 	})
-	// }
-
-	// const handleSubmit = e => {
-	// 	e.preventDefault()
-	// if (data.col < 1) {
-	// 	alert('Error')
-	// } else {
-	// 	try {
-	// 		axios
-	// 			.post(
-	// 				'/api/dis_input',
-	// 				{
-	// 					wallet: data.wallet,
-	// 					col: data.col,
-	// 				},
-	// 				{
-	// 					headers: { 'Content-Type': 'application/json' },
-	// 				}
-	// 			)
-	// 			.then(function (response) {})
-	// 			.catch(function (error) {})
-	// 	} catch (e) {
-	// 		if (e.response.status === 200) {
-	// 			data.col = 1
-	// 			alert('Ok')
-	// 		} else {
-	// 			alert('Error')
-	// 		}
-	// 	}
-	// }
-	// }
+	
 	setTimeout(() => {
 		axios.get('/api/dis_input').then(data => {
 			console.log(data)
