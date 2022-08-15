@@ -9,6 +9,7 @@ import emerald from '../../../assets/backgrounds/изумруд-min.svg'
 import { t } from 'ttag'
 import axios from 'axios'
 import Header from '../../Header/Header'
+import { motion } from 'framer-motion'
 
 const initialCardsAmount = {
 	bronze: [0],
@@ -152,7 +153,12 @@ const Game = () => {
 				<Header />
 				<div className='homepage-wrapper'>
 					<div className={onActive ? 'site-main-game' : 'site-main_active'}>
-						<div className='site-main-game-wrapper'>
+						<motion.div
+							className='site-main-game-wrapper'
+							initial={{ opacity: 0, y: 50 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
+						>
 							<div className='text-game'>{t`JOIN THE FIGHT AND WIN`}</div>
 							<div className='container-pack-pokeballs'>
 								<PokeballsPack
@@ -197,7 +203,7 @@ const Game = () => {
 								/>
 							</div>
 							<GameHistory history={history} />
-						</div>
+						</motion.div>
 					</div>
 				</div>
 			</div>

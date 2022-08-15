@@ -5,6 +5,7 @@ import { t } from 'ttag'
 import Header from '../Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion'
 
 const Pay = () => {
 	const [state_input, SetState] = useState(true)
@@ -139,7 +140,12 @@ const Pay = () => {
 			<div className='main_container'>
 				<Header />
 				<form onSubmit={handleSubmit}>
-					<div className='pay-wrapper'>
+					<motion.div
+						className='pay-wrapper'
+						initial={{ opacity: 0, y: 50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
+					>
 						<div className='pay-title-wrapper'>
 							<h1 className='pay-title'>{t`Withdrawal`}</h1>
 							<span className='pay-subtitle'>{t`Available for payout`}:</span>
@@ -216,33 +222,35 @@ const Pay = () => {
 								</div>
 								<div className='history-table-column history-table-column-mobile'>
 									<span className='history-table-title'>Txid</span>
-									{tran && tran.map((trans, id) => {
-										return (
-											<h3 className='history-table-text-intable'>
-												{trans?.txid.slice(0, 20)}
-												<FontAwesomeIcon
-													icon={faCopy}
-													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
-													onClick={() => handleCopyInTable(id)}
-												/>
-											</h3>
-										)
-									})}
+									{tran &&
+										tran.map((trans, id) => {
+											return (
+												<h3 className='history-table-text-intable'>
+													{trans?.txid.slice(0, 20)}
+													<FontAwesomeIcon
+														icon={faCopy}
+														className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+														onClick={() => handleCopyInTable(id)}
+													/>
+												</h3>
+											)
+										})}
 								</div>
 								<div className='history-table-column history-table-column-mobile-small'>
 									<span className='history-table-title'>Txid</span>
-									{tran && tran.map((trans, id) => {
-										return (
-											<h3 className='history-table-text-intable'>
-												{trans?.txid.slice(0, 10)}
-												<FontAwesomeIcon
-													icon={faCopy}
-													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
-													onClick={() => handleCopyInTable(id)}
-												/>
-											</h3>
-										)
-									})}
+									{tran &&
+										tran.map((trans, id) => {
+											return (
+												<h3 className='history-table-text-intable'>
+													{trans?.txid.slice(0, 10)}
+													<FontAwesomeIcon
+														icon={faCopy}
+														className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+														onClick={() => handleCopyInTable(id)}
+													/>
+												</h3>
+											)
+										})}
 								</div>
 								<div className='history-table-column'>
 									<span className='history-table-title sum'>{`Sum`}</span>
@@ -256,7 +264,7 @@ const Pay = () => {
 								</div>
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				</form>
 			</div>
 		</div>

@@ -11,6 +11,8 @@ import PokebolPt from '../../assets/pockebol-pt.png'
 import PokebolFr from '../../assets/pockebol-fr.png'
 import Logo from '../../assets/header/logo.svg'
 import * as cookie from '../../cookie'
+import { motion } from 'framer-motion'
+
 let data2
 
 try {
@@ -137,7 +139,14 @@ const Startgame = () => {
 	const [onActive, setActive] = React.useState(true)
 	return (
 		<div className='background-start'>
-			<img src={Logo} className='logo-tokemon' alt='' />
+			<motion.img
+				src={Logo}
+				className='logo-tokemon'
+				alt=''
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.5 }}
+			/>
 			{activeImg}
 			<img src={MainBg} alt='' className='main-bg' />
 			<Lang isActive={onActive} />

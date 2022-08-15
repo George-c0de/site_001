@@ -5,6 +5,7 @@ import { t } from 'ttag'
 import Header from '../Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion'
 
 const Deposit = () => {
 	const [state_input, SetState] = useState(true)
@@ -125,7 +126,12 @@ const Deposit = () => {
 				<Header />
 			</div>
 			<form>
-				<div className='deposit-wrapper'>
+				<motion.div
+					className='deposit-wrapper'
+					initial={{ opacity: 0, y: 50 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
+				>
 					<div className='deposit-wrapper-form'>
 						<div className='deposit-title-wrapper'>
 							<h1 className='deposit-title'>{t`Deposit`}</h1>
@@ -238,7 +244,7 @@ const Deposit = () => {
 							</div>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			</form>
 		</div>
 	)

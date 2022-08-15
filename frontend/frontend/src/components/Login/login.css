@@ -409,7 +409,7 @@ input[type='checkbox'] + .checkmark span {
 	}
 	.authorization__pikachu-wrapper {
 		left: 50%;
-		transform: translate(-50%);
+		transform: translate(-50%) !important;
 		bottom: 0;
 	}
 	.reset__text {

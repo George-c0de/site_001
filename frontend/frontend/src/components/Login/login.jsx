@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
 import logo from '../../assets/header/logo.svg'
@@ -8,6 +8,7 @@ import { t } from 'ttag'
 import { get } from '../../cookie'
 import { saveLocale } from '../../utm'
 import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 let data2
 
@@ -208,11 +209,21 @@ const Signup = () => {
 				typeAuthorization === 'reset' ? 'login_container-reset' : ''
 			}`}
 		>
-			<div className='header-authorization'>
+			<motion.div
+				className='header-authorization'
+				initial={{ opacity: 0, y: -150 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.5, ease: 'linear' }}
+			>
 				<img src={logo} alt='' className='nav__logo' />
-			</div>
+			</motion.div>
 			<div className='authorization__container'>
-				<div className='authorization__menu'>
+				<motion.div
+					className='authorization__menu'
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, ease: 'easeIn', delay: 0.45 }}
+				>
 					{(typeAuthorization === 'login' || typeAuthorization === 'sign') && (
 						<div className='authorization__nav'>
 							<p
@@ -355,10 +366,15 @@ const Signup = () => {
 							</form>
 						</>
 					)}
-				</div>
-				<div className='authorization__pikachu-wrapper'>
+				</motion.div>
+				<motion.div
+					className='authorization__pikachu-wrapper'
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, ease: 'easeIn', delay: 0.3 }}
+				>
 					<img src={pikachu_pokeball} className='pikachu-pokeball' alt='' />
-				</div>
+				</motion.div>
 			</div>
 			<Lang />
 		</div>

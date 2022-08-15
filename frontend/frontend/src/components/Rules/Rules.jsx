@@ -40,6 +40,7 @@ import Cross from '../../assets/cross-svgrepo-com.svg'
 import * as cookie from '../../cookie'
 import React, { useState } from 'react'
 import { t } from 'ttag'
+import { motion } from 'framer-motion'
 
 function Rules2() {
 	const LOCALE_COOKIE = '__locale'
@@ -190,7 +191,12 @@ function Rules2() {
 		<>
 			<div className='homepage-wrapper'>
 				{!activeGallery && <Header />}
-				<div className='rules__container'>
+				<motion.div
+					className='rules__container'
+					initial={{ opacity: 0, y: 50 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
+				>
 					<div className='rules__blocks-wrapper'>
 						{!activeGallery && (
 							<>
@@ -240,7 +246,7 @@ function Rules2() {
 							</div>
 						)}
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</>
 	)

@@ -10,8 +10,8 @@ import LogOut from '../../assets/logout.svg'
 import axios from 'axios'
 import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
-import Authorization from '../modals/Authorization'
 import SubscribeTg from '../modals/SubscribeTg'
+import { motion } from 'framer-motion'
 
 let data2
 
@@ -30,9 +30,9 @@ const Header = () => {
 	const navigate = useNavigate()
 
 	const startGame = () => {
-		if (data2 !== 501) {
-			navigate('/login')
-		}
+		// if (data2 !== 501) {
+		// 	navigate('/login')
+		// }
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -105,7 +105,13 @@ const Header = () => {
 
 	return (
 		<>
-			<div className='main__header' ref={ref}>
+			<motion.div
+				className='main__header'
+				ref={ref}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.5, ease: 'linear' }}
+			>
 				<nav className='main__nav'>
 					<div
 						className={`main__menu menu-btn ${openBurger ? 'open' : ''} `}
@@ -175,8 +181,7 @@ const Header = () => {
 					setOpenReferals={setOpenReferals}
 					setOpenStatistics={setOpenStatistics}
 				/>
-			</div>
-			{/* {status && <Authorization />} */}
+			</motion.div>
 			{data2 === 501 && <SubscribeTg />}
 		</>
 	)
