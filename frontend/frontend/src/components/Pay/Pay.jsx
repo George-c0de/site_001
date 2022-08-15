@@ -216,10 +216,10 @@ const Pay = () => {
 								</div>
 								<div className='history-table-column history-table-column-mobile'>
 									<span className='history-table-title'>Txid</span>
-									{tran.map((trans, id) => {
+									{tran && tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable'>
-												{trans.txid.slice(0, 20)}
+												{trans?.txid.slice(0, 20)}
 												<FontAwesomeIcon
 													icon={faCopy}
 													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
@@ -231,10 +231,10 @@ const Pay = () => {
 								</div>
 								<div className='history-table-column history-table-column-mobile-small'>
 									<span className='history-table-title'>Txid</span>
-									{tran.map((trans, id) => {
+									{tran && tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable'>
-												{trans.txid.slice(0, 10)}
+												{trans?.txid.slice(0, 10)}
 												<FontAwesomeIcon
 													icon={faCopy}
 													className='copy-icon deposit-copy-icon deposit-copy-icon-table'

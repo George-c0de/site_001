@@ -33,7 +33,7 @@ const Signup = () => {
 		if (data2 === 501) {
 			navigate('/home')
 		}
-	}, 1000)
+	}, 2500)
 	const [data, setData] = useState({
 		email: '',
 		password1: '',
