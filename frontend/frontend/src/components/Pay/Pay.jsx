@@ -127,7 +127,7 @@ const Pay = () => {
 		if (name == 'col') e.target.value = e.target.value.replace(/[^\d.]/g, '')
 		if (name == 'wallet_input') {
 			e.target.value = e.target.value.replace(/[^0-9A-Za-z]/g, '')
-		} 
+		}
 
 		setData({
 			...data,
@@ -226,7 +226,7 @@ const Pay = () => {
 										tran.map((trans, id) => {
 											return (
 												<h3 className='history-table-text-intable'>
-													{trans?.txid.slice(0, 20)}
+													{trans && trans.txid.slice(0, 20)}
 													<FontAwesomeIcon
 														icon={faCopy}
 														className='copy-icon deposit-copy-icon deposit-copy-icon-table'
@@ -242,7 +242,7 @@ const Pay = () => {
 										tran.map((trans, id) => {
 											return (
 												<h3 className='history-table-text-intable'>
-													{trans?.txid.slice(0, 10)}
+													{trans && trans?.txid.slice(0, 10)}
 													<FontAwesomeIcon
 														icon={faCopy}
 														className='copy-icon deposit-copy-icon deposit-copy-icon-table'

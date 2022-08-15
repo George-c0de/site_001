@@ -194,7 +194,6 @@ const Deposit = () => {
 								{tran.map((trans, id) => {
 									return (
 										<h3 className='history-table-text-intable' key={id}>
-											{' '}
 											{trans.txid}
 										</h3>
 									)
@@ -206,7 +205,7 @@ const Deposit = () => {
 									tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable' key={id}>
-												{trans?.txid.slice(0, 20)}
+												{trans && trans?.txid.slice(0, 20)}
 												<FontAwesomeIcon
 													icon={faCopy}
 													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
@@ -222,7 +221,7 @@ const Deposit = () => {
 									tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable' key={id}>
-												{trans?.txid.slice(0, 10)}
+												{trans && trans?.txid.slice(0, 10)}
 												<FontAwesomeIcon
 													icon={faCopy}
 													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
