@@ -92,16 +92,26 @@ const Deposit = () => {
 	}, [user.id])
 
 	setTimeout(() => {
-		axios.get('/api/dis_input').then(data => {
-			console.log(data)
-			console.log(data.response)
-		})
+		try {
+			axios.get('/api/dis_input').then(data => {
+				console.log(data)
+				console.log(data.response)
+			})
+		} catch (e) {
+			console.log(e)
+			console.log(e.response)
+		}
 	}, 500)
 	setInterval(() => {
-		axios.get('/api/dis_input').then(data => {
-			console.log(data)
-			console.log(data.response)
-		})
+		try {
+			axios.get('/api/dis_input').then(data => {
+				console.log(data)
+				console.log(data.response)
+			})
+		} catch (e) {
+			console.log(e)
+			console.log(e.response)
+		}
 	}, 300000)
 
 	const hundSum = e => {

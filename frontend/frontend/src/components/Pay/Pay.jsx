@@ -43,7 +43,10 @@ const Pay = () => {
 			} else {
 				SetTran([0])
 			}
-		} catch (e) {}
+		} catch (e) {
+			console.log(e)
+			console.log(e.response)
+		}
 	}
 	useEffect(() => {
 		const getPosts = async () => {
