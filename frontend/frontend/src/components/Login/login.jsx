@@ -30,11 +30,20 @@ const Signup = () => {
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [activeCaptcha, setActiveCaptcha] = useState(false)
 	const [firstRender, setFirstRender] = useState(true)
-	setTimeout(() => {
-		if (data2 === 501) {
-			navigate('/home')
+	const [data3, setData3] = useState()
+
+	React.useEffect(() => {
+		try {
+			axios.get('/api/login').catch(function (error) {
+				if (error.response) {
+					setData3(error.response.status)
+				}
+			})
+		} catch (error) {
+			console.log(error)
 		}
-	}, 2500)
+		console.log('RENDER')
+	}, [])
 	const [data, setData] = useState({
 		email: '',
 		password1: '',
@@ -57,6 +66,11 @@ const Signup = () => {
 			utm: get('utm'),
 		})
 	}, [])
+	setTimeout(() => {
+		if (data3 === 501) {
+			navigate('/home')
+		}
+	}, 3000)
 
 	const [emailReset, setEmailReset] = useState('')
 	const [letterSent, setLetterSent] = useState(false)
