@@ -155,6 +155,7 @@ class History_card(models.Model):
     buy = models.BooleanField('Покупка')
     from_person_id = models.CharField(max_length=150, default=0)
 
+
 # Ввод
 class History_Transactions(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -164,7 +165,7 @@ class History_Transactions(models.Model):
     success = models.BooleanField('Успешность', default=False)
     Choices = [('Output', 'Вывод'), ('Input', 'Ввод')]
     name_operation = models.CharField(max_length=50, choices=Choices)
-    txid = models.CharField(max_length=150)
+    txid = models.CharField(max_length=255)
 
     class Meta:
         verbose_name_plural = _("Транзакции")
