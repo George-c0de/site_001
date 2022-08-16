@@ -3,24 +3,22 @@ import telebot
 from rest_framework.response import Response
 import requests
 from django.http import JsonResponse
+
+from site_001.settings import TELEGRAM_TOKEN, ADMIN_TELEGRAM
 from .models import *
 from rest_framework.views import APIView
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
-TUTORIAL_BOT_TOKEN = "5540149986:AAE0qQjVgvobPBOfVxSqOBueeGC2Vc9PWrs"
+# TUTORIAL_BOT_TOKEN = "5540149986:AAE0qQjVgvobPBOfVxSqOBueeGC2Vc9PWrs"
+TUTORIAL_BOT_TOKEN = TELEGRAM_TOKEN
 
 
 # https://api.telegram.org/bot<token>/setWebhook?url=<url>/webhooks/tutorial/
 class TutorialBotView(APIView):
     def post(self, request, *args, **kwargs):
         t_data = json.loads(request.body)
-        memcache_key = "vCH1vGWJxfSeofSAs0K5PA"
-        # print(t_data)
         t_message = t_data["message"]
         t_chat = t_message["chat"]
-        # if not Chat_id.objects.filter(user=request.user.id).exists():
-        #     print(request.user.id)
-        #     Chat_id.objects.create(user=request.user.id, id=int(t_chat["id"]))
         try:
             text = t_message["text"]
         except Exception as e:
@@ -41,19 +39,22 @@ class TutorialBotView(APIView):
                                 self.send_message(event.message, t_chat['id'])
                                 event.delete()
         else:
-            if Chat_id.objects.filter(id=t_chat["id"]).exists():
-                print('no')
-                chat = Chat_id.objects.get(id=int(t_chat["id"]))
-                # we want chat obj to be the same as fetched from collection
-                t_chat['id'] = chat.id
-                if User_Bot.objects.filter(chat_id=t_chat['id']).exists():
-                    print('no')
-                    user = User_Bot.objects.get(chat_id=t_chat['id']).profile.id
-                    if Event.objects.filter(user_id=user).exists():
-                        print('no')
-                        msg = Event.objects.get(user_id=user).message
-                        self.send_message(msg, t_chat['id'])
-                        Event.objects.get(user_id=user).delete()
+            if t_chat['id'] == ADMIN_TELEGRAM:
+                for el in User_Bot.objects.all():
+                    self.send_message(t_message, el.chat_id)
+            # if Chat_id.objects.filter(id=t_chat["id"]).exists():
+            #     print('no')
+            #     chat = Chat_id.objects.get(id=int(t_chat["id"]))
+            #     # we want chat obj to be the same as fetched from collection
+            #     t_chat['id'] = chat.id
+            #     if User_Bot.objects.filter(chat_id=t_chat['id']).exists():
+            #         print('no')
+            #         user = User_Bot.objects.get(chat_id=t_chat['id']).profile.id
+            #         if Event.objects.filter(user_id=user).exists():
+            #             print('no')
+            #             msg = Event.objects.get(user_id=user).message
+            #             self.send_message(msg, t_chat['id'])
+            #             Event.objects.get(user_id=user).delete()
         return JsonResponse({"ok": "POST request processed"})
 
     def get(self, request, *args, **kwargs):

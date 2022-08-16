@@ -5,14 +5,14 @@ from os import getenv
 import uuid
 import xlsxwriter
 from django.contrib.auth import logout, authenticate, login, get_user_model, password_validation
-from django.contrib.auth.forms import PasswordResetForm, _unicode_ci_compare
+from django.contrib.auth.forms import _unicode_ci_compare
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import INTERNAL_RESET_SESSION_TOKEN
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
 from django.db import ProgrammingError, OperationalError
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_exempt
@@ -159,24 +159,10 @@ def getRoutes(request):
 
 @api_view(['GET'])
 def trans_get_output(request):
-    main = []
-    for el in range(0, 9):
-        time = '{}:30:31'
-        date = '2022.12:{}'
-        m = time.format(el + 8)
-        t = date.format(el + 9)
-        date = {
-            'quantity': el,
-            'data': t,
-            'time': m,
-            'txid': '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-        }
-        main.append(date)
-    return Response(data=main)
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
-        if History_Transactions.objects.filter(user_id=profile.id).exists():
-            ht = History_Transactions.objects.filter(user_id=profile.id)
+        if History_Transactions.objects.filter(user_id=profile.id).filter(success=True).exists():
+            ht = History_Transactions.objects.filter(user_id=profile.id).filter(success=True)
             data = []
             for el in ht:
                 if el.success and el.name_operation == 'Output':
@@ -200,31 +186,12 @@ def trans_get_output(request):
     return Response(data=main)
 
 
-# @api_view(['GET'])
-# def status_card(request):
-#     if Profile.objects.filter(user__id=request.id).exists():
-#         profile = Profile.objects.get(user__id=request.id)
-#
 @api_view(['GET'])
 def trans_get_input(request):
-    main = []
-    for el in range(0, 9):
-        time = '{}:30:31'
-        date = '2022.12:{}'
-        m = time.format(el + 8)
-        t = date.format(el + 9)
-        date = {
-            'quantity': el,
-            'data': t,
-            'time': m,
-            'txid': '0d227961945db22e9fb30e4018a790cc24748fa48fb1d1168d897236a9080108',
-        }
-        main.append(date)
-    return Response(data=main)
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
-        if History_Transactions.objects.filter(user_id=profile.id).exists():
-            ht = History_Transactions.objects.filter(user_id=profile.id)
+        if History_Transactions.objects.filter(user_id=profile.id).filter(success=True).exists():
+            ht = History_Transactions.objects.filter(user_id=profile.id).filter(success=True)
             data = []
             for el in ht:
                 if el.success and el.name_operation == 'Input':
@@ -286,7 +253,6 @@ def create_all_and_admin():
 @api_view(['GET'])
 def get_user_in_card(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
-        all_user_in_matrix = User_in_Matrix.objects.all()
         profile_2 = Profile.objects.get(user_id=request.user.id)
         if User_in_Matrix.objects.filter(user_id=profile_2.id).exists():
             profile = User_in_Matrix.objects.filter(user_id=profile_2.id)
@@ -417,18 +383,6 @@ def get_all(request):
     all_ = All.objects.all().first()
     data = AllSerializer(all_)
     return Response(data.data)
-
-
-@api_view(['GET'])
-def get_max(request):
-    if Profile.objects.filter(user_id=request.user.id).exists():
-        profile = Profile.objects.get(user_id=request.user.id)
-        data = {
-            'max_cards': profile.max_card,
-
-        }
-        return Response(data)
-    return Response(status=200)
 
 
 @api_view(['GET'])
@@ -635,29 +589,39 @@ def check_prohibition(name, id_, profile):
             card__card__category=name).filter(card__card__name=id_).exists():
         us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=name).filter(
             card__card__name=id_).get(matrix__up=True).d
-        if us_pr <= 4:
+        if us_pr < 4:
             return False
         else:
+            if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=False).filter(
+                    card__card__category=name).filter(card__card__name=id_).count() == 1:
+                return False
             return True
     else:
+        if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=False).filter(
+                card__card__category=name).filter(card__card__name=id_).count() == 1:
+            return False
         return True
 
 
 @api_view(['GET'])
 def get_referrals(request):
     total_line = 0
+    missed_amount = 0
     if Profile.objects.filter(user__id=request.user.id).exists():
         profile = Profile.objects.get(user__id=request.user.id)
         if First_Line.objects.filter(main_user=profile).exists():
             total_line += First_Line.objects.get(main_user=profile).total_person
+            missed_amount += First_Line.objects.get(main_user=profile).lost_profit
         if Second_Line.objects.filter(main_user__user_id=profile.id).exists():
             total_line += Second_Line.objects.get(main_user=profile).total_person
+            missed_amount += Second_Line.objects.get(main_user=profile).lost_profit
         if Third_Line.objects.filter(main_user__user_id=profile.id).exists():
             total_line += Third_Line.objects.get(main_user=profile).total_person
+            missed_amount += Third_Line.objects.get(main_user=profile).lost_profit
         data = {
             'total_line': total_line,
             'profit': profile.referral_amount,
-            'lost': profile.missed_amount,
+            'lost': missed_amount,
             'link': profile.referral_link
         }
         return Response(data, status=200)
@@ -667,20 +631,16 @@ def get_referrals(request):
 
 try:
     if All.objects.all() is not None:
-        if All.objects.all().exists():
-            all_ = All.objects.all().first()
-        else:
-            all_ = All.objects.create()
+        if not All.objects.all().exists():
+            cr_win_m = All.objects.create()
+            cr_win_m.save()
         create_all_and_admin()
-        admin_ = Profile.objects.filter(admin_or=True).first()
+    elif not All.objects.all().exists():
+        All.objects.create().save()
 except ProgrammingError:
     print("error")
 except OperationalError:
     print("error")
-
-
-def index(request):
-    return render(request, 'backend/index.html')
 
 
 def import_users(request):
@@ -743,13 +703,6 @@ def user_get(request):
         return Response(data.data)
     else:
         return Response(status=400)
-
-
-@api_view(['GET'])
-def go_mess(request):
-    from django.core.mail import send_mail
-    send_mail('Subject here', 'Here is the message.', 'piper.elliottp@gmail.com', ['tering123@yandex.ru'],
-              fail_silently=False)
 
 
 @api_view(['GET', 'POST'])
@@ -910,87 +863,154 @@ def save(*args):
 
 
 # получение уведомления
-def case_3_4_ref(main_user, money_to_card, profile, price):
+def case_3_4_ref(main_user, money_to_card, profile, price, admin_):
+    all_ = All.objects.all().first()
     second_line = False
     third_line = False
     if Second_Line.objects.filter(id=profile.line_2).exists():
         second_line = True
     if Third_Line.objects.filter(id=profile.line_3).exists():
         third_line = True
-    if not second_line and not third_line:
-        admin_.money += money_to_card * Decimal('0.05')
-        main_user.money += money_to_card * Decimal('0.1')
-        mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')), profile.id)
-        send_message_tgbot(mes, main_user.id)
-        all_.money += money_to_card
-        profile.money -= money_to_card
-    # четвертый случай
-    elif not third_line:
-        admin_.money += money_to_card * Decimal('0.01')
-        profile.money -= money_to_card
-        mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.1'), profile.id)
-        send_message_tgbot(mes, main_user.id)
-        main_user.money += money_to_card * Decimal('0.1')
+    # Переписываю
+    if second_line:
         second = Second_Line.objects.get(id=profile.line_2).main_user
-        mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.04'), profile.id)
-        send_message_tgbot(mes, second.id)
-        second.money += money_to_card * Decimal('0.04')
-        if User_in_Matrix.objects.filter(user=second).filter(matrix__price=price).exists():
-            sec = User_in_Matrix.objects.filter(matrix__price=price).get(user=second)
-            sec.all_wins += money_to_card * Decimal('0.04')
-            sec.save()
-        second.save()
-        all_.money += money_to_card
+        if not Buy_Card.objects.filter(user=second).filter(card__price=price).exists():
+            admin_.money += money_to_card * Decimal('0.04')
+            admin_.save()
+        else:
+            mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.04'), profile.id)
+            send_message_tgbot(mes, second.id)
+            second.money += money_to_card * Decimal('0.04')
+            if User_in_Matrix.objects.filter(user=second).filter(matrix__price=price).exists():
+                for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=second):
+                    el.all_wins += money_to_card * Decimal('0.04')
+                    el.save()
+            second.save()
+            second = Second_Line.objects.get(id=profile.line_2).main_user
+            sq = Second_Line.objects.get(main_user=second)
+            sq.profit += money_to_card * Decimal('0.04')
+            sq.save()
+            second.referral_amount += money_to_card * Decimal('0.04')
+            ref_card_dob(second, money_to_card * Decimal('0.04'))
+            second.save()
     else:
-        profile.money -= money_to_card
-        main_user.money += money_to_card * Decimal('0.1')
-        mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.1'), profile.id)
-        send_message_tgbot(mes, main_user.id)
-        second = Second_Line.objects.get(id=profile.line_2).main_user
-        second.money += money_to_card * Decimal('0.04')
-        mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.04'), profile.id)
-        send_message_tgbot(mes, second.id)
-        second.save()
-        if User_in_Matrix.objects.filter(matrix__price=price).filter(user=second).exists():
-            sec = User_in_Matrix.objects.filter(matrix__price=price).get(user=second)
-            sec.all_wins += money_to_card * Decimal('0.04')
-            sec.save()
+        admin_.money += money_to_card * Decimal('0.04')
+        admin_.save()
+    if third_line:
         th = Third_Line.objects.get(id=profile.line_3).main_user
-        th.money += money_to_card * Decimal('0.01')
-        mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.01'), profile.id)
-        send_message_tgbot(mes, th.id)
-        if User_in_Matrix.objects.filter(matrix__price=price).filter(user=th).exists():
-            sec = User_in_Matrix.objects.filter(matrix__price=price).get(user=th)
-            sec.all_wins += money_to_card * Decimal('0.01')
-            sec.save()
-        th.save()
-        all_.money += money_to_card
+        if not Buy_Card.objects.filter(user=th).filter(card__price=price).exists():
+            admin_.money += money_to_card * Decimal('0.04')
+            admin_.save()
+        else:
+            th.money += money_to_card * Decimal('0.01')
+            mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.01'), profile.id)
+            send_message_tgbot(mes, th.id)
+            if User_in_Matrix.objects.filter(matrix__price=price).filter(user=th).exists():
+                for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=th):
+                    el.all_wins += money_to_card * Decimal('0.01')
+                    el.save()
+            th.save()
+            th = Third_Line.objects.get(id=profile.line_3).main_user
+            sq = Third_Line.objects.get(main_user=th)
+            sq.profit += money_to_card * Decimal('0.01')
+            sq.save()
+            ref_card_dob(th, money_to_card * Decimal('0.01'))
+            th.referral_amount += money_to_card * Decimal('0.01')
+            th.save()
+    else:
+        admin_.money += money_to_card * Decimal('0.01')
+        admin_.save()
+    main_user.money += money_to_card * Decimal('0.1')
+    mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')), profile.id)
+    send_message_tgbot(mes, main_user.id)
+    all_.money += money_to_card
+    profile.money -= money_to_card
+    #
     ref_card_dob(main_user, money_to_card * Decimal('0.1'))
     main_user.referral_amount += money_to_card * Decimal('0.1')
     fo = First_Line.objects.get(main_user=main_user)
     fo.profit += money_to_card * Decimal('0.1')
     fo.save()
     if User_in_Matrix.objects.filter(user=main_user).filter(matrix__price=price).exists():
-        sec = User_in_Matrix.objects.filter(matrix__price=price).get(user=main_user)
-        sec.all_wins += money_to_card * Decimal('0.1')
-        sec.save()
-    if second_line:
-        second = Second_Line.objects.get(id=profile.line_2).main_user
-        sq = Second_Line.objects.get(main_user=second)
-        sq.profit += money_to_card * Decimal('0.04')
-        sq.save()
-        second.referral_amount += money_to_card * Decimal('0.04')
-        ref_card_dob(second, money_to_card * Decimal('0.04'))
-        second.save()
-    if third_line:
-        th = Third_Line.objects.get(id=profile.line_3).main_user
-        sq = Third_Line.objects.get(main_user=th)
-        sq.profit += money_to_card * Decimal('0.01')
-        sq.save()
-        ref_card_dob(th, money_to_card * Decimal('0.01'))
-        th.referral_amount += money_to_card * Decimal('0.01')
-        th.save()
-
+        for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=main_user):
+            el.all_wins += money_to_card * Decimal('0.1')
+            el.save()
+    # Конец новой записи
+    #
+    # if not second_line and not third_line:
+    #     admin_.money += money_to_card * Decimal('0.05')
+    #     main_user.money += money_to_card * Decimal('0.1')
+    #     mes = message_for_bot.a['bonus'].format((money_to_card * Decimal('0.1')), profile.id)
+    #     send_message_tgbot(mes, main_user.id)
+    #     all_.money += money_to_card
+    #     profile.money -= money_to_card
+    # # четвертый случай
+    # elif not third_line:
+    #     admin_.money += money_to_card * Decimal('0.01')
+    #     admin_.save()
+    #     profile.money -= money_to_card
+    #     mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.1'), profile.id)
+    #     send_message_tgbot(mes, main_user.id)
+    #     main_user.money += money_to_card * Decimal('0.1')
+    #     second = Second_Line.objects.get(id=profile.line_2).main_user
+    #     mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.04'), profile.id)
+    #     send_message_tgbot(mes, second.id)
+    #     second.money += money_to_card * Decimal('0.04')
+    #     if User_in_Matrix.objects.filter(user=second).filter(matrix__price=price).exists():
+    #         for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=second):
+    #             el.all_wins += money_to_card * Decimal('0.04')
+    #             el.save()
+    #     second.save()
+    #     all_.money += money_to_card
+    # else:
+    #     profile.money -= money_to_card
+    #     main_user.money += money_to_card * Decimal('0.1')
+    #     mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.1'), profile.id)
+    #     send_message_tgbot(mes, main_user.id)
+    #     second = Second_Line.objects.get(id=profile.line_2).main_user
+    #     second.money += money_to_card * Decimal('0.04')
+    #     mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.04'), profile.id)
+    #     send_message_tgbot(mes, second.id)
+    #     second.save()
+    #     if User_in_Matrix.objects.filter(matrix__price=price).filter(user=second).exists():
+    #         for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=second):
+    #             el.all_wins += money_to_card * Decimal('0.04')
+    #             el.save()
+    #     th = Third_Line.objects.get(id=profile.line_3).main_user
+    #     th.money += money_to_card * Decimal('0.01')
+    #     mes = message_for_bot.a['bonus'].format(money_to_card * Decimal('0.01'), profile.id)
+    #     send_message_tgbot(mes, th.id)
+    #     if User_in_Matrix.objects.filter(matrix__price=price).filter(user=th).exists():
+    #         for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=th):
+    #             el.all_wins += money_to_card * Decimal('0.01')
+    #             el.save()
+    #     th.save()
+    #     all_.money += money_to_card
+    # ref_card_dob(main_user, money_to_card * Decimal('0.1'))
+    # main_user.referral_amount += money_to_card * Decimal('0.1')
+    # fo = First_Line.objects.get(main_user=main_user)
+    # fo.profit += money_to_card * Decimal('0.1')
+    # fo.save()
+    # if User_in_Matrix.objects.filter(user=main_user).filter(matrix__price=price).exists():
+    #     for el in User_in_Matrix.objects.filter(matrix__price=price).filter(user=main_user):
+    #         el.all_wins += money_to_card * Decimal('0.1')
+    #         el.save()
+    # if second_line:
+    #     second = Second_Line.objects.get(id=profile.line_2).main_user
+    #     sq = Second_Line.objects.get(main_user=second)
+    #     sq.profit += money_to_card * Decimal('0.04')
+    #     sq.save()
+    #     second.referral_amount += money_to_card * Decimal('0.04')
+    #     ref_card_dob(second, money_to_card * Decimal('0.04'))
+    #     second.save()
+    # if third_line:
+    #     th = Third_Line.objects.get(id=profile.line_3).main_user
+    #     sq = Third_Line.objects.get(main_user=th)
+    #     sq.profit += money_to_card * Decimal('0.01')
+    #     sq.save()
+    #     ref_card_dob(th, money_to_card * Decimal('0.01'))
+    #     th.referral_amount += money_to_card * Decimal('0.01')
+    #     th.save()
     save(main_user, all_, profile, admin_)
 
 
@@ -1230,14 +1250,20 @@ def go__category(name, profile):
 
 
 def all_ref_logic(name, id_, profile):
+    admin_ = Profile.objects.filter(admin_or=True).first()
     category = go__category(name, profile)
     if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).filter(
-            card__card__category=name).filter(card__card__name=id_).exists():
-        us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=name).filter(
-            card__card__name=id_).get(matrix__up=True).d
-        if us_pr <= 4:
+            card__card__category=str(name)).filter(card__card__name=int(id_)).exists():
+        us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=str(name)).filter(
+            card__card__name=int(id_)).get(matrix__up=True).d
+        if us_pr < 4:
             return 400
+    if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=False).filter(
+            card__card__category=str(name)).filter(card__card__name=int(id_)).count() == 1:
+        return 400
     card = 'card_' + str(id_)
+    if not All.objects.all().exists():
+        All().objects.create().save()
     all_ = All.objects.all().first()
     if profile.line_1 is not None:
         main_user = First_Line.objects.get(id=profile.line_1).main_user
@@ -1259,17 +1285,17 @@ def all_ref_logic(name, id_, profile):
         save(all_, profile, admin_, category)
         # main_user = Profile.objects.get(referral_link=cookies)
     else:
-        main_user = main_user
-        save(main_user)
-        # Если у пригласившего не открыта карта номиналом,
-        # которую купил рефер, то рефералка уходит админу
-        if not Buy_Card.objects.filter(user=main_user).filter(card__category=name).filter(
-                card__name=id_).exists():
-            if First_Line.objects.filter(main_user=main_user):
+        main_user.save()
+        # Если у пригласившего не открыта карта номиналом, которую купил рефер, то рефералка уходит админу
+        if not Buy_Card.objects.filter(user=main_user).filter(card__category=name).filter(card__name=id_).exists():
+            if First_Line.objects.filter(main_user=main_user).exists():
                 fq = First_Line.objects.get(main_user=main_user)
                 fq.lost_profit += money_to_card * Decimal('0.1')
                 fq.save()
+                main_user.missed_amount += money_to_card * Decimal('0.1')
+                main_user.save()
             admin_.money += money_to_card * Decimal('0.1')
+            admin_.save()
             all_.money += money_to_card
             profile.money -= money_to_card
             if main_user.line_1 is not None:
@@ -1281,7 +1307,7 @@ def all_ref_logic(name, id_, profile):
                     ref_card_dob(sec_main_prof, money_to_card * Decimal('0.04'))
                     sec_main_prof.save()
                     if User_in_Matrix.objects.filter(user=sec_main_prof).exists():
-                        for el in User_in_Matrix.objects.filter(matrix__price=money_to_card).filter(user=sec_main_prof).filter(card__card__category=category):
+                        for el in User_in_Matrix.objects.filter(matrix__price=money_to_card).filter(user=sec_main_prof):
                             el.all_wins += money_to_card * Decimal('0.04')
                             el.save()
                     sq = Second_Line.objects.get(main_user=sec_main_prof)
@@ -1291,7 +1317,10 @@ def all_ref_logic(name, id_, profile):
                     sqe = Second_Line.objects.get(main_user=sec_main_prof)
                     sqe.lost_profit += money_to_card * Decimal('0.04')
                     sqe.save()
+                    sec_main_prof.missed_amount += money_to_card * Decimal('0.04')
+                    sec_main_prof.save()
                     admin_.money += money_to_card * Decimal('0.04')
+                    admin_.save()
                 if sec_main_prof.line_1 is not None:
                     th_main_prof = First_Line.objects.get(id=sec_main_prof.line_1).main_user
                     if Buy_Card.objects.filter(user=th_main_prof).filter(card__category=name).filter(
@@ -1301,7 +1330,8 @@ def all_ref_logic(name, id_, profile):
                         ref_card_dob(th_main_prof, money_to_card * Decimal('0.01'))
                         th_main_prof.save()
                         if User_in_Matrix.objects.filter(user=th_main_prof).exists():
-                            for el in User_in_Matrix.objects.filter(matrix__price=money_to_card).filter(card__card__category=category):
+                            for el in User_in_Matrix.objects.filter(matrix__price=money_to_card).filter(
+                                    user=th_main_prof):
                                 el.all_wins += money_to_card * Decimal('0.01')
                                 el.save()
                         sq1 = Third_Line.objects.get(main_user=th_main_prof)
@@ -1311,11 +1341,19 @@ def all_ref_logic(name, id_, profile):
                         tp = Third_Line.objects.get(main_user=th_main_prof)
                         tp.lost_profit += money_to_card * Decimal('0.01')
                         tp.save()
+                        th_main_prof.missed_amount += money_to_card * Decimal('0.01')
+                        th_main_prof.save()
                         admin_.money += money_to_card * Decimal('0.01')
+                        admin_.save()
+                else:
+                    admin_.money += money_to_card * Decimal('0.01')
+                    admin_.save()
+            else:
+                admin_.money += money_to_card * Decimal('0.05')
             save(main_user, all_, profile, admin_, category)
         # третий случай (Если у пригласившего нет 2 и 3 линии, то 5% уходит админу)
         else:
-            case_3_4_ref(main_user, money_to_card, profile, money_to_card)
+            case_3_4_ref(main_user, money_to_card, profile, money_to_card, admin_)
             save(category)
     buy_card = Buy_Card()
     buy_card.user = profile
@@ -1336,6 +1374,7 @@ def all_ref_logic(name, id_, profile):
     profile.save()
     new_money = money_to_card * Decimal('0.8')
     admin_.money += money_to_card * Decimal('0.05')
+    admin_.save()
     mes = message_for_bot.a['buy'].format(tokemon.tokemon[name][id_ - 1])
     send_message_tgbot(mes, profile.id)
     logics_matrix(profile, new_money, buy_card)
@@ -1384,15 +1423,11 @@ def get_hist_card(request):
         i = 0
         for key, value in data.items():
             if len(main_list) - 1 < i:
-                print(data)
                 return Response(data=data)
             data[key] = main_list[i]
             i += 1
-        print(data)
         return Response(data=data)
-
     else:
-        print(data)
         return Response(data=data)
 
 
@@ -1428,7 +1463,6 @@ def six(request):
             'gold': gold,
             'emerald': emerald,
         }
-        print(data)
         return Response(data=data)
     return Response(200)
 
@@ -1451,7 +1485,7 @@ def matrix_pay(main_matrix, money, id_):
         hist2.price = Decimal(money / 2)
         hist.user = user_1.user
         hist2.user = user_1.user
-        user_2.user.missed_amount += (money / 2) * 2
+        # user_2.user.missed_amount += (money / 2) * 2
         user_1.d += 1
         user_2.d += 1
         user_2.total_wins += (money / 2) * 2
@@ -1473,8 +1507,8 @@ def matrix_pay(main_matrix, money, id_):
         hist2.user = user_2.user
         user_1.d += 1
         user_2.d += 1
-        user_2.user.missed_amount += money / 2
-        user_1.user.missed_amount += money / 2
+        # user_2.user.missed_amount += money / 2
+        # user_1.user.missed_amount += money / 2
         user_2.total_wins += money / 2
         ref_card_tot(user_2.user, money / 2)
         user_1.total_wins += money / 2
@@ -1489,6 +1523,7 @@ def matrix_pay(main_matrix, money, id_):
 
 # Логика матрицы
 def logics_matrix(user_, money, card_):
+    admin_ = Profile.objects.filter(admin_or=True).first()
     profile = user_
     user_in_matrix = User_in_Matrix()
     user_in_matrix.user = Profile.objects.get(id=profile.id)
@@ -1602,6 +1637,7 @@ gas_needed = 8 * 10 ** 6
 # Вывод
 @csrf_exempt
 def dis(request):
+    all_ = All.objects.all().first()
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
         col = request.body
@@ -1629,7 +1665,7 @@ def dis(request):
                 col += col * 0.01
             if profile.money < col:
                 return Response(status=400)
-            data = send_usdt(wall, col)
+            data = send_usdt(wall, col, profile)
             if data:
                 profile.money -= col
                 profile.save()
@@ -1647,6 +1683,7 @@ def dis(request):
 # Ввод
 @api_view(['GET'])
 def dis_input(request):
+    all_ = All.objects.all().first()
     if Profile.objects.filter(user_id=request.user.id).exists():
         profile = Profile.objects.get(user_id=request.user.id)
         if profile.wallet is not None:
@@ -1658,10 +1695,10 @@ def dis_input(request):
             w.save()
             wall = w
         col = get_usdt_balance(wall.address)
-        if col < 0:
+        if col <= 0:
             return Response(status=400)
         if col is not None:
-            data = collect_usdt(wall, col)
+            data = collect_usdt(wall, col, profile)
             if data:
                 profile.money += col
                 profile.save()
@@ -1688,9 +1725,12 @@ def generate_wallet(request):
 
 # Сбор USDT с кошелька
 # @app.route('/collect_usdt', methods=['POST'])
-def collect_usdt(wallet, col):
+def collect_usdt(wallet, col, profile):
+    admin_ = Profile.objects.filter(admin_or=True).first()
     w = wallet
     pkey = w.pkey
+    Sus = False
+    error_info = ''
     if Wallet.objects.filter(id=admin_.wallet).exists():
         central = Wallet.objects.get(id=admin_.wallet)
     else:
@@ -1712,7 +1752,19 @@ def collect_usdt(wallet, col):
                                  timestamp=tx_timestamp,
                                  )
             new_tx.save()
-
+            Sus = True
+            error_info = tx_id
+        else:
+            error_info = a.get('description')
+        hist_tran = History_Transactions(
+            user=profile,
+            quantity=trx_bal,
+            card=w.address,
+            success=Sus,
+            name_operation='Input',
+            txid=error_info
+        )
+        hist_tran.save()
     a = tc.send_usdt(w.address, central.address, col * 10 ** 6, w.pkey)
     if a.get('result') == 'Success':
         tx = a.get('tx', {})
@@ -1728,14 +1780,35 @@ def collect_usdt(wallet, col):
                              timestamp=tx_timestamp,
                              )
         new_tx.save()
+        Sus = True
+        hist_tran = History_Transactions(
+            user=profile,
+            quantity=col,
+            card=w.address,
+            success=Sus,
+            name_operation='Input',
+            txid=tx_id
+        )
+        hist_tran.save()
         return new_tx
     else:
+        Sus = False
+        hist_tran = History_Transactions(
+            user=profile,
+            quantity=trx_bal,
+            card=w.address,
+            success=Sus,
+            name_operation='Input',
+            txid=a.get('description')
+        )
+        hist_tran.save()
         return False
 
 
 # Отправка TRX на кошелек
 # @app.route('/send_trx', methods=['POST'])
 def send_trx(request):
+    admin_ = Profile.objects.filter(admin_or=True).first()
     w = Wallet.objects.get(address=request.form.get('address'))
     pkey = w.pkey
     if Wallet.objects.filter(id=admin_.wallet).exists():
@@ -1764,7 +1837,8 @@ def send_trx(request):
 
 # Отправка USDT на кошелек
 # @app.route('/send_usdt', methods=['POST'])
-def send_usdt(wallet, col):
+def send_usdt(wallet, col, profile):
+    admin_ = Profile.objects.filter(admin_or=True).first()
     if Wallet.objects.filter(id=admin_.wallet).exists():
         central = Wallet.objects.get(id=admin_.wallet)
     else:
@@ -1786,8 +1860,28 @@ def send_usdt(wallet, col):
                              timestamp=tx_timestamp,
                              )
         new_tx.save()
+        Sus = True
+        hist_tran = History_Transactions(
+            user=profile,
+            quantity=col,
+            card=w.address,
+            success=Sus,
+            name_operation='Output',
+            txid=a.get('description')
+        )
+        hist_tran.save()
         return new_tx
     else:
+        Sus = False
+        hist_tran = History_Transactions(
+            user=profile,
+            quantity=col,
+            card=w.address,
+            success=Sus,
+            name_operation='Output',
+            txid=a.get('description')
+        )
+        hist_tran.save()
         return False
 
 
@@ -1833,22 +1927,3 @@ def get_usdt_balance(address):
 def get_trx_balance(address):
     bal = tc.trx_balance(address)
     return bal
-
-#
-# # Главная
-# # @app.route('/', methods=['GET'])
-# def main(request):
-#     # wallets = select(w for w in Wallet)[:]
-#     wallets = Wallet.objects.all()
-#     # transactions = select(t for t in Transaction)[:]
-#     transactions = Transaction.objects.all()
-#     # usdt_balances = {a: await get_usdt_balance(a) for a in  select(t.address for t in Wallet)[:]}
-#     # trx_balances = {a: await get_trx_balance(a) for a in  select(t.address for t in Wallet)[:]}
-#     a = dict()
-#     for el in wallets:
-#         a[el] = get_usdt_balance(w.address)
-#     b = dict()
-#     for el in wallets:
-#         b[el] = get_trx_balance(w.address)
-#     return render(request, 'backend/paymant.html', {'wallets': wallets, 'transactions': transactions,
-#                                                     'a': a, 'b': b})

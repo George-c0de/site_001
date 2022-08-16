@@ -12,38 +12,41 @@ class HistoryTransactionsProfileAdmin(admin.TabularInline):
 
 @admin.register(Buy_Card)
 class History_card_Admin(admin.ModelAdmin):
-    fields = ('user', 'card')
-    list_display = ('user', 'card')
+    list_display = ('user', 'card', 'time')
+
+
+@admin.register(History_card)
+class History_card2(admin.ModelAdmin):
+    list_display = ('id', 'date')
 
 
 @admin.register(Card)
 class History_card_Admin2(admin.ModelAdmin):
-    fields = ('id', 'name', 'category', 'price')
     list_display = ('id', 'name', 'category', 'price')
 
 
-@admin.register(Admin)
-class ProfileAdminAdmin(admin.ModelAdmin):
-    fields = ('user', 'up', 'max_users')
-    list_display = ('user', 'up', 'max_users')
-
-
 @admin.register(Matrix)
-class ProfileAdminAdmin(admin.ModelAdmin):
-    fields = ('price', 'up', 'max_users', 'col')
+class ProfileAdminAdmin3(admin.ModelAdmin):
     list_display = ('price', 'up', 'max_users', 'col')
+    list_filter = (
+        'up',
+    )
+
+
+@admin.register(All)
+class AllAdmin(admin.ModelAdmin):
+    list_display = ('money', 'all_transactions', 'coll_user')
 
 
 @admin.register(User_in_Matrix)
 class User_in_matr(admin.ModelAdmin):
-    list_display = ('matrix', 'user', 'card')
-    fields = ('matrix', 'user', 'card')
+    list_display = ('id', 'matrix', 'user', 'card')
 
 
 @admin.register(First_Line)
 class FirstLineAdmin(admin.ModelAdmin):
-    list_display = ('main_user', 'id_')
-    fields = ('main_user',)
+    list_display = ('main_user', 'id_', 'lost_profit', 'total_person', 'profit')
+    fields = ('main_user', 'lost_profit', 'total_person', 'profit')
 
     def id_(self, obj):
         return obj.id
@@ -53,8 +56,8 @@ class FirstLineAdmin(admin.ModelAdmin):
 
 @admin.register(Second_Line)
 class Second_LineAdmin(admin.ModelAdmin):
-    list_display = ('main_user', 'id_')
-    fields = ('main_user',)
+    list_display = ('main_user', 'id_', 'lost_profit', 'total_person', 'profit')
+    fields = ('main_user', 'lost_profit', 'total_person', 'profit')
 
     def id_(self, obj):
         return obj.id
@@ -64,8 +67,8 @@ class Second_LineAdmin(admin.ModelAdmin):
 
 @admin.register(Third_Line)
 class Third_LineAdmin(admin.ModelAdmin):
-    list_display = ('main_user', 'id_')
-    fields = ('main_user',)
+    list_display = ('main_user', 'id_', 'lost_profit', 'total_person', 'profit')
+    fields = ('main_user', 'lost_profit', 'total_person', 'profit')
 
     def id_(self, obj):
         return obj.id
