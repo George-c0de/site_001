@@ -284,3 +284,8 @@
 		transform: rotate(360deg);
 	}
 }
+@media screen and (max-width: 450px) {
+	.pokeballs-card-label {
+    height: 80px;
+}
+}

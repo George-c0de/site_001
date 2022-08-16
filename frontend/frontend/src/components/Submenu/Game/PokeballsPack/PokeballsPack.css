@@ -36,6 +36,9 @@
 	height: 790px;
 	padding-top: 0;
 }
+.pokeballs-container.open .detail-wrapper .icon-showdown-container {
+	transform: rotate(180deg);
+}
 
 #pokeballs-detail {
 	display: flex;
@@ -79,13 +82,13 @@
 	height: 20px;
 	width: 20px;
 	right: 15px;
-	top: 12px;
+	top: 11px;
 	cursor: pointer;
 }
 
 .icon-showdown-container .icon-showdown {
 	position: absolute;
-	top: -3px;
+	top: 0px;
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -102,6 +105,7 @@
 	left: 0px;
 	top: 2.5px;
 }
+
 @media screen and (max-width: 580px) {
 	.pokebolls-title {
 		font-size: 25px;

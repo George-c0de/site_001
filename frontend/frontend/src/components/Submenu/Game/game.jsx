@@ -153,14 +153,18 @@ const Game = () => {
 				<Header />
 				<div className='homepage-wrapper'>
 					<div className={onActive ? 'site-main-game' : 'site-main_active'}>
-						<motion.div
-							className='site-main-game-wrapper'
+						<div className='site-main-game-wrapper'>
+							<motion.div
+								className='text-game'
+								initial={{ opacity: 0, y: 50 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
+							>{t`JOIN THE FIGHT AND WIN`}</motion.div>
+							<motion.div className='container-pack-pokeballs' 
 							initial={{ opacity: 0, y: 50 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
-						>
-							<div className='text-game'>{t`JOIN THE FIGHT AND WIN`}</div>
-							<div className='container-pack-pokeballs'>
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, ease: 'linear', delay: 0.5 }}
+								 >
 								<PokeballsPack
 									title={t`BRONZE`}
 									amount={cardsAmount.bronze}
@@ -201,9 +205,9 @@ const Game = () => {
 									six={six.emerald}
 									money={userMoney}
 								/>
-							</div>
+							</motion.div>
 							<GameHistory history={history} />
-						</motion.div>
+						</div>
 					</div>
 				</div>
 			</div>

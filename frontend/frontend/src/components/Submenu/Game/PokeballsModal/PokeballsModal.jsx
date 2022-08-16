@@ -133,7 +133,7 @@ const CardOpened = ({
 
 	const handleBuyClick2 = (props, props2) => {
 		if (!props2 && disabledBtn) {
-			 setAccept2(true)
+			setAccept2(true)
 		}
 		console.log(purchaseConfirmation2, disabledBtn)
 		if (disabledBtn && purchaseConfirmation2) {
@@ -221,6 +221,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 
 	const handleBuyClick = () => {
 		setAccept(true)
+
 		document.body.style.overflow = 'hidden'
 		if (purchaseConfirmation && money >= price) {
 			setTimeout(async () => {
@@ -245,19 +246,19 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 	}, [purchaseConfirmation])
 
 	return (
-		<div>
+		<>
 			{six === false && idCard === 6 ? (
-				<>
+				<div>
 					<span>
 						<div className='pokeballs-card-label2'>
 							<img src={q} />
 						</div>
 					</span>
 					<p className='status-x'>40% x4</p>
-				</>
+				</div>
 			) : (
-				<>
-					<div className='pokeballs-card-label' onClick={handleBuyClick}>
+				<div onClick={handleBuyClick}>
+					<div className='pokeballs-card-label'>
 						{status === 'pending' ? (
 							<span className='status_pending'></span>
 						) : status === 'success' ? (
@@ -275,7 +276,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 						)}
 					</div>
 					<p className='status-x'>40% x4</p>
-				</>
+				</div>
 			)}
 			<img src={pokeball} className='pokeballs-card-ball' alt='' />
 			{accept &&
@@ -296,7 +297,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 						setAccept={setAccept}
 					/>
 				))}
-		</div>
+		</>
 	)
 }
 
