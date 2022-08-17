@@ -9,7 +9,6 @@ import q from '../../../../Ảnh Pokemon Dự Trù/Знак вопроса.svg'
 import './PokeballsModal.css'
 import BuyPockebol from '../../../modals/BuyPockebol'
 import { t } from 'ttag'
-import { noAuto } from '@fortawesome/fontawesome-svg-core'
 import NotEnoughMoney from '../../../modals/NotEnoughMoney'
 import BuyPockebolInner from '../../../modals/buyPockebolInner'
 
@@ -26,7 +25,7 @@ const CardOpened = ({
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState(true)
 	const handleButton = async () => {
-		await axios.get(`/api/prohibitions`).then(res => {
+		await image.png.get(`/api/prohibitions`).then(res => {
 			let data = res.data
 			console.log(data)
 			switch (category) {
@@ -139,6 +138,7 @@ const CardOpened = ({
 		if (disabledBtn && purchaseConfirmation2) {
 			setPurchaseConfirmation2(false)
 			console.log('BUY')
+			console.log(category, idCard)
 			setTimeout(async () => {
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
 					setTimeout(() => {
@@ -227,6 +227,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 			setTimeout(async () => {
 				document.body.style.overflow = 'visible'
 				setStatus('pending')
+			console.log(category, idCard)
 				await axios.get(`/api/${category}/${idCard}`).then(res => {
 					setStatus('success')
 					setTimeout(() => {
