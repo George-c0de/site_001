@@ -11,7 +11,7 @@ from django.contrib.auth.views import INTERNAL_RESET_SESSION_TOKEN
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
 from django.db import ProgrammingError, OperationalError
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -1635,6 +1635,7 @@ gas_needed = 8 * 10 ** 6
 
 
 # Вывод
+
 @csrf_exempt
 def dis(request):
     all_ = All.objects.all().first()
@@ -1653,7 +1654,7 @@ def dis(request):
             else:
                 wallet = tc.create_wallet()
                 if Wallet.objects.filter(address=data['wallet_input']).exists():
-                    return Response(status=400)
+                    return JsonResponse({'error': 'Some error'}, status=400)
                 w = Wallet.objects.create(address=data['wallet_input'], pkey=wallet['private_key'])
                 profile.wallet_input = w.address
                 w.save()
@@ -1674,10 +1675,10 @@ def dis(request):
                 all_.save()
                 mes = message_for_bot.a['withdrawal'].format(col)
                 send_message_tgbot(mes, profile.id)
-                return Response(data=data, status=200)
+                return JsonResponse(data=data, status=200, safe=False)
             else:
-                return Response(status=400)
-    return Response(status=400)
+                return JsonResponse({'error': 'Some error'}, status=400)
+    return JsonResponse({'error': 'Some error'}, status=400)
 
 
 # Ввод

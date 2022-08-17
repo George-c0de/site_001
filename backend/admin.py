@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from .models import *
 from django.utils.http import urlencode
-
+from django.contrib import messages
 from django.contrib.auth.models import User  # Group
 
 
@@ -85,6 +85,21 @@ class Category_Bronze_Admin(admin.ModelAdmin):
     list_filter = (
         'user', 'card_6_disable'
     )
+    actions = ['make_yeah', 'make_no']
+
+    @admin.action(description='Открыть доступ')
+    def make_no(self, request, queryset):
+        for el in Category_Bronze.objects.all():
+            el.card_6_disable = True
+            el.save()
+        self.message_user(request, 'Доступ открыт', messages.SUCCESS)
+
+    @admin.action(description='Закрыть доступ')
+    def make_yeah(self, request, queryset):
+        for el in Category_Bronze.objects.all():
+            el.card_6_disable = False
+            el.save()
+        self.message_user(request, 'Доступ закрыт', messages.ERROR)
 
 
 @admin.register(Category_Silver)
@@ -96,6 +111,21 @@ class Category_Silver_Admin(admin.ModelAdmin):
     list_filter = (
         'user', 'card_6_disable'
     )
+    actions = ['make_yeah', 'make_no']
+
+    @admin.action(description='Открыть доступ')
+    def make_no(self, request, queryset):
+        for el in Category_Silver.objects.all():
+            el.card_6_disable = True
+            el.save()
+        self.message_user(request, 'Доступ открыт', messages.SUCCESS)
+
+    @admin.action(description='Закрыть доступ')
+    def make_yeah(self, request, queryset):
+        for el in Category_Silver.objects.all():
+            el.card_6_disable = False
+            el.save()
+        self.message_user(request, 'Доступ закрыт', messages.ERROR)
 
 
 @admin.register(Category_Gold)
@@ -107,6 +137,21 @@ class Category_Gold_Admin(admin.ModelAdmin):
     list_filter = (
         'user', 'card_6_disable'
     )
+    actions = ['make_yeah', 'make_no']
+
+    @admin.action(description='Открыть доступ')
+    def make_no(self, request, queryset):
+        for el in Category_Gold.objects.all():
+            el.card_6_disable = True
+            el.save()
+        self.message_user(request, 'Доступ открыт', messages.SUCCESS)
+
+    @admin.action(description='Закрыть доступ')
+    def make_yeah(self, request, queryset):
+        for el in Category_Gold.objects.all():
+            el.card_6_disable = False
+            el.save()
+        self.message_user(request, 'Доступ закрыт', messages.ERROR)
 
 
 @admin.register(Category_Emerald)
@@ -118,7 +163,21 @@ class Category_Emerald_Admin(admin.ModelAdmin):
     list_filter = (
         'user', 'card_6_disable'
     )
+    actions = ['make_yeah', 'make_no']
 
+    @admin.action(description='Открыть доступ')
+    def make_no(self, request, queryset):
+        for el in Category_Emerald.objects.all():
+            el.card_6_disable = True
+            el.save()
+        self.message_user(request, 'Доступ открыт', messages.SUCCESS)
+
+    @admin.action(description='Закрыть доступ')
+    def make_yeah(self, request, queryset):
+        for el in Category_Emerald.objects.all():
+            el.card_6_disable = False
+            el.save()
+        self.message_user(request, 'Доступ закрыт', messages.ERROR)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
