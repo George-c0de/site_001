@@ -190,6 +190,10 @@
 			"Fee - 1%, min 1 USD": {
 				"msgid": "Fee - 1%, min 1 USD",
 				"msgstr": ["Fee - 1%, min 1 USD"]
+			},
+			"Incorrect email address or password": {
+				"msgid": "Incorrect email address or password",
+				"msgstr": ["Incorrect email address or password"]
 			}
 		}
 	}

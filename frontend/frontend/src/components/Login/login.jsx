@@ -30,6 +30,8 @@ const Signup = () => {
 	const [invalidEmailReset, setInvalidEmailReset] = useState(false)
 	const [activeCaptcha, setActiveCaptcha] = useState(false)
 	const [firstRender, setFirstRender] = useState(true)
+	const [coincidence, setCoincidence] = useState(false)
+	const [exist, setExist] = useState(false)
 	const [data3, setData3] = useState()
 
 	React.useEffect(() => {
@@ -140,11 +142,19 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
-			if (data.password1.length < 8 || data.password1 !== data.password2) {
+			if (data.password1 !== data.password2) {
+				setCoincidence(true)
+				setInvalidPassword(true)
+			} else {
+				setCoincidence(false)
+				setInvalidPassword(false)
+			}
+			if (data.password1.length < 8) {
 				setInvalidPassword(true)
 			} else {
 				setInvalidPassword(false)
 			}
+			
 			if (
 				!invalidPassword &&
 				!invalidEmail &&
@@ -170,9 +180,14 @@ const Signup = () => {
 						email: data.email,
 						password: data.password1,
 					}
-					const { data: res } = await axios.post(`/api/register`, validObj, {
-						headers: { 'Content-Type': 'application/json' },
-					})
+					try {
+						const { data: res } = await axios.post(`/api/register`, validObj, {
+							headers: { 'Content-Type': 'application/json' },
+						})
+					} catch {
+						setExist(true)
+					}
+
 					let data2 = 200
 					data2 = await axios
 						.post('/api/login', validData)
@@ -217,6 +232,7 @@ const Signup = () => {
 			}
 		}
 	}
+	console.log(invalidPassword && !coincidence)
 	return (
 		<div
 			className={`login_container ${
@@ -285,6 +301,11 @@ const Signup = () => {
 								onChange={handleChange}
 								value={data.password1}
 							/>
+							{(invalidDataLogin || invalidEmail) && (
+								<div className='input__invalid-text'>
+									<p>{t`Incorrect email address or password`}</p>
+								</div>
+							)}
 							<p
 								className='authorization-reset'
 								onClick={() => setTypeAuthorization('reset')}
@@ -308,6 +329,11 @@ const Signup = () => {
 								onChange={handleChange}
 								value={data.email}
 							/>
+							{exist && (
+								<div className='input__invalid-text'>
+									<p>{t`This email is already registered in the system`}</p>
+								</div>
+							)}
 							<input
 								className={`authorization__input ${
 									invalidPassword ? 'authorization__input-invalid' : ''
@@ -328,6 +354,11 @@ const Signup = () => {
 								onChange={handleChange}
 								value={data.password2}
 							/>
+							{coincidence && (
+								<div className='input__invalid-text'>
+									<p>{t`Passwords do not match`}</p>
+								</div>
+							)}
 							{invalidPassword && (
 								<div className='input__invalid-text'>
 									<p>{t`The password must be at least 8 characters long. Contains letters and symbols`}</p>

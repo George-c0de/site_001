@@ -440,6 +440,18 @@
 			"Fee - 1%, min 1 USD": {
 				"msgid": "Fee - 1%, min 1 USD",
 				"msgstr": ["Fee - 1%, min 1 USD"]
+			},
+			"Incorrect email address or password": {
+				"msgid": "Incorrect email address or password",
+				"msgstr": ["Indirizzo e-mail o password errati"]
+			},
+			"Passwords do not match": {
+				"msgid": "Passwords do not match",
+				"msgstr": ["Le password non corrispondono"]
+			},
+			"This email is already registered in the system": {
+				"msgid": "This email is already registered in the system",
+				"msgstr": ["Questa e-mail è già registrata nel sistema"]
 			}
 		}
 	}
