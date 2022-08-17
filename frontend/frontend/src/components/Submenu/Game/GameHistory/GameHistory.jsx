@@ -43,7 +43,7 @@ export const GameHistory = ({ history }) => {
 							history.oneq[2] > 0 ? 'green' : 'red'
 						}`}
 					>
-						{history.two[2] > 0 ? `${history.two[2]}` : `${history.two[2]}`}
+						{history.oneq[2] > 0 ? `${history.oneq[2]}` : `${history.oneq[2]}`}
 					</span>
 				</div>
 				<div className='history-table-row'>

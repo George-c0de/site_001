@@ -35,6 +35,19 @@ _:future,
 :root .panel {
 	background-color: #67deee;
 }
+body:nth-child(1) {
+	display: none
+}
+.eqd5v0k0{
+    position:relative;
+}    
+.eqd5v0k0:before {
+    content: "\25AE"; 
+    font-family: FontAwesome;
+    left:-5px;
+    position:absolute;
+    top:0;
+ }
 @import url('./components/StartGame/startgame.css');
 
 @import url('./components/Login/login.css');

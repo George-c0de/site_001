@@ -61,7 +61,7 @@
 
 .pay-input label {
 	font-weight: 600;
-	font-size: 17px;
+	font-size: 15px;
 	padding-left: 20px;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .pay-input-info {
-	font-size: 15px;
+	font-size: 13.5px;
 	font-weight: 600;
 	align-self: flex-end;
 	line-height: 1;
@@ -101,6 +101,9 @@
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
 	margin-bottom: 59px;
+}
+.css-1yzzujv {
+	opacity: 0 !important;
 }
 
 /*pay HISTORY*/
