@@ -186,6 +186,10 @@
 				"msgstr": [
 					"The minimum amount to be paid is 10 usdt. Transactions for a smaller amount will be lost"
 				]
+			},
+			"Fee - 1%, min 1 USD": {
+				"msgid": "Fee - 1%, min 1 USD",
+				"msgstr": ["Fee - 1%, min 1 USD"]
 			}
 		}
 	}

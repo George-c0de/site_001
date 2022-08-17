@@ -167,6 +167,7 @@ const Pay = () => {
 									}`}
 									name='col'
 								/>
+								<span className='pay-input-info'>{t`Fee - 1%, min 1 USD`}</span>
 							</div>
 							<div className='pay-input'>
 								<label htmlFor='address-input'>{t`Withdrawal wallet`}</label>

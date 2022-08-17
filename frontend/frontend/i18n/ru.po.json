@@ -324,6 +324,10 @@
 			"Log in to continue": {
 				"msgid": "Log in to continue",
 				"msgstr": ["Для продолжения необходимо авторизоваться"]
+			},
+			"Fee - 1%, min 1 USD": {
+				"msgid": "Fee - 1%, min 1 USD",
+				"msgstr": ["Комисия - 1%, мин. 1USD"]
 			}
 		}
 	}

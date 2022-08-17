@@ -24,6 +24,7 @@ const CardOpened = ({
 }) => {
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState(true)
+	const [activeCategory, setActivCategory] = useState(false)
 	const handleButton = async () => {
 		await image.png.get(`/api/prohibitions`).then(res => {
 			let data = res.data
@@ -31,87 +32,128 @@ const CardOpened = ({
 			switch (category) {
 				case 'bronze': {
 					setDisabledBtn(data.bronze[idCard - 1])
+					setActivCategory('bronze')
 					break
 				}
 				case 'бронза': {
 					setDisabledBtn(data.bronze[idCard - 1])
+					setActivCategory('bronze')
 					break
 				}
 
 				case 'bronzo': {
 					setDisabledBtn(data.bronze[idCard - 1])
+					setActivCategory('bronze')
+
 					break
 				}
 				case 'bronce': {
 					setDisabledBtn(data.bronze[idCard - 1])
+					setActivCategory('bronze')
+
 					break
 				}
 				case 'bronco': {
 					setDisabledBtn(data.bronze[idCard - 1])
+					setActivCategory('bronze')
+
 					break
 				}
 				case 'prata': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case 'silber': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
+					
 					break
 				}
 				case 'серебро': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case "d'argento": {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case 'silber': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case 'argent': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case 'prata': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case 'plata': {
 					setDisabledBtn(data.silver[idCard - 1])
+					setActivCategory('silver')
+
 					break
 				}
 				case 'gold': {
 					setDisabledBtn(data.gold[idCard - 1])
+					setActivCategory('gold')
+
 					break
 				}
 				case 'золото': {
 					setDisabledBtn(data.gold[idCard - 1])
+					setActivCategory('gold')
+
 					break
 				}
 				case 'ouro': {
 					setDisabledBtn(data.gold[idCard - 1])
+					setActivCategory('gold')
+
 					break
 				}
 				case 'or': {
 					setDisabledBtn(data.gold[idCard - 1])
+					setActivCategory('gold')
+
 					break
 				}
 				case 'smaragd': {
 					setDisabledBtn(data.emerald[idCard - 1])
+					setActivCategory('emerald')
+
 					break
 				}
 				case 'esmeralda': {
 					setDisabledBtn(data.emerald[idCard - 1])
+					setActivCategory('emerald')
+
 					break
 				}
 				case 'изумруд': {
 					setDisabledBtn(data.emerald[idCard - 1])
+					setActivCategory('emerald')
+
 					break
 				}
 				case 'smeraldo': {
 					setDisabledBtn(data.emerald[idCard - 1])
+					setActivCategory('emerald')
+
 					break
 				}
 			}
@@ -139,8 +181,9 @@ const CardOpened = ({
 			setPurchaseConfirmation2(false)
 			console.log('BUY')
 			console.log(category, idCard)
+			console.log(activeCategory, idCard)
 			setTimeout(async () => {
-				await axios.get(`/api/${category}/${idCard}`).then(res => {
+				await axios.get(`/api/${activeCategory}/${idCard}`).then(res => {
 					setTimeout(() => {
 						buyCard()
 					}, 1000)

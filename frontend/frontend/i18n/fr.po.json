@@ -438,6 +438,10 @@
 			"Log in to continue": {
 				"msgid": "Log in to continue",
 				"msgstr": ["Connectez-vous pour continuer"]
+			},
+			"Fee - 1%, min 1 USD": {
+				"msgid": "Fee - 1%, min 1 USD",
+				"msgstr": ["Fee - 1%, min 1 USD"]
 			}
 		}
   }

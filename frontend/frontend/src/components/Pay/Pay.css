@@ -81,7 +81,7 @@
 .pay-input-info {
 	font-size: 13.5px;
 	font-weight: 600;
-	align-self: flex-end;
+	align-self: center;
 	line-height: 1;
 	padding-top: 5px;
 }
@@ -101,6 +101,18 @@
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
 	margin-bottom: 59px;
+	opacity: 0.8;
+	transition: 0.3s all ease;
+}
+.pay-button:hover {
+	opacity: 1;
+}
+.yellow-btn {
+	opacity: 0.8;
+	transition: 0.3s all ease;
+}
+.yellow-btn:hover {
+	opacity: 1;
 }
 .css-1yzzujv {
 	opacity: 0 !important;
