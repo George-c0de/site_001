@@ -11,7 +11,7 @@ const Deposit = () => {
 	const [state_input, SetState] = useState(true)
 	const [data, setData] = useState({
 		wallet: '',
-		col: 1,
+		col: '1',
 	})
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
@@ -155,7 +155,7 @@ const Deposit = () => {
 								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
 									<p>
-										{user.wallet === null ? ' ' : `${user.wallet}${data.col}`}
+										{user.wallet === null ? ' ' : `${user.wallet}`}
 									</p>
 
 									<FontAwesomeIcon
