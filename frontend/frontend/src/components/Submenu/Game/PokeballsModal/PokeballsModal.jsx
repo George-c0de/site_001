@@ -69,7 +69,6 @@ const CardOpened = ({
 					setDisabledBtn(data.silver[idCard - 1])
 					setActivCategory('silver')
 
-					
 					break
 				}
 				case 'серебро': {
@@ -262,22 +261,22 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 	const [firstRender, setFirstRender] = useState(false)
 	const [hideModal, setHideModal] = React.useState(false)
 
-	const handleBuyClick = () => {
+	const handleBuyClick = async () => {
 		setAccept(true)
 
 		document.body.style.overflow = 'hidden'
 		if (purchaseConfirmation && money >= price) {
-			setTimeout(async () => {
-				document.body.style.overflow = 'visible'
-				setStatus('pending')
+			// setTimeout(async () => {
+			document.body.style.overflow = 'visible'
+			setStatus('pending')
 			console.log(category, idCard)
-				await axios.get(`/api/${category}/${idCard}`).then(res => {
-					setStatus('success')
-					setTimeout(() => {
-						buyCard()
-					}, 1000)
-				})
-			}, 1500)
+			await axios.get(`/api/${category}/${idCard}`).then(res => {
+				setStatus('success')
+				// setTimeout(() => {
+				buyCard()
+				// }, 1000)
+			})
+			// }, 1500)
 		}
 	}
 
