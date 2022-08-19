@@ -143,18 +143,15 @@ const Signup = () => {
 			} else {
 				setInvalidEmail(false)
 			}
-			if (data.password1 !== data.password2) {
+			if (data.password1 !== data.password2 || data.password1.length < 8) {
 				setCoincidence(true)
 				setInvalidPassword(true)
 			} else {
 				setCoincidence(false)
 				setInvalidPassword(false)
 			}
-			if (data.password1.length < 8) {
-				setInvalidPassword(true)
-			} else {
-				setInvalidPassword(false)
-			}
+			// if (data.password1.length < 8) setInvalidPassword(true)
+			// else setInvalidPassword(false)
 
 			if (
 				!invalidPassword &&
@@ -337,7 +334,9 @@ const Signup = () => {
 							)}
 							<input
 								className={`authorization__input ${
-									invalidPassword ? 'authorization__input-invalid' : ''
+									invalidPassword || coincidence
+										? 'authorization__input-invalid'
+										: ''
 								}`}
 								placeholder={t`Password`}
 								name='password1'
@@ -349,7 +348,9 @@ const Signup = () => {
 								type='password'
 								name='password2'
 								className={`authorization__input ${
-									invalidPassword ? 'authorization__input-invalid' : ''
+									invalidPassword || coincidence
+										? 'authorization__input-invalid'
+										: ''
 								}`}
 								placeholder={t`Confirm Password`}
 								onChange={handleChange}
