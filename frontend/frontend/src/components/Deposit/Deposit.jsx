@@ -45,6 +45,7 @@ const Deposit = () => {
 			}
 		} catch (e) {}
 	}
+	console.log(user)
 	useEffect(() => {
 		const getPosts = async () => {
 			try {
@@ -174,7 +175,8 @@ const Deposit = () => {
 							className='deposit-button'
 						>{t`Deposit`}</button> */}
 					</div>
-					<div className='deposit-history-wrapper'>
+					{tran[0]?.time &&
+						<div className='deposit-history-wrapper'>
 						<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>
 						<div className='deposit-history-table'>
 							<div className='history-table-column'>
@@ -253,6 +255,8 @@ const Deposit = () => {
 							</div>
 						</div>
 					</div>
+					}
+			
 				</motion.div>
 			</form>
 		</div>

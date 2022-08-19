@@ -75,6 +75,7 @@ const Game = () => {
 			[0, 0, 0],
 		],
 	})
+	console.log(history.oneq[0])
 
 	const [six, setsix] = useState({
 		bronze: false,
@@ -206,7 +207,7 @@ const Game = () => {
 									money={userMoney}
 								/>
 							</motion.div>
-							<GameHistory history={history} />
+							{history.oneq[0] && <GameHistory history={history} />}
 						</div>
 					</div>
 				</div>

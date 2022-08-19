@@ -34,18 +34,6 @@ const Signup = () => {
 	const [exist, setExist] = useState(false)
 	const [data3, setData3] = useState()
 
-	React.useEffect(() => {
-		try {
-			axios.get('/api/login').catch(function (error) {
-				if (error.response) {
-					setData3(error.response.status)
-				}
-			})
-		} catch (error) {
-			console.log(error)
-		}
-		console.log('RENDER')
-	}, [])
 	const [data, setData] = useState({
 		email: '',
 		password1: '',
@@ -54,10 +42,23 @@ const Signup = () => {
 	})
 
 	React.useEffect(() => {
+		if (!document.cookie.includes('firstRun=true')) setTypeAuthorization('sign')
+		if (firstRender) {
+			document.cookie = 'firstRun=true'
+			try {
+				axios.get('/api/login').catch(function (error) {
+					if (error.response) {
+						setData3(error.response.status)
+					}
+				})
+			} catch (error) {
+				console.log(error)
+			}
+		}
 		if (firstRender && params.utm) {
 			setTypeAuthorization('sign')
-			setFirstRender(false)
 		}
+		setFirstRender(false)
 		if (get('utm') == null) {
 			saveLocale(params.utm)
 		}
@@ -154,7 +155,7 @@ const Signup = () => {
 			} else {
 				setInvalidPassword(false)
 			}
-			
+
 			if (
 				!invalidPassword &&
 				!invalidEmail &&

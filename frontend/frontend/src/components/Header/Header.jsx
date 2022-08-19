@@ -27,6 +27,7 @@ const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
+
 	const navigate = useNavigate()
 
 	const startGame = () => {
@@ -34,6 +35,7 @@ const Header = () => {
 			navigate('/login')
 		}
 	}
+
 
 	const [openBurger, setOpenBurger] = React.useState(false)
 	const showUserInfo = () => {
