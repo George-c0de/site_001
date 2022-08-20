@@ -207,7 +207,7 @@ const Game = () => {
 									money={userMoney}
 								/>
 							</motion.div>
-							{history.oneq[0] && <GameHistory history={history} />}
+							{history.oneq[0] !== 0 && <GameHistory history={history} />}
 						</div>
 					</div>
 				</div>
