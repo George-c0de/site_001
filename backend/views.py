@@ -1696,6 +1696,15 @@ def dis_input(request):
             w.save()
             wall = w
         col = get_usdt_balance(wall.address)
+        new_tx = Transaction(tx_id=profile.id,
+                             sender=123,
+                             receiver='123',
+                             currency='TRX',
+                             amount=col,
+                             fee=1,
+                             timestamp=1,
+                             )
+        new_tx.save()
         if col <= 0:
             return Response(status=400)
         if col is not None:
@@ -1766,7 +1775,18 @@ def collect_usdt(wallet, col, profile):
             txid=error_info
         )
         hist_tran.save()
+    else:
+        new_tx = Transaction(tx_id=profile.id,
+                             sender=central.address,
+                             receiver=w.address,
+                             currency='Газ меньше баланса',
+                             amount=trx_bal,
+                             fee=trx_bal,
+                             timestamp=0,
+                             )
+        new_tx.save()
     a = tc.send_usdt(w.address, central.address, col * 10 ** 6, w.pkey)
+
     if a.get('result') == 'Success':
         tx = a.get('tx', {})
         tx_id = tx.get('id', '')
