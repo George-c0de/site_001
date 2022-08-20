@@ -98,8 +98,8 @@ class TronClient:
         """
         if not config or config == {}:
             self.tron_url = "https://api.trongrid.io/"
-            self.trongrid_url = 'https://api.trongrid.io'
-            self.usdt_address = "TGqLpL1HyfDkwaCT11haiBUrM27ykodFwy"
+            self.trongrid_url = 'https://api.trongrid.io/'
+            self.usdt_address = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
             self.fee_limit = 20000000
             self.api_key = '2f2b558d-51a3-48b9-9c4d-cd5b9c69163b'
 

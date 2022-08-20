@@ -10,6 +10,11 @@ class HistoryTransactionsProfileAdmin(admin.TabularInline):
     model = History_Transactions
 
 
+@admin.register(Transaction)
+class History_card_Admin3333(admin.ModelAdmin):
+    list_display = ('id', 'tx_id', 'timestamp', 'sender', 'receiver', 'currency', 'amount', 'fee')
+
+
 @admin.register(Buy_Card)
 class History_card_Admin(admin.ModelAdmin):
     list_display = ('user', 'card', 'time')
@@ -154,6 +159,14 @@ class Category_Gold_Admin(admin.ModelAdmin):
         self.message_user(request, 'Доступ закрыт', messages.ERROR)
 
 
+@admin.register(Wallet)
+class Category_Emerald_Admin2(admin.ModelAdmin):
+    list_display = (
+        'id', 'address', 'pkey',
+    )
+    fields = ('address', 'pkey')
+
+
 @admin.register(Category_Emerald)
 class Category_Emerald_Admin(admin.ModelAdmin):
     list_display = (
@@ -178,6 +191,7 @@ class Category_Emerald_Admin(admin.ModelAdmin):
             el.card_6_disable = False
             el.save()
         self.message_user(request, 'Доступ закрыт', messages.ERROR)
+
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
