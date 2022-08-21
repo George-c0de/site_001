@@ -452,6 +452,10 @@
 			"This email is already registered in the system": {
 				"msgid": "This email is already registered in the system",
 				"msgstr": ["Questa e-mail è già registrata nel sistema"]
+			},
+			"Withdrawal request successfully created": {
+				"msgid": "Withdrawal request successfully created",
+				"msgstr": ["Richiesta di prelievo creata con successo"]
 			}
 		}
 	}

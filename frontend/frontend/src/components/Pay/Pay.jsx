@@ -6,11 +6,12 @@ import Header from '../Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { motion } from 'framer-motion'
-
+import PaySend from '../modals/PaySend'
 const Pay = () => {
 	const [state_input, SetState] = useState(true)
 	const [invalidAmount, setInvalidAmount] = useState(false)
 	const [invalidWallet, setInvalidWallet] = useState(false)
+	let [openModal, setOpenModal] = useState(false)
 	const [data, setData] = useState({
 		wallet_input: '',
 		col: '',
@@ -88,19 +89,25 @@ const Pay = () => {
 		getPosts()
 	}, [user.id])
 
-	console.log(data)
-
 	const handleCopyInTable = id => {
 		navigator.clipboard.writeText(tran[id].txid)
 	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		if (data.col < 1 || data.col > user.money) {
+		if (data.col < 1 || data.col > user.money || data.col === '') {
 			setInvalidAmount(true)
-		} else if (data.wallet_input === '') {
+		} else {
+			setInvalidAmount(false)
+		}
+		if (data.wallet_input === '') {
 			setInvalidWallet(true)
 		} else {
+			setInvalidWallet(false)
+		}
+
+		if (!invalidAmount && !invalidWallet && data.col.length > 0) {
+			console.log('SEND')
 			try {
 				axios
 					.post(
@@ -117,6 +124,11 @@ const Pay = () => {
 					.catch(function (error) {})
 				setInvalidWallet(false)
 				setInvalidAmount(false)
+				setOpenModal(true)
+				setData({
+					...data,
+					col: '',
+				})
 			} catch (e) {
 				if (e.response.status === 200) {
 					data.col = 1
@@ -125,6 +137,7 @@ const Pay = () => {
 				}
 			}
 		}
+		console.log(invalidAmount, invalidAmount)
 	}
 	const hundSum = (e, name) => {
 		if (name == 'col') e.target.value = e.target.value.replace(/[^\d.]/g, '')
@@ -138,6 +151,7 @@ const Pay = () => {
 		})
 	}
 
+	console.log(openModal)
 	return (
 		<div className='homepage-wrapper'>
 			<div className='main_container'>
@@ -163,7 +177,7 @@ const Pay = () => {
 									onChange={e => hundSum(e, 'col')}
 									value={data.col}
 									className={`pay-sum-inp-pay ${
-										invalidAmount ? 'authorization__input-invalid' : ''
+										invalidAmount ? 'pay-invalid-inp' : ''
 									}`}
 									name='col'
 								/>
@@ -175,7 +189,7 @@ const Pay = () => {
 									onChange={e => hundSum(e, 'wallet_input')}
 									type='text'
 									className={`pay-sum-inp-pay ${
-										invalidWallet ? 'authorization__input-invalid' : ''
+										invalidWallet ? 'pay-invalid-inp' : ''
 									}`}
 									name='wallet_input'
 									value={data.wallet_input}
@@ -273,6 +287,7 @@ const Pay = () => {
 					</motion.div>
 				</form>
 			</div>
+			{openModal && <PaySend setOpenModal={setOpenModal} />}
 		</div>
 	)
 }

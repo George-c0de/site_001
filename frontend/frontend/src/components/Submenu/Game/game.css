@@ -1,5 +1,8 @@
 a {
-	text-decoration: none;
+	text-decoration: none !important;
+}
+a:hover {
+	color: #ffffff !important;
 }
 p {
 	margin: 0;
@@ -299,7 +302,7 @@ ul li {
 
 	ul li {
 		font-size: 10.3px;
-		}
+	}
 
 	.paper-plane {
 		height: 30px;
@@ -401,7 +404,7 @@ ul li {
 		padding-top: 0px;
 		margin-bottom: 0px;
 	}
-	.main__header{
+	.main__header {
 		padding-bottom: 10px;
 	}
 }
@@ -459,10 +462,10 @@ ul li {
 		width: 40px;
 		height: 48px;
 	}
-	.referals__btn{
+	.referals__btn {
 		font-size: 15px !important;
 	}
-	.referals__title{
+	.referals__title {
 		font-size: 20px !important;
 	}
 	.main-logo {
@@ -489,15 +492,15 @@ ul li {
 	.text-pokeball-4 {
 		font-size: 18px !important;
 	}
-	.detail-wrapper { 
+	.detail-wrapper {
 		top: 5px !important;
 	}
 	.small-pokeball {
 		width: 23px !important;
 	}
 	.icon-showdown-container {
-    top: 8px;
-}
+		top: 8px;
+	}
 }
 @media only screen and (min-width: 413px) and (max-width: 600px) {
 	.text-game {

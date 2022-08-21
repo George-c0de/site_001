@@ -33,6 +33,9 @@
 	font-weight: 600;
 	margin-bottom: 20px;
 }
+.pay-invalid-inp {
+	border: 1px solid red !important;
+}
 
 /*INPUTS*/
 

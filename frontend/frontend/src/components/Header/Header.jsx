@@ -184,7 +184,6 @@ const Header = () => {
 					setOpenStatistics={setOpenStatistics}
 				/>
 			</motion.div>
-			{data2 === 501 && <SubscribeTg />}
 		</>
 	)
 }

@@ -10,6 +10,7 @@ import { t } from 'ttag'
 import axios from 'axios'
 import Header from '../../Header/Header'
 import { motion } from 'framer-motion'
+import SubscribeTg from '../../modals/SubscribeTg'
 
 const initialCardsAmount = {
 	bronze: [0],
@@ -22,6 +23,8 @@ const Game = () => {
 	const [onActive, setActive] = useState(true)
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
 	const [userMoney, setUserMoney] = useState('')
+	const [firstRender, setFirstRender] = useState(false)
+	const [showTg, setShowTg] = useState(false)
 
 	const [price, setPrice] = useState({
 		bronze: [10, 15, 25, 40, 50, 77],
@@ -114,6 +117,10 @@ const Game = () => {
 		getCard_data()
 		getHist()
 		getSix()
+		setTimeout(() => {
+			console.log(1)
+			setShowTg(true)
+		}, 5000)
 	}, [])
 
 	let getUsername = async () => {
@@ -161,11 +168,12 @@ const Game = () => {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.5, ease: 'linear', delay: 0.3 }}
 							>{t`JOIN THE FIGHT AND WIN`}</motion.div>
-							<motion.div className='container-pack-pokeballs' 
-							initial={{ opacity: 0, y: 50 }}
+							<motion.div
+								className='container-pack-pokeballs'
+								initial={{ opacity: 0, y: 50 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.5, ease: 'linear', delay: 0.5 }}
-								 >
+							>
 								<PokeballsPack
 									title={t`BRONZE`}
 									amount={cardsAmount.bronze}
@@ -212,6 +220,7 @@ const Game = () => {
 					</div>
 				</div>
 			</div>
+			{showTg && <SubscribeTg />}
 		</>
 	)
 }
