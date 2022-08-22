@@ -90,6 +90,9 @@
 	color: #000000;
 	font-size: 15px;
 }
+.deposit-link p {
+	margin-bottom:  0;
+}
 .deposit-text {
 	margin: 10px 0px;
 	font-size: 16px;

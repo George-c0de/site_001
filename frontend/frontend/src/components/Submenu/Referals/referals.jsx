@@ -3,27 +3,31 @@ import { t } from 'ttag'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../redux/slices/userSlice'
+import { getUser } from '../../redux/slices/selectors'
 const Referals = () => {
+	const { user } = useSelector(getUser)
+	const dispatch = useDispatch()
 	useEffect(() => {
 		fetchPosts()
 		getLines()
 		getUsername()
 	}, [])
-	const [user, setUser] = useState({
-		id: 0,
-		money: '0.00',
-		referral_link: '',
-		referral_amount: '0.00',
-		missed_amount: '0.00',
-		wallet: null,
-		line_1: null,
-		line_2: null,
-		line_3: null,
-		max_card: 0,
-		admin_or: false,
-		user: 0,
-	})
+	// const [user, setUser] = useState({
+	// 	id: 0,
+	// 	money: '0.00',
+	// 	referral_link: '',
+	// 	referral_amount: '0.00',
+	// 	missed_amount: '0.00',
+	// 	wallet: null,
+	// 	line_1: null,
+	// 	line_2: null,
+	// 	line_3: null,
+	// 	max_card: 0,
+	// 	admin_or: false,
+	// 	user: 0,
+	// })
 
 	const [lines, setLines] = useState({
 		first: {
@@ -50,10 +54,14 @@ const Referals = () => {
 	})
 
 	async function fetchPosts() {
-		try {
-			const response = await axios.get('/api/referral')
-			setPosts(response.data)
-		} catch (e) {}
+		console.log('SEND USER')
+		if (user.id == '') {
+			console.log(1)
+			try {
+				const response = await axios.get('/api/user')
+				dispatch(setUser(response.data))
+			} catch (e) {}
+		}
 	}
 
 	let getUsername = async () => {

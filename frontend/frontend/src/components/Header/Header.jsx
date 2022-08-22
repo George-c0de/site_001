@@ -10,7 +10,6 @@ import LogOut from '../../assets/logout.svg'
 import axios from 'axios'
 import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
-import SubscribeTg from '../modals/SubscribeTg'
 import { motion } from 'framer-motion'
 
 let data2

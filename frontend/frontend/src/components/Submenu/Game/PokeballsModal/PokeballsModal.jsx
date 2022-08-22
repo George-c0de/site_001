@@ -234,7 +234,7 @@ const CardOpened = ({
 				<span
 					onClick={handleBuyClick2}
 					className={`card-info-button ${
-						disabledBtn && money <= price ? '' : 'card-info-disabled'
+						disabledBtn ? '' : 'card-info-disabled'
 					}`}
 					disabled={disabledBtn ? false : true}
 				>

@@ -6,33 +6,42 @@ import './UserId.css'
 import { t } from 'ttag'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../redux/slices/userSlice'
+import { getUser } from '../redux/slices/selectors'
 
 export const UserId = ({ note }) => {
 	const linkRef = useRef()
 	const copyRef = useRef()
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const { user } = useSelector(getUser)
 	useEffect(() => {
 		fetchPosts()
 	}, [])
-	const [user, setUser] = useState({
-		id: '',
-		money: '0.00',
-		referral_link: '0',
-		referral_amount: '0.00',
-		missed_amount: '0.00',
-		wallet: null,
-		line_1: null,
-		line_2: null,
-		line_3: null,
-		max_card: 0,
-		admin_or: false,
-		user: 0,
-	})
+
+	// const [user, setUser] = useState({
+	// 	id: '',
+	// 	money: '0.00',
+	// 	referral_link: '0',
+	// 	referral_amount: '0.00',
+	// 	missed_amount: '0.00',
+	// 	wallet: null,
+	// 	line_1: null,
+	// 	line_2: null,
+	// 	line_3: null,
+	// 	max_card: 0,
+	// 	admin_or: false,
+	// 	user: 0,
+	// })
 	async function fetchPosts() {
-		try {
-			const response = await axios.get('/api/user')
-			setUser(response.data)
-		} catch (e) {}
+		console.log('SEND USER')
+		if (user.id == '') {
+			try {
+				const response = await axios.get('/api/user')
+				dispatch(setUser(response.data))
+			} catch (e) {}
+		}
 	}
 
 	const handleCopy = () => {
