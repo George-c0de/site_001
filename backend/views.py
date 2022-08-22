@@ -1249,9 +1249,33 @@ def go__category(name, profile):
     return category
 
 
+def go_disable_of_card(name):
+    if name == 'bronze':
+        if Category_Bronze.objects.filter(card_6_disable=True).exists():
+            return True
+        else:
+            return False
+    elif name == 'silver':
+        if Category_Silver.objects.filter(card_6_disable=True).exists():
+            return True
+        else:
+            return False
+    elif name == 'gold':
+        if Category_Gold.objects.filter(card_6_disable=True).exists():
+            return True
+        else:
+            return False
+    else:
+        if Category_Emerald.objects.filter(card_6_disable=True).exists():
+            return True
+        else:
+            return False
+
+
 def all_ref_logic(name, id_, profile):
     admin_ = Profile.objects.filter(admin_or=True).first()
     category = go__category(name, profile)
+    t_or_f = go_disable_of_card(name)
     if User_in_Matrix.objects.filter(user=profile).filter(matrix__up=True).filter(
             card__card__category=str(name)).filter(card__card__name=int(id_)).exists():
         us_pr = User_in_Matrix.objects.filter(user=profile).filter(card__card__category=str(name)).filter(
@@ -1270,7 +1294,7 @@ def all_ref_logic(name, id_, profile):
     else:
         main_user = None
     # Проверка блокировки карты для пользователя
-    if id_ == 6 and category.card_6_disable is False:
+    if id_ == 6 and not t_or_f:
         return 400
     else:
         money_to_card = what_card(card, category)
@@ -1444,19 +1468,18 @@ def referral_system_emerald(request, id_):
 @api_view(['GET'])
 def six(request):
     if Profile.objects.filter(user_id=request.user.id).exists():
-        profile = Profile.objects.get(user_id=request.user.id)
         bronze = False
         silver = False
         gold = False
         emerald = False
-        if Category_Bronze.objects.filter(user_id=profile.id).exists():
-            bronze = Category_Bronze.objects.get(user_id=profile.id).card_6_disable
-        if Category_Silver.objects.filter(user_id=profile.id).exists():
-            silver = Category_Silver.objects.get(user_id=profile.id).card_6_disable
-        if Category_Gold.objects.filter(user_id=profile.id).exists():
-            gold = Category_Gold.objects.get(user_id=profile.id).card_6_disable
-        if Category_Emerald.objects.filter(user_id=profile.id).exists():
-            emerald = Category_Emerald.objects.get(user_id=profile.id).card_6_disable
+        if Category_Bronze.objects.filter(card_6_disable=True).exists():
+            bronze = True
+        if Category_Silver.objects.filter(card_6_disable=True).exists():
+            silver = True
+        if Category_Gold.objects.filter(card_6_disable=True).exists():
+            gold = True
+        if Category_Emerald.objects.filter(card_6_disable=True).exists():
+            emerald = True
         data = {
             'bronze': bronze,
             'silver': silver,
