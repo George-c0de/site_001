@@ -5,7 +5,7 @@ import { t } from 'ttag'
 
 const NotEnoughMoney = props => {
 	const ref = React.useRef(null)
-	const { hideModal, setHideModal, setPurchaseConfirmation, setAccept, price } =
+	const { hideModal, setAccept } =
 		props
 	const handleClickOutside = event => {
 		if (ref.current && !ref.current.contains(event.target)) {
@@ -26,13 +26,6 @@ const NotEnoughMoney = props => {
 		document.body.style.overflow = 'visible'
 	}
 
-	const confirmPurchase = () => {
-		setPurchaseConfirmation(true)
-		setAccept(false)
-		setHideModal(true)
-		document.body.style.overflow = 'visible'
-	}
-
 	return (
 		<div
 			className={`subscriibe-wrapper buy-wrapper ${
@@ -46,9 +39,7 @@ const NotEnoughMoney = props => {
 					className='subcribe-cross'
 					onClick={handleClick}
 				/>
-				<p className='buy-text'>
-					{t`Insufficient funds to purchase the card`}
-				</p>
+				<p className='buy-text'>{t`Insufficient funds to purchase the card`}</p>
 				<div className='buy-btns-wrapper'>
 					<button
 						onClick={handleClick}
@@ -61,5 +52,4 @@ const NotEnoughMoney = props => {
 		</div>
 	)
 }
-
 export default NotEnoughMoney

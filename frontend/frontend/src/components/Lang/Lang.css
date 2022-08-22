@@ -121,12 +121,12 @@
 		align-items: flex-end;
 	}
 	.lang-icon-preview {
-		top: 5px;
+		top: 12px;
 	}
 	.lang-icon-preview {
 		left: -30%;
 	}
 	.lang-list {
-		margin-bottom: 5px;
+		margin-bottom: 14px;
 	}
 }

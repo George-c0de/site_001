@@ -18,20 +18,25 @@ const initialCardsAmount = {
 	gold: [0],
 	emerald: [0],
 }
+const price = {
+	bronze: [10, 15, 25, 40, 50, 77],
+	silver: [100, 150, 250, 400, 500, 666],
+	gold: [750, 1000, 1250, 1500, 2000, 2222],
+	emerald: [2500, 5000, 7500, 10000, 15000, 22222],
+}
 
 const Game = () => {
-	const [onActive, setActive] = useState(true)
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
 	const [userMoney, setUserMoney] = useState('')
-	const [firstRender, setFirstRender] = useState(false)
 	const [showTg, setShowTg] = useState(false)
 
-	const [price, setPrice] = useState({
-		bronze: [10, 15, 25, 40, 50, 77],
-		silver: [100, 150, 250, 400, 500, 666],
-		gold: [750, 1000, 1250, 1500, 2000, 2222],
-		emerald: [2500, 5000, 7500, 10000, 15000, 22222],
-	})
+	// const [price, setPrice] = useState({
+	// 	bronze: [10, 15, 25, 40, 50, 77],
+	// 	silver: [100, 150, 250, 400, 500, 666],
+	// 	gold: [750, 1000, 1250, 1500, 2000, 2222],
+	// 	emerald: [2500, 5000, 7500, 10000, 15000, 22222],
+	// })
+
 	const [history, setHistory] = useState({
 		oneq: [0, 0, 0],
 		two: [0, 0, 0],
@@ -127,6 +132,7 @@ const Game = () => {
 		const username = await axios.get('/api/user')
 		setUserMoney(username.data.money)
 	}
+
 	let getHist = async () => {
 		await axios.get('/api/get_hist_card').then(data => {
 			const result = {
@@ -160,7 +166,7 @@ const Game = () => {
 			<div className='main_container'>
 				<Header />
 				<div className='homepage-wrapper'>
-					<div className={onActive ? 'site-main-game' : 'site-main_active'}>
+					<div className='site-main-game'>
 						<div className='site-main-game-wrapper'>
 							<motion.div
 								className='text-game'

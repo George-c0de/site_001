@@ -1,12 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './modals.css'
-import Telegram from '../../assets/tg.svg'
-import Cross from '../../assets/cross-svgrepo-com.svg'
 import { t } from 'ttag'
 
 const PaySend = ({setOpenModal}) => {
-	// const [activeTg, setActiveTg] = useState(true)
-
 	const ref = React.useRef(null)
 
 	const handleClickOutside = event => {

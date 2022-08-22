@@ -274,6 +274,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 				setStatus('success')
 				// setTimeout(() => {
 				buyCard()
+				window.location.reload()
 				// }, 1000)
 			})
 			// }, 1500)
@@ -333,10 +334,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 					/>
 				) : (
 					<NotEnoughMoney
-						price={price}
-						setPurchaseConfirmation={setPurchaseConfirmation}
 						hideModal={hideModal}
-						setHideModal={setHideModal}
 						setAccept={setAccept}
 					/>
 				))}

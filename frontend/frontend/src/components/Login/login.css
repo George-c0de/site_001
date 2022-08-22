@@ -114,22 +114,22 @@
 	font-size: 26px;
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
-	opacity: .8;
-	transition: .3s all ease;
+	opacity: 0.8;
+	transition: 0.3s all ease;
 }
 .authorization__button:hover {
 	opacity: 1;
 }
 .yellow_btn {
-	opacity: .8;
-	transition: .3s all ease;
+	opacity: 0.8;
+	transition: 0.3s all ease;
 }
 .yellow_btn:hover {
 	opacity: 1;
 }
 .subscribe-btn {
-	opacity: .8;
-	transition: .3s all ease;
+	opacity: 0.8;
+	transition: 0.3s all ease;
 }
 .subscribe-btn:hover {
 	opacity: 1;

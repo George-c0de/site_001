@@ -8,9 +8,7 @@ const Authorization = () => {
 			<div className='subscriibe-block'>
 				<div className='buy-btns-wrapper btn-modal'>
 					<Link to='/login'>
-						<p className='authorization-modal-text'>
-							{t`Log in to continue`}
-						</p>
+						<p className='authorization-modal-text'>{t`Log in to continue`}</p>
 					</Link>
 				</div>
 			</div>

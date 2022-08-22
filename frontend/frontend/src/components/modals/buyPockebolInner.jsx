@@ -34,9 +34,7 @@ const BuyPockebol = props => {
 	}
 
 	return (
-		<div
-			className={`subscriibe-wrapper buy-wrapper`}
-		>
+		<div className={`subscriibe-wrapper buy-wrapper`}>
 			<div className='subscriibe-block' ref={ref}>
 				<img
 					src={Cross}
