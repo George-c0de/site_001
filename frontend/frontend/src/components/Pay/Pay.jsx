@@ -7,31 +7,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { motion } from 'framer-motion'
 import PaySend from '../modals/PaySend'
+import { setUser } from '../redux/slices/userSlice'
+import { getUser } from '../redux/slices/selectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 const Pay = () => {
 	const [state_input, SetState] = useState(true)
 	const [invalidAmount, setInvalidAmount] = useState(false)
 	const [invalidWallet, setInvalidWallet] = useState(false)
 	let [openModal, setOpenModal] = useState(false)
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const { user } = useSelector(getUser)
 	const [data, setData] = useState({
 		wallet_input: '',
 		col: '',
 	})
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
-	let [user, setUser] = useState({
-		id: 0,
-		money: 0,
-		referral_link: '',
-		referral_amount: '',
-		missed_amount: '',
-		wallet_input: null,
-		line_1: null,
-		line_2: null,
-		line_3: null,
-		max_card: 0,
-		admin_or: false,
-		user: 0,
-	})
+	// let [user, setUser] = useState({
+	// 	id: 0,
+	// 	money: 0,
+	// 	referral_link: '',
+	// 	referral_amount: '',
+	// 	missed_amount: '',
+	// 	wallet_input: null,
+	// 	line_1: null,
+	// 	line_2: null,
+	// 	line_3: null,
+	// 	max_card: 0,
+	// 	admin_or: false,
+	// 	user: 0,
+	// })
 	let [wallet, setWallet] = useState(null)
 	useEffect(() => {
 		getTran()
@@ -67,7 +75,7 @@ const Pay = () => {
 						admin_or: data.data.admin_or,
 						user: data.data.user,
 					}
-					setUser(result)
+					if (user.id == '') dispatch(setUser(result))
 					setMax(result.money)
 					setWallet(result.wallet_input)
 				})

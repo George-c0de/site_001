@@ -6,6 +6,10 @@ import Header from '../Header/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { motion } from 'framer-motion'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../redux/slices/userSlice'
+import { getUser } from '../redux/slices/selectors'
+import { useNavigate } from 'react-router-dom'
 
 const Deposit = () => {
 	const [state_input, SetState] = useState(true)
@@ -15,21 +19,23 @@ const Deposit = () => {
 	})
 	const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
+	const dispatch = useDispatch()
+	const { user } = useSelector(getUser)
 	// убрать комменты снизу
-	let [user, setUser] = useState({
-		id: 0,
-		money: 0,
-		referral_link: '',
-		referral_amount: '',
-		missed_amount: '',
-		wallet: null,
-		line_1: null,
-		line_2: null,
-		line_3: null,
-		max_card: 0,
-		admin_or: false,
-		user: 0,
-	})
+	// let [user, setUser] = useState({
+	// 	id: 0,
+	// 	money: 0,
+	// 	referral_link: '',
+	// 	referral_amount: '',
+	// 	missed_amount: '',
+	// 	wallet: null,
+	// 	line_1: null,
+	// 	line_2: null,
+	// 	line_3: null,
+	// 	max_card: 0,
+	// 	admin_or: false,
+	// 	user: 0,
+	// })
 	useEffect(() => {
 		getTran()
 	}, [])
@@ -64,7 +70,7 @@ const Deposit = () => {
 						admin_or: data.data.admin_or,
 						user: data.data.user,
 					}
-					setUser(result)
+					if (user.id == '') dispatch(setUser(result))
 					setMax(result.money)
 				})
 
@@ -115,13 +121,6 @@ const Deposit = () => {
 		}
 	}, 300000)
 
-	const hundSum = e => {
-		setData({
-			wallet: e.target.value,
-			col: data.col,
-		})
-	}
-
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)
 	}
@@ -155,9 +154,7 @@ const Deposit = () => {
 									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
 								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
-									<p>
-										{user.wallet === null ? ' ' : `${user.wallet}`}
-									</p>
+									<p>{user.wallet === null ? ' ' : `${user.wallet}`}</p>
 
 									<FontAwesomeIcon
 										icon={faCopy}
@@ -175,88 +172,87 @@ const Deposit = () => {
 							className='deposit-button'
 						>{t`Deposit`}</button> */}
 					</div>
-					{tran[0]?.time &&
+					{tran[0]?.time && (
 						<div className='deposit-history-wrapper'>
-						<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>
-						<div className='deposit-history-table'>
-							<div className='history-table-column'>
-								<span className='history-table-title'>{t`Time`}</span>
-								{tran.map((trans, id) => {
-									return (
-										<h3 className='history-table-text-intable' key={id}>
-											{trans.time}
-										</h3>
-									)
-								})}
-							</div>
-							<div className='history-table-column'>
-								<span className='history-table-title'>{t`Date`}</span>
-								{tran.map((trans, id) => {
-									return (
-										<h3 className='history-table-text-intable' key={id}>
-											{trans.data}
-										</h3>
-									)
-								})}
-							</div>
-							<div className='history-table-column history-table-column-desc'>
-								<span className='history-table-title'>
-									Txid {t`TRANSACTION`}
-								</span>
-								{tran.map((trans, id) => {
-									return (
-										<h3 className='history-table-text-intable' key={id}>
-											{trans.txid}
-										</h3>
-									)
-								})}
-							</div>
-							<div className='history-table-column history-table-column-mobile'>
-								<span className='history-table-title'>Txid</span>
-								{tran &&
-									tran.map((trans, id) => {
+							<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>
+							<div className='deposit-history-table'>
+								<div className='history-table-column'>
+									<span className='history-table-title'>{t`Time`}</span>
+									{tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable' key={id}>
-												{trans && trans?.txid.slice(0, 20)}
-												<FontAwesomeIcon
-													icon={faCopy}
-													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
-													onClick={() => handleCopyInTable(id)}
-												/>
+												{trans.time}
 											</h3>
 										)
 									})}
-							</div>
-							<div className='history-table-column history-table-column-mobile-small'>
-								<span className='history-table-title'>Txid</span>
-								{tran &&
-									tran.map((trans, id) => {
+								</div>
+								<div className='history-table-column'>
+									<span className='history-table-title'>{t`Date`}</span>
+									{tran.map((trans, id) => {
 										return (
 											<h3 className='history-table-text-intable' key={id}>
-												{trans && trans?.txid.slice(0, 10)}
-												<FontAwesomeIcon
-													icon={faCopy}
-													className='copy-icon deposit-copy-icon deposit-copy-icon-table'
-													onClick={() => handleCopyInTable(id)}
-												/>
+												{trans.data}
 											</h3>
 										)
 									})}
-							</div>
-							<div className='history-table-column'>
-								<span className='history-table-title sum'>{`Sum`}</span>
-								{tran.map((trans, id) => {
-									return (
-										<h3 className='history-table-text-intable' key={id}>
-											{trans.quantity}
-										</h3>
-									)
-								})}
+								</div>
+								<div className='history-table-column history-table-column-desc'>
+									<span className='history-table-title'>
+										Txid {t`TRANSACTION`}
+									</span>
+									{tran.map((trans, id) => {
+										return (
+											<h3 className='history-table-text-intable' key={id}>
+												{trans.txid}
+											</h3>
+										)
+									})}
+								</div>
+								<div className='history-table-column history-table-column-mobile'>
+									<span className='history-table-title'>Txid</span>
+									{tran &&
+										tran.map((trans, id) => {
+											return (
+												<h3 className='history-table-text-intable' key={id}>
+													{trans && trans?.txid.slice(0, 20)}
+													<FontAwesomeIcon
+														icon={faCopy}
+														className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+														onClick={() => handleCopyInTable(id)}
+													/>
+												</h3>
+											)
+										})}
+								</div>
+								<div className='history-table-column history-table-column-mobile-small'>
+									<span className='history-table-title'>Txid</span>
+									{tran &&
+										tran.map((trans, id) => {
+											return (
+												<h3 className='history-table-text-intable' key={id}>
+													{trans && trans?.txid.slice(0, 10)}
+													<FontAwesomeIcon
+														icon={faCopy}
+														className='copy-icon deposit-copy-icon deposit-copy-icon-table'
+														onClick={() => handleCopyInTable(id)}
+													/>
+												</h3>
+											)
+										})}
+								</div>
+								<div className='history-table-column'>
+									<span className='history-table-title sum'>{`Sum`}</span>
+									{tran.map((trans, id) => {
+										return (
+											<h3 className='history-table-text-intable' key={id}>
+												{trans.quantity}
+											</h3>
+										)
+									})}
+								</div>
 							</div>
 						</div>
-					</div>
-					}
-			
+					)}
 				</motion.div>
 			</form>
 		</div>

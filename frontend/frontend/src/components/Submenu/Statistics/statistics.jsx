@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { t } from 'ttag'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from '../../redux/slices/selectors'
+import { setPosts } from '../../redux/slices/userSlice'
 
 const Statistics = () => {
+	const dispatch = useDispatch()
+	const { posts } = useSelector(getUser)
+	console.log(posts)
 	useEffect(() => {
 		fetchPosts()
 	}, [])
 
-	const [posts, setPosts] = useState({
-		money: 0,
-		all_transactions: 0,
-		coll_user: 0,
-	})
+	// const [posts, setPosts] = useState({
+	// 	money: 0,
+	// 	all_transactions: 0,
+	// 	coll_user: 0,
+	// })
 
 	async function fetchPosts() {
 		try {
 			const response = await axios.get('/api/get_all')
-			setPosts(response.data)
+			dispatch(setPosts(response.data))
 		} catch (e) {
 			console.log(e)
 		}

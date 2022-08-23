@@ -16,21 +16,24 @@ const initialState = {
 		admin_or: false,
 		user: 0,
 	},
+	posts: {
+		money: 0,
+		all_transactions: 0,
+		coll_user: 0,
+	},
 }
 
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		increment: state => {
-			state.value += 1
+		resetUser: state => {
+			state = initialState;
 		},
-		getData2: state => {
-			axios.get('/api/login').catch(function (error) {
-				if (error.response) {
-					state.data2 = error.response.status
-				}
-			})
+		setPosts: (state, action) => {
+			state.posts = {
+				...action.payload,
+			}
 		},
 		setUser: (state, action) => {
 			state.user = {
@@ -41,6 +44,6 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, getData2, setUser } = userSlice.actions
+export const { increment, setPosts, setUser } = userSlice.actions
 
 export default userSlice.reducer

@@ -16,6 +16,7 @@ export const GameHistory = ({ history }) => {
 
 	let getUsername = async () => {
 		const res = await axios.get('/api/user')
+		console.log(res.data)
 		setData(res.data)
 	}
 
