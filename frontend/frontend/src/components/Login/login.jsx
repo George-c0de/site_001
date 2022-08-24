@@ -123,7 +123,7 @@ const Signup = () => {
 							}
 						})
 					if (data2.data === 200) {
-						window.location.assign('https://tokemon.games/home')
+						window.location.assign(`${window.location.origin}/home`)
 					}
 				} catch (error) {
 					setInvalidDataLogin(true)
@@ -196,7 +196,7 @@ const Signup = () => {
 						})
 					if (data2.data === 200) {
 						// navigate('/home') //after registering navigate to login page
-						window.location.assign('https://tokemon.games/home')
+							window.location.assign(`${window.location.origin}/home`)
 					}
 				} catch (error) {
 					setInvalidEmail(true)

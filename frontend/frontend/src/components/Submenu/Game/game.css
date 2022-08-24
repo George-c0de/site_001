@@ -120,18 +120,21 @@ p {
 	transition: 0.5s all ease;
 }
 .main__link:hover {
-	color: #ffcc00;
+	color: #ffcc00 !important;
 }
 .main__blocks {
 	width: 100%;
 	display: flex;
-	align-items: center;
 	justify-content: center;
 }
 .main__block {
 	text-align: center;
 	height: 90px;
 	cursor: pointer;
+	transition: 0.5s all ease;
+}
+.main__block:hover .main__text {
+	color: #ffcc00;
 }
 .main__block img {
 	margin-bottom: 14px;
@@ -151,9 +154,9 @@ p {
 	padding-right: 10px;
 	transition: 0.5s all ease;
 }
-.main__text:hover {
+/* .main__text:hover {
 	color: #ffcc00;
-}
+} */
 .site-main-game {
 	height: 100%;
 	padding-top: 150px;
