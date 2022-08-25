@@ -85,7 +85,7 @@ const Game = () => {
 	})
 	console.log(history.oneq[0])
 
-	const [six, setsix] = useState({
+	const [six, setSix] = useState({
 		bronze: false,
 		silver: false,
 		gold: false,
@@ -100,7 +100,7 @@ const Game = () => {
 				emerald: data.data.emerald,
 			}
 
-			setsix(result)
+			setSix(result)
 		})
 	}
 	const getCard = async () => {

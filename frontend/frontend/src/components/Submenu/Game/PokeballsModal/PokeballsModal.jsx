@@ -24,134 +24,132 @@ const CardOpened = ({
 }) => {
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState(true)
-	const [activeCategory, setActivCategory] = useState(false)
+	const [activeCategory, setActiveCategory] = useState(false)
 	const handleButton = async () => {
+		console.log(category)
 		await image.png.get(`/api/prohibitions`).then(res => {
 			let data = res.data
 			console.log(data)
 			switch (category) {
 				case 'bronze': {
 					setDisabledBtn(data.bronze[idCard - 1])
-					setActivCategory('bronze')
+					setActiveCategory('bronze')
 					break
 				}
 				case 'бронза': {
 					setDisabledBtn(data.bronze[idCard - 1])
-					setActivCategory('bronze')
+					setActiveCategory('bronze')
 					break
 				}
 
 				case 'bronzo': {
 					setDisabledBtn(data.bronze[idCard - 1])
-					setActivCategory('bronze')
+					setActiveCategory('bronze')
 
 					break
 				}
 				case 'bronce': {
 					setDisabledBtn(data.bronze[idCard - 1])
-					setActivCategory('bronze')
+					setActiveCategory('bronze')
 
 					break
 				}
 				case 'bronco': {
 					setDisabledBtn(data.bronze[idCard - 1])
-					setActivCategory('bronze')
+					setActiveCategory('bronze')
 
 					break
 				}
 				case 'prata': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
-
+					setActiveCategory('silver')
 					break
 				}
 				case 'silber': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
-
+					setActiveCategory('silver')
 					break
 				}
 				case 'серебро': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
-
+					setActiveCategory('silver')
 					break
 				}
 				case "d'argento": {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
+					setActiveCategory('silver')
 
 					break
 				}
 				case 'silber': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
+					setActiveCategory('silver')
 
 					break
 				}
 				case 'argent': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
+					setActiveCategory('silver')
 
 					break
 				}
 				case 'prata': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
+					setActiveCategory('silver')
 
 					break
 				}
 				case 'plata': {
 					setDisabledBtn(data.silver[idCard - 1])
-					setActivCategory('silver')
+					setActiveCategory('silver')
 
 					break
 				}
 				case 'gold': {
 					setDisabledBtn(data.gold[idCard - 1])
-					setActivCategory('gold')
+					setActiveCategory('gold')
 
 					break
 				}
 				case 'золото': {
 					setDisabledBtn(data.gold[idCard - 1])
-					setActivCategory('gold')
+					setActiveCategory('gold')
 
 					break
 				}
 				case 'ouro': {
 					setDisabledBtn(data.gold[idCard - 1])
-					setActivCategory('gold')
+					setActiveCategory('gold')
 
 					break
 				}
 				case 'or': {
 					setDisabledBtn(data.gold[idCard - 1])
-					setActivCategory('gold')
+					setActiveCategory('gold')
 
 					break
 				}
 				case 'smaragd': {
 					setDisabledBtn(data.emerald[idCard - 1])
-					setActivCategory('emerald')
+					setActiveCategory('emerald')
 
 					break
 				}
 				case 'esmeralda': {
 					setDisabledBtn(data.emerald[idCard - 1])
-					setActivCategory('emerald')
+					setActiveCategory('emerald')
 
 					break
 				}
 				case 'изумруд': {
 					setDisabledBtn(data.emerald[idCard - 1])
-					setActivCategory('emerald')
+					setActiveCategory('emerald')
 
 					break
 				}
 				case 'smeraldo': {
 					setDisabledBtn(data.emerald[idCard - 1])
-					setActivCategory('emerald')
+					setActiveCategory('emerald')
 
 					break
 				}
@@ -178,8 +176,6 @@ const CardOpened = ({
 		console.log(purchaseConfirmation2, disabledBtn)
 		if (disabledBtn && purchaseConfirmation2) {
 			setPurchaseConfirmation2(false)
-			console.log('BUY')
-			console.log(category, idCard)
 			console.log(activeCategory, idCard)
 			setTimeout(async () => {
 				await axios.get(`/api/${activeCategory}/${idCard}`).then(res => {
@@ -333,10 +329,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 						setAccept={setAccept}
 					/>
 				) : (
-					<NotEnoughMoney
-						hideModal={hideModal}
-						setAccept={setAccept}
-					/>
+					<NotEnoughMoney hideModal={hideModal} setAccept={setAccept} />
 				))}
 		</>
 	)
