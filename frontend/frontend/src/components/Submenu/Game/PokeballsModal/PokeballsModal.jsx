@@ -149,9 +149,9 @@ const CardOpened = ({
 				<span
 					onClick={handleBuyClick2}
 					className={`card-info-button ${
-						disabledBtn ? '' : 'card-info-disabled'
+						disabledBtn && price > money ? '' : 'card-info-disabled'
 					}`}
-					disabled={disabledBtn ? false : true}
+					disabled={disabledBtn && price > money ? false : true}
 				>
 					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>
