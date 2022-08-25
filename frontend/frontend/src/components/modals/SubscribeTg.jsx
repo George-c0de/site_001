@@ -21,13 +21,13 @@ const SubscribeTg = () => {
 
 	React.useEffect(() => {
 		document.addEventListener('click', handleClickOutside, true)
-		document.cookie = 'openTg'
+		document.cookie = 'openTg=true'
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
 		}
 	}, [])
 
-	if (document.cookie.includes('openTg')) return
+	if (document.cookie.includes('openTg=true')) return
 
 	return (
 		<div className={`subscriibe-wrapper ${activeTg ? '' : 'sub-wrapper-hide'}`}>

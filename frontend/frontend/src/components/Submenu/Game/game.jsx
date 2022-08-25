@@ -124,7 +124,9 @@ const Game = () => {
 		getSix()
 		setTimeout(() => {
 			console.log(1)
-			setShowTg(true)
+			if (!document.cookie.includes('openTg')) {
+				setShowTg(true)
+			}
 		}, 5000)
 	}, [])
 

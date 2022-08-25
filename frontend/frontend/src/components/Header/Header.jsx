@@ -30,9 +30,9 @@ const Header = () => {
 	const navigate = useNavigate()
 
 	const startGame = () => {
-		if (data2 !== 501) {
-			navigate('/login')
-		}
+		// if (data2 !== 501) {
+		// 	navigate('/login')
+		// }
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -66,6 +66,7 @@ const Header = () => {
 	const handleLogout = () => {
 		axios.get('/api/logout')
 		localStorage.removeItem('token')
+		document.cookie = 'openTg' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 		// window.location.assign('https://tokemon.games/login')
 		window.location.assign(`${window.location.origin}/login`)
 	}
