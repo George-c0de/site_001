@@ -42,8 +42,6 @@ export const PokeballsPack = ({
 	card_data,
 	price,
 	six,
-	money,
-	
 }) => {
 	console.log(title)
 	const [modalOpen, setModalOpen] = useState(false)
@@ -149,7 +147,6 @@ export const PokeballsPack = ({
 					card_data={card_data}
 					price={price}
 					six={six}
-					money={money}
 				/>
 			</div>
 		</div>

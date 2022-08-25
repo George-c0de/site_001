@@ -27,7 +27,7 @@ const price = {
 
 const Game = () => {
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
-	const [userMoney, setUserMoney] = useState('')
+	// const [userMoney, setUserMoney] = useState('')
 	const [showTg, setShowTg] = useState(false)
 
 	// const [price, setPrice] = useState({
@@ -118,7 +118,7 @@ const Game = () => {
 
 	useEffect(() => {
 		getCard()
-		getUsername()
+		// getUsername()
 		getCard_data()
 		getHist()
 		getSix()
@@ -128,10 +128,10 @@ const Game = () => {
 		}, 5000)
 	}, [])
 
-	let getUsername = async () => {
-		const username = await axios.get('/api/user')
-		setUserMoney(username.data.money)
-	}
+	// let getUsername = async () => {
+	// 	const username = await axios.get('/api/user')
+	// 	setUserMoney(username.data.money)
+	// }
 
 	let getHist = async () => {
 		await axios.get('/api/get_hist_card').then(data => {
@@ -189,7 +189,6 @@ const Game = () => {
 									card_data={card_data.bronze}
 									price={price.bronze}
 									six={six.bronze}
-									money={userMoney}
 								/>
 								<PokeballsPack
 									title={t`SILVER`}
@@ -200,7 +199,6 @@ const Game = () => {
 									card_data={card_data.silver}
 									price={price.silver}
 									six={six.silver}
-									money={userMoney}
 								/>
 								<PokeballsPack
 									title={t`GOLD`}
@@ -211,7 +209,6 @@ const Game = () => {
 									card_data={card_data.gold}
 									price={price.gold}
 									six={six.gold}
-									money={userMoney}
 								/>
 								<PokeballsPack
 									title={t`EMERALD`}
@@ -222,7 +219,6 @@ const Game = () => {
 									card_data={card_data.emerald}
 									price={price.emerald}
 									six={six.emerald}
-									money={userMoney}
 								/>
 							</motion.div>
 							{history.oneq[0] !== 0 && <GameHistory history={history} />}

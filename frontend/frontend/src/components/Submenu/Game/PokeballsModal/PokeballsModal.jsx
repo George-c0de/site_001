@@ -11,6 +11,9 @@ import BuyPockebol from '../../../modals/BuyPockebol'
 import { t } from 'ttag'
 import NotEnoughMoney from '../../../modals/NotEnoughMoney'
 import BuyPockebolInner from '../../../modals/buyPockebolInner'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../../redux/slices/userSlice'
+import { getUser } from '../../../redux/slices/selectors'
 
 const CardOpened = ({
 	image,
@@ -20,14 +23,13 @@ const CardOpened = ({
 	idCard,
 	category,
 	price,
-	money,
 }) => {
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState(true)
 	// const [activeCategory, setActiveCategory] = useState(false)
 	const handleButton = async () => {
 		console.log(category)
-		await image.png.get(`/api/prohibitions`).then(res => {
+		await axios.get(`/api/prohibitions`).then(res => {
 			let data = res.data
 			console.log(data)
 			switch (category) {
@@ -55,8 +57,25 @@ const CardOpened = ({
 		})
 	}
 
+	const dispatch = useDispatch()
+	const { user } = useSelector(getUser)
+	let money = user.money
+
+	useEffect(() => {
+		fetchPosts()
+	}, [])
+
+	async function fetchPosts() {
+		console.log('UPDATE USER')
+		try {
+			const response = await axios.get('/api/user')
+			dispatch(setUser(response.data))
+		} catch (e) {}
+	}
+
 	useEffect(() => {
 		handleButton()
+		fetchPosts()
 	}, [])
 
 	// const [openMenu, setOpenMenu] = useState(false)
@@ -72,16 +91,17 @@ const CardOpened = ({
 			setAccept2(true)
 		}
 		console.log(purchaseConfirmation2, disabledBtn)
-		if (disabledBtn && purchaseConfirmation2) {
+		if (disabledBtn && purchaseConfirmation2 && price <= money) {
 			setPurchaseConfirmation2(false)
 			console.log(category, idCard)
 			// setTimeout(async () => {
-				await axios.get(`/api/${category}/${idCard}`).then(res => {
-					// setTimeout(() => {
-						buyCard()
+			await axios.get(`/api/${category}/${idCard}`).then(res => {
+				// setTimeout(() => {
+				fetchPosts()
+				buyCard()
 
-					// }, 1000)
-				})
+				// }, 1000)
+			})
 			// }, 3000)
 		}
 	}
@@ -149,12 +169,27 @@ const CardOpened = ({
 	)
 }
 
-const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
+const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 	const [status, setStatus] = useState()
 	const [accept, setAccept] = useState()
 	const [purchaseConfirmation, setPurchaseConfirmation] = useState()
 	const [firstRender, setFirstRender] = useState(false)
 	const [hideModal, setHideModal] = React.useState(false)
+	const dispatch = useDispatch()
+	const { user } = useSelector(getUser)
+	let money = user.money
+
+	useEffect(() => {
+		fetchPosts()
+	}, [])
+
+	async function fetchPosts() {
+		console.log('UPDATE USER')
+		try {
+			const response = await axios.get('/api/user')
+			dispatch(setUser(response.data))
+		} catch (e) {}
+	}
 
 	const handleBuyClick = async () => {
 		setAccept(true)
@@ -167,8 +202,10 @@ const CardClosed = ({ price, buyCard, idCard, category, six, money }) => {
 			console.log(category, idCard)
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
 				setStatus('success')
+
 				// setTimeout(() => {
 				buyCard()
+				fetchPosts()
 				// window.location.reload()
 				// }, 1000)
 			})
@@ -244,7 +281,6 @@ export const PokeballsModal = ({
 	card_data,
 	price,
 	six,
-	money,
 }) => {
 	return (
 		<div className='pokeballs-modal'>
@@ -264,7 +300,6 @@ export const PokeballsModal = ({
 								category={category}
 								idCard={i + 1}
 								price={price[i]}
-								money={money}
 							/>
 						) : (
 							<CardClosed
@@ -274,7 +309,6 @@ export const PokeballsModal = ({
 								category={category}
 								six={six}
 								key={id}
-								money={money}
 							/>
 						)}
 					</div>
