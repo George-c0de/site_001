@@ -182,6 +182,7 @@ const Game = () => {
 							>
 								<PokeballsPack
 									title={t`BRONZE`}
+									category='bronze'
 									amount={cardsAmount.bronze}
 									images={IMAGES.slice(0, 6)}
 									background={bronze}
@@ -192,6 +193,7 @@ const Game = () => {
 								/>
 								<PokeballsPack
 									title={t`SILVER`}
+									category={'silver'}
 									amount={cardsAmount.silver}
 									images={IMAGES.slice(6, 12)}
 									background={silver}
@@ -202,6 +204,7 @@ const Game = () => {
 								/>
 								<PokeballsPack
 									title={t`GOLD`}
+									category={'gold'}
 									amount={cardsAmount.gold}
 									images={IMAGES.slice(12, 18)}
 									background={gold}
@@ -212,6 +215,7 @@ const Game = () => {
 								/>
 								<PokeballsPack
 									title={t`EMERALD`}
+									category={'emerald'}
 									amount={cardsAmount.emerald}
 									images={IMAGES.slice(18, 24)}
 									background={emerald}

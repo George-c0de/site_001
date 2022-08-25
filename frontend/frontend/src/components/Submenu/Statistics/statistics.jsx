@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { t } from 'ttag'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'

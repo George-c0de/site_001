@@ -35,6 +35,7 @@ const COLORS_TO_CLASS = {
 
 export const PokeballsPack = ({
 	title,
+	category,
 	amount,
 	images,
 	background,
@@ -42,7 +43,9 @@ export const PokeballsPack = ({
 	price,
 	six,
 	money,
+	
 }) => {
+	console.log(title)
 	const [modalOpen, setModalOpen] = useState(false)
 	const handlePokeballsPack = () => {
 		setModalOpen(!modalOpen)
@@ -142,7 +145,7 @@ export const PokeballsPack = ({
 					background={background}
 					amount={amount}
 					images={images}
-					category={title?.toLowerCase()}
+					category={category?.toLowerCase()}
 					card_data={card_data}
 					price={price}
 					six={six}
