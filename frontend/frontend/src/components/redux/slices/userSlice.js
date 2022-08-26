@@ -5,7 +5,7 @@ const initialState = {
 	user: {
 		id: '',
 		money: '0.00',
-		referral_link: '0',
+		referral_link: '',
 		referral_amount: '0.00',
 		missed_amount: '0.00',
 		wallet: null,

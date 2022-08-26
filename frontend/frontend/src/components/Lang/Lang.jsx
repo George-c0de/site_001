@@ -13,7 +13,7 @@ import argentina from '../../assets/languages/argentina.png'
 import support from '../../Ảnh Pokemon Dự Trù/супорт.svg'
 
 import './Lang.css'
-import { LangContext } from '../../context/LangContext'
+// import { LangContext } from '../../context/LangContext'
 
 
 const languages = {
@@ -41,7 +41,7 @@ export const Lang = ({
 	setOpenReferals,
 	setOpenStatistics,
 }) => {
-	const { lang, updateLang } = useContext(LangContext)
+	// const { lang, updateLang } = useContext(LangContext)
 	const [open, setOpen] = useState(false)
 
 	const handleOpen = () => {
@@ -58,7 +58,7 @@ export const Lang = ({
 	const handleOpenList = e => {
 		const lang = e.target.dataset.lang
 		setOpen(!open)
-		updateLang(lang)
+		// updateLang(lang)
 		saveLocale(lang)
 		window.location.reload()
 	}

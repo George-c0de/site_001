@@ -28,7 +28,7 @@ const Resetpass = () => {
 		} else {
 			if (!invalidPassword && data.password1.length > 0) {
 				try {
-					const { data: res } = await axios.post('/api/set_new/', data, {
+					await axios.post('/api/set_new/', data, {
 						headers: { 'Content-Type': 'application/json' },
 					})
 					navigate('/login') //after registering navigate to login page

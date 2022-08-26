@@ -30,9 +30,9 @@ const Header = () => {
 	const navigate = useNavigate()
 
 	const startGame = () => {
-		if (data2 !== 501) {
-			navigate('/login')
-		}
+		// if (data2 !== 501) {
+		// 	navigate('/login')
+		// }
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -41,19 +41,20 @@ const Header = () => {
 		setOpenBurger(false)
 		setOpenReferals(false)
 		setOpenStatistics(false)
-		startGame()
 	}
 	const showReferals = () => {
 		setOpenReferals(true)
 		setOpenBurger(false)
 		setOpenStatistics(false)
-		startGame()
 	}
 	const showStatistics = () => {
 		setOpenStatistics(true)
 		setOpenBurger(false)
 		setOpenReferals(false)
-		startGame()
+	}
+	const showMenu = () => {
+		setOpenBurger(false)
+		navigate('/home')
 	}
 	const OpenMenu = () => {
 		setOpenBurger(!openBurger)
@@ -66,8 +67,8 @@ const Header = () => {
 	const handleLogout = () => {
 		axios.get('/api/logout')
 		localStorage.removeItem('token')
-		document.cookie = 'openTg' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-		// window.location.assign('https://tokemon.games/login')
+		document.cookie =
+			'openTg' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 		window.location.assign(`${window.location.origin}/login`)
 	}
 	const ref = React.useRef(null)
@@ -133,11 +134,7 @@ const Header = () => {
 					<div className='main__links'>
 						<ul className='main__list'>
 							<li className='main__item'>
-								<a
-									href='##'
-									className='main__link'
-									onClick={() => navigate('/home')}
-								>
+								<a href='##' className='main__link' onClick={showMenu}>
 									{t`MAIN`}
 								</a>
 							</li>

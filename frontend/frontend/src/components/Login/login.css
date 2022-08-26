@@ -2,12 +2,12 @@
 	width: 100%;
 	height: 100vh;
 	min-height: 800px;
-	background-image: url('../../assets/MainBackground.jpg');
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-image: url('../../assets/MainBackground.webp');
 	background-attachment: fixed;
 	background-size: cover;
 	background-position: bottom;
-	overflow-x: hidden;
-	overflow-y: auto;
 }
 .header-authorization {
 	background: linear-gradient(87.52deg, #2570b5 21.14%, #67deee 91.14%);

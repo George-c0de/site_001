@@ -233,7 +233,7 @@ const Signup = () => {
 	console.log(invalidPassword && !coincidence)
 	return (
 		<div
-			className={`login_container ${
+			className={`login_container main-bg ${
 				typeAuthorization === 'reset' ? 'login_container-reset' : ''
 			}`}
 		>

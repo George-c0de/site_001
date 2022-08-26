@@ -10,7 +10,7 @@ p {
 
 .homepage-wrapper {
 	min-height: 100vh;
-	background-image: url('../../../assets/MainBackground.jpg');
+	background-image: url('../../../assets/MainBackground.webp');
 	background-attachment: fixed;
 	background-size: cover;
 	background-repeat: no-repeat;

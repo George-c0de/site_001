@@ -14,20 +14,7 @@ const Referals = () => {
 		getLines()
 		getUsername()
 	}, [])
-	// const [user, setUser] = useState({
-	// 	id: 0,
-	// 	money: '0.00',
-	// 	referral_link: '',
-	// 	referral_amount: '0.00',
-	// 	missed_amount: '0.00',
-	// 	wallet: null,
-	// 	line_1: null,
-	// 	line_2: null,
-	// 	line_3: null,
-	// 	max_card: 0,
-	// 	admin_or: false,
-	// 	user: 0,
-	// })
+
 
 	const [lines, setLines] = useState({
 		first: {

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../redux/slices/userSlice'
 import { getUser } from '../redux/slices/selectors'
 
-export const UserId = ({ note }) => {
+export const UserId = () => {
 	const linkRef = useRef()
 	const copyRef = useRef()
 	const navigate = useNavigate()
@@ -20,20 +20,6 @@ export const UserId = ({ note }) => {
 		fetchPosts()
 	}, [])
 
-	// const [user, setUser] = useState({
-	// 	id: '',
-	// 	money: '0.00',
-	// 	referral_link: '0',
-	// 	referral_amount: '0.00',
-	// 	missed_amount: '0.00',
-	// 	wallet: null,
-	// 	line_1: null,
-	// 	line_2: null,
-	// 	line_3: null,
-	// 	max_card: 0,
-	// 	admin_or: false,
-	// 	user: 0,
-	// })
 	async function fetchPosts() {
 		console.log('SEND USER')
 		if (user.id == '') {

@@ -9,33 +9,18 @@ import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../redux/slices/userSlice'
 import { getUser } from '../redux/slices/selectors'
-import { useNavigate } from 'react-router-dom'
 
 const Deposit = () => {
-	const [state_input, SetState] = useState(true)
+	// const [state_input, SetState] = useState(true)
 	const [data, setData] = useState({
 		wallet: '',
 		col: '1',
 	})
-	const [maxi, setMax] = useState(1)
+	// const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
-	// убрать комменты снизу
-	// let [user, setUser] = useState({
-	// 	id: 0,
-	// 	money: 0,
-	// 	referral_link: '',
-	// 	referral_amount: '',
-	// 	missed_amount: '',
-	// 	wallet: null,
-	// 	line_1: null,
-	// 	line_2: null,
-	// 	line_3: null,
-	// 	max_card: 0,
-	// 	admin_or: false,
-	// 	user: 0,
-	// })
+
 	useEffect(() => {
 		getTran()
 	}, [])
@@ -71,7 +56,7 @@ const Deposit = () => {
 						user: data.data.user,
 					}
 					if (user.id == '') dispatch(setUser(result))
-					setMax(result.money)
+					// setMax(result.money)
 				})
 
 				if (user.wallet !== null) {
@@ -80,20 +65,18 @@ const Deposit = () => {
 						col: 1,
 					})
 					console.log(data.wallet)
-					SetState(true)
+					// SetState(true)
 				} else {
 					setData({
 						wallet: '',
 						col: 1,
 					})
-					console.log('yes')
-					SetState(false)
+					// SetState(false)
 				}
 			} catch (e) {
 				console.log(e)
 				console.log(data)
 			}
-			console.log(user)
 		}
 		getPosts()
 	}, [user.id])
