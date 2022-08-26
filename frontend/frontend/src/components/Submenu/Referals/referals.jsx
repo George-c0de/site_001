@@ -12,7 +12,6 @@ const Referals = () => {
 	useEffect(() => {
 		fetchPosts()
 		getLines()
-		getUsername()
 	}, [])
 
 
@@ -49,11 +48,6 @@ const Referals = () => {
 				dispatch(setUser(response.data))
 			} catch (e) {}
 		}
-	}
-
-	let getUsername = async () => {
-		const res = await axios.get('/api/user')
-		setUser(res.data)
 	}
 
 	const getLines = async () => {

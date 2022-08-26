@@ -64,7 +64,7 @@ export const UserId = () => {
 						{t`Balance`}: <span>{user?.money}$</span>
 					</li>
 					<li>
-						{t`Cards profit`}: <span>{user?.missed_amount}$</span>
+						{t`Cards profit`}: <span>{user?.max_card}$</span>
 					</li>
 					<li>
 						{t`Referal profit`}: <span>{user?.referral_amount}$</span>

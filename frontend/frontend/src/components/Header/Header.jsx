@@ -41,6 +41,7 @@ const Header = () => {
 		setOpenBurger(false)
 		setOpenReferals(false)
 		setOpenStatistics(false)
+		startGame()
 	}
 	const showReferals = () => {
 		setOpenReferals(true)
