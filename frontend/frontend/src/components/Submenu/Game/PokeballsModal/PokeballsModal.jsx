@@ -23,6 +23,8 @@ const CardOpened = ({
 	idCard,
 	category,
 	price,
+	dataId,
+	id,
 }) => {
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState(true)
@@ -115,7 +117,10 @@ const CardOpened = ({
 	}, [purchaseConfirmation2])
 
 	return (
-		<>
+		<div
+			data-id={dataId}
+			className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
+		>
 			<img src={background} alt='' className='card-background' />
 			<div className='pokeballs-card-status'>
 				<div className='card-status-bar' data-status={status}>
@@ -165,11 +170,11 @@ const CardOpened = ({
 					setAccept={setAccept2}
 				/>
 			)}
-		</>
+		</div>
 	)
 }
 
-const CardClosed = ({ price, buyCard, idCard, category, six }) => {
+const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 	const [status, setStatus] = useState()
 	const [accept, setAccept] = useState()
 	const [purchaseConfirmation, setPurchaseConfirmation] = useState()
@@ -224,16 +229,24 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 	return (
 		<>
 			{six === false && idCard === 6 ? (
-				<div>
+				<div
+					data-id={dataId}
+					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
+				>
 					<span>
 						<div className='pokeballs-card-label2'>
 							<img src={q} />
 						</div>
 					</span>
 					<p className='status-x'>40% x4</p>
+					<img src={pokeball} className='pokeballs-card-ball' alt='' />
 				</div>
 			) : (
-				<div onClick={handleBuyClick}>
+				<div
+					data-id={dataId}
+					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
+					onClick={handleBuyClick}
+				>
 					<div className='pokeballs-card-label'>
 						{status === 'pending' ? (
 							<span className='status_pending'></span>
@@ -252,9 +265,9 @@ const CardClosed = ({ price, buyCard, idCard, category, six }) => {
 						)}
 					</div>
 					<p className='status-x'>40% x4</p>
+					<img src={pokeball} className='pokeballs-card-ball' alt='' />
 				</div>
 			)}
-			<img src={pokeball} className='pokeballs-card-ball' alt='' />
 			{accept &&
 				(money >= price ? (
 					<BuyPockebol
@@ -283,13 +296,42 @@ export const PokeballsModal = ({
 	six,
 }) => {
 	return (
+		// <div className='pokeballs-modal'>
+		// 	{cards.map((id, i) => {
+		// 		return (
+		// 			<div
+		// 				data-id={i + 1}
+		// 				className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
+		// 			>
+		// 				{id ? (
+		// 					<CardOpened
+		// 						image={images[i]}
+		// 						background={background}
+		// 						key={id}
+		// 						card_data={card_data[i]}
+		// 						buyCard={() => buyCard(i + 1)}
+		// 						category={category}
+		// 						idCard={i + 1}
+		// 						price={price[i]}
+		// 					/>
+		// 				) : (
+		// 					<CardClosed
+		// 						price={price[i]}
+		// 						buyCard={() => buyCard(i + 1)}
+		// 						idCard={i + 1}
+		// 						category={category}
+		// 						six={six}
+		// 						key={id}
+		// 					/>
+		// 				)}
+		// 			</div>
+		// 		)
+		// 	})}
+		// </div>
 		<div className='pokeballs-modal'>
 			{cards.map((id, i) => {
 				return (
-					<div
-						data-id={i + 1}
-						className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
-					>
+					<>
 						{id ? (
 							<CardOpened
 								image={images[i]}
@@ -300,6 +342,8 @@ export const PokeballsModal = ({
 								category={category}
 								idCard={i + 1}
 								price={price[i]}
+								dataId={i + 1}
+								id={id}
 							/>
 						) : (
 							<CardClosed
@@ -309,9 +353,11 @@ export const PokeballsModal = ({
 								category={category}
 								six={six}
 								key={id}
+								dataId={i + 1}
+								id={id}
 							/>
 						)}
-					</div>
+					</>
 				)
 			})}
 		</div>

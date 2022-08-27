@@ -22,6 +22,9 @@
 	background-color: rgba(79, 79, 79, 0.7);
 	position: relative;
 }
+.inactive {
+	padding: 0px !important;
+}
 
 .pokeballs-modal .pokeballs-card.inactive::before {
 	content: '';
@@ -41,6 +44,9 @@
 	justify-content: space-between;
 	background-color: #6b2e07;
 	gap: 10px;
+}
+.pokeball-block {
+	padding: 10px;
 }
 
 .card-background {
