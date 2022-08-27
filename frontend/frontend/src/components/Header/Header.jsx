@@ -11,6 +11,9 @@ import axios from 'axios'
 import { t } from 'ttag'
 import { Lang } from '../Lang/Lang'
 import { motion } from 'framer-motion'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from '../redux/slices/selectors'
+import { setDeposit } from '../redux/slices/userSlice'
 
 let data2
 
@@ -26,8 +29,11 @@ const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
 	const [openStatistics, setOpenStatistics] = React.useState(false)
-
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const { deposit } = useSelector(getUser)
+	console.log(deposit.send)
 
 	const startGame = () => {
 		if (data2 !== 501) {
@@ -85,6 +91,33 @@ const Header = () => {
 
 	React.useEffect(() => {
 		fetchLink()
+		if (!deposit.send) {
+			setTimeout(() => {
+				try {
+					axios.get('/api/dis_input').then(data => {
+						console.log(data)
+						console.log(data.response)
+					})
+				} catch (e) {
+					console.log(e)
+					console.log(e.response)
+				}
+			}, 500)
+
+			setInterval(() => {
+				try {
+					axios.get('/api/dis_input').then(data => {
+						console.log(data)
+						console.log(data.response)
+					})
+				} catch (e) {
+					console.log(e)
+					console.log(e.response)
+				}
+			}, 300000)
+			dispatch(setDeposit(true))
+		}
+
 		document.addEventListener('click', handleClickOutside, true)
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)

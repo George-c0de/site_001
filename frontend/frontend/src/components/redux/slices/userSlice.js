@@ -21,6 +21,9 @@ const initialState = {
 		all_transactions: 0,
 		coll_user: 0,
 	},
+	deposit: {
+		send: false,
+	},
 }
 
 export const userSlice = createSlice({
@@ -28,7 +31,7 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		resetUser: state => {
-			state = initialState;
+			state = initialState
 		},
 		setPosts: (state, action) => {
 			state.posts = {
@@ -40,10 +43,13 @@ export const userSlice = createSlice({
 				...action.payload,
 			}
 		},
+		setDeposit: (state, action) => {
+			state.deposit.send = true
+		},
 	},
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, setPosts, setUser } = userSlice.actions
+export const { increment, setPosts, setUser, setDeposit } = userSlice.actions
 
 export default userSlice.reducer

@@ -75,34 +75,10 @@ const Deposit = () => {
 				}
 			} catch (e) {
 				console.log(e)
-				console.log(data)
 			}
 		}
 		getPosts()
 	}, [user.id])
-
-	setTimeout(() => {
-		try {
-			axios.get('/api/dis_input').then(data => {
-				console.log(data)
-				console.log(data.response)
-			})
-		} catch (e) {
-			console.log(e)
-			console.log(e.response)
-		}
-	}, 500)
-	setInterval(() => {
-		try {
-			axios.get('/api/dis_input').then(data => {
-				console.log(data)
-				console.log(data.response)
-			})
-		} catch (e) {
-			console.log(e)
-			console.log(e.response)
-		}
-	}, 300000)
 
 	const handleCopy = () => {
 		navigator.clipboard.writeText(linkRef.current?.innerText)

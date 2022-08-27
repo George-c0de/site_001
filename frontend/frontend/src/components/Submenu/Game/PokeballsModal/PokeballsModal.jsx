@@ -278,7 +278,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 export const PokeballsModal = ({
 	cards,
 	buyCard,
-	amount,
 	category,
 	images,
 	background,
@@ -322,7 +321,7 @@ export const PokeballsModal = ({
 		<div className='pokeballs-modal'>
 			{cards.map((id, i) => {
 				return (
-					<>
+					<div key={i}>
 						{id ? (
 							<CardOpened
 								image={images[i]}
@@ -348,7 +347,7 @@ export const PokeballsModal = ({
 								id={id}
 							/>
 						)}
-					</>
+					</div>
 				)
 			})}
 		</div>
