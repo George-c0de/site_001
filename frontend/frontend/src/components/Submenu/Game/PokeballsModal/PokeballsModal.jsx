@@ -63,10 +63,6 @@ const CardOpened = ({
 	const { user } = useSelector(getUser)
 	let money = user.money
 
-	useEffect(() => {
-		fetchPosts()
-	}, [])
-
 	async function fetchPosts() {
 		console.log('UPDATE USER')
 		try {
@@ -77,7 +73,6 @@ const CardOpened = ({
 
 	useEffect(() => {
 		handleButton()
-		fetchPosts()
 	}, [])
 
 	// const [openMenu, setOpenMenu] = useState(false)
@@ -183,10 +178,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
 	let money = user.money
-
-	useEffect(() => {
-		fetchPosts()
-	}, [])
 
 	async function fetchPosts() {
 		console.log('UPDATE USER')
