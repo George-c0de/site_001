@@ -58,7 +58,7 @@ export const PokeballsPack = ({
 	}
 
 	React.useEffect(() => {
-		const array = [1, 0, 0, 0, 0, 0]
+		const array = [0, 0, 0, 0, 0, 0]
 		if (amount.length > 0) {
 			for (let i = 0; i < amount.length; i++) {
 				array[amount[i] - 1] = amount[i]

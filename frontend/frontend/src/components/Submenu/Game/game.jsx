@@ -27,15 +27,7 @@ const price = {
 
 const Game = () => {
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
-	// const [userMoney, setUserMoney] = useState('')
 	const [showTg, setShowTg] = useState(false)
-
-	// const [price, setPrice] = useState({
-	// 	bronze: [10, 15, 25, 40, 50, 77],
-	// 	silver: [100, 150, 250, 400, 500, 666],
-	// 	gold: [750, 1000, 1250, 1500, 2000, 2222],
-	// 	emerald: [2500, 5000, 7500, 10000, 15000, 22222],
-	// })
 
 	const [history, setHistory] = useState({
 		oneq: [0, 0, 0],
@@ -83,7 +75,6 @@ const Game = () => {
 			[0, 0, 0],
 		],
 	})
-	console.log(history.oneq[0])
 
 	const [six, setSix] = useState({
 		bronze: false,
@@ -129,11 +120,6 @@ const Game = () => {
 			}
 		}, 5000)
 	}, [])
-
-	// let getUsername = async () => {
-	// 	const username = await axios.get('/api/user')
-	// 	setUserMoney(username.data.money)
-	// }
 
 	let getHist = async () => {
 		await axios.get('/api/get_hist_card').then(data => {
