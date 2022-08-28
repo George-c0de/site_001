@@ -12,6 +12,10 @@ import Header from '../../Header/Header'
 import { motion } from 'framer-motion'
 import SubscribeTg from '../../modals/SubscribeTg'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../redux/slices/userSlice'
+import { getUser } from '../../redux/slices/selectors'
+
 const initialCardsAmount = {
 	bronze: [0],
 	silver: [0],
@@ -26,6 +30,8 @@ const price = {
 }
 
 const Game = () => {
+	const { user } = useSelector(getUser)
+	const dispatch = useDispatch()
 	const [cardsAmount, setCardsAmount] = useState(initialCardsAmount)
 	const [showTg, setShowTg] = useState(false)
 
@@ -110,6 +116,7 @@ const Game = () => {
 	useEffect(() => {
 		getCard()
 		// getUsername()
+		fetchUser()
 		getCard_data()
 		getHist()
 		getSix()
@@ -120,6 +127,17 @@ const Game = () => {
 			}
 		}, 5000)
 	}, [])
+
+	async function fetchUser() {
+		console.log('SEND USER')
+		if (user.id == '') {
+			console.log(1)
+			try {
+				const response = await axios.get('/api/user')
+				dispatch(setUser(response.data))
+			} catch (e) {}
+		}
+	}
 
 	let getHist = async () => {
 		await axios.get('/api/get_hist_card').then(data => {
