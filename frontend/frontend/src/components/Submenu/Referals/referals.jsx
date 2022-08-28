@@ -9,11 +9,11 @@ import { getUser } from '../../redux/slices/selectors'
 const Referals = () => {
 	const { user } = useSelector(getUser)
 	const dispatch = useDispatch()
+	const [activeStat, setActiveStat] = React.useState()
 	useEffect(() => {
 		fetchPosts()
 		getLines()
 	}, [])
-
 
 	const [lines, setLines] = useState({
 		first: {
@@ -62,6 +62,7 @@ const Referals = () => {
 		})
 	}
 	const getFirst = async () => {
+		setActiveStat(0)
 		setPosts({
 			total_line: lines.first.total,
 			profit: lines.first.profit,
@@ -70,6 +71,7 @@ const Referals = () => {
 		})
 	}
 	const get_second = async () => {
+		setActiveStat(1)
 		setPosts({
 			total_line: lines.second.total,
 			profit: lines.second.profit,
@@ -79,6 +81,7 @@ const Referals = () => {
 	}
 
 	const get_third = async () => {
+		setActiveStat(2)
 		setPosts({
 			total_line: lines.third.total,
 			profit: lines.third.profit,
@@ -124,7 +127,9 @@ const Referals = () => {
 			<div className='referals__info-wrapper'>
 				<div className='referals__info'>
 					<button
-						className='referals__btn yellow-btn'
+						className={`referals__btn yellow-btn yellow-btn-last ${
+							activeStat === 0 ? 'referals__btn-active' : ''
+						}`}
 						onClick={getFirst}
 					>{t`1 line`}</button>
 					<p className='referals__text'>{t`Total person`}:</p>
@@ -134,7 +139,9 @@ const Referals = () => {
 				</div>
 				<div className='referals__info'>
 					<button
-						className='referals__btn yellow-btn'
+						className={`referals__btn yellow-btn yellow-btn-last ${
+							activeStat === 1 ? 'referals__btn-active' : ''
+						}`}
 						onClick={get_second}
 					>{t`2 line`}</button>
 					<p className='referals__text'>{t`Profit received`}:</p>
@@ -144,7 +151,9 @@ const Referals = () => {
 				</div>
 				<div className='referals__info'>
 					<button
-						className='referals__btn yellow-btn yellow-btn-last'
+						className={`referals__btn yellow-btn yellow-btn-last ${
+							activeStat === 2 ? 'referals__btn-active' : ''
+						}`}
 						onClick={get_third}
 					>
 						{t`3 line`}

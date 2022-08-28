@@ -21,6 +21,7 @@
 	border-radius: 15px;
 	background-color: rgba(79, 79, 79, 0.7);
 	position: relative;
+	z-index: 999;
 }
 .inactive {
 	padding: 0px !important;

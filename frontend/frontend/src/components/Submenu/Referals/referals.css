@@ -56,6 +56,9 @@ a:hover {
 .referals__btn:hover {
 	opacity: 1 important;
 }
+.referals__btn-active{
+	opacity: 1 !important;
+}
 @media screen and (max-width: 980px) {
 	.referals__info-wrapper .yellow-btn {
 		font-size: 23px;
