@@ -238,7 +238,8 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
 					onClick={handleBuyClick}
 				>
-					<div className='pokeballs-card-label'>
+					<div className='pokeballs-card-label' onClick={handleBuyClick}>
+						
 						{status === 'pending' ? (
 							<span className='status_pending'></span>
 						) : status === 'success' ? (

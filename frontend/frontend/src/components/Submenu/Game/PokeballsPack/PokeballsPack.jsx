@@ -126,8 +126,9 @@ export const PokeballsPack = ({
 						/>
 					</div>
 					<div
+						onClick={handlePokeballsPack}
 						className={
-							COLORS_TO_CLASS[title.toLowerCase()] || 'text-pokeball-dedfault'
+							COLORS_TO_CLASS[title.toLowerCase()] || 'text-pokeball-default'
 						}
 					>
 						{title}
