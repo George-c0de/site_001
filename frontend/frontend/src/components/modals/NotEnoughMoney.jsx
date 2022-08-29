@@ -33,6 +33,12 @@ const NotEnoughMoney = props => {
 			}`}
 		>
 			<div className='subscriibe-block' ref={ref}>
+				<img
+					src={Cross}
+					alt=''
+					className='subcribe-cross'
+					onClick={handleClick}
+				/>
 				<p className='buy-text'>{t`Insufficient funds to purchase the card`}</p>
 				<div className='buy-btns-wrapper'>
 					<button

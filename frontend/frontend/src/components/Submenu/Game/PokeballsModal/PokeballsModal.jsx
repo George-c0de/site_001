@@ -187,15 +187,13 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 		} catch (e) {}
 	}
 
-	const handleBuyClick = async (event) => {
+	const handleBuyClick = async () => {
 		setAccept(true)
-		console.log(event.target.value)
-		console.log(event.target)
 
-		// document.body.style.overflow = 'hidden'
+		document.body.style.overflow = 'hidden'
 		if (purchaseConfirmation && money >= price) {
 			// setTimeout(async () => {
-			// document.body.style.overflow = 'visible'
+			document.body.style.overflow = 'visible'
 			setStatus('pending')
 			console.log(category, idCard)
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
@@ -238,12 +236,10 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 				<div
 					data-id={dataId}
 					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
-					onClick={event => handleBuyClick(event)}
+					onClick={handleBuyClick}
 				>
-					<div
-						className='pokeballs-card-label'
-						onClick={event => handleBuyClick(event)}
-					>
+					{/* <div className='pokeballs-card-label' onClick={handleBuyClick}>
+						
 						{status === 'pending' ? (
 							<span className='status_pending'></span>
 						) : status === 'success' ? (
@@ -255,28 +251,13 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 							</span>
 						) : (
 							<>
-								<span
-									className='status-activate'
-									onClick={event => handleBuyClick(event)}
-								>{t`ACTIVATE`}</span>
-								<span
-									className='status-price'
-									onClick={event => handleBuyClick(event)}
-								>
-									{price} USD
-								</span>
+								<span className='status-activate'>{t`ACTIVATE`}</span>
+								<span className='status-price'>{price} USD</span>
 							</>
 						)}
 					</div>
-					<p className='status-x' onClick={event => handleBuyClick(event)}>
-						40% x4
-					</p>
-					<img
-						src={pokeball}
-						className='pokeballs-card-ball'
-						alt=''
-						onClick={event => handleBuyClick(event)}
-					/>
+					<p className='status-x'>40% x4</p>
+					<img src={pokeball} className='pokeballs-card-ball' alt='' /> */}
 				</div>
 			)}
 			{accept &&

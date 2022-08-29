@@ -25,7 +25,8 @@
 .inactive {
 	padding: 0px !important;
 }
-.pokeballs-card.inactive::before {
+
+.pokeballs-modal .pokeballs-card.inactive::before {
 	content: '';
 	display: block;
 	position: absolute;
