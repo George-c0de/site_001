@@ -132,7 +132,7 @@
 	.game-history {
 		margin-left: 10px !important;
 	}
-	.pokeballs-modal .pokeballs-card {
+	.pokeballs-card {
 		margin: 5px !important;
 	}
 	.pokeballs-card.opened .pokeballs-card-info img {
@@ -154,7 +154,7 @@
 		width: 15px !important;
 		height: 15px !important;
 	}
-	.pokeballs-modal .pokeballs-card {
+	.pokeballs-card {
 		width: 165px !important;
 		height: 165px !important;
 	}
@@ -209,7 +209,7 @@
 		max-width: 350px;
 		padding: 3px 50px 5px 3px;
 	}
-	.pokeballs-modal .pokeballs-card {
+	.pokeballs-card {
 		width: 162px !important;
 		height: 162px !important;
 	}
@@ -244,11 +244,14 @@
 	.pokeballs-container {
 		max-width: 315px;
 	}
-	.pokeballs-modal .pokeballs-card {
+	.pokeballs-card {
 		width: 144px !important;
 		height: 144px !important;
 	}
 	.pokeballs-container.open {
 		height: 530px;
 	}
+}
+.pokeballs-modal {
+	width: 100% !important;
 }

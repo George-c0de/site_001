@@ -23,19 +23,7 @@
 	position: relative;
 }
 .inactive {
-	padding: 0px !important;
-}
-
-.pokeballs-modal .pokeballs-card.inactive::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(79, 79, 79, 0.7);
-	border-radius: 15px;
+	padding: 0px ;
 }
 
 .pokeballs-modal .pokeballs-card.opened {
@@ -292,6 +280,6 @@
 }
 @media screen and (max-width: 450px) {
 	.pokeballs-card-label {
-    height: 80px;
-}
+		height: 80px;
+	}
 }
