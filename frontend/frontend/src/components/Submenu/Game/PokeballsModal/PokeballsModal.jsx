@@ -224,13 +224,13 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 					data-id={dataId}
 					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
 				>
-					<span>
+					{/* <span>
 						<div className='pokeballs-card-label2'>
 							<img src={q} />
 						</div>
 					</span>
 					<p className='status-x'>40% x4</p>
-					<img src={pokeball} className='pokeballs-card-ball' alt='' />
+					<img src={pokeball} className='pokeballs-card-ball' alt='' /> */}
 				</div>
 			) : (
 				<div
@@ -238,7 +238,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
 					onClick={handleBuyClick}
 				>
-					{/* <div className='pokeballs-card-label' onClick={handleBuyClick}>
+					<div className='pokeballs-card-label' onClick={handleBuyClick}>
 						
 						{status === 'pending' ? (
 							<span className='status_pending'></span>
@@ -257,7 +257,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 						)}
 					</div>
 					<p className='status-x'>40% x4</p>
-					<img src={pokeball} className='pokeballs-card-ball' alt='' /> */}
+					<img src={pokeball} className='pokeballs-card-ball' alt='' />
 				</div>
 			)}
 			{accept &&
