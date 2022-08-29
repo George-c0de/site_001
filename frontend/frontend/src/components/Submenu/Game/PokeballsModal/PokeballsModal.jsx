@@ -224,9 +224,9 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 					data-id={dataId}
 					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
 				>
-					{/* <img src={q} className='pokeballs-card-label2' />
+					<img src={q} className='pokeballs-card-label2' />
 					<p className='status-x'>40% x4</p>
-					<img src={pokeball} className='pokeballs-card-ball' alt='' /> */}
+					<img src={pokeball} className='pokeballs-card-ball' alt='' />
 				</div>
 			) : (
 				<div
