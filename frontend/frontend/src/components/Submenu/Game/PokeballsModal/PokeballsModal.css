@@ -32,7 +32,6 @@
 	border-radius: 15px;
 	background-color: rgba(79, 79, 79, 0.7);
 	position: relative;
-	overflow: hidden;
 }
 .inactive {
 	padding: 0px;
@@ -78,8 +77,12 @@
 	text-align: center;
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
-	object-fit: contain;
-	height: 70%;
+	
+	height: 130px;
+}
+.pokeballs-card-label2 img {
+	height: 100%;
+	width: 100%;
 }
 .pokeballs-card-label {
 	position: absolute;
