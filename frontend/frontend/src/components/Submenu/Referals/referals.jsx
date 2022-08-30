@@ -3,17 +3,27 @@ import { t } from 'ttag'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../../redux/slices/userSlice'
-import { getUser } from '../../redux/slices/selectors'
+
 const Referals = () => {
-	const { user } = useSelector(getUser)
-	const dispatch = useDispatch()
-	const [activeStat, setActiveStat] = React.useState()
 	useEffect(() => {
 		fetchPosts()
 		getLines()
+		getUsername()
 	}, [])
+	const [user, setUser] = useState({
+		id: 0,
+		money: '0.00',
+		referral_link: '',
+		referral_amount: '0.00',
+		missed_amount: '0.00',
+		wallet: null,
+		line_1: null,
+		line_2: null,
+		line_3: null,
+		max_card: 0,
+		admin_or: false,
+		user: 0,
+	})
 
 	const [lines, setLines] = useState({
 		first: {
@@ -40,18 +50,19 @@ const Referals = () => {
 	})
 
 	async function fetchPosts() {
-		console.log('SEND USER')
-		console.log(1)
 		try {
-			const response = await axios.get('/api/user')
-			dispatch(setUser(response.data))
+			const response = await axios.get('/api/referral')
+			setPosts(response.data)
 		} catch (e) {}
+	}
+
+	let getUsername = async () => {
+		const res = await axios.get('/api/user')
+		setUser(res.data)
 	}
 
 	const getLines = async () => {
 		await axios.get('/api/get_lines').then(data => {
-			console.log(data)
-			console.log(data.data)
 			const result = {
 				first: data.data.first,
 				second: data.data.second,
@@ -62,7 +73,6 @@ const Referals = () => {
 		})
 	}
 	const getFirst = async () => {
-		setActiveStat(0)
 		setPosts({
 			total_line: lines.first.total,
 			profit: lines.first.profit,
@@ -71,7 +81,6 @@ const Referals = () => {
 		})
 	}
 	const get_second = async () => {
-		setActiveStat(1)
 		setPosts({
 			total_line: lines.second.total,
 			profit: lines.second.profit,
@@ -81,7 +90,6 @@ const Referals = () => {
 	}
 
 	const get_third = async () => {
-		setActiveStat(2)
 		setPosts({
 			total_line: lines.third.total,
 			profit: lines.third.profit,
@@ -109,7 +117,6 @@ const Referals = () => {
 			true
 		)
 	}
-	console.log(posts)
 
 	return (
 		<div className='referals__container'>
@@ -128,9 +135,7 @@ const Referals = () => {
 			<div className='referals__info-wrapper'>
 				<div className='referals__info'>
 					<button
-						className={`referals__btn yellow-btn yellow-btn-last ${
-							activeStat === 0 ? 'referals__btn-active' : ''
-						}`}
+						className='referals__btn yellow-btn'
 						onClick={getFirst}
 					>{t`1 line`}</button>
 					<p className='referals__text'>{t`Total person`}:</p>
@@ -140,9 +145,7 @@ const Referals = () => {
 				</div>
 				<div className='referals__info'>
 					<button
-						className={`referals__btn yellow-btn yellow-btn-last ${
-							activeStat === 1 ? 'referals__btn-active' : ''
-						}`}
+						className='referals__btn yellow-btn'
 						onClick={get_second}
 					>{t`2 line`}</button>
 					<p className='referals__text'>{t`Profit received`}:</p>
@@ -152,9 +155,7 @@ const Referals = () => {
 				</div>
 				<div className='referals__info'>
 					<button
-						className={`referals__btn yellow-btn yellow-btn-last ${
-							activeStat === 2 ? 'referals__btn-active' : ''
-						}`}
+						className='referals__btn yellow-btn yellow-btn-last'
 						onClick={get_third}
 					>
 						{t`3 line`}
