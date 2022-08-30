@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
 	user: {
 		id: '',
-		money: '100.00',
+		money: '0.00',
 		referral_link: '',
 		referral_amount: '0.00',
 		missed_amount: '0.00',
