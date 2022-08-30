@@ -58,8 +58,8 @@ const Header = () => {
 	const startGame = () => {
 		console.log(data2)
 		setTimeout(() => {
-			if (data2 !== 501 && data2 !== '') {
-				navigate('/login')
+			if (data2 !== 501) {
+				// navigate('/login')
 			}
 		}, 1500)
 	}

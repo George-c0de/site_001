@@ -95,10 +95,10 @@
 @media screen and (max-width: 950px) {
 	.satoshi {
 		width: 230px;
-		right: -30px;
+		height: 280px;
+		top: -40px;
 	}
 }
-
 @media screen and (max-width: 765px) {
 	.satoshi {
 		width: 190px;
