@@ -23,6 +23,7 @@ const initialState = {
 	deposit: {
 		send: false,
 	},
+	dataLogin: ''
 }
 
 export const userSlice = createSlice({
@@ -45,10 +46,13 @@ export const userSlice = createSlice({
 		setDeposit: (state, action) => {
 			state.deposit.send = true
 		},
+		setDataLogin: (state, action) => {
+			state.dataLogin = action.payload
+		},
 	},
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, setPosts, setUser, setDeposit } = userSlice.actions
+export const { increment, setPosts, setUser, setDeposit, setDataLogin } = userSlice.actions
 
 export default userSlice.reducer

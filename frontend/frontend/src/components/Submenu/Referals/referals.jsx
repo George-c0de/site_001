@@ -50,6 +50,8 @@ const Referals = () => {
 
 	const getLines = async () => {
 		await axios.get('/api/get_lines').then(data => {
+			console.log(data)
+			console.log(data.data)
 			const result = {
 				first: data.data.first,
 				second: data.data.second,

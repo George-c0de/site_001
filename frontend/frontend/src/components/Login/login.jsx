@@ -179,13 +179,13 @@ const Signup = () => {
 						password: data.password1,
 					}
 					try {
-						await axios
+						const { data: res } = await axios
 							.post(`/api/register`, validObj, {
 								headers: { 'Content-Type': 'application/json' },
 							})
-							.then(() => {
+							.then(async () => {
 								let data2 = 200
-								data2 = axios
+								data2 = await axios
 									.post('/api/login', validData)
 									.catch(function (error) {
 										if (error.response) {
@@ -193,6 +193,7 @@ const Signup = () => {
 										}
 									})
 								if (data2.data === 200) {
+									// navigate('/home') //after registering navigate to login page
 									window.location.assign(`${window.location.origin}/home`)
 								}
 							})
@@ -221,7 +222,7 @@ const Signup = () => {
 				setInvalidEmailReset(false)
 				setLetterSent(true)
 				try {
-					axios.post('/api/reset_password/', validData, {
+					const { data } = axios.post('/api/reset_password/', validData, {
 						headers: { 'Content-Type': 'application/json' },
 					})
 				} catch (e) {}

@@ -15,16 +15,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../redux/slices/selectors'
 import { setDeposit } from '../redux/slices/userSlice'
 
-let data2
-
-try {
-	axios.get('/api/login').catch(function (error) {
-		if (error.response) {
-			data2 = error.response.status
-		}
-	})
-} catch (error) {}
-
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
@@ -35,10 +25,16 @@ const Header = () => {
 	const { deposit } = useSelector(getUser)
 	console.log(deposit.send)
 
-	const startGame = () => {
-		if (data2 !== 501) {
-			navigate('/login')
-		}
+	const startGame = async () => {
+		try {
+			await axios.get('/api/login').catch(function (error) {
+				if (error.response.status !== 501) navigate('/login')
+			})
+		} catch (error) {}
+
+		// if (data2 !== 501) {
+		// 	navigate('/login')
+		// }
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
