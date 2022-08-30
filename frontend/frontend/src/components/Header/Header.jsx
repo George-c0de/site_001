@@ -28,7 +28,15 @@ const Header = () => {
 	const startGame = async () => {
 		try {
 			await axios.get('/api/login').catch(function (error) {
-				if (error.response.status !== 501) navigate('/login')
+				if (error.response.status !== 501) {
+					console.log(error.response.status)
+					navigate('/login')
+				}
+				console.log(error)
+
+				console.log(error.response)
+
+				console.log(error.response.status)
 			})
 		} catch (error) {}
 
