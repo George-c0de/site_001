@@ -144,7 +144,7 @@ const Pay = () => {
 		})
 	}
 
-	console.log(openModal)
+	console.log(+user.money, +data.col)
 	return (
 		<div className='homepage-wrapper'>
 			<div className='main_container'>
@@ -195,7 +195,18 @@ const Pay = () => {
 								)}
 							</div>
 						</div>
-						<button type={'submit'} className='pay-button'>{t`PAYOUT`}</button>
+						<button
+							type={'submit'}
+							className={`pay-button ${
+								+user.money >= +data.col &&
+								data.col.length > 0 &&
+								'pay-button-active'
+							}`}
+							disabled={
+								+user.money <= +data.col &&
+								data.col.length < 0
+							}
+						>{t`PAYOUT`}</button>
 						{tran[0]?.time && (
 							<div className='deposit-history-wrapper'>
 								<span className='deposit-history-title'>{t`TRANSACTION HISTORY`}</span>

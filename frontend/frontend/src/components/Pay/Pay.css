@@ -104,11 +104,11 @@
 	font-weight: 600;
 	transition: all 0.3s ease-in-out;
 	margin-bottom: 59px;
-	opacity: 0.8;
+	opacity: .7;
 	transition: 0.3s all ease;
 }
-.pay-button:hover {
-	opacity: 1;
+.pay-button-active {
+	opacity: 1
 }
 .yellow-btn {
 	opacity: 0.8;
