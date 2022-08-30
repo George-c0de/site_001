@@ -198,12 +198,13 @@ const Pay = () => {
 						<button
 							type={'submit'}
 							className={`pay-button ${
-								(+user.money / 100) * 1 >= +data.col &&
+								+user.money >= +data.col + (+data.col / 100) * 1 &&
 								data.col.length > 0 &&
+								data.wallet_input.length > 0 &&
 								'pay-button-active'
 							}`}
 							disabled={
-								(+user.money / 100) * 1 <= +data.col ||
+								+user.money < +data.col + (+data.col / 100) * 1 ||
 								data.col.length == 0 ||
 								data.wallet_input.length == 0
 							}
