@@ -15,6 +15,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../redux/slices/selectors'
 import { setDeposit } from '../redux/slices/userSlice'
 
+let data2 = ''
+
+try {
+	axios.get('/api/login').catch(function (error) {
+		if (error.response) {
+			data2 = error.response.status
+		}
+	})
+} catch (error) {}
+
 const Header = () => {
 	const [openUserInfo, setOpenUserInfo] = React.useState(false)
 	const [openReferals, setOpenReferals] = React.useState(false)
@@ -25,24 +35,33 @@ const Header = () => {
 	const { deposit } = useSelector(getUser)
 	console.log(deposit.send)
 
-	const startGame = async () => {
-		try {
-			await axios.get('/api/login').catch(function (error) {
-				if (error.response.status !== 501) {
-					console.log(error.response.status)
-					navigate('/login')
-				}
-				console.log(error)
+	// const startGame = async () => {
+	// 	try {
+	// 		await axios.get('/api/login').catch(function (error) {
+	// 			if (error.response.status !== 501) {
+	// 				console.log(error.response.status)
+	// 				navigate('/login')
+	// 			}
+	// 			console.log(error)
 
-				console.log(error.response)
+	// 			console.log(error.response)
 
-				console.log(error.response.status)
-			})
-		} catch (error) {}
+	// 			console.log(error.response.status)
+	// 		})
+	// 	} catch (error) {}
 
-		// if (data2 !== 501) {
-		// 	navigate('/login')
-		// }
+	// if (data2 !== 501) {
+	// 	navigate('/login')
+	// }
+	// }
+
+	const startGame = () => {
+		console.log(data2)
+		setTimeout(() => {
+			if (data2 !== 501 && data2 !== '') {
+				navigate('/login')
+			}
+		}, 1500)
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
