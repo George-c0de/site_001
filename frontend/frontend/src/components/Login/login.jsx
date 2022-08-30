@@ -179,23 +179,32 @@ const Signup = () => {
 						password: data.password1,
 					}
 					try {
-						const { data: res } = await axios
+						// await axios
+						// 	.post(`/api/register`, validObj, {
+						// 		headers: { 'Content-Type': 'application/json' },
+						// 	})
+						// 	.then(async () => {
+						// 		let data2 = 200
+						// 		data2 = await axios
+						// 			.post('/api/login', validData)
+						// 			.catch(function (error) {
+						// 				if (error.response) {
+						// 					data2 = error.response.status
+						// 				}
+						// 			})
+						// 		if (data2.data === 200) {
+						// 			// navigate('/home') //after registering navigate to login page
+						// 			window.location.assign(`${window.location.origin}/home`)
+						// 		}
+						// 	})
+						await axios
 							.post(`/api/register`, validObj, {
 								headers: { 'Content-Type': 'application/json' },
 							})
 							.then(async () => {
-								let data2 = 200
-								data2 = await axios
-									.post('/api/login', validData)
-									.catch(function (error) {
-										if (error.response) {
-											data2 = error.response.status
-										}
-									})
-								if (data2.data === 200) {
-									// navigate('/home') //after registering navigate to login page
-									window.location.assign(`${window.location.origin}/home`)
-								}
+								await axios.post('/api/login', validData)
+								setExist(false)
+								window.location.assign(`${window.location.origin}/home`)
 							})
 					} catch {
 						setExist(true)
