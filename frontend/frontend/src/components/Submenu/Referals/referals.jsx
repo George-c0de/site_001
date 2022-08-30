@@ -41,13 +41,11 @@ const Referals = () => {
 
 	async function fetchPosts() {
 		console.log('SEND USER')
-		if (user.id == '') {
-			console.log(1)
-			try {
-				const response = await axios.get('/api/user')
-				dispatch(setUser(response.data))
-			} catch (e) {}
-		}
+		console.log(1)
+		try {
+			const response = await axios.get('/api/user')
+			dispatch(setUser(response.data))
+		} catch (e) {}
 	}
 
 	const getLines = async () => {
@@ -109,6 +107,7 @@ const Referals = () => {
 			true
 		)
 	}
+	console.log(posts)
 
 	return (
 		<div className='referals__container'>
