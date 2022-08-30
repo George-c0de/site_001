@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../redux/slices/selectors'
 import { setDeposit } from '../redux/slices/userSlice'
 
-let data2 = ''
+let data2
 
 try {
 	axios.get('/api/login').catch(function (error) {
@@ -58,8 +58,10 @@ const Header = () => {
 	const startGame = () => {
 		console.log(data2)
 		setTimeout(() => {
+			console.log(1)
 			if (data2 !== 501) {
-				// navigate('/login')
+				console.log(2)
+				navigate('/login')
 			}
 		}, 1500)
 	}
