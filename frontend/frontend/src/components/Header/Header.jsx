@@ -33,14 +33,10 @@ const Header = () => {
 	const dispatch = useDispatch()
 
 	const { deposit } = useSelector(getUser)
-	console.log(deposit.send)
 
 	const startGame = () => {
-		console.log(data2)
 		setTimeout(() => {
-			console.log(1)
 			if (data2 !== 501) {
-				console.log(2)
 				navigate('/login')
 			}
 		}, 1500)
@@ -100,11 +96,9 @@ const Header = () => {
 			setTimeout(() => {
 				try {
 					axios.get('/api/dis_input').then(data => {
-						console.log(data)
 						console.log(data.response)
 					})
 				} catch (e) {
-					console.log(e)
 					console.log(e.response)
 				}
 			}, 500)
@@ -112,11 +106,9 @@ const Header = () => {
 			setInterval(() => {
 				try {
 					axios.get('/api/dis_input').then(data => {
-						console.log(data)
 						console.log(data.response)
 					})
 				} catch (e) {
-					console.log(e)
 					console.log(e.response)
 				}
 			}, 300000)

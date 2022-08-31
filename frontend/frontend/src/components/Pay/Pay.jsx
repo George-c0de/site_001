@@ -12,7 +12,6 @@ import { getUser } from '../redux/slices/selectors'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Pay = () => {
-	// const [state_input, SetState] = useState(true)
 	const [invalidAmount, setInvalidAmount] = useState(false)
 	const [invalidWallet, setInvalidWallet] = useState(false)
 	let [openModal, setOpenModal] = useState(false)
@@ -22,13 +21,8 @@ const Pay = () => {
 		wallet_input: '',
 		col: '',
 	})
-	// const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
 
-	// let [wallet, setWallet] = useState(null)
-	// useEffect(() => {
-	// 	getTran()
-	// }, [])
 	const getTran = async () => {
 		try {
 			let response = await axios.get('/api/trans_get_input')
@@ -38,11 +32,11 @@ const Pay = () => {
 				SetTran([0])
 			}
 		} catch (e) {
-			console.log(e)
 			console.log(e.response)
 		}
 	}
 	useEffect(() => {
+		getTran()
 		const getPosts = async () => {
 			try {
 				await axios.get('/api/user').then(data => {
@@ -61,21 +55,17 @@ const Pay = () => {
 						user: data.data.user,
 					}
 					if (user.id == '') dispatch(setUser(result))
-					// setMax(result.money)
-					// setWallet(result.wallet_input)
 				})
 				if (user.wallet_input !== null) {
 					setData({
 						wallet_input: user.wallet_input,
 						col: '',
 					})
-					// SetState(false)
 				} else {
 					setData({
 						wallet_input: '',
 						col: '',
 					})
-					// SetState(true)
 				}
 			} catch (e) {}
 		}
@@ -100,7 +90,6 @@ const Pay = () => {
 		}
 
 		if (!invalidAmount && !invalidWallet && data.col.length > 0) {
-			console.log('SEND')
 			try {
 				axios
 					.post(
@@ -130,7 +119,6 @@ const Pay = () => {
 				}
 			}
 		}
-		console.log(invalidAmount, invalidAmount)
 	}
 	const hundSum = (e, name) => {
 		if (name == 'col') e.target.value = e.target.value.replace(/[^\d.]/g, '')
@@ -144,7 +132,6 @@ const Pay = () => {
 		})
 	}
 
-	console.log(+user.money, +data.col)
 	return (
 		<div className='homepage-wrapper'>
 			<div className='main_container'>

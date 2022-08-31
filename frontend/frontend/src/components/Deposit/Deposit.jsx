@@ -11,12 +11,10 @@ import { setUser } from '../redux/slices/userSlice'
 import { getUser } from '../redux/slices/selectors'
 
 const Deposit = () => {
-	// const [state_input, SetState] = useState(true)
 	const [data, setData] = useState({
 		wallet: '',
 		col: '1',
 	})
-	// const [maxi, setMax] = useState(1)
 	let [tran, SetTran] = useState([])
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
@@ -28,7 +26,6 @@ const Deposit = () => {
 	const getTran = async () => {
 		try {
 			let response = await axios.get('/api/trans_get_output')
-			console.log(response.data)
 			if (response.data.length > 0) {
 				SetTran(response.data)
 			} else {
@@ -36,7 +33,6 @@ const Deposit = () => {
 			}
 		} catch (e) {}
 	}
-	console.log(user)
 	useEffect(() => {
 		const getPosts = async () => {
 			try {
@@ -56,7 +52,6 @@ const Deposit = () => {
 						user: data.data.user,
 					}
 					if (user.id == '') dispatch(setUser(result))
-					// setMax(result.money)
 				})
 
 				if (user.wallet !== null) {
@@ -64,14 +59,11 @@ const Deposit = () => {
 						wallet: user.wallet,
 						col: 1,
 					})
-					console.log(data.wallet)
-					// SetState(true)
 				} else {
 					setData({
 						wallet: '',
 						col: 1,
 					})
-					// SetState(false)
 				}
 			} catch (e) {
 				console.log(e)
@@ -126,10 +118,6 @@ const Deposit = () => {
 								</p>
 							</div>
 						</div>
-						{/* <button
-							type={'submit'}
-							className='deposit-button'
-						>{t`Deposit`}</button> */}
 					</div>
 					{tran[0]?.time && (
 						<div className='deposit-history-wrapper'>

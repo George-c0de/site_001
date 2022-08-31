@@ -13,8 +13,6 @@ import argentina from '../../assets/languages/argentina.png'
 import support from '../../Ảnh Pokemon Dự Trù/супорт.svg'
 
 import './Lang.css'
-// import { LangContext } from '../../context/LangContext'
-
 
 const languages = {
 	en: britain,
@@ -41,11 +39,9 @@ export const Lang = ({
 	setOpenReferals,
 	setOpenStatistics,
 }) => {
-	// const { lang, updateLang } = useContext(LangContext)
 	const [open, setOpen] = useState(false)
 
 	const handleOpen = () => {
-		console.log(open)
 		setOpen(!open)
 		if (open) {
 			setOpenBurger(false)

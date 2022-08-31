@@ -30,29 +30,23 @@ const CardOpened = ({
 	const [disabledBtn, setDisabledBtn] = useState(true)
 	// const [activeCategory, setActiveCategory] = useState(false)
 	const handleButton = async () => {
-		console.log(category)
 		await axios.get(`/api/prohibitions`).then(res => {
 			let data = res.data
-			console.log(data)
 			switch (category) {
 				case 'bronze': {
 					setDisabledBtn(data.bronze[idCard - 1])
-					// setActiveCategory('bronze')
 					break
 				}
 				case 'silver': {
 					setDisabledBtn(data.silver[idCard - 1])
-					// setActiveCategory('silver')
 					break
 				}
 				case 'gold': {
 					setDisabledBtn(data.gold[idCard - 1])
-					// setActiveCategory('gold')
 					break
 				}
 				case 'emerald': {
 					setDisabledBtn(data.emerald[idCard - 1])
-					// setActiveCategory('emerald')
 					break
 				}
 			}
@@ -64,7 +58,6 @@ const CardOpened = ({
 	let money = user.money
 
 	async function fetchPosts() {
-		console.log('UPDATE USER')
 		try {
 			const response = await axios.get('/api/user')
 			dispatch(setUser(response.data))
@@ -87,19 +80,12 @@ const CardOpened = ({
 		if (!props2 && disabledBtn) {
 			setAccept2(true)
 		}
-		console.log(purchaseConfirmation2, disabledBtn)
 		if (disabledBtn && purchaseConfirmation2 && price <= money) {
 			setPurchaseConfirmation2(false)
-			console.log(category, idCard)
-			// setTimeout(async () => {
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
-				// setTimeout(() => {
 				fetchPosts()
 				buyCard()
-
-				// }, 1000)
 			})
-			// }, 3000)
 		}
 	}
 
@@ -180,7 +166,6 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 	let money = user.money
 
 	async function fetchPosts() {
-		console.log('UPDATE USER')
 		try {
 			const response = await axios.get('/api/user')
 			dispatch(setUser(response.data))
@@ -189,13 +174,10 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 
 	const handleBuyClick = async () => {
 		setAccept(true)
-		console.log(1)
 		document.body.style.overflow = 'hidden'
 		if (purchaseConfirmation && money >= price) {
-			console.log(4)
 			document.body.style.overflow = 'visible'
 			setStatus('pending')
-			console.log(category, idCard)
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
 				setStatus('success')
 				buyCard()
@@ -206,10 +188,8 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 
 	React.useEffect(() => {
 		if (firstRender) {
-			console.log(3)
 			handleBuyClick()
 		} else {
-			console.log(2)
 			setFirstRender(true)
 		}
 	}, [purchaseConfirmation])
@@ -283,38 +263,6 @@ export const PokeballsModal = ({
 	six,
 }) => {
 	return (
-		// <div className='pokeballs-modal'>
-		// 	{cards.map((id, i) => {
-		// 		return (
-		// 			<div
-		// 				data-id={i + 1}
-		// 				className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
-		// 			>
-		// 				{id ? (
-		// 					<CardOpened
-		// 						image={images[i]}
-		// 						background={background}
-		// 						key={id}
-		// 						card_data={card_data[i]}
-		// 						buyCard={() => buyCard(i + 1)}
-		// 						category={category}
-		// 						idCard={i + 1}
-		// 						price={price[i]}
-		// 					/>
-		// 				) : (
-		// 					<CardClosed
-		// 						price={price[i]}
-		// 						buyCard={() => buyCard(i + 1)}
-		// 						idCard={i + 1}
-		// 						category={category}
-		// 						six={six}
-		// 						key={id}
-		// 					/>
-		// 				)}
-		// 			</div>
-		// 		)
-		// 	})}
-		// </div>
 		<div className='pokeballs-modal'>
 			{cards.map((id, i) => {
 				return (

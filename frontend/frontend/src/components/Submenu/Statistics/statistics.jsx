@@ -8,16 +8,9 @@ import { setPosts } from '../../redux/slices/userSlice'
 const Statistics = () => {
 	const dispatch = useDispatch()
 	const { posts } = useSelector(getUser)
-	console.log(posts)
 	useEffect(() => {
 		fetchPosts()
 	}, [])
-
-	// const [posts, setPosts] = useState({
-	// 	money: 0,
-	// 	all_transactions: 0,
-	// 	coll_user: 0,
-	// })
 
 	async function fetchPosts() {
 		try {

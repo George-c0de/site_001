@@ -7,18 +7,7 @@ import Lightning from '../../../../assets/lightning.svg'
 import { motion } from 'framer-motion'
 
 export const GameHistory = ({ history }) => {
-	// const [data, setData] = useState({})
 	const [showMore, setShowMore] = useState(false)
-
-	// useEffect(() => {
-	// 	getUsername()
-	// }, [])
-
-	// let getUsername = async () => {
-	// 	const res = await axios.get('/api/user')
-	// 	console.log(res.data)
-	// 	setData(res.data)
-	// }
 
 	return (
 		<motion.div

@@ -21,7 +21,6 @@ export const UserId = () => {
 	}, [])
 
 	async function fetchPosts() {
-		console.log('SEND USER')
 		if (user.id == '') {
 			try {
 				const response = await axios.get('/api/user')

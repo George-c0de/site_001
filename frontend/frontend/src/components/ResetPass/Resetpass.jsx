@@ -8,7 +8,6 @@ import './reset.css'
 
 const Resetpass = () => {
 	const params = useParams()
-	console.log(params)
 	const [data, setData] = React.useState({
 		password1: '',
 		password2: '',

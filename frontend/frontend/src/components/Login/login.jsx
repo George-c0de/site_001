@@ -150,8 +150,15 @@ const Signup = () => {
 				setCoincidence(false)
 				setInvalidPassword(false)
 			}
-			// if (data.password1.length < 8) setInvalidPassword(true)
-			// else setInvalidPassword(false)
+			if (
+				/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(
+					data.email
+				)
+			) {
+				setInvalidEmail(false)
+			} else {
+				setInvalidEmail(true)
+			}
 
 			if (
 				!invalidPassword &&
@@ -178,25 +185,8 @@ const Signup = () => {
 						email: data.email,
 						password: data.password1,
 					}
+
 					try {
-						// await axios
-						// 	.post(`/api/register`, validObj, {
-						// 		headers: { 'Content-Type': 'application/json' },
-						// 	})
-						// 	.then(async () => {
-						// 		let data2 = 200
-						// 		data2 = await axios
-						// 			.post('/api/login', validData)
-						// 			.catch(function (error) {
-						// 				if (error.response) {
-						// 					data2 = error.response.status
-						// 				}
-						// 			})
-						// 		if (data2.data === 200) {
-						// 			// navigate('/home') //after registering navigate to login page
-						// 			window.location.assign(`${window.location.origin}/home`)
-						// 		}
-						// 	})
 						await axios
 							.post(`/api/register`, validObj, {
 								headers: { 'Content-Type': 'application/json' },
@@ -231,7 +221,7 @@ const Signup = () => {
 				setInvalidEmailReset(false)
 				setLetterSent(true)
 				try {
-					const { data } = axios.post('/api/reset_password/', validData, {
+					axios.post('/api/reset_password/', validData, {
 						headers: { 'Content-Type': 'application/json' },
 					})
 				} catch (e) {}
@@ -241,7 +231,6 @@ const Signup = () => {
 			}
 		}
 	}
-	console.log(invalidPassword && !coincidence)
 	return (
 		<div
 			className={`login_container main-bg ${

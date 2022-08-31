@@ -121,7 +121,6 @@ const Game = () => {
 		getHist()
 		getSix()
 		setTimeout(() => {
-			console.log(1)
 			if (!document.cookie.includes('openTg')) {
 				setShowTg(true)
 			}
@@ -129,9 +128,7 @@ const Game = () => {
 	}, [])
 
 	async function fetchUser() {
-		console.log('SEND USER')
 		if (user.id == '') {
-			console.log(1)
 			try {
 				const response = await axios.get('/api/user')
 				dispatch(setUser(response.data))

@@ -43,7 +43,6 @@ export const PokeballsPack = ({
 	price,
 	six,
 }) => {
-	console.log(title)
 	const [modalOpen, setModalOpen] = useState(false)
 	const handlePokeballsPack = () => {
 		setModalOpen(!modalOpen)
