@@ -150,22 +150,25 @@ const Signup = () => {
 				setCoincidence(false)
 				setInvalidPassword(false)
 			}
-			if (
-				/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(
-					data.email
-				)
-			) {
-				setInvalidEmail(false)
-			} else {
-				setInvalidEmail(true)
-			}
+			// if (
+			// 	/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(
+			// 		data.email
+			// 	)
+			// ) {
+			// 	setInvalidEmail(false)
+			// } else {
+			// 	setInvalidEmail(true)
+			// }
 
 			if (
 				!invalidPassword &&
 				!invalidEmail &&
 				data.password1.length > 0 &&
 				data.email.length > 0 &&
-				activeCaptcha
+				activeCaptcha &&
+				/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(
+					data.email
+				)
 			) {
 				setData({
 					username: data.username,
