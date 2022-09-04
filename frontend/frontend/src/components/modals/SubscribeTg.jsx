@@ -13,25 +13,30 @@ const SubscribeTg = () => {
 	const handleClickOutside = event => {
 		if (ref.current && !ref.current.contains(event.target)) {
 			setActiveTg(false)
+			document.cookie = 'openTg=true'
 		}
 	}
 
 	const handleClick = () => {
 		setActiveTg(false)
+		document.cookie = 'openTg=true'
 	}
+
+	console.log('tg')
+
+	const [get_link_tg, setget_link_tg] = React.useState({
+		link_tg: 'https://t.me/Tokemon_game_Bot',
+	})
 
 	React.useEffect(() => {
 		document.addEventListener('click', handleClickOutside, true)
-		document.cookie = 'openTg=true'
+		// document.cookie = 'openTg=true'
 		fetchLink()
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true)
 		}
 	}, [])
-
-	const [get_link_tg, setget_link_tg] = React.useState({
-		link_tg: 'https://t.me/Tokemon_game_Bot',
-	})
+	if (document.cookie.includes('openTg=true')) return
 
 	async function fetchLink() {
 		try {
@@ -44,8 +49,6 @@ const SubscribeTg = () => {
 			}
 		}
 	}
-
-	if (document.cookie.includes('openTg=true')) return
 
 	return (
 		<div className={`subscriibe-wrapper ${activeTg ? '' : 'sub-wrapper-hide'}`}>
