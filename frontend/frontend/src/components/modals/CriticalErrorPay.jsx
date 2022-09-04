@@ -26,14 +26,12 @@ const PaySendError = ({ setOpenModal }) => {
 	return (
 		<div className={`subscriibe-wrapper`}>
 			<div className='subscriibe-block' ref={ref} style={{ maxWidth: '420px' }}>
-				<p className='subscribe-text'>
-					{t`This wallet is assigned to another user. To withdraw funds, use another wallet`}
-				</p>
+				<p className='subscribe-text'>{t`Output error`}</p>
 				<p
 					onClick={handleClick}
 					className='authorization__button subscribe-btn'
 				>
-					{t`Output error`}
+					{t`Continue`}
 				</p>
 			</div>
 		</div>

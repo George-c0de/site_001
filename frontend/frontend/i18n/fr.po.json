@@ -458,6 +458,16 @@
 			"Withdrawal request successfully created": {
 				"msgid": "Withdrawal request successfully created",
 				"msgstr": ["Demande de retrait créée avec succès"]
+			},
+			"This wallet is assigned to another user. To withdraw funds, use another wallet": {
+				"msgid": "This wallet is assigned to another user. To withdraw funds, use another wallet",
+				"msgstr": [
+					"Ce portefeuille est attribué à un autre utilisateur. Pour retirer des fonds, utilisez un autre portefeuille"
+				]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": ["Erreur de sortie"]
 			}
 		}
   }

@@ -344,6 +344,18 @@
 			"Withdrawal request successfully created": {
 				"msgid": "Withdrawal request successfully created",
 				"msgstr": ["Заявка на вывод средств успешно создана"]
+			},
+			"This wallet is assigned to another user. To withdraw funds, use another wallet": {
+				"msgid": "This wallet is assigned to another user. To withdraw funds, use another wallet",
+				"msgstr": [
+					"Данный кошелек закреплен за другим пользователем. Для вывода средств воспользуйтесь другим кошельком"
+				]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": [
+					"Ошибка вывода"
+				]
 			}
 		}
 	}
