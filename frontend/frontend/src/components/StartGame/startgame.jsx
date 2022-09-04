@@ -137,6 +137,7 @@ const Startgame = () => {
 		}
 	}, [])
 	const [onActive, setActive] = React.useState(true)
+	console.log(1)
 	return (
 		<div className='background-start'>
 			<motion.img

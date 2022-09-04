@@ -27,7 +27,7 @@ const Pay = () => {
 		wallet_input: '',
 		col: '',
 	})
-
+	console.log(1)
 	let [tran, SetTran] = useState([])
 
 	const getTran = async () => {
