@@ -189,7 +189,8 @@ const Signup = () => {
 								setExist(false)
 								window.location.assign(`${window.location.origin}/home`)
 							})
-					} catch {
+					} catch(e) {
+						console.log(e.response)
 						setExist(true)
 					}
 				} catch (error) {
