@@ -150,16 +150,6 @@ const Signup = () => {
 				setCoincidence(false)
 				setInvalidPassword(false)
 			}
-			// if (
-			// 	/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(
-			// 		data.email
-			// 	)
-			// ) {
-			// 	setInvalidEmail(false)
-			// } else {
-			// 	setInvalidEmail(true)
-			// }
-
 			if (
 				!invalidPassword &&
 				!invalidEmail &&

@@ -32,7 +32,7 @@ const Pay = () => {
 
 	const getTran = async () => {
 		try {
-			let response = await axios.get('/api/trans_get_input')
+			let response = await axios.get('/api/trans_get_output')
 			if (response.data.length > 0) {
 				SetTran(response.data)
 			} else {

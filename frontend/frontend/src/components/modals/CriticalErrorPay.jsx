@@ -25,8 +25,8 @@ const PaySendError = ({ setOpenModal }) => {
 
 	return (
 		<div className={`subscriibe-wrapper`}>
-			<div className='subscriibe-block' ref={ref} style={{ maxWidth: '420px' }}>
-				<p className='subscribe-text'>{t`Output error`}</p>
+			<div className='subscriibe-block' ref={ref} style={{ maxWidth: '400px' }}>
+				<p className='subscribe-text' style={{fontSize: '25px'}}>{t`Output error`}</p>
 				<p
 					onClick={handleClick}
 					className='authorization__button subscribe-btn'
