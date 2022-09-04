@@ -18,7 +18,7 @@ const Pay = () => {
 	const [invalidWallet, setInvalidWallet] = useState(false)
 	let [openModal, setOpenModal] = useState(false)
 	let [openModalError, setOpenModalError] = useState(false)
-	let [openModalCrtError, setOpenModalCrtError] = useState(true)
+	let [openModalCrtError, setOpenModalCrtError] = useState(false)
 
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
