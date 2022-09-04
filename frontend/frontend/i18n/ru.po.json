@@ -347,7 +347,15 @@
 			},
 			"This wallet is assigned to another user. To withdraw funds, use another wallet": {
 				"msgid": "This wallet is assigned to another user. To withdraw funds, use another wallet",
-				"msgstr": ["Данный кошелек закреплен за другим пользователем. Для вывода средств воспользуйтесь другим кошельком"]
+				"msgstr": [
+					"Данный кошелек закреплен за другим пользователем. Для вывода средств воспользуйтесь другим кошельком"
+				]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": [
+					"Ошибка вывода"
+				]
 			}
 		}
 	}

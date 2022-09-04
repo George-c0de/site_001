@@ -456,6 +456,10 @@
 				"msgstr": [
 					"Esta carteira é atribuída a outro usuário. Para retirar fundos, use outra carteira"
 				]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": ["Erro de saída"]
 			}
 		}
 	}

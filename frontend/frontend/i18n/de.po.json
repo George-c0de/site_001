@@ -455,9 +455,11 @@
 			},
 			"This wallet is assigned to another user. To withdraw funds, use another wallet": {
 				"msgid": "This wallet is assigned to another user. To withdraw funds, use another wallet",
-				"msgstr": [
-					"Diese Brieftasche ist einem anderen Benutzer zugewiesen. Um Geld abzuheben, verwenden Sie eine andere Brieftasche"
-				]
+				"msgstr": ["Erreur de sortie"]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": ["Fehler in der Ausgabe"]
 			}
 		}
   }

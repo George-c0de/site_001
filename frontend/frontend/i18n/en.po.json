@@ -200,6 +200,10 @@
 				"msgstr": [
 					"This wallet is assigned to another user. To withdraw funds, use another wallet"
 				]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": ["Output error"]
 			}
 		}
 	}

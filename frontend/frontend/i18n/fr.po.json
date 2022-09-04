@@ -464,6 +464,10 @@
 				"msgstr": [
 					"Ce portefeuille est attribué à un autre utilisateur. Pour retirer des fonds, utilisez un autre portefeuille"
 				]
+			},
+			"Output error": {
+				"msgid": "Output error",
+				"msgstr": ["Erreur de sortie"]
 			}
 		}
   }

@@ -11,12 +11,14 @@ import { setUser } from '../redux/slices/userSlice'
 import { getUser } from '../redux/slices/selectors'
 import { useDispatch, useSelector } from 'react-redux'
 import PaySendError from '../modals/ErorrPay'
+import CriticalErrorPay from '../modals/CriticalErrorPay'
 
 const Pay = () => {
 	const [invalidAmount, setInvalidAmount] = useState(false)
 	const [invalidWallet, setInvalidWallet] = useState(false)
 	let [openModal, setOpenModal] = useState(false)
 	let [openModalError, setOpenModalError] = useState(false)
+	let [openModalCrtError, setOpenModalCrtError] = useState(false)
 
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
@@ -96,6 +98,13 @@ const Pay = () => {
 
 		if (!invalidAmount && !invalidWallet && data.col.length > 0) {
 			try {
+				setInvalidWallet(false)
+				setInvalidAmount(false)
+
+				setData({
+					...data,
+					col: '',
+				})
 				axios
 					.post(
 						'/api/dis',
@@ -108,16 +117,17 @@ const Pay = () => {
 						}
 					)
 					.catch(function (error) {
-						console.log(error)
-						setOpenModalError(true)
+						console.log(error.response)
+						console.log(error.response.status)
+						setOpenModal(false)
+						if (error.response.status == 400) {
+							setOpenModalCrtError(true)
+						} else if (error.response.status == 401) {
+							setOpenModalError(true)
+						} else {
+							setOpenModal(true)
+						}
 					})
-				setInvalidWallet(false)
-				setInvalidAmount(false)
-				setOpenModal(true)
-				setData({
-					...data,
-					col: '',
-				})
 			} catch (e) {
 				if (e.response.status === 200) {
 					data.col = 1
@@ -289,6 +299,9 @@ const Pay = () => {
 			</div>
 			{openModal && <PaySend setOpenModal={setOpenModal} />}
 			{openModalError && <PaySendError setOpenModal={setOpenModalError} />}
+			{openModalCrtError && (
+				<CriticalErrorPay setOpenModal={setOpenModalCrtError} />
+			)}
 		</div>
 	)
 }
