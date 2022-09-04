@@ -10,17 +10,22 @@ import PaySend from '../modals/PaySend'
 import { setUser } from '../redux/slices/userSlice'
 import { getUser } from '../redux/slices/selectors'
 import { useDispatch, useSelector } from 'react-redux'
+import PaySendError from '../modals/ErorrPay'
 
 const Pay = () => {
 	const [invalidAmount, setInvalidAmount] = useState(false)
 	const [invalidWallet, setInvalidWallet] = useState(false)
 	let [openModal, setOpenModal] = useState(false)
+	let [openModalError, setOpenModalError] = useState(false)
+
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
+
 	const [data, setData] = useState({
 		wallet_input: '',
 		col: '',
 	})
+
 	let [tran, SetTran] = useState([])
 
 	const getTran = async () => {
@@ -102,8 +107,10 @@ const Pay = () => {
 							headers: { 'Content-Type': 'application/json' },
 						}
 					)
-					.then(function (response) {})
-					.catch(function (error) {})
+					.catch(function (error) {
+						console.log(error)
+						setOpenModalError(true)
+					})
 				setInvalidWallet(false)
 				setInvalidAmount(false)
 				setOpenModal(true)
@@ -281,6 +288,7 @@ const Pay = () => {
 				</form>
 			</div>
 			{openModal && <PaySend setOpenModal={setOpenModal} />}
+			{openModalError && <PaySendError setOpenModal={setOpenModalError} />}
 		</div>
 	)
 }

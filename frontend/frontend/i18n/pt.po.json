@@ -450,6 +450,12 @@
 			"Withdrawal request successfully created": {
 				"msgid": "Withdrawal request successfully created",
 				"msgstr": ["Pedido de retirada criado com sucesso"]
+			},
+			"This wallet is assigned to another user. To withdraw funds, use another wallet": {
+				"msgid": "This wallet is assigned to another user. To withdraw funds, use another wallet",
+				"msgstr": [
+					"Esta carteira é atribuída a outro usuário. Para retirar fundos, use outra carteira"
+				]
 			}
 		}
 	}

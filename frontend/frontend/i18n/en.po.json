@@ -194,6 +194,12 @@
 			"Incorrect email address or password": {
 				"msgid": "Incorrect email address or password",
 				"msgstr": ["Incorrect email address or password"]
+			},
+			"This wallet is assigned to another user. To withdraw funds, use another wallet": {
+				"msgid": "This wallet is assigned to another user. To withdraw funds, use another wallet",
+				"msgstr": [
+					"This wallet is assigned to another user. To withdraw funds, use another wallet"
+				]
 			}
 		}
 	}
