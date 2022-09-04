@@ -18,7 +18,7 @@ const Pay = () => {
 	const [invalidWallet, setInvalidWallet] = useState(false)
 	let [openModal, setOpenModal] = useState(false)
 	let [openModalError, setOpenModalError] = useState(false)
-	let [openModalCrtError, setOpenModalCrtError] = useState(false)
+	let [openModalCrtError, setOpenModalCrtError] = useState(true)
 
 	const dispatch = useDispatch()
 	const { user } = useSelector(getUser)
@@ -27,7 +27,7 @@ const Pay = () => {
 		wallet_input: '',
 		col: '',
 	})
-	console.log(1)
+	console.log(2)
 	let [tran, SetTran] = useState([])
 
 	const getTran = async () => {
@@ -121,10 +121,13 @@ const Pay = () => {
 						console.log(error.response.status)
 						setOpenModal(false)
 						if (error.response.status == 400) {
+							console.log('OPEN1')
 							setOpenModalCrtError(true)
 						} else if (error.response.status == 401) {
+							console.log('OPEN2')
 							setOpenModalError(true)
 						} else {
+							console.log('OPEN3')
 							setOpenModal(true)
 						}
 					})
