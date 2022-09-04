@@ -121,9 +121,9 @@ const Pay = () => {
 						console.log(error.response.status)
 						setOpenModal(false)
 						if (error.response.status == 400) {
-							setOpenModalCrtError(true)
-						} else if (error.response.status == 401) {
 							setOpenModalError(true)
+						} else if (error.response.status == 401) {
+							setOpenModalCrtError(true)
 						} else {
 							setOpenModal(true)
 						}
