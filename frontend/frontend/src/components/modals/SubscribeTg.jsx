@@ -3,6 +3,7 @@ import './modals.css'
 import Telegram from '../../assets/tg.svg'
 import Cross from '../../assets/cross-svgrepo-com.svg'
 import { t } from 'ttag'
+import axios from 'axios'
 
 const SubscribeTg = () => {
 	const [activeTg, setActiveTg] = useState(true)
