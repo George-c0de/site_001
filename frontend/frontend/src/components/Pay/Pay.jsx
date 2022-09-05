@@ -97,6 +97,46 @@ const Pay = () => {
 		}
 
 		if (!invalidAmount && !invalidWallet && data.col.length > 0) {
+			// 	try {
+			// 		setInvalidWallet(false)
+			// 		setInvalidAmount(false)
+
+			// 		setData({
+			// 			...data,
+			// 			col: '',
+			// 		})
+			// 		axios
+			// 			.post(
+			// 				'/api/dis',
+			// 				{
+			// 					wallet_input: data.wallet_input,
+			// 					col: data.col,
+			// 				},
+			// 				{
+			// 					headers: { 'Content-Type': 'application/json' },
+			// 				}
+			// 			)
+			// 			.catch(function (error) {
+			// 				console.log(error.response)
+			// 				console.log(error.response.status)
+			// 				setOpenModal(false)
+			// 				if (error.response.status == 400) {
+			// 					setOpenModalCrtError(true)
+			// 				} else if (error.response.status == 401) {
+			// 					setOpenModalError(true)
+			// 				} else {
+			// 					setOpenModal(true)
+			// 				}
+			// 			})
+			// 	} catch (e) {
+			// 		console.log('UNDER CATCH')
+			// 		if (e.response.status === 200) {
+			// 			data.col = 1
+			// 		} else {
+			// 			console.log('Error')
+			// 		}
+			// 	}
+
 			try {
 				setInvalidWallet(false)
 				setInvalidAmount(false)
@@ -120,22 +160,16 @@ const Pay = () => {
 						console.log(error.response)
 						console.log(error.response.status)
 						setOpenModal(false)
-						if (error.response.status == 400) {
-							console.log('OPEN1')
-							setOpenModalCrtError(true)
-						} else if (error.response.status == 401) {
-							console.log('OPEN2')
-							setOpenModalError(true)
-						} else {
-							console.log('OPEN3')
+						if (error.response.status == 200) {
 							setOpenModal(true)
 						}
 					})
 			} catch (e) {
-				if (e.response.status === 200) {
-					data.col = 1
-				} else {
-					console.log('Error')
+				console.log('UNDER CATCH')
+				if (error.response.status == 400) {
+					setOpenModalCrtError(true)
+				} else if (error.response.status == 401) {
+					setOpenModalError(true)
 				}
 			}
 		}
@@ -207,13 +241,14 @@ const Pay = () => {
 							className={`pay-button ${
 								+user.money >= +data.col &&
 								data.col.length > 0 &&
-								data.wallet_input.length > 0 &&
+								data?.wallet &&
+								data?.wallet_input.length > 0 &&
 								'pay-button-active'
 							}`}
 							disabled={
 								+user.money < +data.col ||
 								data.col.length == 0 ||
-								data.wallet_input.length == 0
+								data?.wallet_input.length == 0
 							}
 						>{t`PAYOUT`}</button>
 						{tran[0]?.time && (
@@ -310,12 +345,6 @@ const Pay = () => {
 									<div className='history-table-column'>
 										<span className='history-table-title sum'>{`Sum`}</span>
 										{tran.map(trans => {
-											console.log(+trans.quantity > 0)
-											console.log(
-												+trans.quantity > 0
-													? `+${trans.quantity}`
-													: trans.quantity
-											)
 											return (
 												<h3
 													className={`history-table-text-intable ${
