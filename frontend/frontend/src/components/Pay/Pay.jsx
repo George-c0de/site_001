@@ -226,7 +226,7 @@ const Pay = () => {
 											return (
 												<h3
 													className={`history-table-text-intable ${
-														trans.sum <= 0 ? 'red' : 'green'
+														+trans.quantity <= 0 ? 'red' : 'green'
 													}`}
 												>
 													{trans.time}
@@ -240,7 +240,7 @@ const Pay = () => {
 											return (
 												<h3
 													className={`history-table-text-intable ${
-														trans.sum <= 0 ? 'red' : 'green'
+														+trans.quantity <= 0 ? 'red' : 'green'
 													}`}
 												>
 													{trans.data}
@@ -256,7 +256,7 @@ const Pay = () => {
 											return (
 												<h3
 													className={`history-table-text-intable ${
-														trans.sum <= 0 ? 'red' : 'green'
+														+trans.quantity <= 0 ? 'red' : 'green'
 													}`}
 												>
 													{trans.txid}
@@ -272,7 +272,7 @@ const Pay = () => {
 												return (
 													<h3
 														className={`history-table-text-intable ${
-															trans.sum <= 0 ? 'red' : 'green'
+															+trans.quantity <= 0 ? 'red' : 'green'
 														}`}
 													>
 														{trans && trans.txid.slice(0, 20)}
@@ -294,7 +294,7 @@ const Pay = () => {
 												return (
 													<h3
 														className={`history-table-text-intable ${
-															+trans.sum <= 0 ? 'red' : 'green'
+															+trans.quantity <= 0 ? 'red' : 'green'
 														}`}
 													>
 														{trans && trans?.txid.slice(0, 10)}
@@ -310,12 +310,10 @@ const Pay = () => {
 									<div className='history-table-column'>
 										<span className='history-table-title sum'>{`Sum`}</span>
 										{tran.map(trans => {
-											console.log(trans)
-											console.log(trans.sum)
 											return (
 												<h3
 													className={`history-table-text-intable ${
-														+trans.sum <= 0 ? 'red' : 'green'
+														+trans.quantity <= 0 ? 'red' : 'green'
 													}`}
 												>
 													{trans.quantity}
