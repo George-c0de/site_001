@@ -180,6 +180,7 @@ const Signup = () => {
 					}
 
 					try {
+						document.cookie = 'token=true'
 						await axios
 							.post(`/api/register`, validObj, {
 								headers: { 'Content-Type': 'application/json' },

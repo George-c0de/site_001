@@ -35,11 +35,13 @@ const Header = () => {
 	const { deposit } = useSelector(getUser)
 
 	const startGame = () => {
-		setTimeout(() => {
-			if (data2 !== 501) {
-				navigate('/login')
-			}
-		}, 2000)
+		if (!document.cookie.includes('token=true')) {
+			setTimeout(() => {
+				if (data2 !== 501) {
+					navigate('/login')
+				}
+			}, 2000)
+		}
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
@@ -77,6 +79,7 @@ const Header = () => {
 		localStorage.removeItem('token')
 		document.cookie =
 			'openTg' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+		document.cookie = 'token' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
 		window.location.assign(`${window.location.origin}/login`)
 	}
 	const ref = React.useRef(null)
