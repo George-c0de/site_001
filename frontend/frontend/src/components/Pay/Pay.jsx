@@ -204,8 +204,7 @@ const Pay = () => {
 							className={`pay-button ${
 								+user.money >= +data.col &&
 								data.col.length > 0 &&
-								data?.wallet &&
-								data?.wallet_input.length > 0 &&
+								data?.wallet_input !== '' &&
 								'pay-button-active'
 							}`}
 							disabled={
