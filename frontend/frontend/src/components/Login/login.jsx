@@ -185,12 +185,13 @@ const Signup = () => {
 								headers: { 'Content-Type': 'application/json' },
 							})
 							.then(async () => {
+								console.log('LOGIN1')
 								await axios.post('/api/login', validData)
 								setExist(false)
 								window.location.assign(`${window.location.origin}/home`)
 							})
 					} catch (e) {
-						console.log(e.response)
+						console.log('LOGIN2')
 						if (e.response.status == 400) {
 							await axios.post('/api/login', validData)
 							setExist(false)

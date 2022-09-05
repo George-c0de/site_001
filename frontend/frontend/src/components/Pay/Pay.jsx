@@ -310,6 +310,12 @@ const Pay = () => {
 									<div className='history-table-column'>
 										<span className='history-table-title sum'>{`Sum`}</span>
 										{tran.map(trans => {
+											console.log(+trans.quantity > 0)
+											console.log(
+												+trans.quantity > 0
+													? `+${trans.quantity}`
+													: trans.quantity
+											)
 											return (
 												<h3
 													className={`history-table-text-intable ${
