@@ -224,7 +224,11 @@ const Pay = () => {
 										<span className='history-table-title'>{t`Time`}</span>
 										{tran.map(trans => {
 											return (
-												<h3 className={`history-table-text-intable ${trans.sum <= 0 ? 'red' : 'green'}`}>
+												<h3
+													className={`history-table-text-intable ${
+														trans.sum <= 0 ? 'red' : 'green'
+													}`}
+												>
 													{trans.time}
 												</h3>
 											)
@@ -261,7 +265,6 @@ const Pay = () => {
 										})}
 									</div>
 
-
 									<div className='history-table-column history-table-column-mobile'>
 										<span className='history-table-title'>Txid</span>
 										{tran &&
@@ -286,10 +289,12 @@ const Pay = () => {
 										<span className='history-table-title'>Txid</span>
 										{tran &&
 											tran.map((trans, id) => {
+												console.log(trans)
+												console.log(trans.sum)
 												return (
 													<h3
 														className={`history-table-text-intable ${
-															trans.sum <= 0 ? 'red' : 'green'
+															+trans.sum <= 0 ? 'red' : 'green'
 														}`}
 													>
 														{trans && trans?.txid.slice(0, 10)}
@@ -305,10 +310,12 @@ const Pay = () => {
 									<div className='history-table-column'>
 										<span className='history-table-title sum'>{`Sum`}</span>
 										{tran.map(trans => {
+											console.log(trans)
+											console.log(trans.sum)
 											return (
 												<h3
 													className={`history-table-text-intable ${
-														trans.sum <= 0 ? 'red' : 'green'
+														+trans.sum <= 0 ? 'red' : 'green'
 													}`}
 												>
 													{trans.quantity}
