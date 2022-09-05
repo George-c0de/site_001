@@ -123,6 +123,7 @@ const Signup = () => {
 							}
 						})
 					if (data2.data === 200) {
+						document.cookie = 'token=true'
 						window.location.assign(`${window.location.origin}/home`)
 					}
 				} catch (error) {
@@ -180,13 +181,13 @@ const Signup = () => {
 					}
 
 					try {
-						document.cookie = 'token=true'
+						
 						await axios
 							.post(`/api/register`, validObj, {
 								headers: { 'Content-Type': 'application/json' },
 							})
 							.then(async () => {
-								console.log('LOGIN1')
+								document.cookie = 'token=true'
 								await axios.post('/api/login', validData)
 								setExist(false)
 								window.location.assign(`${window.location.origin}/home`)
