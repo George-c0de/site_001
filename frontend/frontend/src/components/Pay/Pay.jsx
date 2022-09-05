@@ -97,46 +97,6 @@ const Pay = () => {
 		}
 
 		if (!invalidAmount && !invalidWallet && data.col.length > 0) {
-			// 	try {
-			// 		setInvalidWallet(false)
-			// 		setInvalidAmount(false)
-
-			// 		setData({
-			// 			...data,
-			// 			col: '',
-			// 		})
-			// 		axios
-			// 			.post(
-			// 				'/api/dis',
-			// 				{
-			// 					wallet_input: data.wallet_input,
-			// 					col: data.col,
-			// 				},
-			// 				{
-			// 					headers: { 'Content-Type': 'application/json' },
-			// 				}
-			// 			)
-			// 			.catch(function (error) {
-			// 				console.log(error.response)
-			// 				console.log(error.response.status)
-			// 				setOpenModal(false)
-			// 				if (error.response.status == 400) {
-			// 					setOpenModalCrtError(true)
-			// 				} else if (error.response.status == 401) {
-			// 					setOpenModalError(true)
-			// 				} else {
-			// 					setOpenModal(true)
-			// 				}
-			// 			})
-			// 	} catch (e) {
-			// 		console.log('UNDER CATCH')
-			// 		if (e.response.status === 200) {
-			// 			data.col = 1
-			// 		} else {
-			// 			console.log('Error')
-			// 		}
-			// 	}
-
 			try {
 				setInvalidWallet(false)
 				setInvalidAmount(false)
@@ -155,22 +115,25 @@ const Pay = () => {
 						{
 							headers: { 'Content-Type': 'application/json' },
 						}
-					)
+					).then((res) => {
+						console.log(res)
+
+					})
 					.catch(function (error) {
 						console.log(error.response)
 						console.log(error.response.status)
 						setOpenModal(false)
-						if (error.response.status == 200) {
+						if (error.response.status == 400) {
+							setOpenModalCrtError(true)
+						} else if (error.response.status == 401) {
+							setOpenModalError(true)
+						} else {
 							setOpenModal(true)
 						}
 					})
 			} catch (e) {
-				console.log('UNDER CATCH')
-				if (error.response.status == 400) {
-					setOpenModalCrtError(true)
-				} else if (error.response.status == 401) {
-					setOpenModalError(true)
-				}
+				console.log('Error')
+				console.log(e)
 			}
 		}
 	}
