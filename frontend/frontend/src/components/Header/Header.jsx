@@ -35,11 +35,14 @@ const Header = () => {
 	const { deposit } = useSelector(getUser)
 
 	const startGame = () => {
+		console.log('SEND')
 		setTimeout(() => {
+		console.log('SEND2')
+
 			if (data2 !== 501) {
 				navigate('/login')
 			}
-		}, 1500)
+		}, 2500)
 	}
 
 	const [openBurger, setOpenBurger] = React.useState(false)
