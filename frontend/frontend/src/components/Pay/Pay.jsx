@@ -211,7 +211,7 @@ const Pay = () => {
 							disabled={
 								+user.money < +data.col ||
 								data.col.length == 0 ||
-								data?.wallet_input !== ''
+								data?.wallet_input == ''
 							}
 						>{t`PAYOUT`}</button>
 						{tran[0]?.time && (
