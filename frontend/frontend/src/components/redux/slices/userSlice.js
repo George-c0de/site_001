@@ -7,7 +7,7 @@ const initialState = {
 		referral_link: '',
 		referral_amount: '0.00',
 		missed_amount: '0.00',
-		wallet: null,
+		wallet: '22222222222222222222222222222222222226757777777777777777777',
 		line_1: null,
 		line_2: null,
 		line_3: null,

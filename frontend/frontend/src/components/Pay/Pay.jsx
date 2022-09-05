@@ -224,7 +224,7 @@ const Pay = () => {
 										<span className='history-table-title'>{t`Time`}</span>
 										{tran.map(trans => {
 											return (
-												<h3 className='history-table-text-intable'>
+												<h3 className={`history-table-text-intable ${trans.sum <= 0 ? 'red' : 'green'}`}>
 													{trans.time}
 												</h3>
 											)
@@ -234,7 +234,11 @@ const Pay = () => {
 										<span className='history-table-title'>{t`Date`}</span>
 										{tran.map(trans => {
 											return (
-												<h3 className='history-table-text-intable'>
+												<h3
+													className={`history-table-text-intable ${
+														trans.sum <= 0 ? 'red' : 'green'
+													}`}
+												>
 													{trans.data}
 												</h3>
 											)
@@ -246,18 +250,28 @@ const Pay = () => {
 										</span>
 										{tran.map(trans => {
 											return (
-												<h3 className='history-table-text-intable'>
+												<h3
+													className={`history-table-text-intable ${
+														trans.sum <= 0 ? 'red' : 'green'
+													}`}
+												>
 													{trans.txid}
 												</h3>
 											)
 										})}
 									</div>
+
+
 									<div className='history-table-column history-table-column-mobile'>
 										<span className='history-table-title'>Txid</span>
 										{tran &&
 											tran.map((trans, id) => {
 												return (
-													<h3 className='history-table-text-intable'>
+													<h3
+														className={`history-table-text-intable ${
+															trans.sum <= 0 ? 'red' : 'green'
+														}`}
+													>
 														{trans && trans.txid.slice(0, 20)}
 														<FontAwesomeIcon
 															icon={faCopy}
@@ -273,7 +287,11 @@ const Pay = () => {
 										{tran &&
 											tran.map((trans, id) => {
 												return (
-													<h3 className='history-table-text-intable'>
+													<h3
+														className={`history-table-text-intable ${
+															trans.sum <= 0 ? 'red' : 'green'
+														}`}
+													>
 														{trans && trans?.txid.slice(0, 10)}
 														<FontAwesomeIcon
 															icon={faCopy}
@@ -288,7 +306,11 @@ const Pay = () => {
 										<span className='history-table-title sum'>{`Sum`}</span>
 										{tran.map(trans => {
 											return (
-												<h3 className='history-table-text-intable'>
+												<h3
+													className={`history-table-text-intable ${
+														trans.sum <= 0 ? 'red' : 'green'
+													}`}
+												>
 													{trans.quantity}
 												</h3>
 											)

@@ -36,7 +36,12 @@
 .pay-invalid-inp {
 	border: 1px solid red !important;
 }
-
+.green {
+	color: green !important;
+}
+.red {
+	color: red !important;
+}
 /*INPUTS*/
 
 .history-table-text-intable {

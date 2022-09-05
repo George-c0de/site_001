@@ -51,7 +51,7 @@ const Deposit = () => {
 						admin_or: data.data.admin_or,
 						user: data.data.user,
 					}
-					if (user.id == '') dispatch(setUser(result))
+					dispatch(setUser(result))
 				})
 
 				if (user.wallet !== null) {
@@ -73,7 +73,7 @@ const Deposit = () => {
 	}, [user.id])
 
 	const handleCopy = () => {
-		navigator.clipboard.writeText(linkRef.current?.innerText)
+		navigator.clipboard.writeText(user.wallet)
 	}
 
 	const handleCopyInTable = id => {
@@ -105,7 +105,13 @@ const Deposit = () => {
 									{t`To top up your balance, send the required amount to the specified purse trc-20. The amount will be immediately credited to your game balance.`}
 								</p>
 								<span className='link-invite deposit-link' ref={linkRef}>
-									<p>{user.wallet === null ? ' ' : `${user.wallet}`}</p>
+									<p>
+										{user.wallet === null || user.wallet === undefined
+											? ' '
+											: user.wallet.length > 40
+											? `${user.wallet.slice(0, 35)}...`
+											: `${user.wallet.slice(0, 35)}`}
+									</p>
 
 									<FontAwesomeIcon
 										icon={faCopy}
