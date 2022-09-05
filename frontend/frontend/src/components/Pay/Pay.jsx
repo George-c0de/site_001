@@ -316,7 +316,9 @@ const Pay = () => {
 														+trans.quantity <= 0 ? 'red' : 'green'
 													}`}
 												>
-													{trans.quantity}
+													{trans.quantity > 0
+														? `+${trans.quantity}`
+														: trans.quantity}
 												</h3>
 											)
 										})}
