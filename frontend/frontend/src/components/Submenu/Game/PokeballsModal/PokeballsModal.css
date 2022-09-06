@@ -36,6 +36,9 @@
 .inactive {
 	padding: 0px;
 }
+.question {
+	cursor: default !important;
+}
 
 .pokeballs-modal .pokeballs-card.opened {
 	display: flex;
@@ -76,7 +79,6 @@
 	justify-content: center;
 	text-align: center;
 	transition: all 0.3s ease-in-out;
-	cursor: pointer;
 
 	height: 130px;
 }
@@ -250,7 +252,6 @@
 	background-color: #d9d9d9;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
 	border-radius: 50%;
-	cursor: pointer;
 }
 
 .card-status-balls span img {

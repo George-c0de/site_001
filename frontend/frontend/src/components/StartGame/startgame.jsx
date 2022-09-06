@@ -28,7 +28,7 @@ const Startgame = () => {
 	const [activeImg, setActiveImg] = React.useState()
 	const navigate = useNavigate()
 	const startGame = () => {
-		if (data2 === 501) {
+		if (data2 === 501 || document.cookie.includes('token=true')) {
 			navigate('/home')
 		} else {
 			navigate('/login')

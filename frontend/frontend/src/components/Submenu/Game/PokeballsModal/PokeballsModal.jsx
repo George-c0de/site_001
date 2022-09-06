@@ -28,7 +28,6 @@ const CardOpened = ({
 }) => {
 	let status = card_data[0]
 	const [disabledBtn, setDisabledBtn] = useState(true)
-	// const [activeCategory, setActiveCategory] = useState(false)
 	const handleButton = async () => {
 		await axios.get(`/api/prohibitions`).then(res => {
 			let data = res.data
@@ -68,19 +67,17 @@ const CardOpened = ({
 		handleButton()
 	}, [])
 
-	// const [openMenu, setOpenMenu] = useState(false)
-	// const [answer, setAnswer] = useState(false)
-
 	const [accept2, setAccept2] = useState()
 	const [purchaseConfirmation2, setPurchaseConfirmation2] = useState()
 	const [firstRender2, setFirstRender2] = useState(false)
 	const [hideModal2, setHideModal2] = React.useState(false)
 
 	const handleBuyClick2 = async (props, props2) => {
-		if (!props2 && disabledBtn) {
+	console.log(disabledBtn)
+		if (!props2 && disabledBtn && price <= money) {
 			setAccept2(true)
 		}
-		if (disabledBtn && purchaseConfirmation2 && price <= money) {
+		if (!disabledBtn && purchaseConfirmation2 && price <= money) {
 			setPurchaseConfirmation2(false)
 			await axios.get(`/api/${category}/${idCard}`).then(res => {
 				fetchPosts()
@@ -135,9 +132,9 @@ const CardOpened = ({
 				<span
 					onClick={handleBuyClick2}
 					className={`card-info-button ${
-						disabledBtn && price > money ? '' : 'card-info-disabled'
+						disabledBtn || price > money ? 'card-info-disabled' : ''
 					}`}
-					disabled={disabledBtn && price > money ? false : true}
+					disabled={disabledBtn && price > money}
 				>
 					{t`ACTIVATE` + ' ' + price + 'USD'}
 				</span>
@@ -199,7 +196,7 @@ const CardClosed = ({ price, buyCard, idCard, category, six, dataId, id }) => {
 			{six === false && idCard === 6 ? (
 				<div
 					data-id={dataId}
-					className={id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}
+					className={`question ${id ? 'pokeballs-card opened' : 'pokeballs-card inactive'}`}
 				>
 					<span>
 						<div className='pokeballs-card-label2'>

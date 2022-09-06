@@ -115,9 +115,10 @@ const Pay = () => {
 						{
 							headers: { 'Content-Type': 'application/json' },
 						}
-					).then((res) => {
+					)
+					.then(res => {
+						setOpenModal(true)
 						console.log(res)
-
 					})
 					.catch(function (error) {
 						console.log(error.response)
