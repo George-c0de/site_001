@@ -9,7 +9,6 @@ from .models import *
 from rest_framework.views import APIView
 
 TELEGRAM_URL = "https://api.telegram.org/bot"
-# TUTORIAL_BOT_TOKEN = "5540149986:AAE0qQjVgvobPBOfVxSqOBueeGC2Vc9PWrs"
 TUTORIAL_BOT_TOKEN = TELEGRAM_TOKEN
 
 
