@@ -8,7 +8,12 @@
 	justify-content: center;
 	align-items: center;
 }
-
+.card-status-balls span {
+	cursor: default !important;
+}
+.card-status-balls {
+	cursor: default !important;
+}
 .pokeballs-container.open .pokeballs-modal {
 	display: flex;
 }
